@@ -5,11 +5,13 @@ import { motion } from "framer-motion";
 interface ProjectCardProps {
   title: string;
   videoSrc: string;
+  onClick?: () => void;
 }
 
-export function ProjectCard({ title, videoSrc }: ProjectCardProps) {
+export function ProjectCard({ title, videoSrc, onClick }: ProjectCardProps) {
   return (
     <motion.div
+      onClick={onClick}
       className="relative flex-none w-[300px] sm:w-[380px] rounded-[2rem] overflow-hidden cursor-pointer group origin-center transition-all bg-white/40 backdrop-blur-2xl border border-white/60"
       initial={{ y: 0, scale: 1 }}
       whileHover={{
@@ -47,7 +49,7 @@ export function ProjectCard({ title, videoSrc }: ProjectCardProps) {
         />
 
         {/* Overlay Glassmorphic oscuro sutil + Ícono de Play dinámico */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0033a0]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0033a0]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
 
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-[600ms] pointer-events-none z-20">
           <div className="bg-white/20 p-4 sm:p-5 rounded-full text-white backdrop-blur-lg border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.2)] transform translate-y-6 group-hover:translate-y-0 transition-transform duration-[600ms] ease-out">
