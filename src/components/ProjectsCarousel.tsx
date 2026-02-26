@@ -65,7 +65,7 @@ export function ProjectsCarousel() {
                 </div>
 
                 {/* Contenedor del Slider */}
-                <div className="overflow-hidden py-16 px-4 sm:px-8 cursor-grab active:cursor-grabbing" ref={emblaRef}>
+                <div className="overflow-visible py-16 px-4 sm:px-8 cursor-grab active:cursor-grabbing" ref={emblaRef}>
                     <div className="flex flex-row gap-8 sm:gap-14 min-w-min items-center">
                         {projects.map((p) => (
                             <div key={p.id} className="relative z-10 hover:z-50 shrink-0">
@@ -79,17 +79,17 @@ export function ProjectsCarousel() {
                     </div>
                 </div>
 
-                {/* Botones de navegación (Flechas "Hermosas" Glassmorphism Gigantes) */}
+                {/* Botones de navegación (Flechas siempre visibles y elegantes) */}
                 <button
                     onClick={scrollPrev}
-                    className={`absolute left-2 sm:left-4 lg:-left-6 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,51,160,0.25)] text-[#0033a0] p-4 h-16 w-16 sm:h-20 sm:w-20 hidden sm:flex items-center justify-center transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 z-50 rounded-full border border-white/90 hover:scale-110 hover:shadow-[0_10px_50px_rgba(0,51,160,0.4)] ${!prevBtnEnabled && "invisible"}`}
+                    className={`absolute -left-2 sm:-left-6 lg:-left-12 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,51,160,0.3)] text-[#0033a0] p-4 h-16 w-16 sm:h-20 sm:w-20 flex items-center justify-center transition-all duration-300 ease-out z-50 rounded-full border border-white hover:scale-110 hover:shadow-[0_10px_50px_rgba(0,51,160,0.4)] ${!prevBtnEnabled && "hidden"}`}
                 >
                     <ChevronLeft size={44} strokeWidth={2.5} className="-ml-1" />
                 </button>
 
                 <button
                     onClick={scrollNext}
-                    className={`absolute right-2 sm:right-4 lg:-right-6 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,51,160,0.25)] text-[#0033a0] p-4 h-16 w-16 sm:h-20 sm:w-20 hidden sm:flex items-center justify-center transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 z-50 rounded-full border border-white/90 hover:scale-110 hover:shadow-[0_10px_50px_rgba(255,153,0,0.3)] ${!nextBtnEnabled && "invisible"}`}
+                    className={`absolute -right-2 sm:-right-6 lg:-right-12 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,51,160,0.3)] text-[#0033a0] p-4 h-16 w-16 sm:h-20 sm:w-20 flex items-center justify-center transition-all duration-300 ease-out z-50 rounded-full border border-white hover:scale-110 hover:shadow-[0_10px_50px_rgba(255,153,0,0.4)] ${!nextBtnEnabled && "hidden"}`}
                 >
                     <ChevronRight size={44} strokeWidth={2.5} className="-mr-1" />
                 </button>
