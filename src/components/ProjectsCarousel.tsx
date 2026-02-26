@@ -15,12 +15,15 @@ export function ProjectsCarousel() {
     const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
     const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
 
-    // Datos hardcodeados de los proyectos/casos destacados
+    // 7 videos destacados de la carpeta /videos
     const projects = [
-        { id: 1, title: "El inicio de todo", image: "/carruseles/1/a.jpg" },
-        { id: 2, title: "Redes de Gobierno", image: "/carruseles/2/1.jpg" },
-        { id: 3, title: "Sector salud", image: "/carruseles/3/a.jpg" },
-        { id: 4, title: "Automatización", image: "/carruseles/4/a.jpg" },
+        { id: 1, title: "El inicio de todo", videoSrc: "/videos/1.mp4" },
+        { id: 2, title: "Redes de Gobierno", videoSrc: "/videos/2.mp4" },
+        { id: 3, title: "Sector salud", videoSrc: "/videos/3.mp4" },
+        { id: 4, title: "Automatización", videoSrc: "/videos/4.mp4" },
+        { id: 5, title: "Transformación Digital", videoSrc: "/videos/5.mp4" },
+        { id: 6, title: "Conectividad Satelital", videoSrc: "/videos/6.mp4" },
+        { id: 7, title: "Mirando al Futuro", videoSrc: "/videos/7.mp4" },
     ];
 
     const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
@@ -40,33 +43,32 @@ export function ProjectsCarousel() {
     }, [emblaApi, onSelect]);
 
     return (
-        <div className="relative group">
+        <div className="relative group max-w-7xl mx-auto">
             {/* El padding vertical (py-8) es clave para que Framer Motion no corte la tarjeta al escalar */}
             <div className="overflow-hidden py-8 px-4 sm:px-12" ref={emblaRef}>
                 <div className="flex flex-row gap-4 sm:gap-6 min-w-min">
                     {projects.map((p) => (
-                        <div key={p.id} className="relative z-0 hover:z-50">
+                        <div key={p.id} className="relative z-0 hover:z-50 shrink-0">
                             <ProjectCard
                                 title={p.title}
-                                imageSrc={p.image}
-                                alt={p.title}
+                                videoSrc={p.videoSrc}
                             />
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Botones de navegación (Estilo Netflix) */}
+            {/* Botones de navegación (Ajustados con color azul marino) */}
             <button
                 onClick={scrollPrev}
-                className={`absolute left-0 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white p-2 h-[calc(100%-4rem)] w-12 hidden sm:flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 z-50 rounded-r-md ${!prevBtnEnabled && "invisible"}`}
+                className={`absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 bg-white/90 shadow-md hover:bg-white text-[#0033a0] p-2 h-16 w-12 hidden sm:flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 z-50 rounded-r-md sm:rounded-full border border-gray-100 ${!prevBtnEnabled && "invisible"}`}
             >
                 <ChevronLeft size={32} />
             </button>
 
             <button
                 onClick={scrollNext}
-                className={`absolute right-0 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white p-2 h-[calc(100%-4rem)] w-12 hidden sm:flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 z-50 rounded-l-md ${!nextBtnEnabled && "invisible"}`}
+                className={`absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 bg-white/90 shadow-md hover:bg-white text-[#0033a0] p-2 h-16 w-12 hidden sm:flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 z-50 rounded-l-md sm:rounded-full border border-gray-100 ${!nextBtnEnabled && "invisible"}`}
             >
                 <ChevronRight size={32} />
             </button>
