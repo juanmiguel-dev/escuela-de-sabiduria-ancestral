@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { ProjectsCarousel } from "@/components/ProjectsCarousel";
 
 export default function Home() {
-  const fadeUpVariant = {
+  const fadeUpVariant: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
   };
@@ -121,7 +121,7 @@ export default function Home() {
           variants={{
             hidden: { opacity: 0, scale: 0.95, y: 20 },
             visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 1, ease: "easeOut" } }
-          }}
+          } as Variants}
           className="text-center max-w-4xl mx-auto"
         >
           <div className="mb-8 inline-block">
