@@ -51,7 +51,7 @@ export default function Home() {
       </section>
 
       {/* Sección Carrusel: Casos Destacados */}
-      <section className="pt-16 sm:pt-24 pb-12 relative overflow-hidden">
+      <section className="pt-16 sm:pt-24 pb-12 relative">
         <motion.div
           initial="hidden"
           whileInView="visible"
