@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ProjectCard } from "./ProjectCard";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import AutoScroll from "embla-carousel-auto-scroll";
 
@@ -17,8 +17,6 @@ export function ProjectsCarousel() {
         AutoScroll({ playOnInit: true, stopOnMouseEnter: true, stopOnInteraction: false, speed: 1.0 })
     ]);
 
-    const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
-    const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
     const [selectedVideo, setSelectedVideo] = useState<{ title: string, src: string } | null>(null);
 
     // 7 videos destacados de la carpeta /videos
@@ -31,22 +29,6 @@ export function ProjectsCarousel() {
         { id: 6, title: "Conectividad Satelital", videoSrc: "/videos/6.mp4" },
         { id: 7, title: "Mirando al Futuro", videoSrc: "/videos/7.mp4" },
     ];
-
-    const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-    const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
-
-    const onSelect = useCallback(() => {
-        if (!emblaApi) return;
-        setPrevBtnEnabled(emblaApi.canScrollPrev());
-        setNextBtnEnabled(emblaApi.canScrollNext());
-    }, [emblaApi]);
-
-    useEffect(() => {
-        if (!emblaApi) return;
-        onSelect();
-        emblaApi.on("select", onSelect);
-        emblaApi.on("reInit", onSelect);
-    }, [emblaApi, onSelect]);
 
     // Manejar bloqueo de scroll cuando el modal esta abierto
     useEffect(() => {
@@ -69,9 +51,9 @@ export function ProjectsCarousel() {
 
                 {/* Contenedor del Slider */}
                 <div className="overflow-hidden py-16 px-4 sm:px-8 cursor-grab active:cursor-grabbing" ref={emblaRef}>
-                    <div className="flex flex-row gap-8 sm:gap-14 items-center">
+                    <div className="flex flex-row items-center">
                         {projects.map((p) => (
-                            <div key={p.id} className="relative z-10 hover:z-50 shrink-0">
+                            <div key={p.id} className="relative z-10 hover:z-50 shrink-0 flex-[0_0_auto] mr-6 sm:mr-10">
                                 <ProjectCard
                                     title={p.title}
                                     videoSrc={p.videoSrc}
@@ -80,23 +62,6 @@ export function ProjectsCarousel() {
                             </div>
                         ))}
                     </div>
-                </div>
-
-                {/* Botones de navegación (Flechas más sutiles debajo del slide) */}
-                <div className="flex justify-center gap-6 mt-2 relative z-20">
-                    <button
-                        onClick={scrollPrev}
-                        className="bg-white/80 hover:bg-white shadow-[0_4px_12px_rgba(0,0,0,0.05)] text-[#0033a0] p-3 h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center transition-all duration-300 ease-out rounded-full border border-gray-100 hover:scale-110 hover:shadow-md"
-                    >
-                        <ChevronLeft size={28} strokeWidth={2.5} className="-ml-1" />
-                    </button>
-
-                    <button
-                        onClick={scrollNext}
-                        className="bg-white/80 hover:bg-white shadow-[0_4px_12px_rgba(0,0,0,0.05)] text-[#0033a0] p-3 h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center transition-all duration-300 ease-out rounded-full border border-gray-100 hover:scale-110 hover:shadow-md"
-                    >
-                        <ChevronRight size={28} strokeWidth={2.5} className="-mr-1" />
-                    </button>
                 </div>
             </div>
 
