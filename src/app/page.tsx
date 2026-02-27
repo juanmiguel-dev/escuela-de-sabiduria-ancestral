@@ -3,6 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { ProjectsCarousel } from "@/components/ProjectsCarousel";
+import { ImageCarousel } from "@/components/ImageCarousel";
 
 export default function Home() {
   const fadeUpVariant: Variants = {
@@ -89,6 +90,21 @@ export default function Home() {
               </h3>
             </div>
           ))}
+        </motion.div>
+      </section>
+
+      {/* Segundo Carrusel: Galería / Casos */}
+      <section className="pb-20 relative">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariant}
+        >
+          <div className="px-4 sm:px-12 mb-4 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Imágenes Destacadas</h2>
+          </div>
+          <ImageCarousel />
         </motion.div>
       </section>
 
