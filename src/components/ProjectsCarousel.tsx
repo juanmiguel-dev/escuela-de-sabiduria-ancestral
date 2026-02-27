@@ -41,7 +41,7 @@ export function ProjectsCarousel() {
 
     return (
         <>
-            <div className="relative group max-w-[95vw] sm:max-w-[90rem] mx-auto rounded-[3rem]">
+            <div className="relative group w-full">
 
                 {/* Fondo estético con orbes desenfocados para reflectancia */}
                 <div className="absolute inset-0 z-[-1] pointer-events-none opacity-40 overflow-hidden mix-blend-multiply">
