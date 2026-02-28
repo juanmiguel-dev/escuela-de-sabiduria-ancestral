@@ -67,32 +67,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Banner de Servicios (Adaptado al light theme para coherencia) */}
-      <section className="relative z-30 px-4 sm:px-12 mb-20 lg:mb-32 max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={fadeUpVariant}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-10"
-        >
-          {[
-            { tag: "01", title: "Automatización\nIA\nConectividad satelital" },
-            { tag: "02", title: "Transformación digital\nDesarrollo in-house" },
-            { tag: "03", title: "Servicios Profesionales\nLlave en mano" }
-          ].map((service, i) => (
-            <div key={i} className="bg-[#f8f9fc] border border-gray-200 p-8 rounded-2xl hover:border-[#0033a0]/30 hover:bg-white hover:shadow-lg transition-all cursor-default group flex flex-col justify-between min-h-[160px]">
-              <span className="text-[#ff9900] font-mono text-sm mb-4 block transition-colors font-semibold">
-                {service.tag}
-              </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-[#0033a0] whitespace-pre-line leading-tight transition-colors">
-                {service.title}
-              </h3>
-            </div>
-          ))}
-        </motion.div>
-      </section>
-
       {/* Segundo Carrusel: Galería / Casos */}
       <section className="pb-20 relative">
         <motion.div
@@ -101,8 +75,8 @@ export default function Home() {
           viewport={{ once: true, margin: "-50px" }}
           variants={fadeUpVariant}
         >
-          <div className="px-4 sm:px-12 mb-4 text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Imágenes Destacadas</h2>
+          <div className="px-4 sm:px-12 mb-4 text-left">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Automatización - IA - Conectividad satelital</h2>
           </div>
           <ImageCarousel />
         </motion.div>
