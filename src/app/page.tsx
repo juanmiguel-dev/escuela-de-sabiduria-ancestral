@@ -52,7 +52,7 @@ export default function Home() {
       </section>
 
       {/* Sección Carrusel: Casos Destacados */}
-      <section className="pt-16 sm:pt-24 pb-12 relative">
+      <section className="pt-16 sm:pt-24 pb-12 relative max-w-[1400px] mx-auto w-full">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -68,7 +68,7 @@ export default function Home() {
       </section>
 
       {/* Segundo Carrusel: Galería / Casos */}
-      <section className="pb-20 relative">
+      <section className="pb-16 relative max-w-[1400px] mx-auto w-full">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -78,7 +78,34 @@ export default function Home() {
           <div className="px-4 sm:px-12 mb-4 text-left">
             <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Automatización - IA - Conectividad satelital</h2>
           </div>
-          <ImageCarousel />
+          <ImageCarousel images={[
+            { id: 1, src: "/carruseles/1/Publicación 4F-100.jpg" },
+            { id: 2, src: "/carruseles/1/a.jpg" },
+            { id: 3, src: "/carruseles/1/b.jpg" },
+            { id: 4, src: "/carruseles/1/c.jpg" },
+            { id: 5, src: "/carruseles/1/d.jpg" },
+            { id: 6, src: "/carruseles/1/e.jpg" },
+          ]} />
+        </motion.div>
+      </section>
+
+      {/* Tercer Carrusel: Transformación Digital */}
+      <section className="pb-20 relative max-w-[1400px] mx-auto w-full">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariant}
+        >
+          <div className="px-4 sm:px-12 mb-4 text-left">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Transformación digital + Desarrollo in-house</h2>
+          </div>
+          <ImageCarousel images={[
+            { id: 1, src: "/carruseles/2/1.jpg" },
+            { id: 2, src: "/carruseles/2/2.jpg" },
+            { id: 3, src: "/carruseles/2/3.jpg" },
+            { id: 4, src: "/carruseles/2/4.jpg" }
+          ]} />
         </motion.div>
       </section>
 

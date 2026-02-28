@@ -4,23 +4,22 @@ import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 
-export function ImageCarousel() {
+interface ImageItem {
+    id: string | number;
+    src: string;
+}
+
+interface ImageCarouselProps {
+    images: ImageItem[];
+}
+
+export function ImageCarousel({ images }: ImageCarouselProps) {
     const [emblaRef] = useEmblaCarousel({
         align: "start",
         loop: true,
         skipSnaps: false,
         dragFree: true,
     });
-
-    // Imágenes de la carpeta 1
-    const images = [
-        { id: 1, src: "/carruseles/1/Publicación 4F-100.jpg" },
-        { id: 2, src: "/carruseles/1/a.jpg" },
-        { id: 3, src: "/carruseles/1/b.jpg" },
-        { id: 4, src: "/carruseles/1/c.jpg" },
-        { id: 5, src: "/carruseles/1/d.jpg" },
-        { id: 6, src: "/carruseles/1/e.jpg" },
-    ];
 
     return (
         <div className="relative group w-full">
