@@ -18,7 +18,7 @@ export function ProjectCard({ title, videoSrc, onClick }: ProjectCardProps) {
         y: -12,
         scale: 1.04,
         zIndex: 50,
-        boxShadow: "0 25px 50px -12px rgba(0, 51, 160, 0.25), 0 0 20px rgba(255, 255, 255, 0.8) inset"
+        boxShadow: "0 0 25px 2px rgba(0, 51, 160, 0.3), 0 0 10px rgba(255, 255, 255, 0.6) inset"
       }}
       transition={{
         duration: 0.5,
