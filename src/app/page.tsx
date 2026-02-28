@@ -52,14 +52,14 @@ export default function Home() {
       </section>
 
       {/* Sección Carrusel: Casos Destacados */}
-      <section className="pt-16 sm:pt-24 pb-12 relative max-w-[1400px] mx-auto w-full">
+      <section className="pt-16 sm:pt-24 pb-12 relative w-full overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={fadeUpVariant}
         >
-          <div className="px-4 sm:px-12 mb-8 text-center mt-4">
+          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-8 text-center mt-4">
             <h2 className="text-3xl sm:text-4xl font-bold text-[#0033a0] tracking-tight">Casos destacados</h2>
           </div>
 
@@ -68,14 +68,14 @@ export default function Home() {
       </section>
 
       {/* Segundo Carrusel: Galería / Casos */}
-      <section className="pb-16 relative max-w-[1400px] mx-auto w-full">
+      <section className="pb-16 relative w-full overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={fadeUpVariant}
         >
-          <div className="px-4 sm:px-12 mb-4 text-left">
+          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
             <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Automatización - IA - Conectividad satelital</h2>
           </div>
           <ImageCarousel images={[
@@ -90,14 +90,14 @@ export default function Home() {
       </section>
 
       {/* Tercer Carrusel: Transformación Digital */}
-      <section className="pb-20 relative max-w-[1400px] mx-auto w-full">
+      <section className="pb-20 relative w-full overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={fadeUpVariant}
         >
-          <div className="px-4 sm:px-12 mb-4 text-left">
+          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
             <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Transformación digital + Desarrollo in-house</h2>
           </div>
           <ImageCarousel images={[
@@ -106,6 +106,53 @@ export default function Home() {
             { id: 3, src: "/carruseles/2/3.jpg" },
             { id: 4, src: "/carruseles/2/4.jpg" }
           ]} />
+        </motion.div>
+      </section>
+
+      {/* Cuarto Carrusel: Servicios Profesionales (Fondo Azul Marca) */}
+      <section className="py-20 relative bg-[#0033a0] w-full mt-10 overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariant}
+        >
+          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Servicios Profesionales + Llave en mano</h2>
+          </div>
+          <ImageCarousel
+            dark={true}
+            images={[
+              { id: 1, src: "/carruseles/3/a.jpg" },
+              { id: 2, src: "/carruseles/3/b.jpg" },
+              { id: 3, src: "/carruseles/3/c.jpg" },
+              { id: 4, src: "/carruseles/3/d.jpg" },
+              { id: 5, src: "/carruseles/3/e.jpg" },
+            ]}
+          />
+        </motion.div>
+      </section>
+
+      {/* Quinto Carrusel: Integración */}
+      <section className="pt-20 pb-16 relative bg-white w-full overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariant}
+        >
+          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Integración</h2>
+          </div>
+          <ImageCarousel
+            images={[
+              { id: 1, src: "/carruseles/4/a.jpg" },
+              { id: 2, src: "/carruseles/4/b.jpg" },
+              { id: 3, src: "/carruseles/4/c.jpg" },
+              { id: 4, src: "/carruseles/4/d.jpg" },
+              { id: 5, src: "/carruseles/4/e.jpg" },
+            ]}
+          />
         </motion.div>
       </section>
 
