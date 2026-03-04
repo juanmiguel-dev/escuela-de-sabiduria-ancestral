@@ -61,7 +61,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-8 text-center mt-4">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0055ff] tracking-tight drop-shadow-[0_0_10px_rgba(0,85,255,0.2)]">Casos destacados</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Casos destacados</h2>
           </div>
 
           <ProjectsCarousel />
@@ -77,7 +77,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0055ff] tracking-tight">Automatización - IA - Conectividad satelital</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Automatización - IA - Conectividad satelital</h2>
           </div>
           <ImageCarousel images={[
             { id: 1, src: "/carruseles/1/Publicación 4F-100.jpg" },
@@ -99,7 +99,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0055ff] tracking-tight">Transformación digital + Desarrollo in-house</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Transformación digital + Desarrollo in-house</h2>
           </div>
           <ImageCarousel images={[
             { id: 1, src: "/carruseles/2/1.jpg" },
@@ -143,7 +143,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0055ff] tracking-tight">Integración</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Integración</h2>
           </div>
           <ImageCarousel
             images={[
@@ -173,7 +173,7 @@ export default function Home() {
             <div className="w-16 h-[4px] bg-[#ff9900] mx-auto rounded-full shadow-[0_0_10px_rgba(255,153,0,0.5)]" />
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 tracking-tight leading-tight text-white">
-            Nuestra historia termina en la <span className="text-[#0055ff] drop-shadow-[0_0_15px_rgba(0,85,255,0.4)]">Integración</span>
+            Nuestra historia termina en la <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">Integración</span>
           </h2>
           <p className="text-lg sm:text-2xl text-gray-400 font-medium leading-relaxed max-w-3xl mx-auto">
             Porque 40 años no son solo el reflejo del pasado, sino la plataforma que hemos construido para integrar todas las tecnologías del mañana. Seguimos conectando ideas, conectando personas y haciendo posible el futuro.
