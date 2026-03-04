@@ -43,10 +43,9 @@ export function ProjectsCarousel() {
         <>
             <div className="relative group w-full">
 
-                {/* Fondo estético con orbes desenfocados para reflectancia */}
-                <div className="absolute inset-0 z-[-1] pointer-events-none opacity-40 overflow-hidden mix-blend-multiply">
-                    <div className="absolute top-1/2 left-[10%] w-[300px] h-[300px] bg-[#0033a0]/80 rounded-full blur-[100px] -translate-y-1/2" />
-                    <div className="absolute top-1/2 right-[10%] w-[350px] h-[350px] bg-[#ff9900]/70 rounded-full blur-[120px] -translate-y-1/2" />
+                {/* Fondo estético sutil */}
+                <div className="absolute inset-0 z-[-1] pointer-events-none opacity-20 overflow-hidden">
+                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#0055ff] to-transparent" />
                 </div>
 
                 {/* Contenedor del Slider */}
