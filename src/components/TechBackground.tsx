@@ -13,91 +13,65 @@ export const TechBackground: React.FC = () => {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let particles: Particle[] = [];
-    const particleCount = 60;
-    const connectionDistance = 150;
-    const mouse = { x: 0, y: 0, active: false };
+    let scrollOffset = 0;
+    const speed = 0.2;
+    const gridSize = 40;
+    const dotSize = 1.2;
+    const lineOpacity = 0.04;
+    const dotOpacity = 0.1;
 
-    class Particle {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-
-      constructor(width: number, height: number) {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.size = Math.random() * 2 + 1;
-      }
-
-      update(width: number, height: number) {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-      }
-
-      draw() {
-        if (!ctx) return;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 51, 160, 0.2)'; // Azul tecnológico sutil
-        ctx.fill();
-      }
-    }
-
-    const init = () => {
+    const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle(canvas.width, canvas.height));
-      }
     };
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      particles.forEach((p, i) => {
-        p.update(canvas.width, canvas.height);
-        p.draw();
+      scrollOffset = (scrollOffset + speed) % gridSize;
 
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+      for (let y = -gridSize; y < canvas.height + gridSize; y += gridSize) {
+        const yPos = y - scrollOffset;
+        const perspective = Math.max(0, yPos / canvas.height); 
 
-          if (distance < connectionDistance) {
+        for (let x = -gridSize; x < canvas.width + gridSize; x += gridSize) {
+          // Dibuja los puntos
+          ctx.beginPath();
+          ctx.arc(x, yPos, dotSize * perspective, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 85, 255, ${dotOpacity + perspective * 0.3})`;
+          ctx.fill();
+
+          // Dibuja las líneas horizontales
+          if (x < canvas.width) {
             ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            const opacity = 1 - (distance / connectionDistance);
-            ctx.strokeStyle = `rgba(0, 51, 160, ${opacity * 0.15})`; // Conexiones sutiles
-            ctx.lineWidth = 0.5;
+            ctx.moveTo(x, yPos);
+            ctx.lineTo(x + gridSize, yPos);
+            ctx.strokeStyle = `rgba(0, 85, 255, ${lineOpacity + perspective * 0.08})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+
+          // Dibuja las líneas verticales
+          if (y < canvas.height) {
+            ctx.beginPath();
+            ctx.moveTo(x, yPos);
+            ctx.lineTo(x, yPos + gridSize);
+            ctx.strokeStyle = `rgba(0, 85, 255, ${lineOpacity + perspective * 0.08})`;
+            ctx.lineWidth = 1;
             ctx.stroke();
           }
         }
-      });
+      }
 
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    init();
+    resizeCanvas();
     animate();
 
-    const handleResize = () => {
-      init();
-    };
-
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', resizeCanvas);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
