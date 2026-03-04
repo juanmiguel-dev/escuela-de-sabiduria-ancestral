@@ -32,7 +32,7 @@ export default function Home() {
         {/* Featured Video Background */}
         <div className="absolute inset-0 z-0">
           <video
-            src="/videos/reel3-fiat.mp4"
+            src="/videos/1.mp4"
             autoPlay
             muted
             loop
