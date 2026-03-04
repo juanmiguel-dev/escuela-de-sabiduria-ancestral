@@ -27,41 +27,83 @@ export default function Home() {
         />
       </header>
 
-      {/* Hero Section (Estructura de la imagen) */}
-      <section className="relative pt-32 sm:pt-48 px-4 sm:px-12 flex flex-col items-center justify-center text-center">
+      {/* Hero Section (Netflix Style) */}
+      <section className="relative h-[85vh] sm:h-[95vh] w-full flex items-center overflow-hidden">
+        {/* Featured Video Background */}
+        <div className="absolute inset-0 z-0">
+          <video
+            src="/videos/reel3-fiat.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+          {/* Light Overlay Gradient for Readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/60 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#eeeeee] via-transparent to-transparent z-10" />
+        </div>
+
         <motion.div
-          className="relative z-20 max-w-4xl space-y-4 sm:space-y-6"
+          className="relative z-20 max-w-4xl px-6 sm:px-12 space-y-4 sm:space-y-6"
           initial="hidden"
           animate="visible"
           variants={fadeUpVariant}
         >
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tight leading-none flex flex-col items-center gap-1 sm:gap-2">
-            <span className="text-[#0033a0]">
+          {/* "Netflix Series" equivalent */}
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-[#ff9900] font-bold text-sm tracking-widest uppercase">Evolución 4.0</span>
+            <div className="w-12 h-[2px] bg-[#ff9900]" />
+          </div>
+
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.9] flex flex-col items-start gap-1">
+            <span className="text-[#0033a0] drop-shadow-sm">
               40 años
             </span>
-            <span className="text-[#ff9900]">
-              conectando el futuro
+            <span className="text-[#ff9900] drop-shadow-sm">
+              conectando
+            </span>
+            <span className="text-[#ff9900] drop-shadow-sm">
+              el futuro
             </span>
           </h1>
 
-          <p className="text-lg sm:text-2xl text-gray-800 max-w-2xl mx-auto font-medium leading-relaxed mt-4 sm:mt-6">
-            Cuatro décadas resolviendo desafíos complejos
-            <br className="hidden sm:block" />
-            en infraestructura, integración y conectividad avanzada.
+          {/* Meta Info Bar */}
+          <div className="flex flex-wrap items-center gap-4 text-sm sm:text-base font-bold text-gray-700">
+            <span className="text-green-600">97% Conectividad</span>
+            <span>1985 - 2025</span>
+            <span className="px-2 py-0.5 border-2 border-gray-400 rounded text-xs uppercase tracking-tighter">Trayectoria</span>
+            <span>4K Infraestructura</span>
+          </div>
+
+          <p className="text-lg sm:text-2xl text-gray-800 max-w-xl font-medium leading-tight">
+            Cuatro décadas resolviendo desafíos complejos en infraestructura, integración y conectividad avanzada.
           </p>
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-4 pt-4">
+            <button className="flex items-center gap-2 bg-[#0033a0] text-white px-8 py-3 rounded font-bold hover:bg-[#002880] transition-colors shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              Conocer más
+            </button>
+            <button className="flex items-center gap-2 bg-white/60 backdrop-blur-md text-[#0033a0] px-8 py-3 rounded font-bold hover:bg-white/80 transition-all border border-[#0033a0]/20 shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Más info
+            </button>
+          </div>
         </motion.div>
       </section>
 
-      {/* Sección Carrusel: Casos Destacados */}
-      <section className="pt-16 sm:pt-24 pb-12 relative w-full overflow-hidden">
+      {/* Sección Carrusel: Casos Destacados - Overlap Effect */}
+      <section className="relative z-30 -mt-16 sm:-mt-24 pb-12 w-full overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={fadeUpVariant}
         >
-          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-8 text-center mt-4">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0033a0] tracking-tight">Casos destacados</h2>
+          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Proyectos destacados</h2>
           </div>
 
           <ProjectsCarousel />
