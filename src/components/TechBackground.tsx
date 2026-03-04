@@ -35,9 +35,9 @@ export const TechBackground: React.FC = () => {
         this.vy = (Math.random() - 0.5) * 0.4;
         this.length = Math.random() * maxLineLength + 50;
         this.angle = Math.random() * Math.PI * 2;
-        this.opacity = Math.random() * 0.2 + 0.1;
-        this.color = 'rgba(0, 85, 255, '; // Blue for lines
-        this.nodeColor = 'rgba(0, 230, 184, '; // Teal for nodes
+        this.opacity = Math.random() * 0.1 + 0.05;
+        this.color = 'rgba(0, 51, 160, '; // Dark Blue for lines
+        this.nodeColor = 'rgba(0, 51, 160, '; // Dark Blue for nodes
       }
 
       update(width: number, height: number) {
@@ -67,19 +67,11 @@ export const TechBackground: React.FC = () => {
         ctx.lineWidth = 0.5;
         ctx.stroke();
 
-        // Draw square nodes at the ends with glow
-        const nodeSize = 6;
-        ctx.shadowColor = this.nodeColor + `0.7)`;
-        ctx.shadowBlur = 10;
-        
-        ctx.strokeStyle = `${this.nodeColor}${this.opacity})`;
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(this.x - nodeSize / 2, this.y - nodeSize / 2, nodeSize, nodeSize);
-        ctx.strokeRect(endX - nodeSize / 2, endY - nodeSize / 2, nodeSize, nodeSize);
-
-        // Reset shadow for other elements
-        ctx.shadowColor = 'transparent';
-        ctx.shadowBlur = 0;
+        // Draw square nodes at the ends
+        const nodeSize = 5;
+        ctx.fillStyle = `${this.nodeColor}${this.opacity})`;
+        ctx.fillRect(this.x - nodeSize / 2, this.y - nodeSize / 2, nodeSize, nodeSize);
+        ctx.fillRect(endX - nodeSize / 2, endY - nodeSize / 2, nodeSize, nodeSize);
       }
     }
 

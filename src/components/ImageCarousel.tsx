@@ -42,10 +42,10 @@ export function ImageCarousel({ images, dark }: ImageCarouselProps) {
                     <div className="flex flex-row items-center">
                         {images.map((img) => (
                             <div key={img.id} className="relative z-10 hover:z-50 shrink-0 flex-[0_0_auto] mr-6 sm:mr-10">
-                                {/* Card de Imagen con un hover elegante y bordes consitentes */}
+                                {/* Card de Imagen con un hover elegante y bordes consitentes, fondo se ajusta si es oscuro */}
                                 <div
                                     onClick={() => setSelectedImg(img.src)}
-                                    className="relative flex-none w-[260px] sm:w-[350px] aspect-square rounded-[2rem] overflow-hidden shadow-sm transition-all duration-500 hover:scale-105 cursor-pointer bg-[#1a1a1a]/40 border border-white/10 hover:shadow-[0_0_30px_rgba(0,85,255,0.2)]"
+                                    className={`relative flex-none w-[260px] sm:w-[350px] aspect-square rounded-[2rem] overflow-hidden shadow-sm transition-all duration-500 hover:scale-105 cursor-pointer ${dark ? 'bg-[#1a1a1a]/40 border border-white/10 hover:shadow-[0_0_30px_rgba(0,85,255,0.2)]' : 'bg-white/40 border border-gray-100 hover:shadow-[0_0_25px_rgba(0,51,160,0.3)]'}`}
                                 >
                                     <Image
                                         src={img.src}
@@ -55,8 +55,8 @@ export function ImageCarousel({ images, dark }: ImageCarouselProps) {
                                         sizes="(max-width: 768px) 100vw, 33vw"
                                     />
                                     {/* Overlay con icono sutil de zoom al hover */}
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                        <div className="bg-white/10 p-3 rounded-full backdrop-blur-md border border-white/20 text-white">
+                                    <div className={`absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ${dark ? 'bg-black/40' : 'bg-black/20'}`}>
+                                        <div className={`p-3 rounded-full backdrop-blur-md text-white ${dark ? 'bg-white/10 border border-white/20' : 'bg-white/20 border border-white/30'}`}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /><line x1="11" y1="8" x2="11" y2="14" /><line x1="8" y1="11" x2="14" y2="11" /></svg>
                                         </div>
                                     </div>

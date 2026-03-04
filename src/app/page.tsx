@@ -13,7 +13,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen selection:bg-[#0033a0] selection:text-white pb-24 overflow-x-hidden font-sans relative">
+    <main className="min-h-screen selection:bg-[#0033a0] selection:text-white pb-24 overflow-x-hidden font-sans relative text-gray-900">
 
       {/* Header / Top Navigation (Logo de Trans Advanced Technologies) */}
       <header className="absolute top-0 left-0 w-full p-6 sm:p-10 z-50">
@@ -22,7 +22,7 @@ export default function Home() {
           alt="Trans Advanced Technologies"
           width={280}
           height={80}
-          className="h-10 sm:h-14 w-auto brightness-0 invert"
+          className="h-10 sm:h-14 w-auto"
           priority
         />
       </header>
@@ -36,15 +36,15 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tight leading-none flex flex-col items-center gap-1 sm:gap-2">
-            <span className="text-[#0055ff] drop-shadow-[0_0_15px_rgba(0,85,255,0.3)]">
+            <span className="text-[#0033a0]">
               40 años
             </span>
-            <span className="text-[#ff9900] drop-shadow-[0_0_15px_rgba(255,153,0,0.3)]">
+            <span className="text-[#ff9900]">
               conectando el futuro
             </span>
           </h1>
 
-          <p className="text-lg sm:text-2xl text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed mt-4 sm:mt-6">
+          <p className="text-lg sm:text-2xl text-gray-800 max-w-2xl mx-auto font-medium leading-relaxed mt-4 sm:mt-6">
             Cuatro décadas resolviendo desafíos complejos
             <br className="hidden sm:block" />
             en infraestructura, integración y conectividad avanzada.
@@ -61,7 +61,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-8 text-center mt-4">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Casos destacados</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0033a0] tracking-tight">Casos destacados</h2>
           </div>
 
           <ProjectsCarousel />
@@ -77,7 +77,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Automatización - IA - Conectividad satelital</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Automatización - IA - Conectividad satelital</h2>
           </div>
           <ImageCarousel images={[
             { id: 1, src: "/carruseles/1/Publicación 4F-100.jpg" },
@@ -99,7 +99,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Transformación digital + Desarrollo in-house</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Transformación digital + Desarrollo in-house</h2>
           </div>
           <ImageCarousel images={[
             { id: 1, src: "/carruseles/2/1.jpg" },
@@ -110,8 +110,8 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Cuarto Carrusel: Servicios Profesionales (Fondo Azul Marca con opacidad) */}
-      <section className="py-20 relative bg-[#0033a0]/20 w-full mt-10 overflow-hidden backdrop-blur-sm border-y border-white/5">
+      {/* Cuarto Carrusel: Servicios Profesionales (Fondo Azul Marca) */}
+      <section className="py-20 relative bg-[#0033a0] w-full mt-10 overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -119,7 +119,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Servicios Profesionales + Llave en mano</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Servicios Profesionales + Llave en mano</h2>
           </div>
           <ImageCarousel
             dark={true}
@@ -143,7 +143,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Integración</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Integración</h2>
           </div>
           <ImageCarousel
             images={[
@@ -158,7 +158,7 @@ export default function Home() {
       </section>
 
       {/* Sección de Cierre: Integración (Adaptado) */}
-      <section className="py-24 sm:py-32 px-4 sm:px-12 relative flex items-center justify-center mt-auto bg-black/40 border-t border-white/5">
+      <section className="py-24 sm:py-32 px-4 sm:px-12 relative flex items-center justify-center mt-auto bg-[#f8f9fc] border-t border-gray-100">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -170,26 +170,26 @@ export default function Home() {
           className="text-center max-w-4xl mx-auto"
         >
           <div className="mb-8 inline-block">
-            <div className="w-16 h-[4px] bg-[#ff9900] mx-auto rounded-full shadow-[0_0_10px_rgba(255,153,0,0.5)]" />
+            <div className="w-16 h-[4px] bg-[#ff9900] mx-auto rounded-full" />
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 tracking-tight leading-tight text-white">
-            Nuestra historia termina en la <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">Integración</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 tracking-tight leading-tight text-gray-900">
+            Nuestra historia termina en la <span className="text-[#0033a0]">Integración</span>
           </h2>
-          <p className="text-lg sm:text-2xl text-gray-400 font-medium leading-relaxed max-w-3xl mx-auto">
+          <p className="text-lg sm:text-2xl text-gray-600 font-medium leading-relaxed max-w-3xl mx-auto">
             Porque 40 años no son solo el reflejo del pasado, sino la plataforma que hemos construido para integrar todas las tecnologías del mañana. Seguimos conectando ideas, conectando personas y haciendo posible el futuro.
           </p>
         </motion.div>
       </section>
       {/* Footer / Logo a pie de página */}
-      <footer className="py-20 bg-black/60 border-t border-white/5 flex flex-col items-center justify-center">
+      <footer className="py-20 bg-[#f8f9fc] border-t border-gray-100 flex flex-col items-center justify-center">
         <Image
           src="/logo-full.svg"
           alt="Trans Advanced Technologies Footer"
           width={280}
           height={80}
-          className="h-12 sm:h-16 w-auto opacity-30 brightness-0 invert hover:opacity-100 transition-all duration-700"
+          className="h-12 sm:h-16 w-auto opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
         />
-        <p className="mt-8 text-sm text-gray-500 font-medium tracking-widest uppercase">
+        <p className="mt-8 text-sm text-gray-400 font-medium tracking-widest uppercase">
           © {new Date().getFullYear()} Trans Advanced Technologies
         </p>
       </footer>

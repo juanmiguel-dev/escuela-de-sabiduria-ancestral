@@ -1,32 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #001a33; /* Dark Blue */
-  --foreground: #ededed;
+  --background: #eeeeee;
+  --foreground: #111111;
   
   /* TransAdvanced Branding */
-  --brand-blue: #0066cc;
-  --brand-teal: #00e6b8;
-  --brand-dark: #001a33;
-  --brand-accent: #00a3cc;
+  --brand-blue: #0033a0;
+  --brand-teal: #00b491;
+  --brand-dark: #111111;
+  --brand-accent: #008c9e;
 }
 
 body {
-  background: radial-gradient(circle at center, #143057 0%, #0e223d 15%, #001a33 50%, #001a33 100%);
-  background-size: 200% 200%;
-  animation: gradient-shift 60s ease infinite;
+  background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  20% { background-position: 80% 20%; }
-  40% { background-position: 10% 90%; }
-  60% { background-position: 90% 80%; }
-  80% { background-position: 30% 10%; }
-  100% { background-position: 0% 50%; }
 }
 
 /* Custom Scrollbar */
@@ -34,52 +23,14 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
   background: var(--brand-blue);
   border-radius: 4px;
 }
 
-/* Scanline Effect (Subtle) */
-.scanlines {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -5;
-  pointer-events: none;
-}
-.scanlines::before {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(0, 102, 204, 0.03), rgba(0, 230, 184, 0.02), rgba(0, 0, 255, 0.03));
-  background-size: 100% 2px, 3px 100%;
-}
-
-/* Noise Texture */
-.noise-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -6;
-  pointer-events: none;
-}
-.noise-bg::before {
-    content: " ";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.02;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+/* Scanline and Noise effects are not suitable for light theme, so they are removed */
+.scanlines::before, .noise-bg::before {
+  display: none;
 }
