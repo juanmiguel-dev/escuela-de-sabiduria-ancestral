@@ -34,8 +34,9 @@ export const TechBackground: React.FC = () => {
         this.vy = (Math.random() - 0.5) * 0.4;
         this.length = Math.random() * maxLineLength + 50;
         this.angle = Math.random() * Math.PI * 2;
-        this.opacity = Math.random() * 0.15 + 0.05;
-        this.color = Math.random() > 0.8 ? 'rgba(255, 153, 0, ' : 'rgba(0, 85, 255, '; // Mix of Blue and Orange
+        this.opacity = Math.random() * 0.2 + 0.1;
+        this.color = 'rgba(0, 85, 255, '; // Blue for lines
+        this.nodeColor = 'rgba(0, 230, 184, '; // Teal for nodes
       }
 
       update(width: number, height: number) {
@@ -61,33 +62,23 @@ export const TechBackground: React.FC = () => {
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(endX, endY);
-        ctx.strokeStyle = `${this.color}${this.opacity})`;
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = `${this.color}${this.opacity * 0.5})`;
+        ctx.lineWidth = 0.5;
         ctx.stroke();
 
-        // Draw nodes at the ends
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = `${this.color}${this.opacity * 2})`;
-        ctx.fill();
+        // Draw square nodes at the ends with glow
+        const nodeSize = 6;
+        ctx.shadowColor = this.nodeColor + `0.7)`;
+        ctx.shadowBlur = 10;
+        
+        ctx.strokeStyle = `${this.nodeColor}${this.opacity})`;
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(this.x - nodeSize / 2, this.y - nodeSize / 2, nodeSize, nodeSize);
+        ctx.strokeRect(endX - nodeSize / 2, endY - nodeSize / 2, nodeSize, nodeSize);
 
-        ctx.beginPath();
-        ctx.arc(endX, endY, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = `${this.color}${this.opacity * 2})`;
-        ctx.fill();
-
-        // Add a subtle cross at one end
-        if (this.opacity > 0.15) {
-          const crossSize = 4;
-          ctx.beginPath();
-          ctx.moveTo(this.x - crossSize, this.y);
-          ctx.lineTo(this.x + crossSize, this.y);
-          ctx.moveTo(this.x, this.y - crossSize);
-          ctx.lineTo(this.x, this.y + crossSize);
-          ctx.strokeStyle = `${this.color}${this.opacity * 1.5})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
+        // Reset shadow for other elements
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
       }
     }
 
@@ -103,15 +94,7 @@ export const TechBackground: React.FC = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Draw background glow
-      const gradient = ctx.createRadialGradient(
-        canvas.width / 2, canvas.height / 2, 0,
-        canvas.width / 2, canvas.height / 2, canvas.width / 1.5
-      );
-      gradient.addColorStop(0, 'rgba(0, 51, 160, 0.05)');
-      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // No background glow needed, handled by CSS
 
       vectors.forEach(v => {
         v.update(canvas.width, canvas.height);
