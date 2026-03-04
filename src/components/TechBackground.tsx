@@ -14,11 +14,11 @@ export const TechBackground: React.FC = () => {
 
     let animationFrameId: number;
     let scrollOffset = 0;
-    const speed = 0.2;
-    const gridSize = 40;
-    const dotSize = 1.2;
-    const lineOpacity = 0.04;
-    const dotOpacity = 0.1;
+    const speed = 0.25;
+    const gridSize = 45;
+    const dotSize = 1.3;
+    const lineOpacity = 0.08;
+    const dotOpacity = 0.15;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -31,13 +31,13 @@ export const TechBackground: React.FC = () => {
 
       for (let y = -gridSize; y < canvas.height + gridSize; y += gridSize) {
         const yPos = y - scrollOffset;
-        const perspective = Math.max(0, yPos / canvas.height); 
+        const perspective = Math.max(0, yPos / canvas.height);
 
         for (let x = -gridSize; x < canvas.width + gridSize; x += gridSize) {
           // Dibuja los puntos
           ctx.beginPath();
           ctx.arc(x, yPos, dotSize * perspective, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(0, 85, 255, ${dotOpacity + perspective * 0.3})`;
+          ctx.fillStyle = `rgba(0, 85, 255, ${dotOpacity + perspective * 0.4})`;
           ctx.fill();
 
           // Dibuja las líneas horizontales
@@ -45,7 +45,7 @@ export const TechBackground: React.FC = () => {
             ctx.beginPath();
             ctx.moveTo(x, yPos);
             ctx.lineTo(x + gridSize, yPos);
-            ctx.strokeStyle = `rgba(0, 85, 255, ${lineOpacity + perspective * 0.08})`;
+            ctx.strokeStyle = `rgba(0, 85, 255, ${lineOpacity + perspective * 0.15})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -55,7 +55,7 @@ export const TechBackground: React.FC = () => {
             ctx.beginPath();
             ctx.moveTo(x, yPos);
             ctx.lineTo(x, yPos + gridSize);
-            ctx.strokeStyle = `rgba(0, 85, 255, ${lineOpacity + perspective * 0.08})`;
+            ctx.strokeStyle = `rgba(0, 85, 255, ${lineOpacity + perspective * 0.15})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }

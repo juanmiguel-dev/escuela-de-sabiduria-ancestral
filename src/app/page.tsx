@@ -13,8 +13,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#141414] text-white selection:bg-[#0033a0] selection:text-white pb-24 overflow-x-hidden font-sans relative">
-      <TechBackground />
+    <main className="min-h-screen selection:bg-[#0033a0] selection:text-white pb-24 overflow-x-hidden font-sans relative">
 
       {/* Header / Top Navigation (Logo de Trans Advanced Technologies) */}
       <header className="absolute top-0 left-0 w-full p-6 sm:p-10 z-50">
