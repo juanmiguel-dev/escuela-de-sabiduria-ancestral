@@ -26,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#141414] text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TechBackground />
+        <div className="scanlines" />
+        <div className="noise-bg" />
         {children}
       </body>
     </html>
