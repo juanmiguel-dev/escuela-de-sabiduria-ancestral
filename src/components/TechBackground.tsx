@@ -26,6 +26,7 @@ export const TechBackground: React.FC = () => {
       angle: number;
       opacity: number;
       color: string;
+      nodeColor: string;
 
       constructor(width: number, height: number) {
         this.x = Math.random() * width;
