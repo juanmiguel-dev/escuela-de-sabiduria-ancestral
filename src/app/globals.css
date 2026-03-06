@@ -40,6 +40,15 @@ body {
   50% { opacity: 0.6; }
 }
 
+@keyframes color-blink {
+  0%, 100% { color: var(--brand-blue); }
+  50% { color: var(--brand-accent); }
+}
+
 .animate-smooth-blink {
   animation: smooth-blink 2.5s ease-in-out infinite;
+}
+
+.animate-color-blink {
+  animation: color-blink 3s ease-in-out infinite;
 }

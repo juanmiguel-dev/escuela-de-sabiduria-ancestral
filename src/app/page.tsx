@@ -74,7 +74,7 @@ export default function Home() {
           {/* Meta Info Bar Unificada */}
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] sm:text-sm font-bold text-gray-700">
             <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">NUEVO CASO</span>
-            <span className="animate-smooth-blink">1985 - 2025</span>
+            <span className="animate-color-blink font-bold">1985 - 2025</span>
             <span>4K Infraestructura</span>
             <span className="text-gray-600 text-xs sm:text-sm font-bold">#Starlink #Meraki #Wifi <span className="bg-[#ff9900]/20 px-1 rounded">#Enlaces</span></span>
           </div>
@@ -87,7 +87,7 @@ export default function Home() {
           <div className="flex items-center gap-4 pt-4">
             <button 
               onClick={() => setIsVideoModalOpen(true)}
-              className="flex items-center gap-2 bg-[#0033a0] text-white px-8 py-3 rounded font-bold hover:bg-[#002880] transition-colors shadow-lg group"
+              className="flex items-center gap-2 bg-[#0033a0] text-white px-8 py-3 rounded font-bold hover:bg-[#002880] transition-colors shadow-lg group cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="group-hover:scale-110 transition-transform"><path d="M8 5v14l11-7z"/></svg>
               Conocer más

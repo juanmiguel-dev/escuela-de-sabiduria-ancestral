@@ -65,7 +65,7 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
       </div>
 
       {/* Parte Inferior: Información Blanca */}
-      <div className="p-6 bg-white space-y-4">
+      <div className="p-6 bg-white space-y-4 min-h-[140px]">
         <h3 className="text-[#1a2b4e] text-xl font-black leading-tight tracking-tight">
           {title}
         </h3>
