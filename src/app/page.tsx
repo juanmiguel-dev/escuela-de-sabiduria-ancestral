@@ -122,12 +122,11 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Implementaciones de escala nacional</h2>
           </div>
           <ImageCarousel images={[
-            { id: 1, src: "/carruseles/1/Publicación 4F-100.jpg" },
-            { id: 2, src: "/carruseles/1/a.jpg" },
-            { id: 3, src: "/carruseles/1/b.jpg" },
-            { id: 4, src: "/carruseles/1/c.jpg" },
-            { id: 5, src: "/carruseles/1/d.jpg" },
-            { id: 6, src: "/carruseles/1/e.jpg" },
+            { id: 1, src: "/carruseles/1/Publicación 4F-100.jpg", title: "12.000 escuelas conectadas", year: "2007", tags: "#Networking #Educación", match: "99% de coincidencia" },
+            { id: 2, src: "/carruseles/1/a.jpg", title: "Conectividad masiva de aulas", year: "2017", tags: "#Switches #AP #Networking", match: "98% de coincidencia" },
+            { id: 3, src: "/carruseles/1/b.jpg", title: "Red Gobierno CABA", year: "2010-2015", tags: "#MPLS #Networking", match: "97% de coincidencia" },
+            { id: 4, src: "/carruseles/1/c.jpg", title: "Ciudad Interconectada", year: "2017", tags: "#MPLS #Networking #CABA", match: "99% de coincidencia" },
+            { id: 5, src: "/carruseles/1/d.jpg", title: "Enlaces de Fibra Óptica", year: "2018", tags: "#Fibra #Infraestructura", match: "96% de coincidencia" },
           ]} />
         </motion.div>
       </section>
@@ -144,10 +143,10 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Pioneros en infraestructura y redes</h2>
           </div>
           <ImageCarousel images={[
-            { id: 1, src: "/carruseles/2/1.jpg" },
-            { id: 2, src: "/carruseles/2/2.jpg" },
-            { id: 3, src: "/carruseles/2/3.jpg" },
-            { id: 4, src: "/carruseles/2/4.jpg" }
+            { id: 1, src: "/carruseles/2/1.jpg", title: "Primera red Switching AR", year: "1993", tags: "#Switches #Pioneros", match: "100% de coincidencia" },
+            { id: 2, src: "/carruseles/2/2.jpg", title: "Red WAN Frame Relay", year: "1997", tags: "#WAN #FrameRelay", match: "98% de coincidencia" },
+            { id: 3, src: "/carruseles/2/3.jpg", title: "Primer SoftSwitch Corporativo", year: "2009", tags: "#SoftSwitch #Telefonía", match: "99% de coincidencia" },
+            { id: 4, src: "/carruseles/2/4.jpg", title: "Red MPLS Nacional", year: "2010", tags: "#MPLS #Fibra", match: "97% de coincidencia" }
           ]} />
         </motion.div>
       </section>
@@ -164,14 +163,12 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Sectores: Salud, Justicia y Educación</h2>
           </div>
           <ImageCarousel
-            dark={true}
             images={[
-              { id: 1, src: "/carruseles/6/Publicación 10d-100.jpg" },
-              { id: 2, src: "/carruseles/6/a.jpg" },
-              { id: 3, src: "/carruseles/6/b.jpg" },
-              { id: 4, src: "/carruseles/6/c.jpg" },
-              { id: 5, src: "/carruseles/8/Publicación 8d.jpg" },
-              { id: 6, src: "/carruseles/8/a.jpg" },
+              { id: 1, src: "/carruseles/6/Publicación 10d-100.jpg", title: "Hospitales CABA", year: "2005", tags: "#Salud #Networking", match: "98% de coincidencia" },
+              { id: 2, src: "/carruseles/6/a.jpg", title: "Hospital Viña del Mar", year: "2010", tags: "#Salud #ContactCenter", match: "97% de coincidencia" },
+              { id: 3, src: "/carruseles/6/b.jpg", title: "Swiss Medical", year: "2010s", tags: "#Salud #MisiónCrítica", match: "99% de coincidencia" },
+              { id: 4, src: "/carruseles/6/c.jpg", title: "Consejo de la Magistratura", year: "2013-Hoy", tags: "#Justicia #Sistemas", match: "96% de coincidencia" },
+              { id: 5, src: "/carruseles/8/Publicación 8d.jpg", title: "Aulas Inteligentes", year: "2017-Hoy", tags: "#Educación #IA", match: "100% de coincidencia" },
             ]}
           />
         </motion.div>
