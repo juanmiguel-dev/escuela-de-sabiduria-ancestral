@@ -78,7 +78,3 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
     </motion.div>
   );
 }
-
-    </motion.div>
-  );
-}
