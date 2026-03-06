@@ -67,26 +67,21 @@ export default function Home() {
           animate="visible"
           variants={fadeUpVariant}
         >
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-tight text-[#0033a0] drop-shadow-sm">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-tight text-[#0033a0] drop-shadow-sm">
             Educación y conectividad satelital
           </h1>
 
-          {/* Meta Info Bar */}
-          <div className="flex flex-wrap items-center gap-4 text-[10px] sm:text-sm font-bold text-gray-700">
+          {/* Meta Info Bar Unificada */}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] sm:text-sm font-bold text-gray-700">
             <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">NUEVO CASO</span>
             <span className="animate-smooth-blink">1985 - 2025</span>
             <span>4K Infraestructura</span>
+            <span className="text-gray-600 text-xs sm:text-sm font-bold">#Starlink #Meraki #Wifi <span className="bg-[#ff9900]/20 px-1 rounded">#Enlaces</span></span>
           </div>
 
-          <div className="space-y-2">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0] text-sm sm:text-base">NUEVO CASO</span>
-              <span className="text-gray-600 text-xs sm:text-sm font-bold">#Starlink #Meraki #Wifi <span className="bg-[#ff9900]/20 px-1">#Enlaces</span></span>
-            </div>
-            <p className="text-lg sm:text-2xl text-gray-800 max-w-xl font-bold leading-tight border-b border-gray-300 pb-1 inline-block">
-              1000 escuelas rurales conectadas en 90 días
-            </p>
-          </div>
+          <p className="text-lg sm:text-2xl text-gray-800 max-w-xl font-bold leading-tight border-b border-gray-300 pb-1 inline-block pt-4">
+            1000 escuelas rurales conectadas en 90 días
+          </p>
 
           {/* Action Buttons */}
           <div className="flex items-center gap-4 pt-4">
