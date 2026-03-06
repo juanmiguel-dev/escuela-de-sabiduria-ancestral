@@ -86,10 +86,15 @@ export default function Home() {
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               Conocer más
             </button>
-            <button className="flex items-center gap-2 bg-white/60 backdrop-blur-md text-[#0033a0] px-8 py-3 rounded font-bold hover:bg-white/80 transition-all border border-[#0033a0]/20 shadow-lg">
+            <a 
+              href="https://www.transadvanced.tech/contacto" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-white/60 backdrop-blur-md text-[#0033a0] px-8 py-3 rounded font-bold hover:bg-white/80 transition-all border border-[#0033a0]/20 shadow-lg"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
               Más info
-            </button>
+            </a>
           </div>
         </motion.div>
       </section>
