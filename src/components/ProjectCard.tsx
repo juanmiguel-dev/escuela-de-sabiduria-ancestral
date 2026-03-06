@@ -12,21 +12,22 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coincidencia", onClick }: ProjectCardProps) {
+  const tagList = tags ? tags.split(' ').filter(t => t.startsWith('#')).map(t => t.replace('#', '')) : [];
+
   return (
     <motion.div
       onClick={onClick}
-      className="relative flex-none w-[280px] sm:w-[320px] rounded-xl overflow-hidden cursor-pointer group origin-center transition-all bg-[#1a1a1a] shadow-xl border border-white/5"
+      className="relative flex-none w-[300px] sm:w-[340px] rounded-[2rem] overflow-hidden cursor-pointer group bg-white shadow-[0_15px_35px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-500"
       whileHover={{
-        borderColor: "rgba(255, 153, 0, 0.5)",
-        boxShadow: "0 0 20px rgba(255, 153, 0, 0.2), 0 0 40px rgba(0, 51, 160, 0.1)",
-        transition: { duration: 0.3 }
+        y: -10,
+        boxShadow: "0 25px 50px rgba(0,0,0,0.15)",
       }}
     >
-      {/* Contenedor del video */}
-      <div className="relative w-full aspect-video overflow-hidden">
+      {/* Parte Superior: Media (Video/Imagen) */}
+      <div className="relative w-full aspect-[4/3] overflow-hidden">
         <video
           src={videoSrc}
-          className="w-full h-full object-cover transition-opacity duration-500"
+          className="w-full h-full object-cover"
           preload="metadata"
           muted
           loop
@@ -42,38 +43,49 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
           }}
         />
         
-        {/* Overlay con Título (Estilo Logo) - Siempre visible o sutil */}
-        <div className="absolute inset-0 z-20 flex flex-col justify-end p-4 bg-gradient-to-t from-black/80 via-transparent to-transparent group-hover:from-[#0033a0]/80 transition-all duration-500">
-          <div className="space-y-1 transform group-hover:-translate-y-2 transition-transform duration-300">
-            <h3 className="text-white text-xl font-black tracking-tighter leading-none uppercase italic drop-shadow-lg">
-              {title}
-            </h3>
-            
-            {/* Metadata visible en hover (Overlay) */}
-            <div className="flex items-center gap-2 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span className="text-green-400">{match}</span>
-              <span className="text-gray-300">{year}</span>
-              <span className="px-1 py-0.5 border border-white/30 text-white rounded-[2px] text-[8px]">4K</span>
-            </div>
-            
-            {/* Tags visibles en hover (Overlay) */}
-            <p className="text-gray-300 text-[9px] leading-tight opacity-0 group-hover:opacity-100 transition-opacity duration-300 line-clamp-1">
-              {tags}
-            </p>
+        {/* Overlay Azul Gradiente sutil (siempre visible para estética) */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0033a0]/20 to-transparent pointer-events-none" />
+
+        {/* Badge de Año (Arriba Izquierda) */}
+        <div className="absolute top-4 left-4 z-20">
+          <div className="bg-gray-500/40 backdrop-blur-md px-3 py-1 rounded-lg border border-white/30">
+            <span className="text-white text-sm font-bold">{year}</span>
           </div>
         </div>
 
-        {/* Efecto de luz superior (Glow) */}
-        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#ff9900] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[0_0_15px_#ff9900]" />
+        {/* Contenido Central (Overlay) */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#0033a0]/40 backdrop-blur-[2px]">
+           <div className="bg-[#ff9900] px-3 py-1 rounded text-[10px] font-black text-white uppercase mb-2">
+             CASO: {title.split(' ')[0]}
+           </div>
+           <p className="text-white text-lg font-bold leading-tight drop-shadow-md">
+             {title}
+           </p>
+        </div>
       </div>
 
-      {/* Barra inferior estática - Solo decorativa ahora */}
-      <div className="p-2 bg-[#1a1a1a] flex items-center justify-between border-t border-white/5">
-        <div className="flex items-center gap-2">
-          <div className="w-1 h-1 rounded-full bg-[#ff9900] group-hover:animate-pulse" />
-          <span className="text-white text-[9px] font-bold tracking-widest uppercase opacity-60">Destacado</span>
+      {/* Parte Inferior: Información Blanca */}
+      <div className="p-6 bg-white space-y-4">
+        <h3 className="text-[#1a2b4e] text-xl font-black leading-tight tracking-tight">
+          {title}
+        </h3>
+        
+        {/* Tags Estilo Referencia */}
+        <div className="flex flex-wrap gap-2">
+          {tagList.map((tag, idx) => (
+            <span 
+              key={idx} 
+              className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-xs font-bold border border-gray-200"
+            >
+              {tag}
+            </span>
+          ))}
+          {tagList.length === 0 && (
+            <span className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-xs font-bold border border-gray-200">
+              Networking
+            </span>
+          )}
         </div>
-        <span className="text-[9px] text-gray-500 font-medium">{year}</span>
       </div>
     </motion.div>
   );
