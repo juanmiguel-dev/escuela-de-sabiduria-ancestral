@@ -67,29 +67,14 @@ export default function Home() {
           animate="visible"
           variants={fadeUpVariant}
         >
-          {/* Category / "Netflix Series" equivalent */}
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-[#ff9900] font-bold text-sm tracking-widest uppercase">Educación y conectividad satelital</span>
-            <div className="w-12 h-[2px] bg-[#ff9900]" />
-          </div>
-
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.9] flex flex-col items-start gap-1">
-            <span className="text-[#0033a0] drop-shadow-sm">
-              40 años
-            </span>
-            <span className="text-[#ff9900] drop-shadow-sm">
-              conectando
-            </span>
-            <span className="text-[#ff9900] drop-shadow-sm">
-              el futuro
-            </span>
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-tight text-[#0033a0] drop-shadow-sm">
+            Educación y conectividad satelital
           </h1>
 
           {/* Meta Info Bar */}
           <div className="flex flex-wrap items-center gap-4 text-[10px] sm:text-sm font-bold text-gray-700">
-            <span className="text-green-600 border-b border-green-600">97% Conectividad</span>
-            <span>1985 - 2025</span>
-            <span className="px-1.5 py-0.5 border border-gray-800 rounded-[2px] text-[10px] uppercase tracking-tighter font-black">Trayectoria</span>
+            <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">NUEVO CASO</span>
+            <span className="animate-smooth-blink">1985 - 2025</span>
             <span>4K Infraestructura</span>
           </div>
 

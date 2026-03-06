@@ -34,3 +34,12 @@ body {
 .scanlines::before, .noise-bg::before {
   display: none;
 }
+
+@keyframes smooth-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-smooth-blink {
+  animation: smooth-blink 2.5s ease-in-out infinite;
+}
