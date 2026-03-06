@@ -103,7 +103,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Proyectos destacados</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Cuando la tecnología no puede fallar</h2>
           </div>
 
           <ProjectsCarousel />
@@ -119,7 +119,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Automatización - IA - Conectividad satelital</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Implementaciones de escala nacional</h2>
           </div>
           <ImageCarousel images={[
             { id: 1, src: "/carruseles/1/Publicación 4F-100.jpg" },
@@ -132,7 +132,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Tercer Carrusel: Transformación Digital */}
+      {/* Tercer Carrusel: Pioneros */}
       <section className="pb-20 relative w-full overflow-hidden">
         <motion.div
           initial="hidden"
@@ -141,7 +141,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Transformación digital + Desarrollo in-house</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Pioneros en infraestructura y redes</h2>
           </div>
           <ImageCarousel images={[
             { id: 1, src: "/carruseles/2/1.jpg" },
@@ -152,7 +152,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Cuarto Carrusel: Servicios Profesionales (Fondo Azul Marca) */}
+      {/* Cuarto Carrusel: Otros Proyectos (Fondo Azul Marca) */}
       <section className="py-20 relative bg-[#0033a0] w-full mt-10 overflow-hidden">
         <motion.div
           initial="hidden"
@@ -161,22 +161,23 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Servicios Profesionales + Llave en mano</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Sectores: Salud, Justicia y Educación</h2>
           </div>
           <ImageCarousel
             dark={true}
             images={[
-              { id: 1, src: "/carruseles/3/a.jpg" },
-              { id: 2, src: "/carruseles/3/b.jpg" },
-              { id: 3, src: "/carruseles/3/c.jpg" },
-              { id: 4, src: "/carruseles/3/d.jpg" },
-              { id: 5, src: "/carruseles/3/e.jpg" },
+              { id: 1, src: "/carruseles/6/Publicación 10d-100.jpg" },
+              { id: 2, src: "/carruseles/6/a.jpg" },
+              { id: 3, src: "/carruseles/6/b.jpg" },
+              { id: 4, src: "/carruseles/6/c.jpg" },
+              { id: 5, src: "/carruseles/8/Publicación 8d.jpg" },
+              { id: 6, src: "/carruseles/8/a.jpg" },
             ]}
           />
         </motion.div>
       </section>
 
-      {/* Quinto Carrusel: Integración */}
+      {/* Quinta Sección: Integración */}
       <section className="pt-20 pb-16 relative w-full overflow-hidden">
         <motion.div
           initial="hidden"
@@ -194,6 +195,8 @@ export default function Home() {
               { id: 3, src: "/carruseles/4/c.jpg" },
               { id: 4, src: "/carruseles/4/d.jpg" },
               { id: 5, src: "/carruseles/4/e.jpg" },
+              { id: 6, src: "/carruseles/9/a.jpg" },
+              { id: 7, src: "/carruseles/9/b.jpg" },
             ]}
           />
         </motion.div>
