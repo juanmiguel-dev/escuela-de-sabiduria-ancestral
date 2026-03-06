@@ -3,8 +3,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ProjectCard } from "./ProjectCard";
-import { X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { VideoModal } from "./VideoModal";
 import AutoScroll from "embla-carousel-auto-scroll";
 
 export function ProjectsCarousel() {
@@ -67,44 +66,12 @@ export function ProjectsCarousel() {
                 </div>
             </div>
 
-            {/* POPUP SUPER PUESTO (Modal Reproductor) */}
-            <AnimatePresence>
-                {selectedVideo && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/80 backdrop-blur-xl"
-                        onClick={() => setSelectedVideo(null)}
-                    >
-                        <motion.div
-                            initial={{ scale: 0.9, y: 30, opacity: 0 }}
-                            animate={{ scale: 1, y: 0, opacity: 1 }}
-                            exit={{ scale: 0.9, y: 30, opacity: 0 }}
-                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-6xl aspect-video bg-black rounded-3xl overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.6)] border border-white/10"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            {/* Botón de cierre elegante */}
-                            <button
-                                onClick={() => setSelectedVideo(null)}
-                                className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 bg-black/40 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20"
-                            >
-                                <X size={28} strokeWidth={2} />
-                            </button>
-
-                            {/* Reproductor Real sin auto-loop para que lo vean tranquilos */}
-                            <video
-                                src={selectedVideo.src}
-                                controls
-                                autoPlay
-                                className="w-full h-full object-contain bg-black"
-                                controlsList="nodownload"
-                            />
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            <VideoModal
+                isOpen={!!selectedVideo}
+                onClose={() => setSelectedVideo(null)}
+                title={selectedVideo?.title || ""}
+                videoSrc={selectedVideo?.src || ""}
+            />
         </>
     );
 }

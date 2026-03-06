@@ -1,12 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { ProjectsCarousel } from "@/components/ProjectsCarousel";
 import { ImageCarousel } from "@/components/ImageCarousel";
 import { TechBackground } from "@/components/TechBackground";
+import { VideoModal } from "@/components/VideoModal";
 
 export default function Home() {
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+
   const fadeUpVariant: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
@@ -29,16 +33,29 @@ export default function Home() {
 
       {/* Hero Section (Netflix Style) */}
       <section className="relative h-[85vh] sm:h-[95vh] w-full flex items-center overflow-hidden">
-        {/* Featured Video Background */}
+        {/* Featured Background: Video on Desktop, Static Image on Mobile */}
         <div className="absolute inset-0 z-0">
+          {/* Static Image for Mobile (Netflix Style) */}
+          <div className="block sm:hidden w-full h-full">
+            <Image
+              src="/carruseles/8/Publicación 8d.jpg" // Una imagen representativa de escuelas/educación
+              alt="Educación y conectividad satelital"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+          
+          {/* Video for Desktop */}
           <video
-            src="/videos/1.mp4"
+            src="/videos/7.mp4"
             autoPlay
             muted
             loop
             playsInline
-            className="w-full h-full object-cover"
+            className="hidden sm:block w-full h-full object-cover"
           />
+          
           {/* Light Overlay Gradient for Readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/60 to-transparent z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#eeeeee] via-transparent to-transparent z-10" />
@@ -50,9 +67,9 @@ export default function Home() {
           animate="visible"
           variants={fadeUpVariant}
         >
-          {/* "Netflix Series" equivalent */}
+          {/* Category / "Netflix Series" equivalent */}
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[#ff9900] font-bold text-sm tracking-widest uppercase">Evolución 4.0</span>
+            <span className="text-[#ff9900] font-bold text-sm tracking-widest uppercase">Educación y conectividad satelital</span>
             <div className="w-12 h-[2px] bg-[#ff9900]" />
           </div>
 
@@ -69,21 +86,30 @@ export default function Home() {
           </h1>
 
           {/* Meta Info Bar */}
-          <div className="flex flex-wrap items-center gap-4 text-sm sm:text-base font-bold text-gray-700">
-            <span className="text-green-600">97% Conectividad</span>
+          <div className="flex flex-wrap items-center gap-4 text-[10px] sm:text-sm font-bold text-gray-700">
+            <span className="text-green-600 border-b border-green-600">97% Conectividad</span>
             <span>1985 - 2025</span>
-            <span className="px-2 py-0.5 border-2 border-gray-400 rounded text-xs uppercase tracking-tighter">Trayectoria</span>
+            <span className="px-1.5 py-0.5 border border-gray-800 rounded-[2px] text-[10px] uppercase tracking-tighter font-black">Trayectoria</span>
             <span>4K Infraestructura</span>
           </div>
 
-          <p className="text-lg sm:text-2xl text-gray-800 max-w-xl font-medium leading-tight">
-            Cuatro décadas resolviendo desafíos complejos en infraestructura, integración y conectividad avanzada.
-          </p>
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0] text-sm sm:text-base">NUEVO CASO</span>
+              <span className="text-gray-600 text-xs sm:text-sm font-bold">#Starlink #Meraki #Wifi <span className="bg-[#ff9900]/20 px-1">#Enlaces</span></span>
+            </div>
+            <p className="text-lg sm:text-2xl text-gray-800 max-w-xl font-bold leading-tight border-b border-gray-300 pb-1 inline-block">
+              1000 escuelas rurales conectadas en 90 días
+            </p>
+          </div>
 
           {/* Action Buttons */}
           <div className="flex items-center gap-4 pt-4">
-            <button className="flex items-center gap-2 bg-[#0033a0] text-white px-8 py-3 rounded font-bold hover:bg-[#002880] transition-colors shadow-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <button 
+              onClick={() => setIsVideoModalOpen(true)}
+              className="flex items-center gap-2 bg-[#0033a0] text-white px-8 py-3 rounded font-bold hover:bg-[#002880] transition-colors shadow-lg group"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="group-hover:scale-110 transition-transform"><path d="M8 5v14l11-7z"/></svg>
               Conocer más
             </button>
             <a 
@@ -98,6 +124,13 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      <VideoModal 
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        title="Educación y conectividad satelital"
+        videoSrc="/videos/7.mp4"
+      />
 
       {/* Sección Carrusel: Casos Destacados - Overlap Effect */}
       <section className="relative z-30 -mt-16 sm:-mt-24 pb-12 w-full overflow-hidden">
