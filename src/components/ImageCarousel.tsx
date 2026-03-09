@@ -68,18 +68,18 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                 {/* Flechas de Navegación (Solo visibles en hover del contenedor principal) */}
                 <button 
                     onClick={scrollPrev}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-40 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                    className={`absolute left-4 top-1/2 -translate-y-1/2 z-40 bg-black/40 hover:bg-white hover:text-black text-white p-2 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer ${minimal ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                 >
                     <ChevronLeft size={32} />
                 </button>
                 <button 
                     onClick={scrollNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-40 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                    className={`absolute right-4 top-1/2 -translate-y-1/2 z-40 bg-black/40 hover:bg-white hover:text-black text-white p-2 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer ${minimal ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                 >
                     <ChevronRight size={32} />
                 </button>
 
-                <div className={`overflow-hidden cursor-grab active:cursor-grabbing ${minimal ? '' : 'py-16 px-4 sm:px-8'}`} ref={emblaRef}>
+                <div className={`overflow-hidden cursor-grab active:cursor-grabbing ${minimal ? 'py-12' : 'py-16 px-4 sm:px-8'}`} ref={emblaRef}>
                     <div className="flex flex-row items-center">
                         {images.map((img) => {
                             const tagList = img.tags ? img.tags.split(' ').filter(t => t.startsWith('#')).map(t => t.replace('#', '')) : [];
@@ -90,7 +90,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                     <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex-[0_0_auto] mr-4 sm:mr-8">
                                         <motion.div
                                             onClick={() => handleCardClick(img)}
-                                            className="relative flex-none w-[80vw] sm:w-[65vw] max-w-[1000px] aspect-video rounded-3xl overflow-hidden cursor-pointer border border-white/10 transition-all duration-500"
+                                            className="relative flex-none w-[60vw] sm:w-[45vw] max-w-[800px] aspect-video rounded-3xl overflow-hidden cursor-pointer border border-white/10 transition-all duration-500"
                                             whileHover={{ scale: 1.02 }}
                                         >
                                             <Image

@@ -28,7 +28,7 @@ export function GalleryModal({ isOpen, onClose, title, images }: GalleryModalPro
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-12 bg-black/50 backdrop-blur-md"
+                    className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-12 bg-black/80 backdrop-blur-xl"
                     onClick={onClose}
                 >
                     <motion.div
@@ -36,7 +36,7 @@ export function GalleryModal({ isOpen, onClose, title, images }: GalleryModalPro
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.95, opacity: 0 }}
                         transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                        className="relative w-[85vw] h-[80vh] flex flex-col"
+                        className="relative w-full h-full flex flex-col"
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Encabezado del Modal (Transparente) */}
