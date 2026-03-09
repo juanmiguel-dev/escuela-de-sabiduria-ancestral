@@ -29,20 +29,23 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
     });
 
     const [selectedImg, setSelectedImg] = useState<string | null>(null);
+    const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
     // Bloquear scroll cuando el modal está abierto
     useEffect(() => {
-        if (selectedImg || isGalleryOpen) {
+        if (selectedImg || isGalleryOpen || selectedVideo) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
         }
-    }, [selectedImg, isGalleryOpen]);
+    }, [selectedImg, isGalleryOpen, selectedVideo]);
 
     const handleCardClick = (img: ImageItem) => {
         if (img.isGallery) {
             setIsGalleryOpen(true);
+        } else if (img.src.endsWith('.mp4')) {
+            setSelectedVideo(img.src);
         } else {
             setSelectedImg(img.src);
         }
@@ -177,6 +180,44 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
                                 src={selectedImg}
                                 alt="Vista ampliada"
                                 className="w-auto h-auto max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl border border-white/10"
+                            />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* MODAL / POPUP DE VIDEO */}
+            <AnimatePresence>
+                {selectedVideo && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/90 backdrop-blur-2xl"
+                        onClick={() => setSelectedVideo(null)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                            className="relative w-full max-w-4xl aspect-video"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Botón de cierre elegante */}
+                            <button
+                                onClick={() => setSelectedVideo(null)}
+                                className="absolute top-0 right-0 sm:-top-4 sm:-right-4 z-[110] bg-white/10 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20"
+                            >
+                                <X size={28} strokeWidth={2} />
+                            </button>
+
+                            <video
+                                src={selectedVideo}
+                                className="w-full h-full rounded-2xl shadow-2xl border border-white/10"
+                                controls
+                                autoPlay
+                                loop
                             />
                         </motion.div>
                     </motion.div>
