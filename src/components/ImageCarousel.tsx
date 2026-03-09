@@ -18,9 +18,10 @@ interface ImageItem {
 
 interface ImageCarouselProps {
     images: ImageItem[];
+    onGalleryClick?: (img: ImageItem) => void;
 }
 
-export function ImageCarousel({ images }: ImageCarouselProps) {
+export function ImageCarousel({ images, onGalleryClick }: ImageCarouselProps) {
     const [emblaRef] = useEmblaCarousel({
         align: "start",
         loop: true,
@@ -43,7 +44,11 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
 
     const handleCardClick = (img: ImageItem) => {
         if (img.isGallery) {
-            setIsGalleryOpen(true);
+            if (onGalleryClick) {
+                onGalleryClick(img);
+            } else {
+                setIsGalleryOpen(true);
+            }
         } else if (img.src.endsWith('.mp4')) {
             setSelectedVideo(img.src);
         } else {

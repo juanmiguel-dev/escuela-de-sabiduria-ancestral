@@ -157,7 +157,9 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Cuando la tecnología no puede fallar</h2>
           </div>
           
-          <ImageCarousel images={[
+          <ImageCarousel 
+            onGalleryClick={() => setIsGalleryModalOpen(true)}
+            images={[
             { id: "emergencias", src: "/tecnologia-no-puede-fallar/emergencias.mp4", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo", match: "100% de coincidencia" },
             { id: "salud", src: "/tecnologia-no-puede-fallar/salud.mp4", title: "Tecnología en sector Salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA", match: "99% de coincidencia" },
             { id: "ciberseguridad", src: "/tecnologia-no-puede-fallar/ciberseguridad.mp4", title: "Ciberseguridad pública con Cisco", year: "2012", tags: "#Ciberseguridad #Cisco", match: "98% de coincidencia" },
