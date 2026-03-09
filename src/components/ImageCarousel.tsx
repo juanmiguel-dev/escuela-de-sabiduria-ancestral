@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface ImageItem {
@@ -19,10 +19,11 @@ interface ImageItem {
 interface ImageCarouselProps {
     images: ImageItem[];
     onGalleryClick?: (img: ImageItem) => void;
+    minimal?: boolean;
 }
 
-export function ImageCarousel({ images, onGalleryClick }: ImageCarouselProps) {
-    const [emblaRef] = useEmblaCarousel({
+export function ImageCarousel({ images, onGalleryClick, minimal = false }: ImageCarouselProps) {
+    const [emblaRef, emblaApi] = useEmblaCarousel({
         align: "start",
         loop: true,
         skipSnaps: false,
@@ -32,6 +33,10 @@ export function ImageCarousel({ images, onGalleryClick }: ImageCarouselProps) {
     const [selectedImg, setSelectedImg] = useState<string | null>(null);
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
+    // Funciones para las flechas
+    const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+    const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
     // Bloquear scroll cuando el modal está abierto
     useEffect(() => {
@@ -59,10 +64,49 @@ export function ImageCarousel({ images, onGalleryClick }: ImageCarouselProps) {
     return (
         <>
             <div className="relative group w-full">
+                {/* Flechas de Navegación (Solo visibles en hover del contenedor principal) */}
+                <button 
+                    onClick={scrollPrev}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-40 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                >
+                    <ChevronLeft size={32} />
+                </button>
+                <button 
+                    onClick={scrollNext}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-40 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                >
+                    <ChevronRight size={32} />
+                </button>
+
                 <div className="overflow-hidden py-16 px-4 sm:px-8 cursor-grab active:cursor-grabbing" ref={emblaRef}>
                     <div className="flex flex-row items-center">
                         {images.map((img) => {
                             const tagList = img.tags ? img.tags.split(' ').filter(t => t.startsWith('#')).map(t => t.replace('#', '')) : [];
+                            
+                            // MODO MINIMALISTA: Solo la imagen redondeada, sin texto ni estilo de card blanca
+                            if (minimal) {
+                                return (
+                                    <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex-[0_0_auto] mr-6 sm:mr-10">
+                                        <motion.div
+                                            onClick={() => handleCardClick(img)}
+                                            className="relative flex-none w-[300px] sm:w-[450px] aspect-video rounded-2xl overflow-hidden cursor-pointer shadow-2xl border border-white/10 transition-all duration-500"
+                                            whileHover={{ scale: 1.02 }}
+                                        >
+                                            <Image
+                                                src={img.src}
+                                                alt="Galería"
+                                                fill
+                                                className="object-cover"
+                                                sizes="(max-width: 768px) 100vw, 50vw"
+                                            />
+                                            {/* Sutil overlay al hover en minimal */}
+                                            <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                                        </motion.div>
+                                    </div>
+                                );
+                            }
+
+                            // MODO NORMAL (CARD): Estilo tipo referencia con parte inferior blanca
                             return (
                                 <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex-[0_0_auto] mr-6 sm:mr-10">
                                     <motion.div

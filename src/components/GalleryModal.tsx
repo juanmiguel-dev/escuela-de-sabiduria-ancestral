@@ -51,7 +51,7 @@ export function GalleryModal({ isOpen, onClose, title, images }: GalleryModalPro
                         </button>
 
                         <div className="h-full pt-24 pb-12">
-                            <ImageCarousel images={images} />
+                            <ImageCarousel images={images} minimal={true} />
                         </div>
                     </motion.div>
                 </motion.div>
