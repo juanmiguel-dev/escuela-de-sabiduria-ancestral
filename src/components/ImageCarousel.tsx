@@ -206,7 +206,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false }: Image
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/90 backdrop-blur-2xl"
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/50 backdrop-blur-md"
                         onClick={() => setSelectedImg(null)}
                     >
                         <motion.div
@@ -242,7 +242,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false }: Image
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/90 backdrop-blur-2xl"
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/50 backdrop-blur-md"
                         onClick={() => setSelectedVideo(null)}
                     >
                         <motion.div
