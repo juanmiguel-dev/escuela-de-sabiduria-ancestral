@@ -112,6 +112,29 @@ export default function Home() {
         videoSrc="/videos/7.mp4"
       />
 
+      {/* Nueva Sección: Cuando la tecnología no puede fallar */}
+      <section className="relative z-30 pt-16 pb-12 w-full overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariant}
+        >
+          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Cuando la tecnología no puede fallar</h2>
+          </div>
+          
+          <ImageCarousel images={[
+            { id: "emergencias", src: "/carruseles/6/Publicación 10d-100.jpg", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo", match: "100% de coincidencia" },
+            { id: "salud", src: "/carruseles/3/a.jpg", title: "Tecnología en sector Salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA", match: "99% de coincidencia" },
+            { id: "ciberseguridad", src: "/carruseles/2/2.jpg", title: "Ciberseguridad pública con Cisco", year: "2012", tags: "#Ciberseguridad #Cisco", match: "98% de coincidencia" },
+            { id: "frontera", src: "/carruseles/3/b.jpg", title: "Videovigilancia fronteriza", year: "2011", tags: "#CCTV", match: "97% de coincidencia" },
+            { id: "hospitales", src: "/carruseles/6/a.jpg", title: "Hospitales CABA", year: "2005", tags: "#Cableado #Switches #Networking", match: "96% de coincidencia" },
+            { id: "arsat", src: "/carruseles/6/b.jpg", title: "Data center ARSAT", year: "2014", tags: "#Data center #Cisco", match: "99% de coincidencia" },
+          ]} />
+        </motion.div>
+      </section>
+
       {/* Sección Carrusel: Casos Destacados - Overlap Effect */}
       <section className="relative z-30 -mt-16 sm:-mt-24 pb-12 w-full overflow-hidden">
         <motion.div
