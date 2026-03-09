@@ -36,21 +36,21 @@ export function GalleryModal({ isOpen, onClose, title, images }: GalleryModalPro
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.95, opacity: 0 }}
                         transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                        className="relative w-full max-w-7xl h-[80vh] bg-black/20 rounded-3xl overflow-hidden shadow-2xl border border-white/10 flex flex-col"
+                        className="relative w-[85vw] h-[80vh] flex flex-col"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        {/* Encabezado del Modal */}
-                        <div className="relative z-50 flex justify-between items-center p-6 sm:p-8">
-                            <h3 className="text-white text-2xl sm:text-4xl font-bold tracking-tight">{title}</h3>
+                        {/* Encabezado del Modal (Transparente) */}
+                        <div className="relative z-50 flex justify-between items-center px-4 sm:px-8 py-6">
+                            <h3 className="text-white text-2xl sm:text-4xl font-bold tracking-tight drop-shadow-lg">{title}</h3>
                             <button
                                 onClick={onClose}
-                                className="bg-black/50 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20 cursor-pointer"
+                                className="bg-black/40 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20 cursor-pointer"
                             >
                                 <X size={28} strokeWidth={2} />
                             </button>
                         </div>
 
-                        {/* Contenido del Carrusel (ocupa el resto del espacio) */}
+                        {/* Contenido del Carrusel (Sin restricciones de fondo) */}
                         <div className="flex-grow flex items-center justify-center min-h-0">
                             <ImageCarousel images={images} minimal={true} />
                         </div>

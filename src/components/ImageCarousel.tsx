@@ -78,7 +78,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false }: Image
                     <ChevronRight size={32} />
                 </button>
 
-                <div className={`overflow-hidden cursor-grab active:cursor-grabbing ${minimal ? 'py-4' : 'py-16 px-4 sm:px-8'}`} ref={emblaRef}>
+                <div className={`overflow-hidden cursor-grab active:cursor-grabbing ${minimal ? 'py-10' : 'py-16 px-4 sm:px-8'}`} ref={emblaRef}>
                     <div className="flex flex-row items-center">
                         {images.map((img) => {
                             const tagList = img.tags ? img.tags.split(' ').filter(t => t.startsWith('#')).map(t => t.replace('#', '')) : [];
@@ -89,8 +89,8 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false }: Image
                                     <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex-[0_0_auto] mr-6 sm:mr-10">
                                         <motion.div
                                             onClick={() => handleCardClick(img)}
-                                            className="relative flex-none w-[300px] sm:w-[450px] aspect-video rounded-2xl overflow-hidden cursor-pointer shadow-2xl border border-white/10 transition-all duration-500"
-                                            whileHover={{ scale: 1.02 }}
+                                            className="relative flex-none w-[320px] sm:w-[550px] aspect-video rounded-3xl overflow-hidden cursor-pointer shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 transition-all duration-500"
+                                            whileHover={{ scale: 1.05 }}
                                         >
                                             <Image
                                                 src={img.src}
