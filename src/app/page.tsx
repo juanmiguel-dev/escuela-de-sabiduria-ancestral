@@ -6,10 +6,19 @@ import Image from "next/image";
 import { ProjectsCarousel } from "@/components/ProjectsCarousel";
 import { ImageCarousel } from "@/components/ImageCarousel";
 import { TechBackground } from "@/components/TechBackground";
-import { VideoModal } from "@/components/VideoModal";
+import { GalleryModal } from "@/components/GalleryModal";
 
 export default function Home() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
+
+  const galleryImages = [
+    { id: 1, src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg" },
+    { id: 2, src: "/tecnologia-no-puede-fallar/2011/Publicación 6B-100.jpg" },
+    { id: 3, src: "/tecnologia-no-puede-fallar/2011/Publicación 6C-100.jpg" },
+    { id: 4, src: "/tecnologia-no-puede-fallar/2011/Publicación 6D-100.jpg" },
+    { id: 5, src: "/tecnologia-no-puede-fallar/2011/Publicación 6E-100.jpg" },
+  ];
 
   const fadeUpVariant: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -112,6 +121,13 @@ export default function Home() {
         videoSrc="/videos/7.mp4"
       />
 
+      <GalleryModal 
+        isOpen={isGalleryModalOpen}
+        onClose={() => setIsGalleryModalOpen(false)}
+        title="Videovigilancia fronteriza"
+        images={galleryImages}
+      />
+
       {/* Sección Carrusel: Casos Destacados - Overlap Effect (Se mantiene igual) */}
       <section className="relative z-30 -mt-16 sm:-mt-24 pb-12 w-full overflow-hidden">
         <motion.div
@@ -141,12 +157,13 @@ export default function Home() {
           </div>
           
           <ImageCarousel images={[
-            { id: "emergencias", src: "/carruseles/6/Publicación 10d-100.jpg", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo", match: "100% de coincidencia" },
-            { id: "salud", src: "/carruseles/3/a.jpg", title: "Tecnología en sector Salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA", match: "99% de coincidencia" },
-            { id: "ciberseguridad", src: "/carruseles/2/2.jpg", title: "Ciberseguridad pública con Cisco", year: "2012", tags: "#Ciberseguridad #Cisco", match: "98% de coincidencia" },
-            { id: "frontera", src: "/carruseles/3/b.jpg", title: "Videovigilancia fronteriza", year: "2011", tags: "#CCTV", match: "97% de coincidencia" },
-            { id: "hospitales", src: "/carruseles/6/a.jpg", title: "Hospitales CABA", year: "2005", tags: "#Cableado #Switches #Networking", match: "96% de coincidencia" },
-            { id: "arsat", src: "/carruseles/6/b.jpg", title: "Data center ARSAT", year: "2014", tags: "#Data center #Cisco", match: "99% de coincidencia" },
+            { id: "emergencias", src: "/tecnologia-no-puede-fallar/emergencias.mp4", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo", match: "100% de coincidencia" },
+            { id: "salud", src: "/tecnologia-no-puede-fallar/salud.mp4", title: "Tecnología en sector Salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA", match: "99% de coincidencia" },
+            { id: "ciberseguridad", src: "/tecnologia-no-puede-fallar/ciberseguridad.mp4", title: "Ciberseguridad pública con Cisco", year: "2012", tags: "#Ciberseguridad #Cisco", match: "98% de coincidencia" },
+            { id: "frontera", src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg", title: "Videovigilancia fronteriza", year: "2011", tags: "#CCTV #Galería", match: "97% de coincidencia", isGallery: true },
+            { id: "hospitales", src: "/tecnologia-no-puede-fallar/hospitales.jpg", title: "Hospitales CABA", year: "2005", tags: "#Cableado #Switches #Networking", match: "96% de coincidencia" },
+
+            { id: "arsat", src: "/tecnologia-no-puede-fallar/arsat.jpg", title: "Data center ARSAT", year: "2014", tags: "#Data center #Cisco", match: "99% de coincidencia" },
           ]} />
         </motion.div>
       </section>

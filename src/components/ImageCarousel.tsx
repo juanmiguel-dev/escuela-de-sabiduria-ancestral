@@ -13,6 +13,7 @@ interface ImageItem {
     year?: string;
     tags?: string;
     match?: string;
+    isGallery?: boolean;
 }
 
 interface ImageCarouselProps {
@@ -28,15 +29,24 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
     });
 
     const [selectedImg, setSelectedImg] = useState<string | null>(null);
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
     // Bloquear scroll cuando el modal está abierto
     useEffect(() => {
-        if (selectedImg) {
+        if (selectedImg || isGalleryOpen) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
         }
-    }, [selectedImg]);
+    }, [selectedImg, isGalleryOpen]);
+
+    const handleCardClick = (img: ImageItem) => {
+        if (img.isGallery) {
+            setIsGalleryOpen(true);
+        } else {
+            setSelectedImg(img.src);
+        }
+    };
 
     return (
         <>
@@ -48,15 +58,34 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
                             return (
                                 <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex-[0_0_auto] mr-6 sm:mr-10">
                                     <motion.div
-                                        onClick={() => setSelectedImg(img.src)}
+                                        onClick={() => handleCardClick(img)}
                                         className="relative flex-none w-[300px] sm:w-[340px] rounded-[2rem] overflow-hidden cursor-pointer group bg-white shadow-[0_15px_35px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-500"
                                         whileHover={{
                                             y: -10,
                                             boxShadow: "0 25px 50px rgba(0,0,0,0.15)",
                                         }}
                                     >
-                                        {/* Parte Superior: Media (Imagen) */}
-                                        <div className="relative w-full aspect-[4/3] overflow-hidden">
+                                        {/* Contenedor de la Media (Video o Imagen) */}
+                                    <div className="relative w-full aspect-[4/3] overflow-hidden">
+                                        {img.src.endsWith('.mp4') ? (
+                                            <video
+                                                src={img.src}
+                                                className="w-full h-full object-cover"
+                                                preload="metadata"
+                                                muted
+                                                loop
+                                                playsInline
+                                                onMouseEnter={(e) => {
+                                                    const video = e.target as HTMLVideoElement;
+                                                    video.play().catch(() => { });
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    const video = e.target as HTMLVideoElement;
+                                                    video.pause();
+                                                    video.currentTime = 0;
+                                                }}
+                                            />
+                                        ) : (
                                             <Image
                                                 src={img.src}
                                                 alt={img.title || "Galería"}
@@ -64,9 +93,10 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
                                                 className="object-cover"
                                                 sizes="(max-width: 768px) 100vw, 33vw"
                                             />
-                                            
-                                            {/* Overlay Azul Gradiente sutil */}
-                                            <div className="absolute inset-0 bg-gradient-to-br from-[#0033a0]/20 to-transparent pointer-events-none" />
+                                        )}
+                                        
+                                        {/* Overlay Azul Gradiente sutil */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-[#0033a0]/20 to-transparent pointer-events-none" />
 
                                             {/* Badge de Año (Arriba Izquierda) */}
                                             <div className="absolute top-4 left-4 z-20">
