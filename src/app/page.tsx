@@ -112,7 +112,23 @@ export default function Home() {
         videoSrc="/videos/7.mp4"
       />
 
-      {/* Nueva Sección: Cuando la tecnología no puede fallar */}
+      {/* Sección Carrusel: Casos Destacados - Overlap Effect (Se mantiene igual) */}
+      <section className="relative z-30 -mt-16 sm:-mt-24 pb-12 w-full overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariant}
+        >
+          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Casos destacados</h2>
+          </div>
+
+          <ProjectsCarousel />
+        </motion.div>
+      </section>
+
+      {/* Nueva Sección: Cuando la tecnología no puede fallar (Abajo de los videos) */}
       <section className="relative z-30 pt-16 pb-12 w-full overflow-hidden">
         <motion.div
           initial="hidden"
@@ -132,22 +148,6 @@ export default function Home() {
             { id: "hospitales", src: "/carruseles/6/a.jpg", title: "Hospitales CABA", year: "2005", tags: "#Cableado #Switches #Networking", match: "96% de coincidencia" },
             { id: "arsat", src: "/carruseles/6/b.jpg", title: "Data center ARSAT", year: "2014", tags: "#Data center #Cisco", match: "99% de coincidencia" },
           ]} />
-        </motion.div>
-      </section>
-
-      {/* Sección Carrusel: Casos Destacados - Overlap Effect */}
-      <section className="relative z-30 -mt-16 sm:-mt-24 pb-12 w-full overflow-hidden">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={fadeUpVariant}
-        >
-          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Cuando la tecnología no puede fallar</h2>
-          </div>
-
-          <ProjectsCarousel />
         </motion.div>
       </section>
 
