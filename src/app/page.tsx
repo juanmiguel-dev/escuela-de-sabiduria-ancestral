@@ -160,10 +160,10 @@ export default function Home() {
           <ImageCarousel 
             onGalleryClick={() => setIsGalleryModalOpen(true)}
             images={[
-            { id: "emergencias", src: "/tecnologia-no-puede-fallar/emergencias.mp4", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo", match: "100% de coincidencia" },
-            { id: "salud", src: "/tecnologia-no-puede-fallar/salud.mp4", title: "Tecnología en sector Salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA", match: "99% de coincidencia" },
+            { id: "emergencias", src: "/tecnologia-no-puede-fallar/emergencias.mp4", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo #CENTER", match: "100% de coincidencia" },
+            { id: "salud", src: "/tecnologia-no-puede-fallar/salud.mp4", title: "Tecnología en sector Salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA #CENTER", match: "99% de coincidencia" },
             { id: "ciberseguridad", src: "/tecnologia-no-puede-fallar/ciberseguridad.mp4", title: "Ciberseguridad pública con Cisco", year: "2012", tags: "#Ciberseguridad #Cisco", match: "98% de coincidencia" },
-            { id: "frontera", src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg", title: "Videovigilancia fronteriza", year: "2011", tags: "#CCTV #Galería", match: "97% de coincidencia", isGallery: true },
+            { id: "frontera", src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg", title: "Videovigilancia fronteriza", year: "2011", tags: "#CCTV", match: "97% de coincidencia", isGallery: true },
             { id: "hospitales", src: "/tecnologia-no-puede-fallar/hospitales.jpg", title: "Hospitales CABA", year: "2005", tags: "#Cableado #Switches #Networking", match: "96% de coincidencia" },
 
             { id: "arsat", src: "/tecnologia-no-puede-fallar/arsat.jpg", title: "Data center ARSAT", year: "2014", tags: "#Data center #Cisco", match: "99% de coincidencia" },
