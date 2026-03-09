@@ -52,16 +52,6 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
             <span className="text-white text-sm font-bold">{year}</span>
           </div>
         </div>
-
-        {/* Contenido Central (Overlay) */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#0033a0]/40 backdrop-blur-[2px]">
-           <div className="bg-[#ff9900] px-3 py-1 rounded text-[10px] font-black text-white uppercase mb-2">
-             CASO: {title.split(' ')[0]}
-           </div>
-           <p className="text-white text-lg font-bold leading-tight drop-shadow-md">
-             {title}
-           </p>
-        </div>
       </div>
 
       {/* Parte Inferior: Información Blanca */}

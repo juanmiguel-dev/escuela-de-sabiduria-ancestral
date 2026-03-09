@@ -78,7 +78,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false }: Image
                     <ChevronRight size={32} />
                 </button>
 
-                <div className="overflow-hidden py-16 px-4 sm:px-8 cursor-grab active:cursor-grabbing" ref={emblaRef}>
+                <div className={`overflow-hidden cursor-grab active:cursor-grabbing ${minimal ? 'py-4' : 'py-16 px-4 sm:px-8'}`} ref={emblaRef}>
                     <div className="flex flex-row items-center">
                         {images.map((img) => {
                             const tagList = img.tags ? img.tags.split(' ').filter(t => t.startsWith('#')).map(t => t.replace('#', '')) : [];
@@ -155,16 +155,6 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false }: Image
                                                 <div className="bg-gray-500/40 backdrop-blur-md px-3 py-1 rounded-lg border border-white/30">
                                                     <span className="text-white text-sm font-bold">{img.year}</span>
                                                 </div>
-                                            </div>
-
-                                            {/* Contenido Central (Overlay) */}
-                                            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#0033a0]/40 backdrop-blur-[2px]">
-                                                <div className="bg-[#ff9900] px-3 py-1 rounded text-[10px] font-black text-white uppercase mb-2">
-                                                    CASO: {img.title?.split(' ')[0]}
-                                                </div>
-                                                <p className="text-white text-lg font-bold leading-tight drop-shadow-md">
-                                                    {img.title}
-                                                </p>
                                             </div>
                                         </div>
 
