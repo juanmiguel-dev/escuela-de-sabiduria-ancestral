@@ -42,7 +42,7 @@ export function VideoModal({ isOpen, onClose, title, videoSrc }: VideoModalProps
                         {/* Botón de cierre elegante */}
                         <button
                             onClick={onClose}
-                            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 bg-black/40 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20"
+                            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 bg-black/40 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20 cursor-pointer"
                         >
                             <X size={28} strokeWidth={2} />
                         </button>

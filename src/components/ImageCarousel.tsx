@@ -67,13 +67,13 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false }: Image
                 {/* Flechas de Navegación (Solo visibles en hover del contenedor principal) */}
                 <button 
                     onClick={scrollPrev}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-40 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-40 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                 >
                     <ChevronLeft size={32} />
                 </button>
                 <button 
                     onClick={scrollNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-40 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-40 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                 >
                     <ChevronRight size={32} />
                 </button>
@@ -220,7 +220,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false }: Image
                             {/* Botón de cierre elegante */}
                             <button
                                 onClick={() => setSelectedImg(null)}
-                                className="absolute top-0 right-0 sm:-top-4 sm:-right-4 z-[110] bg-white/10 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20"
+                                className="absolute top-0 right-0 sm:-top-4 sm:-right-4 z-[110] bg-white/10 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20 cursor-pointer"
                             >
                                 <X size={28} strokeWidth={2} />
                             </button>
@@ -256,7 +256,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false }: Image
                             {/* Botón de cierre elegante */}
                             <button
                                 onClick={() => setSelectedVideo(null)}
-                                className="absolute top-0 right-0 sm:-top-4 sm:-right-4 z-[110] bg-white/10 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20"
+                                className="absolute top-0 right-0 sm:-top-4 sm:-right-4 z-[110] bg-white/10 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20 cursor-pointer"
                             >
                                 <X size={28} strokeWidth={2} />
                             </button>

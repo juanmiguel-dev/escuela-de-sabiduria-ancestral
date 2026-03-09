@@ -45,7 +45,7 @@ export function GalleryModal({ isOpen, onClose, title, images }: GalleryModalPro
                         
                         <button
                             onClick={onClose}
-                            className="absolute top-6 right-6 sm:right-12 z-50 bg-black/50 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20"
+                            className="absolute top-6 right-6 sm:right-12 z-50 bg-black/50 hover:bg-white hover:text-black text-white p-3 rounded-full backdrop-blur-md transition-all duration-300 border border-white/20 cursor-pointer"
                         >
                             <X size={28} strokeWidth={2} />
                         </button>
