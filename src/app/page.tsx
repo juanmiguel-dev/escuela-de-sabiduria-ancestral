@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ProjectsCarousel } from "@/components/ProjectsCarousel";
 import { ImageCarousel } from "@/components/ImageCarousel";
 import { TechBackground } from "@/components/TechBackground";
+import { VideoModal } from "@/components/VideoModal";
 import { GalleryModal } from "@/components/GalleryModal";
 
 export default function Home() {
