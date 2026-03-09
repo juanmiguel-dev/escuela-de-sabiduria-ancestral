@@ -20,11 +20,12 @@ interface ImageCarouselProps {
     images: ImageItem[];
     onGalleryClick?: (img: ImageItem) => void;
     minimal?: boolean;
+    align?: "start" | "center";
 }
 
-export function ImageCarousel({ images, onGalleryClick, minimal = false }: ImageCarouselProps) {
+export function ImageCarousel({ images, onGalleryClick, minimal = false, align = "start" }: ImageCarouselProps) {
     const [emblaRef, emblaApi] = useEmblaCarousel({
-        align: "start",
+        align: align,
         loop: true,
         skipSnaps: false,
         dragFree: true,
@@ -78,7 +79,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false }: Image
                     <ChevronRight size={32} />
                 </button>
 
-                <div className={`overflow-hidden cursor-grab active:cursor-grabbing ${minimal ? 'py-10' : 'py-16 px-4 sm:px-8'}`} ref={emblaRef}>
+                <div className={`overflow-hidden cursor-grab active:cursor-grabbing ${minimal ? '' : 'py-16 px-4 sm:px-8'}`} ref={emblaRef}>
                     <div className="flex flex-row items-center">
                         {images.map((img) => {
                             const tagList = img.tags ? img.tags.split(' ').filter(t => t.startsWith('#')).map(t => t.replace('#', '')) : [];
@@ -86,11 +87,11 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false }: Image
                             // MODO MINIMALISTA: Solo la imagen redondeada, sin texto ni estilo de card blanca
                             if (minimal) {
                                 return (
-                                    <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex-[0_0_auto] mr-6 sm:mr-10">
+                                    <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex-[0_0_auto] mr-4 sm:mr-8">
                                         <motion.div
                                             onClick={() => handleCardClick(img)}
-                                            className="relative flex-none w-[320px] sm:w-[550px] aspect-video rounded-3xl overflow-hidden cursor-pointer shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 transition-all duration-500"
-                                            whileHover={{ scale: 1.05 }}
+                                            className="relative flex-none w-[80vw] sm:w-[65vw] max-w-[1000px] aspect-video rounded-3xl overflow-hidden cursor-pointer border border-white/10 transition-all duration-500"
+                                            whileHover={{ scale: 1.02 }}
                                         >
                                             <Image
                                                 src={img.src}

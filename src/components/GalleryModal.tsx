@@ -52,7 +52,7 @@ export function GalleryModal({ isOpen, onClose, title, images }: GalleryModalPro
 
                         {/* Contenido del Carrusel (Sin restricciones de fondo) */}
                         <div className="flex-grow flex items-center justify-center min-h-0">
-                            <ImageCarousel images={images} minimal={true} />
+                            <ImageCarousel images={images} minimal={true} align="center" />
                         </div>
                     </motion.div>
                 </motion.div>
