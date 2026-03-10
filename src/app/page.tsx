@@ -249,10 +249,11 @@ export default function Home() {
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
           <ImageCarousel images={[
-            { id: 1, src: "/pioneros/primer-red-mpls/Publicación 9A-100.jpg", title: "Primera Red MPLS", year: "2005", tags: "#MPLS #Pioneros", match: "98% de coincidencia" },
-            { id: 2, src: "/pioneros/primer-red-mpls/Publicación 9b-100.jpg", title: "Core Networking", year: "2006", tags: "#Cisco #Core", match: "97% de coincidencia" },
-            { id: 3, src: "/pioneros/primera-red-provincial/Publicación 11a-100.jpg", title: "Red Provincial", year: "2007", tags: "#Provincia #Digital", match: "96% de coincidencia" },
-            { id: 4, src: "/pioneros/primera-red-provincial/Publicación 11b-100.jpg", title: "Infraestructura WAN", year: "2008", tags: "#WAN #Networking", match: "99% de coincidencia" },
+            { id: 1, src: "/pioneros/primeros-pasos.mp4", title: "Primeros Pasos", year: "1985", tags: "#Historia #Fundación", match: "99% de coincidencia" },
+            { id: 2, src: "/pioneros/primer-softswitch.jpg", title: "Primer Softswitch", year: "2002", tags: "#VozIP #Innovación", match: "98% de coincidencia" },
+            { id: 3, src: "/pioneros/primera-red-mpls/Publicación 9A-100.jpg", title: "Primera Red MPLS", year: "2005", tags: "#MPLS #Pioneros", match: "97% de coincidencia" },
+            { id: 4, src: "/pioneros/primera-red-provincial/Publicación 11a-100.jpg", title: "Primera Red Provincial", year: "2007", tags: "#Provincia #Conectividad", match: "96% de coincidencia" },
+            { id: 5, src: "/pioneros/primera-red-wan.jpg", title: "Primera Red WAN", year: "1998", tags: "#WAN #Networking", match: "99% de coincidencia" },
           ]} />
         </motion.div>
       </section>
