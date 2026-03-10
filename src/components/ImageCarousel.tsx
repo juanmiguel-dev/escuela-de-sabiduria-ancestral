@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, FileText } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface ImageItem {
@@ -14,6 +14,7 @@ interface ImageItem {
     tags?: string;
     match?: string;
     isGallery?: boolean;
+    pdfSrc?: string;
 }
 
 interface ImageCarouselProps {
@@ -160,27 +161,47 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                         </div>
 
                                         {/* Parte Inferior: Información Blanca */}
-                                        <div className="p-6 bg-white space-y-4 min-h-[140px]">
-                                            <h3 className="text-[#1a2b4e] text-xl font-black leading-tight tracking-tight">
-                                                {img.title}
-                                            </h3>
-                                            
-                                            {/* Tags Estilo Referencia */}
-                                            <div className="flex flex-wrap gap-2">
-                                                {tagList.map((tag, idx) => (
-                                                    <span 
-                                                        key={idx} 
-                                                        className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-xs font-bold border border-gray-200"
-                                                    >
-                                                        {tag}
-                                                    </span>
-                                                ))}
-                                                {tagList.length === 0 && (
-                                                    <span className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-xs font-bold border border-gray-200">
-                                                        Networking
-                                                    </span>
-                                                )}
+                                        <div className="p-6 bg-white space-y-4 min-h-[140px] flex flex-col justify-between">
+                                            <div className="space-y-3">
+                                                <h3 className="text-[#1a2b4e] text-xl font-black leading-tight tracking-tight">
+                                                    {img.title}
+                                                </h3>
+                                                
+                                                {/* Tags Estilo Referencia */}
+                                                <div className="flex flex-wrap gap-2">
+                                                    {tagList.map((tag, idx) => (
+                                                        <span 
+                                                            key={idx} 
+                                                            className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-xs font-bold border border-gray-200"
+                                                        >
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                    {tagList.length === 0 && (
+                                                        <span className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-xs font-bold border border-gray-200">
+                                                            Networking
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </div>
+
+                                            {/* Botón PDF si existe */}
+                                            {img.pdfSrc && (
+                                                <div className="pt-2 border-t border-gray-100">
+                                                    <button 
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            window.open(img.pdfSrc, '_blank');
+                                                        }}
+                                                        className="flex items-center gap-2 text-[#0033a0] hover:text-[#ff9900] font-bold text-sm transition-colors group/pdf"
+                                                    >
+                                                        <div className="p-1.5 bg-[#0033a0]/5 group-hover/pdf:bg-[#ff9900]/10 rounded-md transition-colors">
+                                                            <FileText size={16} />
+                                                        </div>
+                                                        VER DOCUMENTO PDF
+                                                    </button>
+                                                </div>
+                                            )}
                                         </div>
                                     </motion.div>
                                 </div>
