@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import AutoScroll from "embla-carousel-auto-scroll";
 import { ProjectCard } from "./ProjectCard";
 import { VideoModal } from "./VideoModal";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -24,7 +25,15 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
         align: "start",
         loop: true,
         dragFree: true,
-    });
+    }, [
+        AutoScroll({ 
+            playOnInit: true, 
+            stopOnMouseEnter: true, 
+            stopOnInteraction: false, 
+            speed: 0.8,
+            direction: "backward" // Sentido contrario
+        })
+    ]);
 
     const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
     const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
