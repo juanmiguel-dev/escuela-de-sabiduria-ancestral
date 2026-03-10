@@ -22,8 +22,8 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
       className="relative flex-none w-[210px] sm:w-[240px] h-[320px] rounded-[1.5rem] overflow-hidden cursor-pointer group bg-white shadow-[0_10px_25px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col border border-transparent"
       whileHover={{
         y: -8,
-        boxShadow: "0 0 25px rgba(255, 153, 0, 0.4), 0 20px 40px rgba(0,0,0,0.15)",
-        borderColor: "rgba(255, 153, 0, 0.5)",
+        boxShadow: "0 0 30px rgba(255, 255, 255, 0.8), 0 20px 40px rgba(0,0,0,0.1)",
+        borderColor: "rgba(255, 255, 255, 0.6)",
       }}
     >
       {/* Parte Superior: Media (Video/Imagen) */}

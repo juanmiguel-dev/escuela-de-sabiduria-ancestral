@@ -210,7 +210,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Segundo Carrusel: Galería / Casos */}
+      {/* Segunda Sección: Escala Nacional (Infraestructura) */}
       <section className="pb-16 relative w-full overflow-hidden">
         <motion.div
           initial="hidden"
@@ -225,16 +225,16 @@ export default function Home() {
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
           <ImageCarousel images={[
-            { id: 1, src: "/carruseles/1/Publicación 4F-100.jpg", title: "12.000 escuelas conectadas", year: "2007", tags: "#Networking #Educación", match: "99% de coincidencia" },
-            { id: 2, src: "/carruseles/1/a.jpg", title: "Conectividad masiva de aulas", year: "2017", tags: "#Switches #AP #Networking", match: "98% de coincidencia" },
-            { id: 3, src: "/carruseles/1/b.jpg", title: "Red Gobierno CABA", year: "2010-2015", tags: "#MPLS #Networking", match: "97% de coincidencia" },
-            { id: 4, src: "/carruseles/1/c.jpg", title: "Ciudad Interconectada", year: "2017", tags: "#MPLS #Networking #CABA", match: "99% de coincidencia" },
-            { id: 5, src: "/carruseles/1/d.jpg", title: "Enlaces de Fibra Óptica", year: "2018", tags: "#Fibra #Infraestructura", match: "96% de coincidencia" },
+            { id: 1, src: "/infraestructura/1300km/Publicación 7A-100.jpg", title: "1300km de Fibra", year: "2018", tags: "#Fibra #Infraestructura", match: "99% de coincidencia" },
+            { id: 2, src: "/infraestructura/1300km/Publicación 7B-100.jpg", title: "Redes Provinciales", year: "2017", tags: "#Provincia #Redes", match: "98% de coincidencia" },
+            { id: 3, src: "/infraestructura/1300km/Publicación 7C-100.jpg", title: "Conectividad Regional", year: "2019", tags: "#Networking #Enlace", match: "97% de coincidencia" },
+            { id: 4, src: "/infraestructura/telefonia-publica-morteros/Publicación 12a-100.jpg", title: "Telefonía Pública", year: "2010", tags: "#Morteros #Voz", match: "99% de coincidencia" },
+            { id: 5, src: "/infraestructura/telefonia-publica-morteros/Publicación 12b-100.jpg", title: "Servicios Críticos", year: "2011", tags: "#Comunicaciones", match: "96% de coincidencia" },
           ]} />
         </motion.div>
       </section>
 
-      {/* Tercer Carrusel: Pioneros */}
+      {/* Tercera Sección: Pioneros en Innovación */}
       <section className="pb-20 relative w-full overflow-hidden">
         <motion.div
           initial="hidden"
@@ -244,20 +244,43 @@ export default function Home() {
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
             <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
-              Pioneros en <span className="text-[#ff9900]">infraestructura</span>
+              Pioneros en <span className="text-[#ff9900]">tecnología</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
           <ImageCarousel images={[
-            { id: 1, src: "/carruseles/2/Publicación 2F-100.jpg", title: "Ciberseguridad en Redes", year: "2012", tags: "#Cisco #Ciberseguridad", match: "98% de coincidencia" },
-            { id: 2, src: "/carruseles/2/a.jpg", title: "Data Center de Alta Disponibilidad", year: "2014", tags: "#DataCenter #Cisco", match: "97% de coincidencia" },
-            { id: 3, src: "/carruseles/2/b.jpg", title: "Infraestructura Crítica", year: "2005", tags: "#Switching #Routing", match: "96% de coincidencia" },
-            { id: 4, src: "/carruseles/2/c.jpg", title: "Sistemas de Respaldo", year: "2018", tags: "#UPS #Energía", match: "99% de coincidencia" },
+            { id: 1, src: "/pioneros/primer-red-mpls/Publicación 9A-100.jpg", title: "Primera Red MPLS", year: "2005", tags: "#MPLS #Pioneros", match: "98% de coincidencia" },
+            { id: 2, src: "/pioneros/primer-red-mpls/Publicación 9b-100.jpg", title: "Core Networking", year: "2006", tags: "#Cisco #Core", match: "97% de coincidencia" },
+            { id: 3, src: "/pioneros/primera-red-provincial/Publicación 11a-100.jpg", title: "Red Provincial", year: "2007", tags: "#Provincia #Digital", match: "96% de coincidencia" },
+            { id: 4, src: "/pioneros/primera-red-provincial/Publicación 11b-100.jpg", title: "Infraestructura WAN", year: "2008", tags: "#WAN #Networking", match: "99% de coincidencia" },
           ]} />
         </motion.div>
       </section>
 
-      {/* Cuarto Carrusel: 40 años */}
+      {/* Cuarta Sección: Integraciones Multidisciplinarias */}
+      <section className="pb-24 relative w-full overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariant}
+        >
+          <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+              Integraciones <span className="text-[#ff9900]">multidisciplinarias</span>
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+          </div>
+          <ImageCarousel images={[
+            { id: 1, src: "/integraciones/call-centers/Publicación 18A-100.jpg", title: "Integración Call Center", year: "2015", tags: "#CallCenter #Omnicanal", match: "100% de coincidencia" },
+            { id: 2, src: "/integraciones/contact-center/Publicación 8A.jpg", title: "Contact Center Moderno", year: "2016", tags: "#ContactCenter #CX", match: "99% de coincidencia" },
+            { id: 3, src: "/integraciones/integraciones-multidisciplinaria/Publicación 10A-100.jpg", title: "Red Única", year: "2017", tags: "#Multiservicio #Networking", match: "98% de coincidencia" },
+          ]} />
+        </motion.div>
+      </section>
+
+
+      {/* Quinta Sección: 40 años de Innovación */}
       <section className="pb-24 relative w-full overflow-hidden">
         <motion.div
           initial="hidden"
@@ -272,9 +295,9 @@ export default function Home() {
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
           <ImageCarousel images={[
-            { id: 1, src: "/carruseles/3/Publicación 1F-100.jpg", title: "Nuestra Historia", year: "1985-2025", tags: "#Aniversario #Trayectoria", match: "100% de coincidencia" },
-            { id: 2, src: "/carruseles/3/a.jpg", title: "Evolución Tecnológica", year: "1993", tags: "#IBM #Cisco #Networking", match: "99% de coincidencia" },
-            { id: 3, src: "/carruseles/3/b.jpg", title: "Proyectos Emblemáticos", year: "2000", tags: "#Infraestructura #País", match: "98% de coincidencia" },
+            { id: 1, src: "/carruseles/3/a.jpg", title: "Nuestra Historia", year: "1985-2025", tags: "#Aniversario #Trayectoria", match: "100% de coincidencia" },
+            { id: 2, src: "/carruseles/3/b.jpg", title: "Evolución Tecnológica", year: "1993", tags: "#IBM #Cisco #Networking", match: "99% de coincidencia" },
+            { id: 3, src: "/carruseles/3/c.jpg", title: "Proyectos Emblemáticos", year: "2000", tags: "#Infraestructura #País", match: "98% de coincidencia" },
           ]} />
         </motion.div>
       </section>
