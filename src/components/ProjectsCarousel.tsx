@@ -65,7 +65,7 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
     return (
         <div className="relative w-full overflow-visible">
             {/* Overlay de fundido a la izquierda (Suaviza la entrada/salida) */}
-            <div className="absolute left-0 top-0 bottom-0 w-32 z-30 pointer-events-none bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/50 to-transparent backdrop-blur-[2px]" />
+            <div className="absolute left-0 top-0 bottom-0 w-48 z-30 pointer-events-none bg-gradient-to-r from-[#eeeeee] to-transparent" />
 
             {/* Viewport: Único lugar con overflow-hidden para el slider */}
             <div className="overflow-hidden" ref={emblaRef}>
