@@ -64,10 +64,12 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
 
     return (
         <div className="relative w-full">
+            {/* Viewport: Controla el área visible y el recorte */}
             <div className="overflow-hidden" ref={emblaRef}>
-                <div className="flex px-4 sm:px-12 py-4">
+                {/* Container: Usa margen negativo para compensar el padding del primer slide */}
+                <div className="flex -ml-8 py-4">
                     {projects.map((p) => (
-                        <div key={p.id} className="mr-8 flex-none">
+                        <div key={p.id} className="flex-[0_0_auto] min-w-0 pl-8">
                             <ProjectCard
                                 title={p.title}
                                 videoSrc={p.videoSrc}
