@@ -143,7 +143,7 @@ export default function Home() {
         </motion.div>
 
         {/* Carousel Overlay (Absolute Positioned at bottom right of Hero) */}
-        <div className="absolute bottom-10 right-0 z-30 w-full max-w-[900px] hidden lg:block overflow-hidden">
+        <div className="absolute bottom-10 right-0 z-30 w-[60vw] max-w-[900px] hidden lg:block overflow-visible">
            <ProjectsCarousel onProjectHover={(p) => setActiveProject({
              title: p.title,
              videoSrc: p.videoSrc,

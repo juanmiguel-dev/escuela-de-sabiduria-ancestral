@@ -63,13 +63,13 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
     }, [selectedVideo]);
 
     return (
-        <div className="relative w-full">
-            {/* Viewport: Controla el área visible y el recorte */}
+        <div className="relative w-full overflow-visible">
+            {/* Viewport: Único lugar con overflow-hidden para el slider */}
             <div className="overflow-hidden" ref={emblaRef}>
-                {/* Container: Usa margen negativo para compensar el padding del primer slide */}
-                <div className="flex -ml-8 py-4">
+                {/* Container: Limpio sin márgenes negativos conflictivos */}
+                <div className="flex">
                     {projects.map((p) => (
-                        <div key={p.id} className="flex-[0_0_auto] min-w-0 pl-8">
+                        <div key={p.id} className="flex-[0_0_auto] px-4 py-8">
                             <ProjectCard
                                 title={p.title}
                                 videoSrc={p.videoSrc}
