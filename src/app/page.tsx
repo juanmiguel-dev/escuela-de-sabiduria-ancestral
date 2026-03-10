@@ -30,7 +30,7 @@ export default function Home() {
     <main className="min-h-screen selection:bg-[#0033a0] selection:text-white pb-24 overflow-x-hidden font-sans relative text-gray-900">
 
       {/* Header / Top Navigation (Logo de Trans Advanced Technologies) */}
-      <header className="absolute top-0 left-0 w-full p-6 sm:p-10 z-50">
+      <header className="absolute top-0 left-0 w-full px-6 py-8 sm:px-12 sm:py-10 z-50">
         <Image
           src="/logo-full.svg"
           alt="Trans Advanced Technologies"
@@ -72,45 +72,68 @@ export default function Home() {
         </div>
 
         <motion.div
-          className="relative z-20 max-w-4xl px-6 sm:px-12 space-y-4 sm:space-y-6"
+          className="relative z-20 max-w-5xl px-6 sm:px-12 space-y-6 sm:space-y-8"
           initial="hidden"
           animate="visible"
           variants={fadeUpVariant}
         >
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-tight text-[#0033a0] drop-shadow-sm">
-            Educación y conectividad satelital
+          {/* Floating Badges Style */}
+          <div className="flex flex-wrap gap-3">
+            <div className="bg-[#00b491]/20 backdrop-blur-md border border-[#00b491]/30 px-4 py-1.5 rounded-full flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#00b491] rounded-full animate-pulse" />
+              <span className="text-[#00b491] text-xs font-black uppercase tracking-wider">Líderes en conectividad</span>
+            </div>
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full">
+              <span className="text-gray-700 text-xs font-black uppercase tracking-wider">Starlink Authorized Partner</span>
+            </div>
+          </div>
+
+          <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter leading-[0.85] flex flex-col items-start">
+            <span className="text-[#0033a0] drop-shadow-sm">Educación</span>
+            <span className="flex items-center gap-4">
+              <span className="text-gray-400 opacity-30 italic font-light tracking-widest text-4xl sm:text-6xl md:text-7xl mr-2">y</span>
+              <span className="text-[#ff9900] drop-shadow-sm">conectividad</span>
+            </span>
+            <span className="text-[#0033a0] drop-shadow-sm">satelital</span>
           </h1>
 
           {/* Meta Info Bar Unificada */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] sm:text-sm font-bold text-gray-700">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-base font-bold text-gray-700">
             <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">NUEVO CASO</span>
-            <span className="animate-color-blink font-bold">1985 - 2025</span>
-            <span>4K Infraestructura</span>
-            <span className="text-gray-600 text-xs sm:text-sm font-bold">#Starlink #Meraki #Wifi <span className="bg-[#ff9900]/20 px-1 rounded">#Enlaces</span></span>
+            <span className="animate-color-blink font-black">1985 - 2025</span>
+            <span className="opacity-40">|</span>
+            <span className="font-black">4K Infraestructura</span>
+            <span className="text-gray-600 font-bold bg-white/40 px-2 py-0.5 rounded border border-gray-200 shadow-sm">
+              #Starlink #Meraki #Wifi <span className="text-[#ff9900]">#Enlaces</span>
+            </span>
           </div>
 
-          <p className="text-lg sm:text-2xl text-gray-800 max-w-xl font-bold leading-tight border-b border-gray-300 pb-1 inline-block pt-4">
-            1000 escuelas rurales conectadas en 90 días
-          </p>
+          <div className="space-y-6">
+            <p className="text-xl sm:text-3xl text-gray-800 max-w-2xl font-black leading-tight border-l-4 border-[#ff9900] pl-6 py-2">
+              1000 escuelas rurales conectadas en 90 días
+            </p>
 
-          {/* Action Buttons */}
-          <div className="flex items-center gap-4 pt-4">
-            <button 
-              onClick={() => setIsVideoModalOpen(true)}
-              className="flex items-center gap-2 bg-[#0033a0] text-white px-8 py-3 rounded font-bold hover:bg-[#002880] transition-colors shadow-lg group cursor-pointer"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="group-hover:scale-110 transition-transform"><path d="M8 5v14l11-7z"/></svg>
-              Conocer más
-            </button>
-            <a 
-              href="https://www.transadvanced.tech/contacto" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-white/60 backdrop-blur-md text-[#0033a0] px-8 py-3 rounded font-bold hover:bg-white/80 transition-all border border-[#0033a0]/20 shadow-lg"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              Más info
-            </a>
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <button 
+                onClick={() => setIsVideoModalOpen(true)}
+                className="flex items-center gap-3 bg-[#0033a0] text-white px-10 py-4 rounded-full font-black hover:bg-[#002880] transition-all shadow-[0_10px_30px_rgba(0,51,160,0.3)] group cursor-pointer"
+              >
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                CONOCER MÁS
+              </button>
+              <a 
+                href="https://www.transadvanced.tech/contacto" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-white text-[#0033a0] px-10 py-4 rounded-full font-black hover:bg-gray-50 transition-all border-2 border-[#0033a0]/10 shadow-xl"
+              >
+                MÁS INFO
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+            </div>
           </div>
         </motion.div>
       </section>
@@ -137,8 +160,11 @@ export default function Home() {
           viewport={{ once: true, margin: "-50px" }}
           variants={fadeUpVariant}
         >
-          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 tracking-tight">Casos destacados</h2>
+          <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+              Casos <span className="text-[#ff9900]">destacados</span>
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
 
           <ProjectsCarousel />
@@ -153,15 +179,18 @@ export default function Home() {
           viewport={{ once: true, margin: "-50px" }}
           variants={fadeUpVariant}
         >
-          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Cuando la tecnología no puede fallar</h2>
+          <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+              Cuando la tecnología <span className="text-[#ff9900]">no puede fallar</span>
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
           
           <ImageCarousel 
             onGalleryClick={() => setIsGalleryModalOpen(true)}
             images={[
-            { id: "emergencias", src: "/tecnologia-no-puede-fallar/emergencias.mp4", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo #CENTER", match: "100% de coincidencia" },
-            { id: "salud", src: "/tecnologia-no-puede-fallar/salud.mp4", title: "Tecnología en sector Salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA #CENTER", match: "99% de coincidencia" },
+            { id: "emergencias", src: "/tecnologia-no-puede-fallar/emergencias.mp4", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo #Center", match: "100% de coincidencia" },
+            { id: "salud", src: "/tecnologia-no-puede-fallar/salud.mp4", title: "Tecnología en sector Salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA #Center", match: "99% de coincidencia" },
             { id: "ciberseguridad", src: "/tecnologia-no-puede-fallar/ciberseguridad.mp4", title: "Ciberseguridad pública con Cisco", year: "2012", tags: "#Ciberseguridad #Cisco", match: "98% de coincidencia" },
             { id: "frontera", src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg", title: "Videovigilancia fronteriza", year: "2011", tags: "#CCTV", match: "97% de coincidencia", isGallery: true },
             { id: "hospitales", src: "/tecnologia-no-puede-fallar/hospitales.jpg", title: "Hospitales CABA", year: "2005", tags: "#Cableado #Switches #Networking", match: "96% de coincidencia" },
@@ -179,8 +208,11 @@ export default function Home() {
           viewport={{ once: true, margin: "-50px" }}
           variants={fadeUpVariant}
         >
-          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Implementaciones de escala nacional</h2>
+          <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+              Escala <span className="text-[#ff9900]">nacional</span>
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
           <ImageCarousel images={[
             { id: 1, src: "/carruseles/1/Publicación 4F-100.jpg", title: "12.000 escuelas conectadas", year: "2007", tags: "#Networking #Educación", match: "99% de coincidencia" },
@@ -200,14 +232,39 @@ export default function Home() {
           viewport={{ once: true, margin: "-50px" }}
           variants={fadeUpVariant}
         >
-          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Pioneros en infraestructura y redes</h2>
+          <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+              Pioneros en <span className="text-[#ff9900]">infraestructura</span>
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
           <ImageCarousel images={[
-            { id: 1, src: "/carruseles/2/1.jpg", title: "Primera red Switching AR", year: "1993", tags: "#Switches #Pioneros", match: "100% de coincidencia" },
-            { id: 2, src: "/carruseles/2/2.jpg", title: "Red WAN Frame Relay", year: "1997", tags: "#WAN #FrameRelay", match: "98% de coincidencia" },
-            { id: 3, src: "/carruseles/2/3.jpg", title: "Primer SoftSwitch Corporativo", year: "2009", tags: "#SoftSwitch #Telefonía", match: "99% de coincidencia" },
-            { id: 4, src: "/carruseles/2/4.jpg", title: "Red MPLS Nacional", year: "2010", tags: "#MPLS #Fibra", match: "97% de coincidencia" }
+            { id: 1, src: "/carruseles/2/Publicación 2F-100.jpg", title: "Ciberseguridad en Redes", year: "2012", tags: "#Cisco #Ciberseguridad", match: "98% de coincidencia" },
+            { id: 2, src: "/carruseles/2/a.jpg", title: "Data Center de Alta Disponibilidad", year: "2014", tags: "#DataCenter #Cisco", match: "97% de coincidencia" },
+            { id: 3, src: "/carruseles/2/b.jpg", title: "Infraestructura Crítica", year: "2005", tags: "#Switching #Routing", match: "96% de coincidencia" },
+            { id: 4, src: "/carruseles/2/c.jpg", title: "Sistemas de Respaldo", year: "2018", tags: "#UPS #Energía", match: "99% de coincidencia" },
+          ]} />
+        </motion.div>
+      </section>
+
+      {/* Cuarto Carrusel: 40 años */}
+      <section className="pb-24 relative w-full overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariant}
+        >
+          <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+              40 años de <span className="text-[#ff9900]">innovación</span>
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+          </div>
+          <ImageCarousel images={[
+            { id: 1, src: "/carruseles/3/Publicación 1F-100.jpg", title: "Nuestra Historia", year: "1985-2025", tags: "#Aniversario #Trayectoria", match: "100% de coincidencia" },
+            { id: 2, src: "/carruseles/3/a.jpg", title: "Evolución Tecnológica", year: "1993", tags: "#IBM #Cisco #Networking", match: "99% de coincidencia" },
+            { id: 3, src: "/carruseles/3/b.jpg", title: "Proyectos Emblemáticos", year: "2000", tags: "#Infraestructura #País", match: "98% de coincidencia" },
           ]} />
         </motion.div>
       </section>
