@@ -91,13 +91,13 @@ export default function Home() {
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.85] flex flex-col items-start">
-                <span className="text-[#0033a0] drop-shadow-sm">{activeProject.title.split(' ')[0]}</span>
-                <span className="flex items-center gap-4">
-                  <span className="text-gray-400 opacity-30 italic font-light tracking-widest text-4xl sm:text-6xl md:text-7xl mr-2">y</span>
-                  <span className="text-[#ff9900] drop-shadow-sm">{activeProject.title.split(' ')[1] || ""}</span>
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-[0.95] flex flex-col items-start">
+                <span className="text-[#0033a0] drop-shadow-sm">
+                  {activeProject.title.split(' ').slice(0, Math.ceil(activeProject.title.split(' ').length / 2)).join(' ')}
                 </span>
-                <span className="text-[#0033a0] drop-shadow-sm">{activeProject.title.split(' ').slice(2).join(' ')}</span>
+                <span className="text-[#ff9900] drop-shadow-sm">
+                  {activeProject.title.split(' ').slice(Math.ceil(activeProject.title.split(' ').length / 2)).join(' ')}
+                </span>
               </h1>
 
               {/* Meta Info Bar Unificada */}
