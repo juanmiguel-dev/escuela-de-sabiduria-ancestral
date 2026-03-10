@@ -143,7 +143,7 @@ export default function Home() {
         </motion.div>
 
         {/* Carousel Overlay (Absolute Positioned at bottom right of Hero) */}
-        <div className="absolute bottom-10 right-0 z-30 w-full max-w-[800px] hidden lg:block overflow-hidden">
+        <div className="absolute bottom-10 right-0 z-30 w-full max-w-[850px] hidden lg:block overflow-hidden">
            <ProjectsCarousel onProjectHover={(p) => setActiveProject({
              title: p.title,
              videoSrc: p.videoSrc,
@@ -151,7 +151,10 @@ export default function Home() {
              tags: p.tags,
              description: p.title === "Atención emergencias 107" ? "Gestión crítica de emergencias médicas" : 
                           p.title === "Tecnología en sector Salud" ? "Digitalización integral hospitalaria" :
-                          "Protección de datos a nivel nacional"
+                          p.title === "Ciberseguridad pública con Cisco" ? "Protección de datos a nivel nacional" :
+                          p.title === "6000 puestos de trabajo conectados" ? "Infraestructura de red de gran escala" :
+                          p.title === "El inicio de todo" ? "Nuestros orígenes en 1993" :
+                          "Innovación constante"
            })} />
            <div className="flex flex-col items-end px-12 mt-6">
               <h2 className="text-2xl font-black text-[#0033a0] tracking-tighter uppercase">
