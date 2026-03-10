@@ -19,9 +19,10 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
     <motion.div
       onClick={onClick}
       onMouseEnter={onHover}
-      className="relative flex-none w-[210px] sm:w-[240px] rounded-[1.5rem] overflow-hidden cursor-pointer group bg-white shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-500"
+      className="relative flex-none w-[210px] sm:w-[240px] h-[320px] rounded-[1.5rem] overflow-hidden cursor-pointer group bg-white/40 backdrop-blur-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] transition-all duration-500 flex flex-col border border-white/20"
       whileHover={{
         y: -8,
+        backgroundColor: "rgba(255, 255, 255, 0.6)",
         boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
       }}
     >
@@ -56,27 +57,24 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
         </div>
       </div>
 
-      {/* Parte Inferior: Información Blanca */}
-      <div className="p-4 bg-white space-y-3 min-h-[120px]">
-        <h3 className="text-[#1a2b4e] text-lg font-black leading-tight tracking-tight">
-          {title}
-        </h3>
-        
-        {/* Tags Estilo Referencia */}
-        <div className="flex flex-wrap gap-1.5">
-          {tagList.map((tag, idx) => (
-            <span 
-              key={idx} 
-              className="bg-gray-100 text-[#0033a0] px-2.5 py-0.5 rounded-lg text-[10px] font-bold border border-gray-200"
-            >
-              {tag}
-            </span>
-          ))}
-          {tagList.length === 0 && (
-            <span className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-xs font-bold border border-gray-200">
-              Networking
-            </span>
-          )}
+      {/* Parte Inferior: Información Glassmorphism */}
+      <div className="p-4 flex-grow flex flex-col justify-between">
+        <div className="space-y-2">
+          <h3 className="text-[#1a2b4e] text-lg font-black leading-tight tracking-tight">
+            {title}
+          </h3>
+          
+          {/* Tags Estilo Referencia */}
+          <div className="flex flex-wrap gap-1.5">
+            {tagList.map((tag, idx) => (
+              <span 
+                key={idx} 
+                className="bg-[#0033a0]/10 text-[#0033a0] px-2.5 py-0.5 rounded-lg text-[10px] font-bold border border-[#0033a0]/10"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </motion.div>
