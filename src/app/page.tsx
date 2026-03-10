@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ProjectsCarousel } from "@/components/ProjectsCarousel";
 import { ImageCarousel } from "@/components/ImageCarousel";
