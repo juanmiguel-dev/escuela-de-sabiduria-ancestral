@@ -53,7 +53,7 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
     return (
         <div className="relative w-full group">
             <div className="overflow-hidden" ref={emblaRef}>
-                <div className="flex pl-4 sm:pl-[40%] pr-0 py-4">
+                <div className="flex px-4 sm:px-12 py-4">
                     {projects.map((p) => (
                         <div key={p.id} className="mr-6">
                             <ProjectCard
