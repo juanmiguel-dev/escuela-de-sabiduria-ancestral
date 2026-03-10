@@ -249,11 +249,12 @@ export default function Home() {
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
           <ImageCarousel images={[
-            { id: 1, src: "/pioneros/primeros-pasos.mp4", title: "Primeros Pasos", year: "1985", tags: "#Historia #Fundación", match: "99% de coincidencia" },
-            { id: 2, src: "/pioneros/primer-softswitch.jpg", title: "Primer Softswitch", year: "2002", tags: "#VozIP #Innovación", match: "98% de coincidencia" },
-            { id: 3, src: "/pioneros/primera-red-mpls/Publicación 9A-100.jpg", title: "Primera Red MPLS", year: "2005", tags: "#MPLS #Pioneros", match: "97% de coincidencia" },
-            { id: 4, src: "/pioneros/primera-red-provincial/Publicación 11a-100.jpg", title: "Primera Red Provincial", year: "2007", tags: "#Provincia #Conectividad", match: "96% de coincidencia" },
-            { id: 5, src: "/pioneros/primera-red-wan.jpg", title: "Primera Red WAN", year: "1998", tags: "#WAN #Networking", match: "99% de coincidencia" },
+            { id: 1, src: "/pioneros/primeros-pasos.mp4", title: "Primeros pasos de Trans", year: "1985", tags: "#Historia #Fundación", match: "100% de coincidencia" },
+            { id: 2, src: "/pioneros/primera-red-switching.jpg", title: "Primera red de Switching en Argentina", year: "1993", tags: "#Pioneros #Switching", match: "99% de coincidencia" },
+            { id: 3, src: "/pioneros/primera-red-wan.jpg", title: "Primera red WAN - Frame Relay en Argentina", year: "1998", tags: "#WAN #FrameRelay", match: "98% de coincidencia" },
+            { id: 4, src: "/pioneros/primer-red-mpls/Publicación 9A-100.jpg", title: "Primer red MPLS del país", year: "2005", tags: "#MPLS #Networking", match: "99% de coincidencia", isGallery: true },
+            { id: 5, src: "/pioneros/primer-softswitch.jpg", title: "Primer SoftSwitch corporativo a gran escala", year: "2002", tags: "#SoftSwitch #VozIP", match: "97% de coincidencia" },
+            { id: 6, src: "/pioneros/primera-red-provincial/Publicación 11a-100.jpg", title: "Primera red de gobierno provincial en Argentina", year: "2007", tags: "#Gobierno #Digitalización", match: "96% de coincidencia", isGallery: true },
           ]} />
         </motion.div>
       </section>
