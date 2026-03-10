@@ -34,6 +34,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
 
     const [selectedImg, setSelectedImg] = useState<string | null>(null);
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+    const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
     // Funciones para las flechas
@@ -42,12 +43,12 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
 
     // Bloquear scroll cuando el modal está abierto
     useEffect(() => {
-        if (selectedImg || isGalleryOpen || selectedVideo) {
+        if (selectedImg || isGalleryOpen || selectedVideo || selectedPdf) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
         }
-    }, [selectedImg, isGalleryOpen, selectedVideo]);
+    }, [selectedImg, isGalleryOpen, selectedVideo, selectedPdf]);
 
     const handleCardClick = (img: ImageItem) => {
         if (img.isGallery) {
@@ -56,6 +57,8 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
             } else {
                 setIsGalleryOpen(true);
             }
+        } else if (img.src.endsWith('.pdf')) {
+            setSelectedPdf(img.src);
         } else if (img.src.endsWith('.mp4')) {
             setSelectedVideo(img.src);
         } else {
@@ -191,9 +194,9 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                     <button 
                                                         onClick={(e) => {
                                                             e.stopPropagation();
-                                                            window.open(img.pdfSrc, '_blank');
+                                                            setSelectedPdf(img.pdfSrc || null);
                                                         }}
-                                                        className="flex items-center gap-2 text-[#0033a0] hover:text-[#ff9900] font-bold text-sm transition-colors group/pdf"
+                                                        className="flex items-center gap-2 text-[#0033a0] hover:text-[#ff9900] font-bold text-sm transition-colors group/pdf w-full text-left"
                                                     >
                                                         <div className="p-1.5 bg-[#0033a0]/5 group-hover/pdf:bg-[#ff9900]/10 rounded-md transition-colors">
                                                             <FileText size={16} />
@@ -210,6 +213,52 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                     </div>
                 </div>
             </div>
+
+            {/* MODAL / POPUP DE PDF */}
+            <AnimatePresence>
+                {selectedPdf && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/60 backdrop-blur-md"
+                        onClick={() => setSelectedPdf(null)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.95, opacity: 0 }}
+                            className="relative w-full max-w-5xl h-[90vh] bg-white rounded-2xl overflow-hidden shadow-2xl"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Cabecera del Modal PDF */}
+                            <div className="absolute top-0 left-0 w-full h-16 bg-white border-b border-gray-100 flex items-center justify-between px-6 z-[110]">
+                                <div className="flex items-center gap-3">
+                                    <div className="p-2 bg-[#0033a0]/5 rounded-lg text-[#0033a0]">
+                                        <FileText size={20} />
+                                    </div>
+                                    <span className="font-black text-[#1a2b4e] uppercase tracking-tight">Documento Histórico</span>
+                                </div>
+                                <button
+                                    onClick={() => setSelectedPdf(null)}
+                                    className="bg-gray-100 hover:bg-gray-200 text-gray-500 p-2 rounded-full transition-all duration-300 cursor-pointer"
+                                >
+                                    <X size={24} />
+                                </button>
+                            </div>
+
+                            {/* Contenido del PDF (Iframe) */}
+                            <div className="w-full h-full pt-16">
+                                <iframe
+                                    src={`${selectedPdf}#toolbar=0&navpanes=0&scrollbar=0`}
+                                    className="w-full h-full border-none"
+                                    title="Visor PDF"
+                                />
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* MODAL / POPUP DE IMAGEN */}
             <AnimatePresence>
