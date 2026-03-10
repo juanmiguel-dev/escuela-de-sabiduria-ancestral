@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ProjectCard } from "./ProjectCard";
 import { VideoModal } from "./VideoModal";
-import AutoScroll from "embla-carousel-auto-scroll";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface Project {
     id: number;
@@ -25,6 +25,9 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
         loop: true,
         dragFree: true,
     });
+
+    const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+    const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
     const [selectedVideo, setSelectedVideo] = useState<{ title: string, src: string } | null>(null);
 
@@ -48,33 +51,39 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
     }, [selectedVideo]);
 
     return (
-        <>
-            <div className="relative group w-full">
-
-                {/* Fondo estético con orbes desenfocados para reflectancia */}
-                <div className="absolute inset-0 z-[-1] pointer-events-none opacity-40 overflow-hidden mix-blend-multiply">
-                    <div className="absolute top-1/2 left-[10%] w-[300px] h-[300px] bg-[#0033a0]/20 rounded-full blur-[100px] -translate-y-1/2" />
-                    <div className="absolute top-1/2 right-[10%] w-[350px] h-[350px] bg-[#ff9900]/10 rounded-full blur-[120px] -translate-y-1/2" />
+        <div className="relative w-full group">
+            <div className="overflow-hidden" ref={emblaRef}>
+                <div className="flex px-4 sm:px-12 py-4">
+                    {projects.map((p) => (
+                        <div key={p.id} className="mr-6">
+                            <ProjectCard
+                                title={p.title}
+                                videoSrc={p.videoSrc}
+                                year={p.year}
+                                tags={p.tags}
+                                match={p.match}
+                                onClick={() => setSelectedVideo({ title: p.title, src: p.videoSrc })}
+                                onHover={() => onProjectHover?.(p)}
+                            />
+                        </div>
+                    ))}
                 </div>
+            </div>
 
-                {/* Contenedor del Slider */}
-                <div className="overflow-hidden py-16 px-4 sm:px-8 cursor-grab active:cursor-grabbing" ref={emblaRef}>
-                    <div className="flex flex-row items-center">
-                        {projects.map((p) => (
-                            <div key={p.id} className="relative z-10 hover:z-50 shrink-0 flex-[0_0_auto] mr-6 sm:mr-10">
-                                <ProjectCard
-                                    title={p.title}
-                                    videoSrc={p.videoSrc}
-                                    year={p.year}
-                                    tags={p.tags}
-                                    match={p.match}
-                                    onClick={() => setSelectedVideo({ title: p.title, src: p.videoSrc })}
-                                    onHover={() => onProjectHover?.(p)}
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </div>
+            {/* Flechas de Navegación (Debajo de las cards) */}
+            <div className="flex justify-end items-center gap-4 px-12 mt-2">
+                <button 
+                    onClick={scrollPrev}
+                    className="bg-white/10 hover:bg-[#ff9900] text-white p-2 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer shadow-lg group/btn"
+                >
+                    <ChevronLeft size={20} className="group-hover/btn:scale-110 transition-transform" />
+                </button>
+                <button 
+                    onClick={scrollNext}
+                    className="bg-white/10 hover:bg-[#ff9900] text-white p-2 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer shadow-lg group/btn"
+                >
+                    <ChevronRight size={20} className="group-hover/btn:scale-110 transition-transform" />
+                </button>
             </div>
 
             <VideoModal
@@ -83,6 +92,6 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
                 title={selectedVideo?.title || ""}
                 videoSrc={selectedVideo?.src || ""}
             />
-        </>
+        </div>
     );
 }
