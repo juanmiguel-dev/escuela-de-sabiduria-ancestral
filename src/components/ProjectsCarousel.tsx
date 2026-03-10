@@ -35,6 +35,9 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
         })
     ]);
 
+    // Sincronizamos las flechas con el movimiento invertido:
+    // Al ser backward, scrollPrev() nos lleva en el sentido del flujo visual (derecha)
+    // y scrollNext() nos lleva en contra (izquierda).
     const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
     const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
@@ -64,7 +67,7 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
             <div className="overflow-hidden" ref={emblaRef}>
                 <div className="flex px-4 sm:px-12 py-4">
                     {projects.map((p) => (
-                        <div key={p.id} className="mr-6">
+                        <div key={p.id} className="mr-8">
                             <ProjectCard
                                 title={p.title}
                                 videoSrc={p.videoSrc}
@@ -80,18 +83,18 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
             </div>
 
             {/* Flechas de Navegación (Debajo de las cards) */}
-            <div className="flex justify-end items-center gap-4 px-12 mt-2">
+            <div className="flex justify-end items-center gap-6 px-12 mt-4">
                 <button 
                     onClick={scrollPrev}
-                    className="bg-white/10 hover:bg-[#ff9900] text-white p-2 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer shadow-lg group/btn"
+                    className="bg-white/10 hover:bg-[#ff9900] text-white p-2.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer shadow-lg group/btn"
                 >
-                    <ChevronLeft size={20} className="group-hover/btn:scale-110 transition-transform" />
+                    <ChevronLeft size={22} className="group-hover/btn:scale-110 transition-transform" />
                 </button>
                 <button 
                     onClick={scrollNext}
-                    className="bg-white/10 hover:bg-[#ff9900] text-white p-2 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer shadow-lg group/btn"
+                    className="bg-white/10 hover:bg-[#ff9900] text-white p-2.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer shadow-lg group/btn"
                 >
-                    <ChevronRight size={20} className="group-hover/btn:scale-110 transition-transform" />
+                    <ChevronRight size={22} className="group-hover/btn:scale-110 transition-transform" />
                 </button>
             </div>
 

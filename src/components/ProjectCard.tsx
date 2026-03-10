@@ -23,7 +23,8 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
       whileHover={{
         y: -8,
         backgroundColor: "rgba(255, 255, 255, 0.6)",
-        boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
+        boxShadow: "0 0 25px rgba(255, 153, 0, 0.4), 0 20px 40px rgba(0,0,0,0.15)",
+        borderColor: "rgba(255, 153, 0, 0.5)",
       }}
     >
       {/* Parte Superior: Media (Video/Imagen) */}
