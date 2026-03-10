@@ -258,77 +258,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Cuarto Carrusel: Otros Proyectos (Fondo Azul Marca) */}
-      <section className="py-20 relative bg-[#0033a0] w-full mt-10 overflow-hidden">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={fadeUpVariant}
-        >
-          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Sectores: Salud, Justicia y Educación</h2>
-          </div>
-          <ImageCarousel
-            images={[
-              { id: 1, src: "/carruseles/6/Publicación 10d-100.jpg", title: "Hospitales CABA", year: "2005", tags: "#Salud #Networking", match: "98% de coincidencia" },
-              { id: 2, src: "/carruseles/6/a.jpg", title: "Hospital Viña del Mar", year: "2010", tags: "#Salud #ContactCenter", match: "97% de coincidencia" },
-              { id: 3, src: "/carruseles/6/b.jpg", title: "Swiss Medical", year: "2010s", tags: "#Salud #MisiónCrítica", match: "99% de coincidencia" },
-              { id: 4, src: "/carruseles/6/c.jpg", title: "Consejo de la Magistratura", year: "2013-Hoy", tags: "#Justicia #Sistemas", match: "96% de coincidencia" },
-              { id: 5, src: "/carruseles/8/Publicación 8d.jpg", title: "Aulas Inteligentes", year: "2017-Hoy", tags: "#Educación #IA", match: "100% de coincidencia" },
-            ]}
-          />
-        </motion.div>
-      </section>
 
-      {/* Quinta Sección: Integración */}
-      <section className="pt-20 pb-16 relative w-full overflow-hidden">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={fadeUpVariant}
-        >
-          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-12 mb-4 text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0033a0] tracking-tight">Integración</h2>
-          </div>
-          <ImageCarousel
-            images={[
-              { id: 1, src: "/carruseles/4/a.jpg" },
-              { id: 2, src: "/carruseles/4/b.jpg" },
-              { id: 3, src: "/carruseles/4/c.jpg" },
-              { id: 4, src: "/carruseles/4/d.jpg" },
-              { id: 5, src: "/carruseles/4/e.jpg" },
-              { id: 6, src: "/carruseles/9/a.jpg" },
-              { id: 7, src: "/carruseles/9/b.jpg" },
-            ]}
-          />
-        </motion.div>
-      </section>
-
-      {/* Sección de Cierre: Integración (Adaptado) */}
-      <section className="py-24 sm:py-32 px-4 sm:px-12 relative flex items-center justify-center mt-auto bg-[#f8f9fc] border-t border-gray-100">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={{
-            hidden: { opacity: 0, scale: 0.95, y: 20 },
-            visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 1, ease: "easeOut" } }
-          } as Variants}
-          className="text-center max-w-4xl mx-auto"
-        >
-          <div className="mb-8 inline-block">
-            <div className="w-16 h-[4px] bg-[#ff9900] mx-auto rounded-full" />
-          </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 tracking-tight leading-tight text-gray-900">
-            Nuestra historia termina en la <span className="text-[#0033a0]">Integración</span>
-          </h2>
-          <p className="text-lg sm:text-2xl text-gray-600 font-medium leading-relaxed max-w-3xl mx-auto">
-            Porque 40 años no son solo el reflejo del pasado, sino la plataforma que hemos construido para integrar todas las tecnologías del mañana. Seguimos conectando ideas, conectando personas y haciendo posible el futuro.
-          </p>
-        </motion.div>
-      </section>
       {/* Footer / Logo a pie de página */}
       <footer className="py-20 bg-[#f8f9fc] border-t border-gray-100 flex flex-col items-center justify-center">
         <Image
