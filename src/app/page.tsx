@@ -77,17 +77,6 @@ export default function Home() {
           animate="visible"
           variants={fadeUpVariant}
         >
-          {/* Floating Badges Style */}
-          <div className="flex flex-wrap gap-3">
-            <div className="bg-[#00b491]/20 backdrop-blur-md border border-[#00b491]/30 px-4 py-1.5 rounded-full flex items-center gap-2">
-              <div className="w-2 h-2 bg-[#00b491] rounded-full animate-pulse" />
-              <span className="text-[#00b491] text-xs font-black uppercase tracking-wider">Líderes en conectividad</span>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full">
-              <span className="text-gray-700 text-xs font-black uppercase tracking-wider">Starlink Authorized Partner</span>
-            </div>
-          </div>
-
           <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter leading-[0.85] flex flex-col items-start">
             <span className="text-[#0033a0] drop-shadow-sm">Educación</span>
             <span className="flex items-center gap-4">
