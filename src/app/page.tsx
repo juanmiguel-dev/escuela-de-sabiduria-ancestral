@@ -210,7 +210,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Segunda Sección: Escala Nacional (Infraestructura) */}
+      {/* Segunda Sección: Implementaciones de escala nacional (Infraestructura) */}
       <section className="pb-16 relative w-full overflow-hidden">
         <motion.div
           initial="hidden"
@@ -220,7 +220,7 @@ export default function Home() {
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
             <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
-              Escala <span className="text-[#ff9900]">nacional</span>
+              Implementaciones de <span className="text-[#ff9900]">escala nacional</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
@@ -257,7 +257,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Cuarta Sección: Integraciones Multidisciplinarias */}
+      {/* Cuarta Sección: Integraciones que parecían imposibles */}
       <section className="pb-24 relative w-full overflow-hidden">
         <motion.div
           initial="hidden"
@@ -267,7 +267,7 @@ export default function Home() {
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
             <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
-              Integraciones <span className="text-[#ff9900]">multidisciplinarias</span>
+              Integraciones que <span className="text-[#ff9900]">parecían imposibles</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
@@ -280,7 +280,7 @@ export default function Home() {
       </section>
 
 
-      {/* Quinta Sección: 40 años de Innovación */}
+      {/* Quinta Sección: Infraestructura que conecta */}
       <section className="pb-24 relative w-full overflow-hidden">
         <motion.div
           initial="hidden"
@@ -290,14 +290,15 @@ export default function Home() {
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
             <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
-              40 años de <span className="text-[#ff9900]">innovación</span>
+              Infraestructura que <span className="text-[#ff9900]">conecta</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
           <ImageCarousel images={[
-            { id: 1, src: "/carruseles/3/a.jpg", title: "Nuestra Historia", year: "1985-2025", tags: "#Aniversario #Trayectoria", match: "100% de coincidencia" },
-            { id: 2, src: "/carruseles/3/b.jpg", title: "Evolución Tecnológica", year: "1993", tags: "#IBM #Cisco #Networking", match: "99% de coincidencia" },
-            { id: 3, src: "/carruseles/3/c.jpg", title: "Proyectos Emblemáticos", year: "2000", tags: "#Infraestructura #País", match: "98% de coincidencia" },
+            { id: 1, src: "/infraestructura/Caso 2_horizontal.mp4", title: "Infraestructura Regional", year: "2019", tags: "#Regional #Networking", match: "99% de coincidencia" },
+            { id: 2, src: "/infraestructura/plantas-industriales.mp4", title: "Plantas Industriales", year: "2018", tags: "#Industria #Redes", match: "98% de coincidencia" },
+            { id: 3, src: "/infraestructura/redes-de-gobierno.mp4", title: "Redes de Gobierno", year: "2015", tags: "#Gobierno #Infraestructura", match: "97% de coincidencia" },
+            { id: 4, src: "/infraestructura/call-centers-en-chile.jpg", title: "Expansión Regional Chile", year: "2012", tags: "#Internacional #Chile", match: "96% de coincidencia" },
           ]} />
         </motion.div>
       </section>
