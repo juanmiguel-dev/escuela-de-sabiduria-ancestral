@@ -19,10 +19,10 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
     <motion.div
       onClick={onClick}
       onMouseEnter={onHover}
-      className="relative flex-none w-[300px] sm:w-[340px] rounded-[2rem] overflow-hidden cursor-pointer group bg-white shadow-[0_15px_35px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-500"
+      className="relative flex-none w-[210px] sm:w-[240px] rounded-[1.5rem] overflow-hidden cursor-pointer group bg-white shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-500"
       whileHover={{
-        y: -10,
-        boxShadow: "0 25px 50px rgba(0,0,0,0.15)",
+        y: -8,
+        boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
       }}
     >
       {/* Parte Superior: Media (Video/Imagen) */}
@@ -57,17 +57,17 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
       </div>
 
       {/* Parte Inferior: Información Blanca */}
-      <div className="p-6 bg-white space-y-4 min-h-[140px]">
-        <h3 className="text-[#1a2b4e] text-xl font-black leading-tight tracking-tight">
+      <div className="p-4 bg-white space-y-3 min-h-[120px]">
+        <h3 className="text-[#1a2b4e] text-lg font-black leading-tight tracking-tight">
           {title}
         </h3>
         
         {/* Tags Estilo Referencia */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5">
           {tagList.map((tag, idx) => (
             <span 
               key={idx} 
-              className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-xs font-bold border border-gray-200"
+              className="bg-gray-100 text-[#0033a0] px-2.5 py-0.5 rounded-lg text-[10px] font-bold border border-gray-200"
             >
               {tag}
             </span>
