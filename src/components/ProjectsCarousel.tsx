@@ -63,11 +63,11 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
     }, [selectedVideo]);
 
     return (
-        <div className="relative w-full group">
-            <div className="overflow-hidden" ref={emblaRef}>
-                <div className="flex px-4 sm:px-12 py-4">
+        <div className="relative w-full bg-transparent">
+            <div className="overflow-visible" ref={emblaRef}>
+                <div className="flex gap-8 py-8">
                     {projects.map((p) => (
-                        <div key={p.id} className="mr-8">
+                        <div key={p.id} className="flex-none">
                             <ProjectCard
                                 title={p.title}
                                 videoSrc={p.videoSrc}
