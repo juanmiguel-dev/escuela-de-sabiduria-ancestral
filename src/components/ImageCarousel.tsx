@@ -83,6 +83,9 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                     <ChevronRight size={32} />
                 </button>
 
+                {/* Overlay de fundido a la izquierda (Suaviza la entrada/salida) */}
+                <div className="absolute left-0 top-0 bottom-0 w-32 z-30 pointer-events-none bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/50 to-transparent backdrop-blur-[2px]" />
+
                 <div className={`overflow-hidden cursor-grab active:cursor-grabbing ${minimal ? 'py-12' : 'py-16 px-4 sm:px-8'}`} ref={emblaRef}>
                     <div className="flex flex-row items-center">
                         {images.map((img) => {
