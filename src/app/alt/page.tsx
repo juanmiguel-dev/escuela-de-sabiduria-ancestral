@@ -9,18 +9,9 @@ import { TechBackground } from "@/components/TechBackground";
 import { VideoModal } from "@/components/VideoModal";
 import { GalleryModal } from "@/components/GalleryModal";
 
-export default function Home() {
+export default function AltPage() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
-
-  // Estado para el proyecto activo en el Hero
-  const [activeProject, setActiveProject] = useState({
-    title: "Educación y conectividad satelital",
-    videoSrc: "/videos/7.mp4",
-    year: "1985 - 2025",
-    tags: "#Starlink #Meraki #Wifi #Enlaces",
-    description: "1000 escuelas rurales conectadas en 90 días"
-  });
 
   const galleryImages = [
     { id: 1, src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg" },
@@ -50,32 +41,35 @@ export default function Home() {
         />
       </header>
 
-      {/* Hero Section (Dynamic Content) */}
-      <section className="relative h-[100vh] w-full flex items-center overflow-hidden">
+      {/* Hero Section (Netflix Style) */}
+      <section className="relative h-[85vh] sm:h-[95vh] w-full flex items-center overflow-hidden">
         {/* Featured Background: Video on Desktop, Static Image on Mobile */}
-        <AnimatePresence mode="wait">
-          <motion.div 
-            key={activeProject.videoSrc}
-            className="absolute inset-0 z-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <video
-              src={activeProject.videoSrc}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
+        <div className="absolute inset-0 z-0">
+          {/* Static Image for Mobile (Netflix Style) */}
+          <div className="block sm:hidden w-full h-full">
+            <Image
+              src="/carruseles/8/Publicación 8d.jpg" // Una imagen representativa de escuelas/educación
+              alt="Educación y conectividad satelital"
+              fill
+              className="object-cover"
+              priority
             />
-            
-            {/* Light Overlay Gradient for Readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/60 to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#eeeeee] via-transparent to-transparent z-10" />
-          </motion.div>
-        </AnimatePresence>
+          </div>
+          
+          {/* Video for Desktop */}
+          <video
+            src="/videos/7.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="hidden sm:block w-full h-full object-cover"
+          />
+          
+          {/* Light Overlay Gradient for Readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/60 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#eeeeee] via-transparent to-transparent z-10" />
+        </div>
 
         <motion.div
           className="relative z-20 max-w-5xl px-6 sm:px-12 space-y-6 sm:space-y-8"
@@ -83,93 +77,61 @@ export default function Home() {
           animate="visible"
           variants={fadeUpVariant}
         >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeProject.title}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter leading-[0.85] flex flex-col items-start">
-                <span className="text-[#0033a0] drop-shadow-sm">{activeProject.title.split(' ')[0]}</span>
-                <span className="flex items-center gap-4">
-                  <span className="text-gray-400 opacity-30 italic font-light tracking-widest text-4xl sm:text-6xl md:text-7xl mr-2">y</span>
-                  <span className="text-[#ff9900] drop-shadow-sm">{activeProject.title.split(' ')[1] || ""}</span>
-                </span>
-                <span className="text-[#0033a0] drop-shadow-sm">{activeProject.title.split(' ').slice(2).join(' ')}</span>
-              </h1>
+          <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter leading-[0.85] flex flex-col items-start">
+            <span className="text-[#0033a0] drop-shadow-sm">Educación</span>
+            <span className="flex items-center gap-4">
+              <span className="text-gray-400 opacity-30 italic font-light tracking-widest text-4xl sm:text-6xl md:text-7xl mr-2">y</span>
+              <span className="text-[#ff9900] drop-shadow-sm">conectividad</span>
+            </span>
+            <span className="text-[#0033a0] drop-shadow-sm">satelital</span>
+          </h1>
 
-              {/* Meta Info Bar Unificada */}
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-base font-bold text-gray-700 mt-6">
-                <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">CASO DESTACADO</span>
-                <span className="font-black">{activeProject.year}</span>
-                <span className="opacity-40">|</span>
-                <span className="font-black">Infraestructura</span>
-                <span className="text-gray-600 font-bold bg-white/40 px-2 py-0.5 rounded border border-gray-200 shadow-sm">
-                  {activeProject.tags}
-                </span>
-              </div>
+          {/* Meta Info Bar Unificada */}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-base font-bold text-gray-700">
+            <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">NUEVO CASO</span>
+            <span className="animate-color-blink font-black">1985 - 2025</span>
+            <span className="opacity-40">|</span>
+            <span className="font-black">4K Infraestructura</span>
+            <span className="text-gray-600 font-bold bg-white/40 px-2 py-0.5 rounded border border-gray-200 shadow-sm">
+              #Starlink #Meraki #Wifi <span className="text-[#ff9900]">#Enlaces</span>
+            </span>
+          </div>
 
-              <div className="space-y-6 mt-6">
-                <p className="text-xl sm:text-3xl text-gray-800 max-w-2xl font-black leading-tight border-l-4 border-[#ff9900] pl-6 py-2">
-                  {activeProject.description || "Solución tecnológica de alto impacto"}
-                </p>
+          <div className="space-y-6">
+            <p className="text-xl sm:text-3xl text-gray-800 max-w-2xl font-black leading-tight border-l-4 border-[#ff9900] pl-6 py-2">
+              1000 escuelas rurales conectadas en 90 días
+            </p>
 
-                {/* Action Buttons */}
-                <div className="flex flex-wrap items-center gap-4 pt-2">
-                  <button 
-                    onClick={() => setIsVideoModalOpen(true)}
-                    className="flex items-center gap-3 bg-[#0033a0] text-white px-10 py-4 rounded-full font-black hover:bg-[#002880] transition-all shadow-[0_10px_30px_rgba(0,51,160,0.3)] group cursor-pointer"
-                  >
-                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    CONOCER MÁS
-                  </button>
-                  <a 
-                    href="https://www.transadvanced.tech/contacto" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-white text-[#0033a0] px-10 py-4 rounded-full font-black hover:bg-gray-50 transition-all border-2 border-[#0033a0]/10 shadow-xl"
-                  >
-                    MÁS INFO
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                  </a>
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <button 
+                onClick={() => setIsVideoModalOpen(true)}
+                className="flex items-center gap-3 bg-[#0033a0] text-white px-10 py-4 rounded-full font-black hover:bg-[#002880] transition-all shadow-[0_10px_30px_rgba(0,51,160,0.3)] group cursor-pointer"
+              >
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                CONOCER MÁS
+              </button>
+              <a 
+                href="https://www.transadvanced.tech/contacto" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-white text-[#0033a0] px-10 py-4 rounded-full font-black hover:bg-gray-50 transition-all border-2 border-[#0033a0]/10 shadow-xl"
+              >
+                MÁS INFO
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+            </div>
+          </div>
         </motion.div>
-
-        {/* Carousel Overlay (Absolute Positioned at bottom right of Hero) */}
-        <div className="absolute bottom-10 right-0 z-30 w-full max-w-[60%] hidden lg:block overflow-visible">
-           <div className="flex flex-col items-end px-12 mb-4">
-              <h2 className="text-2xl font-black text-[#0033a0] tracking-tighter uppercase">
-                Casos <span className="text-[#ff9900]">destacados</span>
-              </h2>
-              <div className="w-16 h-1 bg-[#ff9900] mt-1" />
-           </div>
-           <ProjectsCarousel onProjectHover={(p) => setActiveProject({
-             title: p.title,
-             videoSrc: p.videoSrc,
-             year: p.year,
-             tags: p.tags,
-             description: p.title === "Atención emergencias 107" ? "Gestión crítica de emergencias médicas" : 
-                          p.title === "Tecnología en sector Salud" ? "Digitalización integral hospitalaria" :
-                          p.title === "Ciberseguridad pública con Cisco" ? "Protección de datos a nivel nacional" :
-                          p.title === "6000 puestos de trabajo conectados" ? "Infraestructura de red de gran escala" :
-                          p.title === "El inicio de todo" ? "Nuestros orígenes en 1993" :
-                          "Innovación constante"
-           })} />
-        </div>
       </section>
 
       <VideoModal 
         isOpen={isVideoModalOpen}
         onClose={() => setIsVideoModalOpen(false)}
-        title={activeProject.title}
-        videoSrc={activeProject.videoSrc}
+        title="Educación y conectividad satelital"
+        videoSrc="/videos/7.mp4"
       />
 
       <GalleryModal 
@@ -179,7 +141,24 @@ export default function Home() {
         images={galleryImages}
       />
 
-      {/* El carrusel de Casos Destacados ahora está integrado en el Hero (ver arriba) */}
+      {/* Sección Carrusel: Casos Destacados - Overlap Effect (Se mantiene igual) */}
+      <section className="relative z-30 -mt-16 sm:-mt-24 pb-12 w-full overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariant}
+        >
+          <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+              Casos <span className="text-[#ff9900]">destacados</span>
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+          </div>
+
+          <ProjectsCarousel />
+        </motion.div>
+      </section>
 
       {/* Nueva Sección: Cuando la tecnología no puede fallar (Abajo de los videos) */}
       <section className="relative z-30 pt-16 pb-12 w-full overflow-hidden">

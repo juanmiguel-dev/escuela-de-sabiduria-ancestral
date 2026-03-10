@@ -9,14 +9,16 @@ interface ProjectCardProps {
   tags?: string;
   match?: string;
   onClick?: () => void;
+  onHover?: () => void;
 }
 
-export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coincidencia", onClick }: ProjectCardProps) {
+export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coincidencia", onClick, onHover }: ProjectCardProps) {
   const tagList = tags ? tags.split(' ').filter(t => t.startsWith('#')).map(t => t.replace('#', '')) : [];
 
   return (
     <motion.div
       onClick={onClick}
+      onMouseEnter={onHover}
       className="relative flex-none w-[300px] sm:w-[340px] rounded-[2rem] overflow-hidden cursor-pointer group bg-white shadow-[0_15px_35px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-500"
       whileHover={{
         y: -10,

@@ -6,7 +6,20 @@ import { ProjectCard } from "./ProjectCard";
 import { VideoModal } from "./VideoModal";
 import AutoScroll from "embla-carousel-auto-scroll";
 
-export function ProjectsCarousel() {
+interface Project {
+    id: number;
+    title: string;
+    videoSrc: string;
+    year: string;
+    tags: string;
+    match: string;
+}
+
+interface ProjectsCarouselProps {
+    onProjectHover?: (project: Project) => void;
+}
+
+export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
     const [emblaRef, emblaApi] = useEmblaCarousel({
         align: "start", // Usamos start para mejor compatibilidad de loop con resoluciones anchas
         loop: true,
@@ -19,7 +32,7 @@ export function ProjectsCarousel() {
     const [selectedVideo, setSelectedVideo] = useState<{ title: string, src: string } | null>(null);
 
     // 6 videos destacados de la carpeta /videos mapeados según el JSON
-    const projects = [
+    const projects: Project[] = [
         { id: 6, title: "Atención emergencias 107", videoSrc: "/videos/6.mp4", year: "2010", tags: "#Contact Center #Desarrollo", match: "99% de coincidencia" },
         { id: 3, title: "Tecnología en sector Salud", videoSrc: "/videos/3.mp4", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA", match: "98% de coincidencia" },
         { id: 2, title: "Ciberseguridad pública con Cisco", videoSrc: "/videos/2.mp4", year: "2012", tags: "#Ciberseguridad #Cisco", match: "97% de coincidencia" },
@@ -59,6 +72,7 @@ export function ProjectsCarousel() {
                                     tags={p.tags}
                                     match={p.match}
                                     onClick={() => setSelectedVideo({ title: p.title, src: p.videoSrc })}
+                                    onHover={() => onProjectHover?.(p)}
                                 />
                             </div>
                         ))}
