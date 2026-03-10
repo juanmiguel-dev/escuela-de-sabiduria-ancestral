@@ -82,22 +82,6 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
                 </div>
             </div>
 
-            {/* Flechas de Navegación (Debajo de las cards) */}
-            <div className="flex justify-end items-center gap-6 px-12 mt-4">
-                <button 
-                    onClick={scrollPrev}
-                    className="bg-white/10 hover:bg-[#ff9900] text-white p-2.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer shadow-lg group/btn"
-                >
-                    <ChevronLeft size={22} className="group-hover/btn:scale-110 transition-transform" />
-                </button>
-                <button 
-                    onClick={scrollNext}
-                    className="bg-white/10 hover:bg-[#ff9900] text-white p-2.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 cursor-pointer shadow-lg group/btn"
-                >
-                    <ChevronRight size={22} className="group-hover/btn:scale-110 transition-transform" />
-                </button>
-            </div>
-
             <VideoModal
                 isOpen={!!selectedVideo}
                 onClose={() => setSelectedVideo(null)}
