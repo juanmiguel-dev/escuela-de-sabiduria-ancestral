@@ -144,12 +144,6 @@ export default function Home() {
 
         {/* Carousel Overlay (Absolute Positioned at bottom right of Hero) */}
         <div className="absolute bottom-10 right-0 z-30 w-full max-w-[60%] hidden lg:block overflow-hidden">
-           <div className="flex flex-col items-end px-12 mb-4">
-              <h2 className="text-2xl font-black text-[#0033a0] tracking-tighter uppercase">
-                Casos <span className="text-[#ff9900]">destacados</span>
-              </h2>
-              <div className="w-16 h-1 bg-[#ff9900] mt-1" />
-           </div>
            <ProjectsCarousel onProjectHover={(p) => setActiveProject({
              title: p.title,
              videoSrc: p.videoSrc,
@@ -162,6 +156,12 @@ export default function Home() {
                           p.title === "El inicio de todo" ? "Nuestros orígenes en 1993" :
                           "Innovación constante"
            })} />
+           <div className="flex flex-col items-end px-12 mt-6">
+              <h2 className="text-2xl font-black text-[#0033a0] tracking-tighter uppercase">
+                Casos <span className="text-[#ff9900]">destacados</span>
+              </h2>
+              <div className="w-16 h-1 bg-[#ff9900] mt-1" />
+           </div>
         </div>
       </section>
 
