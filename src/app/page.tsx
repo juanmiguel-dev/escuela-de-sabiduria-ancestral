@@ -143,10 +143,7 @@ export default function Home() {
         </motion.div>
 
         {/* Carousel Overlay (Absolute Positioned at bottom right of Hero) */}
-        <div className="absolute bottom-10 right-0 z-30 w-full max-w-[850px] hidden lg:block overflow-visible">
-           {/* Gradiente de fundido a la izquierda con efecto glassmorphism */}
-           <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-[#eeeeee] to-transparent z-40 pointer-events-none backdrop-blur-[2px]" />
-           
+        <div className="absolute bottom-10 right-0 z-30 w-full hidden lg:block overflow-hidden">
            <ProjectsCarousel onProjectHover={(p) => setActiveProject({
              title: p.title,
              videoSrc: p.videoSrc,
