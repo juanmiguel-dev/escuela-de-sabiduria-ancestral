@@ -14,6 +14,7 @@ interface ImageItem {
     tags?: string;
     match?: string;
     isGallery?: boolean;
+    gallery?: { id: string | number; src: string; }[];
     pdfSrc?: string;
 }
 
@@ -57,6 +58,8 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
             } else {
                 setIsGalleryOpen(true);
             }
+        } else if (img.pdfSrc) {
+            setSelectedPdf({ src: img.pdfSrc, title: img.title || "Documento" });
         } else if (img.src.endsWith('.pdf')) {
             setSelectedPdf({ src: img.src, title: img.title || "Documento" });
         } else if (img.src.endsWith('.mp4')) {

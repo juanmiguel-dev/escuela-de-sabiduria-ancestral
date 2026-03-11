@@ -11,7 +11,7 @@ import { GalleryModal } from "@/components/GalleryModal";
 
 export default function Home() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
+  const [selectedGallery, setSelectedGallery] = useState<{ title: string, images: { id: string | number; src: string; }[] } | null>(null);
 
   // Estado para el proyecto activo en el Hero
   const [activeProject, setActiveProject] = useState({
@@ -173,10 +173,10 @@ export default function Home() {
       />
 
       <GalleryModal 
-        isOpen={isGalleryModalOpen}
-        onClose={() => setIsGalleryModalOpen(false)}
-        title="Videovigilancia fronteriza"
-        images={galleryImages}
+        isOpen={!!selectedGallery}
+        onClose={() => setSelectedGallery(null)}
+        title={selectedGallery?.title || ""}
+        images={selectedGallery?.images || []}
       />
 
       {/* El carrusel de Casos Destacados ahora está integrado en el Hero (ver arriba) */}
@@ -197,12 +197,27 @@ export default function Home() {
           </div>
           
           <ImageCarousel 
-            onGalleryClick={() => setIsGalleryModalOpen(true)}
+            onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
             images={[
             { id: "emergencias", src: "/tecnologia-no-puede-fallar/emergencias.mp4", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo #Center", match: "100% de coincidencia" },
             { id: "salud", src: "/tecnologia-no-puede-fallar/salud.mp4", title: "Tecnología en sector Salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA #Center", match: "99% de coincidencia" },
             { id: "ciberseguridad", src: "/tecnologia-no-puede-fallar/ciberseguridad.mp4", title: "Ciberseguridad pública con Cisco", year: "2012", tags: "#Ciberseguridad #Cisco", match: "98% de coincidencia" },
-            { id: "frontera", src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg", title: "Videovigilancia fronteriza", year: "2011", tags: "#CCTV", match: "97% de coincidencia", isGallery: true },
+            { 
+              id: "frontera", 
+              src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg", 
+              title: "Videovigilancia fronteriza", 
+              year: "2011", 
+              tags: "#CCTV", 
+              match: "97% de coincidencia", 
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg" },
+                { id: 2, src: "/tecnologia-no-puede-fallar/2011/Publicación 6B-100.jpg" },
+                { id: 3, src: "/tecnologia-no-puede-fallar/2011/Publicación 6C-100.jpg" },
+                { id: 4, src: "/tecnologia-no-puede-fallar/2011/Publicación 6D-100.jpg" },
+                { id: 5, src: "/tecnologia-no-puede-fallar/2011/Publicación 6E-100.jpg" },
+              ]
+            },
             { id: "hospitales", src: "/tecnologia-no-puede-fallar/hospitales.jpg", title: "Hospitales CABA", year: "2005", tags: "#Cableado #Switches #Networking", match: "96% de coincidencia" },
 
             { id: "arsat", src: "/tecnologia-no-puede-fallar/arsat.jpg", title: "Data center ARSAT", year: "2014", tags: "#Data center #Cisco", match: "99% de coincidencia" },
@@ -252,10 +267,40 @@ export default function Home() {
             { id: 1, src: "/pioneros/primeros-pasos.mp4", title: "Primeros pasos de Trans", year: "1985", tags: "#Historia #Fundación", match: "100% de coincidencia" },
             { id: 2, src: "/pioneros/primera-red-switching.jpg", title: "Primera red de Switching en Argentina", year: "1993", tags: "#Pioneros #Switching", match: "99% de coincidencia", pdfSrc: "/pioneros/primera-red-switching.pdf" },
             { id: 3, src: "/pioneros/primera-red-wan.jpg", title: "Primera red WAN - Frame Relay en Argentina", year: "1998", tags: "#WAN #FrameRelay", match: "98% de coincidencia", pdfSrc: "/pioneros/primera-red-wan.pdf" },
-            { id: 4, src: "/pioneros/primer-red-mpls/Publicación 9A-100.jpg", title: "Primer red MPLS del país", year: "2005", tags: "#MPLS #Networking", match: "99% de coincidencia", isGallery: true },
+            { 
+              id: 4, 
+              src: "/pioneros/primer-red-mpls/Publicación 9A-100.jpg", 
+              title: "Primer red MPLS del país", 
+              year: "2005", 
+              tags: "#MPLS #Networking", 
+              match: "99% de coincidencia", 
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/pioneros/primer-red-mpls/Publicación 9A-100.jpg" },
+                { id: 2, src: "/pioneros/primer-red-mpls/Publicación 9b-100.jpg" },
+                { id: 3, src: "/pioneros/primer-red-mpls/Publicación 9c-100.jpg" },
+                { id: 4, src: "/pioneros/primer-red-mpls/Publicación 9d-100.jpg" },
+                { id: 5, src: "/pioneros/primer-red-mpls/Publicación 9e-100.jpg" },
+                { id: 6, src: "/pioneros/primer-red-mpls/Publicación 9f-100.jpg" },
+              ]
+            },
             { id: 5, src: "/pioneros/primer-softswitch.jpg", title: "Primer SoftSwitch corporativo a gran escala", year: "2002", tags: "#SoftSwitch #VozIP", match: "97% de coincidencia" },
-            { id: 6, src: "/pioneros/primera-red-provincial/Publicación 11a-100.jpg", title: "Primera red de gobierno provincial en Argentina", year: "2007", tags: "#Gobierno #Digitalización", match: "96% de coincidencia", isGallery: true },
-          ]} />
+            { 
+              id: 6, 
+              src: "/pioneros/primera-red-provincial/Publicación 11a-100.jpg", 
+              title: "Primera red de gobierno provincial en Argentina", 
+              year: "2007", 
+              tags: "#Gobierno #Digitalización", 
+              match: "96% de coincidencia", 
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/pioneros/primera-red-provincial/Publicación 11a-100.jpg" },
+                { id: 2, src: "/pioneros/primera-red-provincial/Publicación 11b-100.jpg" },
+                { id: 3, src: "/pioneros/primera-red-provincial/Publicación 11c-100.jpg" },
+                { id: 4, src: "/pioneros/primera-red-provincial/Publicación 11d-100.jpg" },
+              ]
+            },
+          ]} onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })} />
         </motion.div>
       </section>
 
