@@ -157,13 +157,6 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                         
                                         {/* Overlay Azul Gradiente sutil */}
                                         <div className="absolute inset-0 bg-gradient-to-br from-[#0033a0]/20 to-transparent pointer-events-none" />
-
-                                            {/* Badge de Año (Arriba Izquierda) */}
-                                            <div className="absolute top-4 left-4 z-20">
-                                                <div className="bg-gray-500/40 backdrop-blur-md px-3 py-1 rounded-lg border border-white/30">
-                                                    <span className="text-white text-sm font-bold">{img.year}</span>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         {/* Parte Inferior: Información Blanca */}
