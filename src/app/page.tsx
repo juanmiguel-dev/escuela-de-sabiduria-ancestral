@@ -405,11 +405,109 @@ export default function Home() {
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
-          <ImageCarousel images={[
-            { id: 1, src: "/infraestructura/Caso 2_horizontal.mp4", title: "Infraestructura Regional", year: "2019", tags: "#Regional #Networking", match: "99% de coincidencia" },
-            { id: 2, src: "/infraestructura/plantas-industriales.mp4", title: "Plantas Industriales", year: "2018", tags: "#Industria #Redes", match: "98% de coincidencia" },
-            { id: 3, src: "/infraestructura/redes-de-gobierno.mp4", title: "Redes de Gobierno", year: "2015", tags: "#Gobierno #Infraestructura", match: "97% de coincidencia" },
-            { id: 4, src: "/infraestructura/call-centers-en-chile.jpg", title: "Expansión Regional Chile", year: "2012", tags: "#Internacional #Chile", match: "96% de coincidencia" },
+          <ImageCarousel 
+            onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
+            images={[
+            { 
+              id: 1, 
+              src: "/infraestructura/1300km de fibra - 92 localidades/Publicación 7A-100.jpg", 
+              title: "1300km de fibra - 92 localidades", 
+              year: "2018", 
+              tags: "#Fibra #Nacional", 
+              match: "99% de coincidencia",
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/infraestructura/1300km de fibra - 92 localidades/Publicación 7A-100.jpg" },
+                { id: 2, src: "/infraestructura/1300km de fibra - 92 localidades/Publicación 7B-100.jpg" },
+                { id: 3, src: "/infraestructura/1300km de fibra - 92 localidades/Publicación 7C-100.jpg" },
+                { id: 4, src: "/infraestructura/1300km de fibra - 92 localidades/Publicación 7D-100.jpg" },
+                { id: 5, src: "/infraestructura/1300km de fibra - 92 localidades/Publicación 7E-100.jpg" },
+              ]
+            },
+            { 
+              id: 2, 
+              src: "/infraestructura/telefonia-publica-morteros/Publicación 12a-100.jpg", 
+              title: "Telefonía pública - Morteros", 
+              year: "2010", 
+              tags: "#Voz #Morteros", 
+              match: "98% de coincidencia",
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/infraestructura/telefonia-publica-morteros/Publicación 12a-100.jpg" },
+                { id: 2, src: "/infraestructura/telefonia-publica-morteros/Publicación 12b-100.jpg" },
+              ]
+            },
+            { id: 3, src: "/infraestructura/Educación y Starlink.mp4", title: "Educación y Starlink", year: "2024", tags: "#Starlink #Conectividad", match: "100% de coincidencia" },
+            { id: 4, src: "/infraestructura/Redes de Gobierno.mp4", title: "Redes de Gobierno", year: "2015", tags: "#Gobierno #Infraestructura", match: "97% de coincidencia" },
+            { id: 5, src: "/infraestructura/Innovación en Atención al cliente.mp4", title: "Innovación en Atención al cliente", year: "2020", tags: "#CX #Innovación", match: "99% de coincidencia" },
+            { id: 6, src: "/infraestructura/Plantas industriales automotrices.mp4", title: "Plantas industriales automotrices", year: "2018", tags: "#Industria #Redes", match: "98% de coincidencia" },
+            { id: 7, src: "/infraestructura/Call centers en Chile.jpg", title: "Call centers en Chile", year: "2012", tags: "#Chile #Internacional", match: "96% de coincidencia" },
+          ]} />
+        </motion.div>
+      </section>
+
+
+      {/* Sexta Sección: Salud, educación y ciudadanía */}
+      <section className="pb-24 relative w-full overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariant}
+        >
+          <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+              Salud, educación <span className="text-[#ff9900]">y ciudadanía</span>
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+          </div>
+          <ImageCarousel 
+            onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
+            images={[
+            { 
+              id: 1, 
+              src: "/salud-educacion-ciudadania/Metrovias - Gestion de pasajeros/Publicación 5A-100.jpg", 
+              title: "Metrovias - Gestión de pasajeros", 
+              year: "2016", 
+              tags: "#Transporte #Ciudadanía", 
+              match: "99% de coincidencia",
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/salud-educacion-ciudadania/Metrovias - Gestion de pasajeros/Publicación 5A-100.jpg" },
+                { id: 2, src: "/salud-educacion-ciudadania/Metrovias - Gestion de pasajeros/Publicación 5B-100.jpg" },
+                { id: 3, src: "/salud-educacion-ciudadania/Metrovias - Gestion de pasajeros/Publicación 5C-100.jpg" },
+                { id: 4, src: "/salud-educacion-ciudadania/Metrovias - Gestion de pasajeros/Publicación 5D-100.jpg" },
+              ]
+            },
+            { id: 2, src: "/salud-educacion-ciudadania/Tecnología en Sector Salud.mp4", title: "Tecnología en Sector Salud", year: "2022", tags: "#Salud #Digitalización", match: "100% de coincidencia" },
+            { id: 3, src: "/salud-educacion-ciudadania/Automatización para organismos públicos.mp4", title: "Automatización para organismos públicos", year: "2021", tags: "#Ciudadanía #Automatización", match: "98% de coincidencia" },
+            { 
+              id: 4, 
+              src: "/salud-educacion-ciudadania/Aulas Inteligentes (Fundación Rocca)/Portada Aulas inteligentes-100.jpg", 
+              title: "Aulas Inteligentes - Fundación Rocca", 
+              year: "2019", 
+              tags: "#Educación #Innovación", 
+              match: "97% de coincidencia",
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/salud-educacion-ciudadania/Aulas Inteligentes (Fundación Rocca)/Portada Aulas inteligentes-100.jpg" }
+              ]
+            },
+            { 
+              id: 5, 
+              src: "/salud-educacion-ciudadania/Palacio de Justicia/Nota de blog 4/Portada palacio de justicia 1-100.jpg", 
+              title: "Palacio de Justicia", 
+              year: "2018", 
+              tags: "#Justicia #Infraestructura", 
+              match: "96% de coincidencia",
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/salud-educacion-ciudadania/Palacio de Justicia/Nota de blog 4/Portada palacio de justicia 1-100.jpg" }
+              ]
+            },
+            { id: 6, src: "/salud-educacion-ciudadania/Hospital Viña del Mar.jpg", title: "Hospital Viña del Mar", year: "2017", tags: "#Salud #Chile", match: "95% de coincidencia" },
+            { id: 7, src: "/salud-educacion-ciudadania/Juegos Olímpicos.jpg", title: "Juegos Olímpicos", year: "2018", tags: "#Eventos #Ciudadanía", match: "99% de coincidencia" },
+            { id: 8, src: "/salud-educacion-ciudadania/Acondicionamiento oficinas Edenor.jpg", title: "Acondicionamiento oficinas Edenor", year: "2020", tags: "#Infraestructura #Oficinas", match: "94% de coincidencia" },
           ]} />
         </motion.div>
       </section>
