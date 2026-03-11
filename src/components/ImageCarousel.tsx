@@ -97,14 +97,14 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                     <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex-[0_0_auto] mr-4 sm:mr-8">
                                         <motion.div
                                             onClick={() => handleCardClick(img)}
-                                            className="relative flex-none w-[60vw] sm:w-[45vw] max-w-[800px] aspect-video rounded-3xl overflow-hidden cursor-pointer border border-white/10 transition-all duration-500 bg-black/20"
+                                            className="relative flex-none w-[60vw] sm:w-[45vw] max-w-[800px] aspect-video rounded-3xl overflow-hidden cursor-pointer border border-white/10 transition-all duration-500"
                                             whileHover={{ scale: 1.02 }}
                                         >
                                             <Image
                                                 src={img.src}
                                                 alt="Galería"
                                                 fill
-                                                className="object-contain"
+                                                className="object-cover"
                                                 sizes="(max-width: 768px) 100vw, 50vw"
                                             />
                                             {/* Sutil overlay al hover en minimal */}
@@ -126,11 +126,11 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                         }}
                                     >
                                         {/* Contenedor de la Media (Video o Imagen) */}
-                                    <div className="relative w-full aspect-[5/4] shrink-0 overflow-hidden bg-gray-50">
+                                    <div className="relative w-full aspect-[4/3] shrink-0 overflow-hidden">
                                         {img.src.endsWith('.mp4') ? (
                                             <video
                                                 src={img.src}
-                                                className="w-full h-full object-contain"
+                                                className="w-full h-full object-cover"
                                                 preload="metadata"
                                                 muted
                                                 loop
@@ -150,7 +150,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                 src={img.src}
                                                 alt={img.title || "Galería"}
                                                 fill
-                                                className="object-contain"
+                                                className="object-cover"
                                                 sizes="(max-width: 768px) 100vw, 33vw"
                                             />
                                         )}
