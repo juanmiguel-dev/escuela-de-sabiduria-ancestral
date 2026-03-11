@@ -34,7 +34,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
 
     const [selectedImg, setSelectedImg] = useState<string | null>(null);
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
-    const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
+    const [selectedPdf, setSelectedPdf] = useState<{ src: string, title: string } | null>(null);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
     // Funciones para las flechas
@@ -58,7 +58,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                 setIsGalleryOpen(true);
             }
         } else if (img.src.endsWith('.pdf')) {
-            setSelectedPdf(img.src);
+            setSelectedPdf({ src: img.src, title: img.title || "Documento" });
         } else if (img.src.endsWith('.mp4')) {
             setSelectedVideo(img.src);
         } else {
@@ -194,7 +194,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                     <button 
                                                         onClick={(e) => {
                                                             e.stopPropagation();
-                                                            setSelectedPdf(img.pdfSrc || null);
+                                                            setSelectedPdf({ src: img.pdfSrc || "", title: img.title || "Documento" });
                                                         }}
                                                         className="flex items-center gap-2 text-[#0033a0] hover:text-[#ff9900] font-bold text-sm transition-colors group/pdf w-full text-left cursor-pointer"
                                                     >
@@ -237,7 +237,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                     <div className="p-2 bg-[#0033a0]/5 rounded-lg text-[#0033a0]">
                                         <FileText size={20} />
                                     </div>
-                                    <span className="font-black text-[#1a2b4e] uppercase tracking-tight">Documento Histórico</span>
+                                    <span className="font-black text-[#1a2b4e] uppercase tracking-tight line-clamp-1">{selectedPdf.title}</span>
                                 </div>
                                 <button
                                     onClick={() => setSelectedPdf(null)}
@@ -250,7 +250,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                             {/* Contenido del PDF (Iframe) */}
                             <div className="w-full h-full pt-16">
                                 <iframe
-                                    src={`${selectedPdf}#toolbar=0&navpanes=0&scrollbar=0`}
+                                    src={`${selectedPdf.src}#toolbar=0&navpanes=0&scrollbar=0`}
                                     className="w-full h-full border-none"
                                     title="Visor PDF"
                                 />
