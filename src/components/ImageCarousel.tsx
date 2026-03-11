@@ -196,7 +196,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                             e.stopPropagation();
                                                             setSelectedPdf(img.pdfSrc || null);
                                                         }}
-                                                        className="flex items-center gap-2 text-[#0033a0] hover:text-[#ff9900] font-bold text-sm transition-colors group/pdf w-full text-left"
+                                                        className="flex items-center gap-2 text-[#0033a0] hover:text-[#ff9900] font-bold text-sm transition-colors group/pdf w-full text-left cursor-pointer"
                                                     >
                                                         <div className="p-1.5 bg-[#0033a0]/5 group-hover/pdf:bg-[#ff9900]/10 rounded-md transition-colors">
                                                             <FileText size={16} />
