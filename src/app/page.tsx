@@ -318,10 +318,56 @@ export default function Home() {
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
-          <ImageCarousel images={[
-            { id: 1, src: "/integraciones/call-centers/Publicación 18A-100.jpg", title: "Integración Call Center", year: "2015", tags: "#CallCenter #Omnicanal", match: "100% de coincidencia" },
-            { id: 2, src: "/integraciones/contact-center/Publicación 8A.jpg", title: "Contact Center Moderno", year: "2016", tags: "#ContactCenter #CX", match: "99% de coincidencia" },
-            { id: 3, src: "/integraciones/integraciones-multidisciplinaria/Publicación 10A-100.jpg", title: "Red Única", year: "2017", tags: "#Multiservicio #Networking", match: "98% de coincidencia" },
+          <ImageCarousel 
+            onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
+            images={[
+            { 
+              id: 1, 
+              src: "/integraciones/call-centers/Publicación 18A-100.jpg", 
+              title: "Call Centers", 
+              year: "2015", 
+              tags: "#CallCenter #Integración", 
+              match: "100% de coincidencia",
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/integraciones/call-centers/Publicación 18A-100.jpg" },
+                { id: 2, src: "/integraciones/call-centers/Publicación 18B-100.jpg" },
+                { id: 3, src: "/integraciones/call-centers/Publicación 18C-100.jpg" },
+                { id: 4, src: "/integraciones/call-centers/Publicación 18D-100.jpg" },
+              ]
+            },
+            { 
+              id: 2, 
+              src: "/integraciones/contact-center/Publicación 8A.jpg", 
+              title: "Contact Center", 
+              year: "2016", 
+              tags: "#ContactCenter #CX", 
+              match: "99% de coincidencia",
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/integraciones/contact-center/Publicación 8A.jpg" },
+                { id: 2, src: "/integraciones/contact-center/Publicación 8b.jpg" },
+                { id: 3, src: "/integraciones/contact-center/Publicación 8c.jpg" },
+                { id: 4, src: "/integraciones/contact-center/Publicación 8d.jpg" },
+              ]
+            },
+            { 
+              id: 3, 
+              src: "/integraciones/integraciones-multidisciplinaria/Publicación 10A-100.jpg", 
+              title: "Integraciones Multidisciplinarias", 
+              year: "2017", 
+              tags: "#Multiservicio #Networking", 
+              match: "98% de coincidencia",
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/integraciones/integraciones-multidisciplinaria/Publicación 10A-100.jpg" },
+                { id: 2, src: "/integraciones/integraciones-multidisciplinaria/Publicación 10b-100.jpg" },
+                { id: 3, src: "/integraciones/integraciones-multidisciplinaria/Publicación 10c-100.jpg" },
+                { id: 4, src: "/integraciones/integraciones-multidisciplinaria/Publicación 10d-100.jpg" },
+              ]
+            },
+            { id: 4, src: "/integraciones/red-unica-multiservicio.mp4", title: "Red Única Multiservicio", year: "2018", tags: "#Multiservicio #Video", match: "97% de coincidencia" },
+            { id: 5, src: "/integraciones/triple-play.png", title: "Triple Play", year: "2014", tags: "#TriplePlay #Servicios", match: "96% de coincidencia" },
           ]} />
         </motion.div>
       </section>
