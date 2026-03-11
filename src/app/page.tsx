@@ -239,12 +239,30 @@ export default function Home() {
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
-          <ImageCarousel images={[
-            { id: 1, src: "/infraestructura/1300km/Publicación 7A-100.jpg", title: "1300km de Fibra", year: "2018", tags: "#Fibra #Infraestructura", match: "99% de coincidencia" },
-            { id: 2, src: "/infraestructura/1300km/Publicación 7B-100.jpg", title: "Redes Provinciales", year: "2017", tags: "#Provincia #Redes", match: "98% de coincidencia" },
-            { id: 3, src: "/infraestructura/1300km/Publicación 7C-100.jpg", title: "Conectividad Regional", year: "2019", tags: "#Networking #Enlace", match: "97% de coincidencia" },
-            { id: 4, src: "/infraestructura/telefonia-publica-morteros/Publicación 12a-100.jpg", title: "Telefonía Pública", year: "2010", tags: "#Morteros #Voz", match: "99% de coincidencia" },
-            { id: 5, src: "/infraestructura/telefonia-publica-morteros/Publicación 12b-100.jpg", title: "Servicios Críticos", year: "2011", tags: "#Comunicaciones", match: "96% de coincidencia" },
+          <ImageCarousel 
+            onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
+            images={[
+            { 
+              id: 1, 
+              src: "/implementaciones/conectividad-masiva-de-aulas/Publicación 4F-100.jpg", 
+              title: "Conectividad masiva de aulas", 
+              year: "2017", 
+              tags: "#Aulas #Networking", 
+              match: "99% de coincidencia",
+              isGallery: true,
+              gallery: [
+                { id: 1, src: "/implementaciones/conectividad-masiva-de-aulas/Publicación 4A-100.jpg" },
+                { id: 2, src: "/implementaciones/conectividad-masiva-de-aulas/Publicación 4B-100.jpg" },
+                { id: 3, src: "/implementaciones/conectividad-masiva-de-aulas/Publicación 4C-100.jpg" },
+                { id: 4, src: "/implementaciones/conectividad-masiva-de-aulas/Publicación 4D-100.jpg" },
+                { id: 5, src: "/implementaciones/conectividad-masiva-de-aulas/Publicación 4E-100.jpg" },
+                { id: 6, src: "/implementaciones/conectividad-masiva-de-aulas/Publicación 4F-100.jpg" },
+              ]
+            },
+            { id: 2, src: "/implementaciones/360-edificios-publicos-interconectados.mp4", title: "360 edificios públicos interconectados", year: "2015", tags: "#Gobierno #Networking", match: "98% de coincidencia" },
+            { id: 3, src: "/implementaciones/6000-puestos-de-trabajo-conectados.mp4", title: "6000 puestos de trabajo conectados", year: "2018", tags: "#Infraestructura #Redes", match: "97% de coincidencia" },
+            { id: 4, src: "/implementaciones/12000-escuelas-conectadas.jpg", title: "12000 escuelas conectadas", year: "2010", tags: "#Educación #Nacional", match: "99% de coincidencia" },
+            { id: 5, src: "/implementaciones/Ciudad-de-Buenos-Aires-interconectada.jpg", title: "Ciudad de Buenos Aires interconectada", year: "2012", tags: "#CABA #SmartCity", match: "96% de coincidencia" },
           ]} />
         </motion.div>
       </section>
