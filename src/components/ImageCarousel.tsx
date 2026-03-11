@@ -97,8 +97,8 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                     <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex-[0_0_auto] mr-4 sm:mr-8">
                                         <motion.div
                                             onClick={() => handleCardClick(img)}
-                                            className="relative flex-none w-[60vw] sm:w-[45vw] max-w-[800px] aspect-video rounded-3xl overflow-hidden cursor-pointer border border-white/10 transition-all duration-500"
-                                            whileHover={{ scale: 1.02 }}
+                                            className="relative flex-none w-[40vw] sm:w-[18vw] max-w-[400px] aspect-video rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer border border-white/10 transition-all duration-500"
+                                            whileHover={{ scale: 1.05 }}
                                         >
                                             <Image
                                                 src={img.src}
