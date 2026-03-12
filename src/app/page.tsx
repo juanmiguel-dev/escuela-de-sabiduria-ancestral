@@ -120,7 +120,7 @@ export default function Home() {
                 <span className="font-black">{activeProject.year}</span>
                 <span className="opacity-40">|</span>
                 <span className="font-black">Infraestructura</span>
-                <span className="text-gray-600 font-bold bg-white/40 px-2 py-0.5 rounded border border-gray-200 shadow-sm">
+                <span className="text-white font-black bg-[#ff9900] px-3 py-1 rounded border border-white/30 shadow-lg animate-orange-glow">
                   {activeProject.tags}
                 </span>
               </div>

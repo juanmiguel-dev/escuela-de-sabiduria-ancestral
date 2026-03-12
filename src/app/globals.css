@@ -40,15 +40,18 @@ body {
   50% { opacity: 0.6; }
 }
 
-@keyframes color-blink {
-  0%, 100% { color: var(--brand-blue); }
-  50% { color: var(--brand-accent); }
+@keyframes orange-glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(255, 153, 0, 0.4), 0 0 10px rgba(255, 153, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 15px rgba(255, 153, 0, 0.7), 0 0 25px rgba(255, 153, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
 }
 
-.animate-smooth-blink {
-  animation: smooth-blink 2.5s ease-in-out infinite;
+.animate-orange-glow {
+  animation: orange-glow 3s ease-in-out infinite;
 }
 
-.animate-color-blink {
-  animation: color-blink 3s ease-in-out infinite;
-}
