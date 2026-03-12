@@ -105,13 +105,13 @@ export default function Home() {
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-5xl sm:text-7xl md:text-8xl font-medium tracking-tight leading-[1.1] flex flex-col items-start font-sans">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight leading-[1.1] flex flex-col items-start font-sans">
                 <span className="text-[#0033a0] drop-shadow-sm">
                   {activeProject.title.split(' ')[0]}
                 </span>
                 <span className="flex items-center gap-4">
                   {activeProject.title.toLowerCase().split(' ').includes('y') && (
-                    <span className="text-gray-400 opacity-30 italic font-light tracking-widest text-3xl sm:text-5xl md:text-6xl mr-2">y</span>
+                    <span className="text-gray-400 opacity-30 italic font-light tracking-widest text-2xl sm:text-4xl md:text-5xl mr-2">y</span>
                   )}
                   <span className="text-[#ff9900] drop-shadow-sm">
                     {activeProject.title.split(' ').slice(1, -1).filter(w => w.toLowerCase() !== 'y').join(' ') || activeProject.title.split(' ')[1] || ""}
@@ -147,7 +147,7 @@ export default function Home() {
                     <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                     </div>
-                    Conocer más
+                    Ver caso
                   </button>
                   <a 
                     href="https://www.transadvanced.tech/contacto" 
