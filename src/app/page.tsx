@@ -107,18 +107,10 @@ export default function Home() {
             >
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight leading-[1.1] flex flex-col items-start font-sans">
                 <span className="text-[#0033a0] drop-shadow-sm">
-                  {activeProject.title.split(' ')[0]}
+                  {activeProject.title.split(' ').slice(0, Math.ceil(activeProject.title.split(' ').length / 2)).join(' ')}
                 </span>
-                <span className="flex items-center gap-4">
-                  {activeProject.title.toLowerCase().split(' ').includes('y') && (
-                    <span className="text-gray-400 opacity-30 italic font-light tracking-widest text-2xl sm:text-4xl md:text-5xl mr-2">y</span>
-                  )}
-                  <span className="text-[#ff9900] drop-shadow-sm">
-                    {activeProject.title.split(' ').slice(1, -1).filter(w => w.toLowerCase() !== 'y').join(' ') || activeProject.title.split(' ')[1] || ""}
-                  </span>
-                </span>
-                <span className="text-[#0033a0] drop-shadow-sm">
-                  {activeProject.title.split(' ').length > 2 ? activeProject.title.split(' ').slice(-1) : ""}
+                <span className="text-[#37e4af] drop-shadow-sm">
+                  {activeProject.title.split(' ').slice(Math.ceil(activeProject.title.split(' ').length / 2)).join(' ')}
                 </span>
               </h1>
 
@@ -134,7 +126,7 @@ export default function Home() {
               </div>
 
               <div className="space-y-6 mt-6">
-                <p className="text-xl sm:text-3xl text-gray-800 max-w-2xl font-black leading-tight border-l-4 border-[#ff9900] pl-6 py-2">
+                <p className="text-xl sm:text-3xl text-gray-800 max-w-2xl font-black leading-tight border-l-4 border-[#37e4af] pl-6 py-2">
                   {activeProject.description || "Solución tecnológica de alto impacto"}
                 </p>
 
@@ -175,9 +167,9 @@ export default function Home() {
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
             <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight">
-              Casos <span className="text-[#ff9900]">destacados</span>
+              Casos <span className="text-[#37e4af]">destacados</span>
             </h2>
-            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+            <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
           </div>
 
           <ProjectsCarousel onProjectHover={(p) => setActiveProject({
@@ -219,9 +211,9 @@ export default function Home() {
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
             <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
-              Cuando la tecnología <span className="text-[#ff9900]">no puede fallar</span>
+              Cuando la tecnología <span className="text-[#37e4af]">no puede fallar</span>
             </h2>
-            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+            <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
           </div>
           
           <ImageCarousel 
@@ -263,9 +255,9 @@ export default function Home() {
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
             <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
-              Implementaciones de <span className="text-[#ff9900]">escala nacional</span>
+              Implementaciones de <span className="text-[#37e4af]">escala nacional</span>
             </h2>
-            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+            <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
           </div>
           <ImageCarousel 
             onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
@@ -305,9 +297,9 @@ export default function Home() {
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
             <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
-              Pioneros en <span className="text-[#ff9900]">tecnología</span>
+              Pioneros en <span className="text-[#37e4af]">tecnología</span>
             </h2>
-            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+            <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
           </div>
           <ImageCarousel images={[
             { id: 1, src: "/pioneros/primeros-pasos.mp4", title: "Primeros pasos de Trans", year: "1985", tags: "#Historia #Fundación", match: "100% de coincidencia" },
@@ -360,9 +352,9 @@ export default function Home() {
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
             <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
-              Integraciones que <span className="text-[#ff9900]">parecían imposibles</span>
+              Integraciones que <span className="text-[#37e4af]">parecían imposibles</span>
             </h2>
-            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+            <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
           </div>
           <ImageCarousel 
             onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
@@ -429,9 +421,9 @@ export default function Home() {
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
             <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
-              Infraestructura que <span className="text-[#ff9900]">conecta</span>
+              Infraestructura que <span className="text-[#37e4af]">conecta</span>
             </h2>
-            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+            <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
           </div>
           <ImageCarousel 
             onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
@@ -485,9 +477,9 @@ export default function Home() {
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
             <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
-              Salud, educación <span className="text-[#ff9900]">y ciudadanía</span>
+              Salud, educación <span className="text-[#37e4af]">y ciudadanía</span>
             </h2>
-            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+            <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
           </div>
           <ImageCarousel 
             onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
