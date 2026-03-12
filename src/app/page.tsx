@@ -283,7 +283,7 @@ export default function Home() {
           </div>
           <ImageCarousel images={[
             { id: 1, src: "/pioneros/primeros-pasos.mp4", title: "Primeros pasos de Trans", year: "1985", tags: "#Historia #Fundación", match: "100% de coincidencia" },
-            { id: 2, src: "/pioneros/primera-red-switching.jpg", title: "Primera red de switching en Argentina", year: "1993", tags: "#Pioneros #Switching", match: "99% de coincidencia", pdfSrc: "/pioneros/primera-red-switching.pdf" }
+            { id: 2, src: "/pioneros/primera-red-switching.jpg", title: "Primera red de switching en Argentina", year: "1993", tags: "#Pioneros #Switching", match: "99% de coincidencia", pdfSrc: "/pioneros/primera-red-switching.pdf" },
             { id: 3, src: "/pioneros/primera-red-wan.jpg", title: "Primera red WAN - Frame Relay en Argentina", year: "1998", tags: "#WAN #FrameRelay", match: "98% de coincidencia", pdfSrc: "/pioneros/primera-red-wan.pdf" },
             { 
               id: 4, 
@@ -439,7 +439,7 @@ export default function Home() {
             },
             { id: 3, src: "/infraestructura/Educación y Starlink.mp4", title: "Educación y Starlink", year: "2024", tags: "#Starlink #Conectividad", match: "100% de coincidencia" },
             { id: 4, src: "/infraestructura/Redes de Gobierno.mp4", title: "Redes de gobierno", year: "2015", tags: "#Gobierno #Infraestructura", match: "97% de coincidencia" },
-            { id: 5, src: "/infraestructura/Innovación en Atención al cliente.mp4", title: "Innovación en atención al cliente", year: "2020", tags: "#CX #Innovación", match: "99% de coincidencia" }
+            { id: 5, src: "/infraestructura/Innovación en Atención al cliente.mp4", title: "Innovación en atención al cliente", year: "2020", tags: "#CX #Innovación", match: "99% de coincidencia" },
             { id: 6, src: "/infraestructura/Plantas industriales automotrices.mp4", title: "Plantas industriales automotrices", year: "2018", tags: "#Industria #Redes", match: "98% de coincidencia" },
             { id: 7, src: "/infraestructura/Call centers en Chile.jpg", title: "Call centers en Chile", year: "2012", tags: "#Chile #Internacional", match: "96% de coincidencia" },
           ]} />
