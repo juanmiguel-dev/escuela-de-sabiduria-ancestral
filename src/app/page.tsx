@@ -50,32 +50,46 @@ export default function Home() {
         />
       </header>
 
-      {/* Hero Section (Dynamic Content) */}
-      <section className="relative h-[100vh] w-full flex items-center overflow-hidden">
+      {/* Hero Section (Netflix Style) */}
+      <section className="relative h-[85vh] sm:h-[95vh] w-full flex items-center overflow-hidden">
         {/* Featured Background: Video on Desktop, Static Image on Mobile */}
-        <AnimatePresence mode="wait">
-          <motion.div 
-            key={activeProject.videoSrc}
-            className="absolute inset-0 z-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <video
-              src={activeProject.videoSrc}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
+        <div className="absolute inset-0 z-0">
+          {/* Static Image for Mobile (Netflix Style) */}
+          <div className="block sm:hidden w-full h-full">
+            <Image
+              src="/carruseles/8/Publicación 8d.jpg"
+              alt="Educación y conectividad satelital"
+              fill
+              className="object-cover"
+              priority
             />
-            
-            {/* Light Overlay Gradient for Readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/60 to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#eeeeee] via-transparent to-transparent z-10" />
-          </motion.div>
-        </AnimatePresence>
+          </div>
+          
+          {/* Video for Desktop */}
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={activeProject.videoSrc}
+              className="absolute inset-0 z-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <video
+                src={activeProject.videoSrc}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="hidden sm:block w-full h-full object-cover"
+              />
+              
+              {/* Light Overlay Gradient for Readability */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/60 to-transparent z-10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#eeeeee] via-transparent to-transparent z-10" />
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
         <motion.div
           className="relative z-20 max-w-5xl px-6 sm:px-12 space-y-6 sm:space-y-8"
@@ -91,17 +105,25 @@ export default function Home() {
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-[0.95] flex flex-col items-start">
+              <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter leading-[0.85] flex flex-col items-start">
                 <span className="text-[#0033a0] drop-shadow-sm">
-                  {activeProject.title.split(' ').slice(0, Math.ceil(activeProject.title.split(' ').length / 2)).join(' ')}
+                  {activeProject.title.split(' ')[0]}
                 </span>
-                <span className="text-[#ff9900] drop-shadow-sm">
-                  {activeProject.title.split(' ').slice(Math.ceil(activeProject.title.split(' ').length / 2)).join(' ')}
+                <span className="flex items-center gap-4">
+                  {activeProject.title.toLowerCase().split(' ').includes('y') && (
+                    <span className="text-gray-400 opacity-30 italic font-light tracking-widest text-4xl sm:text-6xl md:text-7xl mr-2">y</span>
+                  )}
+                  <span className="text-[#ff9900] drop-shadow-sm">
+                    {activeProject.title.split(' ').slice(1, -1).filter(w => w.toLowerCase() !== 'y').join(' ') || activeProject.title.split(' ')[1] || ""}
+                  </span>
+                </span>
+                <span className="text-[#0033a0] drop-shadow-sm">
+                  {activeProject.title.split(' ').length > 2 ? activeProject.title.split(' ').slice(-1) : ""}
                 </span>
               </h1>
 
               {/* Meta Info Bar Unificada */}
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-base font-bold text-gray-700 mt-6">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-base font-bold text-gray-700 mt-8">
                 <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">Caso destacado</span>
                 <span className="font-black">{activeProject.year}</span>
                 <span className="opacity-40">|</span>
@@ -141,10 +163,24 @@ export default function Home() {
             </motion.div>
           </AnimatePresence>
         </motion.div>
+      </section>
 
-        {/* Carousel Overlay (Absolute Positioned at bottom right of Hero) */}
-        <div className="absolute bottom-10 right-0 z-30 w-[60vw] max-w-[900px] hidden lg:block overflow-visible">
-           <ProjectsCarousel onProjectHover={(p) => setActiveProject({
+      {/* Sección Carrusel: Casos Destacados - Overlap Effect */}
+      <section className="relative z-30 -mt-16 sm:-mt-24 pb-12 w-full overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUpVariant}
+        >
+          <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter">
+              Casos <span className="text-[#ff9900]">destacados</span>
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
+          </div>
+
+          <ProjectsCarousel onProjectHover={(p) => setActiveProject({
              title: p.title,
              videoSrc: p.videoSrc,
              year: p.year,
@@ -156,14 +192,8 @@ export default function Home() {
                           p.title === "El inicio de todo" ? "Nuestros orígenes en 1993" :
                           "Innovación constante"
            })} />
-           <div className="flex flex-col items-end px-12 mt-6">
-              <h2 className="text-2xl font-black text-[#0033a0] tracking-tighter">
-                Casos <span className="text-[#ff9900]">destacados</span>
-              </h2>
-              <div className="w-16 h-1 bg-[#ff9900] mt-1" />
-           </div>
-        </div>
-      </section>
+        </motion.div>
+       </section>
 
       <VideoModal 
         isOpen={isVideoModalOpen}
@@ -178,10 +208,8 @@ export default function Home() {
         title={selectedGallery?.title || ""}
         images={selectedGallery?.images || []}
       />
-
-      {/* El carrusel de Casos Destacados ahora está integrado en el Hero (ver arriba) */}
-
-      {/* Nueva Sección: Cuando la tecnología no puede fallar (Abajo de los videos) */}
+ 
+       {/* Nueva Sección: Cuando la tecnología no puede fallar (Abajo de los videos) */}
       <section className="relative z-30 pt-16 pb-12 w-full overflow-hidden">
         <motion.div
           initial="hidden"
