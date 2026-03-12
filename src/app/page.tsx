@@ -105,13 +105,13 @@ export default function Home() {
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter leading-[0.85] flex flex-col items-start">
+              <h1 className="text-5xl sm:text-7xl md:text-8xl font-medium tracking-tight leading-[1.1] flex flex-col items-start font-sans">
                 <span className="text-[#0033a0] drop-shadow-sm">
                   {activeProject.title.split(' ')[0]}
                 </span>
                 <span className="flex items-center gap-4">
                   {activeProject.title.toLowerCase().split(' ').includes('y') && (
-                    <span className="text-gray-400 opacity-30 italic font-light tracking-widest text-4xl sm:text-6xl md:text-7xl mr-2">y</span>
+                    <span className="text-gray-400 opacity-30 italic font-light tracking-widest text-3xl sm:text-5xl md:text-6xl mr-2">y</span>
                   )}
                   <span className="text-[#ff9900] drop-shadow-sm">
                     {activeProject.title.split(' ').slice(1, -1).filter(w => w.toLowerCase() !== 'y').join(' ') || activeProject.title.split(' ')[1] || ""}
@@ -174,7 +174,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter">
+            <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight">
               Casos <span className="text-[#ff9900]">destacados</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
@@ -218,7 +218,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
+            <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
               Cuando la tecnología <span className="text-[#ff9900]">no puede fallar</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
@@ -262,7 +262,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
+            <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
               Implementaciones de <span className="text-[#ff9900]">escala nacional</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
@@ -304,7 +304,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
+            <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
               Pioneros en <span className="text-[#ff9900]">tecnología</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
@@ -359,7 +359,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
+            <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
               Integraciones que <span className="text-[#ff9900]">parecían imposibles</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
@@ -428,7 +428,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
+            <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
               Infraestructura que <span className="text-[#ff9900]">conecta</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
@@ -484,7 +484,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
+            <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
               Salud, educación <span className="text-[#ff9900]">y ciudadanía</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
