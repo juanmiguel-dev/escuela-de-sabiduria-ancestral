@@ -171,13 +171,13 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                     {tagList.map((tag, idx) => (
                                                         <span 
                                                             key={idx} 
-                                                            className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-xs font-bold border border-gray-200"
+                                                            className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-[10px] font-medium border border-gray-200 uppercase tracking-wider"
                                                         >
                                                             {tag}
                                                         </span>
                                                     ))}
                                                     {tagList.length === 0 && (
-                                                        <span className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-xs font-bold border border-gray-200">
+                                                        <span className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-[10px] font-medium border border-gray-200 uppercase tracking-wider">
                                                             Networking
                                                         </span>
                                                     )}

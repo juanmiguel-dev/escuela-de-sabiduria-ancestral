@@ -69,7 +69,7 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
             {tagList.map((tag, idx) => (
               <span 
                 key={idx} 
-                className="bg-[#0033a0]/10 text-[#0033a0] px-2.5 py-0.5 rounded-lg text-[10px] font-bold border border-[#0033a0]/10"
+                className="bg-[#0033a0]/10 text-[#0033a0] px-2.5 py-0.5 rounded-lg text-[10px] font-medium border border-[#0033a0]/10 uppercase tracking-wider"
               >
                 {tag}
               </span>
