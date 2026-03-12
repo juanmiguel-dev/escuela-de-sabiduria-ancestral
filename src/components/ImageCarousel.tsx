@@ -197,7 +197,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                         <div className="p-1.5 bg-[#0033a0]/5 group-hover/pdf:bg-[#ff9900]/10 rounded-md transition-colors">
                                                             <FileText size={16} />
                                                         </div>
-                                                        VER DOCUMENTO PDF
+                                                        Ver documento PDF
                                                     </button>
                                                 </div>
                                             )}
@@ -233,7 +233,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                     <div className="p-2 bg-[#0033a0]/5 rounded-lg text-[#0033a0]">
                                         <FileText size={20} />
                                     </div>
-                                    <span className="font-black text-[#1a2b4e] uppercase tracking-tight line-clamp-1">{selectedPdf.title}</span>
+                                    <span className="font-black text-[#1a2b4e] tracking-tight line-clamp-1">{selectedPdf.title}</span>
                                 </div>
                                 <button
                                     onClick={() => setSelectedPdf(null)}

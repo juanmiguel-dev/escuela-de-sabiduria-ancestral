@@ -102,7 +102,7 @@ export default function Home() {
 
               {/* Meta Info Bar Unificada */}
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-base font-bold text-gray-700 mt-6">
-                <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">CASO DESTACADO</span>
+                <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">Caso destacado</span>
                 <span className="font-black">{activeProject.year}</span>
                 <span className="opacity-40">|</span>
                 <span className="font-black">Infraestructura</span>
@@ -125,7 +125,7 @@ export default function Home() {
                     <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                     </div>
-                    CONOCER MÁS
+                    Conocer más
                   </button>
                   <a 
                     href="https://www.transadvanced.tech/contacto" 
@@ -133,7 +133,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 bg-white text-[#0033a0] px-10 py-4 rounded-full font-black hover:bg-gray-50 transition-all border-2 border-[#0033a0]/10 shadow-xl"
                   >
-                    MÁS INFO
+                    Más info
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                   </a>
                 </div>
@@ -150,14 +150,14 @@ export default function Home() {
              year: p.year,
              tags: p.tags,
              description: p.title === "Atención emergencias 107" ? "Gestión crítica de emergencias médicas" : 
-                          p.title === "Tecnología en sector Salud" ? "Digitalización integral hospitalaria" :
+                          p.title === "Tecnología en sector salud" ? "Digitalización integral hospitalaria" :
                           p.title === "Ciberseguridad pública con Cisco" ? "Protección de datos a nivel nacional" :
                           p.title === "6000 puestos de trabajo conectados" ? "Infraestructura de red de gran escala" :
                           p.title === "El inicio de todo" ? "Nuestros orígenes en 1993" :
                           "Innovación constante"
            })} />
            <div className="flex flex-col items-end px-12 mt-6">
-              <h2 className="text-2xl font-black text-[#0033a0] tracking-tighter uppercase">
+              <h2 className="text-2xl font-black text-[#0033a0] tracking-tighter">
                 Casos <span className="text-[#ff9900]">destacados</span>
               </h2>
               <div className="w-16 h-1 bg-[#ff9900] mt-1" />
@@ -190,7 +190,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
               Cuando la tecnología <span className="text-[#ff9900]">no puede fallar</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
@@ -200,7 +200,7 @@ export default function Home() {
             onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
             images={[
             { id: "emergencias", src: "/tecnologia-no-puede-fallar/emergencias.mp4", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo #Center", match: "100% de coincidencia" },
-            { id: "salud", src: "/tecnologia-no-puede-fallar/salud.mp4", title: "Tecnología en sector Salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA #Center", match: "99% de coincidencia" },
+            { id: "salud", src: "/tecnologia-no-puede-fallar/salud.mp4", title: "Tecnología en sector salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA #Center", match: "99% de coincidencia" },
             { id: "ciberseguridad", src: "/tecnologia-no-puede-fallar/ciberseguridad.mp4", title: "Ciberseguridad pública con Cisco", year: "2012", tags: "#Ciberseguridad #Cisco", match: "98% de coincidencia" },
             { 
               id: "frontera", 
@@ -234,7 +234,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
               Implementaciones de <span className="text-[#ff9900]">escala nacional</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
@@ -262,7 +262,7 @@ export default function Home() {
             { id: 2, src: "/implementaciones/360-edificios-publicos-interconectados.mp4", title: "360 edificios públicos interconectados", year: "2015", tags: "#Gobierno #Networking", match: "98% de coincidencia" },
             { id: 3, src: "/implementaciones/6000-puestos-de-trabajo-conectados.mp4", title: "6000 puestos de trabajo conectados", year: "2018", tags: "#Infraestructura #Redes", match: "97% de coincidencia" },
             { id: 4, src: "/implementaciones/12000-escuelas-conectadas.jpg", title: "12000 escuelas conectadas", year: "2010", tags: "#Educación #Nacional", match: "99% de coincidencia" },
-            { id: 5, src: "/implementaciones/Ciudad-de-Buenos-Aires-interconectada.jpg", title: "Ciudad de Buenos Aires interconectada", year: "2012", tags: "#CABA #SmartCity", match: "96% de coincidencia" },
+            { id: 5, src: "/implementaciones/Ciudad de Buenos Aires interconectada.jpg", title: "Ciudad de Buenos Aires interconectada", year: "2012", tags: "#CABA #SmartCity", match: "96% de coincidencia" },
           ]} />
         </motion.div>
       </section>
@@ -276,14 +276,14 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
               Pioneros en <span className="text-[#ff9900]">tecnología</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
           </div>
           <ImageCarousel images={[
             { id: 1, src: "/pioneros/primeros-pasos.mp4", title: "Primeros pasos de Trans", year: "1985", tags: "#Historia #Fundación", match: "100% de coincidencia" },
-            { id: 2, src: "/pioneros/primera-red-switching.jpg", title: "Primera red de Switching en Argentina", year: "1993", tags: "#Pioneros #Switching", match: "99% de coincidencia", pdfSrc: "/pioneros/primera-red-switching.pdf" },
+            { id: 2, src: "/pioneros/primera-red-switching.jpg", title: "Primera red de switching en Argentina", year: "1993", tags: "#Pioneros #Switching", match: "99% de coincidencia", pdfSrc: "/pioneros/primera-red-switching.pdf" }
             { id: 3, src: "/pioneros/primera-red-wan.jpg", title: "Primera red WAN - Frame Relay en Argentina", year: "1998", tags: "#WAN #FrameRelay", match: "98% de coincidencia", pdfSrc: "/pioneros/primera-red-wan.pdf" },
             { 
               id: 4, 
@@ -302,7 +302,7 @@ export default function Home() {
                 { id: 6, src: "/pioneros/primer-red-mpls/Publicación 9f-100.jpg" },
               ]
             },
-            { id: 5, src: "/pioneros/primer-softswitch.jpg", title: "Primer SoftSwitch corporativo a gran escala", year: "2002", tags: "#SoftSwitch #VozIP", match: "97% de coincidencia" },
+            { id: 5, src: "/pioneros/primer-softswitch.jpg", title: "Primer softSwitch corporativo a gran escala", year: "2002", tags: "#SoftSwitch #VozIP", match: "97% de coincidencia" },
             { 
               id: 6, 
               src: "/pioneros/primera-red-provincial/Publicación 11a-100.jpg", 
@@ -331,7 +331,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
               Integraciones que <span className="text-[#ff9900]">parecían imposibles</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
@@ -342,7 +342,7 @@ export default function Home() {
             { 
               id: 1, 
               src: "/integraciones/call-centers/Publicación 18A-100.jpg", 
-              title: "Call Centers", 
+              title: "Call centers", 
               year: "2015", 
               tags: "#CallCenter #Integración", 
               match: "100% de coincidencia",
@@ -357,7 +357,7 @@ export default function Home() {
             { 
               id: 2, 
               src: "/integraciones/contact-center/Publicación 8A.jpg", 
-              title: "Contact Center", 
+              title: "Contact center", 
               year: "2016", 
               tags: "#ContactCenter #CX", 
               match: "99% de coincidencia",
@@ -372,7 +372,7 @@ export default function Home() {
             { 
               id: 3, 
               src: "/integraciones/integraciones-multidisciplinaria/Publicación 10A-100.jpg", 
-              title: "Integraciones Multidisciplinarias", 
+              title: "Integraciones multidisciplinarias", 
               year: "2017", 
               tags: "#Multiservicio #Networking", 
               match: "98% de coincidencia",
@@ -384,8 +384,8 @@ export default function Home() {
                 { id: 4, src: "/integraciones/integraciones-multidisciplinaria/Publicación 10d-100.jpg" },
               ]
             },
-            { id: 4, src: "/integraciones/red-unica-multiservicio.mp4", title: "Red Única Multiservicio", year: "2018", tags: "#Multiservicio #Video", match: "97% de coincidencia" },
-            { id: 5, src: "/integraciones/triple-play.png", title: "Triple Play", year: "2014", tags: "#TriplePlay #Servicios", match: "96% de coincidencia" },
+            { id: 4, src: "/integraciones/red-unica-multiservicio.mp4", title: "Red única multiservicio", year: "2018", tags: "#Multiservicio #Video", match: "97% de coincidencia" },
+            { id: 5, src: "/integraciones/triple-play.png", title: "Triple play", year: "2014", tags: "#TriplePlay #Servicios", match: "96% de coincidencia" }
           ]} />
         </motion.div>
       </section>
@@ -400,7 +400,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
               Infraestructura que <span className="text-[#ff9900]">conecta</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
@@ -438,8 +438,8 @@ export default function Home() {
               ]
             },
             { id: 3, src: "/infraestructura/Educación y Starlink.mp4", title: "Educación y Starlink", year: "2024", tags: "#Starlink #Conectividad", match: "100% de coincidencia" },
-            { id: 4, src: "/infraestructura/Redes de Gobierno.mp4", title: "Redes de Gobierno", year: "2015", tags: "#Gobierno #Infraestructura", match: "97% de coincidencia" },
-            { id: 5, src: "/infraestructura/Innovación en Atención al cliente.mp4", title: "Innovación en Atención al cliente", year: "2020", tags: "#CX #Innovación", match: "99% de coincidencia" },
+            { id: 4, src: "/infraestructura/Redes de Gobierno.mp4", title: "Redes de gobierno", year: "2015", tags: "#Gobierno #Infraestructura", match: "97% de coincidencia" },
+            { id: 5, src: "/infraestructura/Innovación en Atención al cliente.mp4", title: "Innovación en atención al cliente", year: "2020", tags: "#CX #Innovación", match: "99% de coincidencia" }
             { id: 6, src: "/infraestructura/Plantas industriales automotrices.mp4", title: "Plantas industriales automotrices", year: "2018", tags: "#Industria #Redes", match: "98% de coincidencia" },
             { id: 7, src: "/infraestructura/Call centers en Chile.jpg", title: "Call centers en Chile", year: "2012", tags: "#Chile #Internacional", match: "96% de coincidencia" },
           ]} />
@@ -456,7 +456,7 @@ export default function Home() {
           variants={fadeUpVariant}
         >
           <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter uppercase leading-none">
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0033a0] tracking-tighter leading-none">
               Salud, educación <span className="text-[#ff9900]">y ciudadanía</span>
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9900] mt-4" />
@@ -467,7 +467,7 @@ export default function Home() {
             { 
               id: 1, 
               src: "/salud-educacion-ciudadania/Metrovias - Gestion de pasajeros/Publicación 5A-100.jpg", 
-              title: "Metrovias - Gestión de pasajeros", 
+              title: "Metrovias - gestión de pasajeros", 
               year: "2016", 
               tags: "#Transporte #Ciudadanía", 
               match: "99% de coincidencia",
@@ -479,12 +479,12 @@ export default function Home() {
                 { id: 4, src: "/salud-educacion-ciudadania/Metrovias - Gestion de pasajeros/Publicación 5D-100.jpg" },
               ]
             },
-            { id: 2, src: "/salud-educacion-ciudadania/Tecnología en Sector Salud.mp4", title: "Tecnología en Sector Salud", year: "2022", tags: "#Salud #Digitalización", match: "100% de coincidencia" },
+            { id: 2, src: "/salud-educacion-ciudadania/Tecnología en Sector Salud.mp4", title: "Tecnología en sector salud", year: "2022", tags: "#Salud #Digitalización", match: "100% de coincidencia" },
             { id: 3, src: "/salud-educacion-ciudadania/Automatización para organismos públicos.mp4", title: "Automatización para organismos públicos", year: "2021", tags: "#Ciudadanía #Automatización", match: "98% de coincidencia" },
             { 
               id: 4, 
               src: "/salud-educacion-ciudadania/Aulas Inteligentes (Fundación Rocca)/Portada Aulas inteligentes-100.jpg", 
-              title: "Aulas Inteligentes - Fundación Rocca", 
+              title: "Aulas inteligentes - Fundación Rocca", 
               year: "2019", 
               tags: "#Educación #Innovación", 
               match: "97% de coincidencia",
@@ -522,7 +522,7 @@ export default function Home() {
           height={80}
           className="h-12 sm:h-16 w-auto opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
         />
-        <p className="mt-8 text-sm text-gray-400 font-medium tracking-widest uppercase">
+        <p className="mt-8 text-sm text-gray-400 font-medium tracking-widest">
           © {new Date().getFullYear()} Trans Advanced Technologies
         </p>
       </footer>
