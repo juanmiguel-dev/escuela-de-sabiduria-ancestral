@@ -104,33 +104,9 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.5 }}
-              className="flex flex-col items-start"
             >
-              {/* Meta Info Badges (Estilo Referencia Imagen) */}
-              <div className="flex flex-col items-start gap-2 mb-8">
-                <motion.div 
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-[#ff9d00] px-6 py-2 rounded-sm shadow-[0_10px_30px_rgba(255,157,0,0.3)] border border-white/20"
-                >
-                  <span className="text-white text-sm sm:text-xl font-medium tracking-tight">
-                    CASO: <span className="font-black uppercase">{activeProject.title}</span>
-                  </span>
-                </motion.div>
-                <motion.div 
-                  initial={{ opacity: 0, y: -5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="bg-black/10 backdrop-blur-md px-4 py-1.5 rounded-sm border border-white/10 ml-6"
-                >
-                  <span className="text-gray-600 text-xs sm:text-sm font-bold">
-                    Franquicia: <span className="text-gray-900 font-black">Networking {activeProject.year}</span>
-                  </span>
-                </motion.div>
-              </div>
-
               <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter leading-[0.85] flex flex-col items-start">
-                <span className="text-[#00f5a0] drop-shadow-[0_2px_10px_rgba(0,245,160,0.2)]">
+                <span className="text-[#0033a0] drop-shadow-sm">
                   {activeProject.title.split(' ')[0]}
                 </span>
                 <span className="flex items-center gap-4">
@@ -141,44 +117,48 @@ export default function Home() {
                     {activeProject.title.split(' ').slice(1, -1).filter(w => w.toLowerCase() !== 'y').join(' ') || activeProject.title.split(' ')[1] || ""}
                   </span>
                 </span>
-                <span className="text-[#00f5a0] drop-shadow-[0_2px_10px_rgba(0,245,160,0.2)]">
+                <span className="text-[#0033a0] drop-shadow-sm">
                   {activeProject.title.split(' ').length > 2 ? activeProject.title.split(' ').slice(-1) : ""}
                 </span>
               </h1>
 
-              <div className="mt-12 relative max-w-3xl w-full group">
-                {/* Tech Box Decoration (Futuristic corners) */}
-                <div className="absolute inset-0 border-2 border-[#00f5a0]/20 rounded-lg group-hover:border-[#00f5a0]/40 transition-colors" />
-                <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-[#00f5a0] rounded-tl-lg" />
-                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-[#00f5a0] rounded-br-lg" />
-                
-                <div className="relative bg-white/5 backdrop-blur-md p-8 sm:p-12 rounded-lg">
-                  <p className="text-2xl sm:text-4xl text-gray-800 font-bold leading-tight text-center sm:text-left">
-                    {activeProject.description || "Solución tecnológica de alto impacto"}
-                  </p>
-                </div>
+              {/* Meta Info Bar Unificada */}
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-base font-bold text-gray-700 mt-8">
+                <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">Caso destacado</span>
+                <span className="font-black">{activeProject.year}</span>
+                <span className="opacity-40">|</span>
+                <span className="font-black">Infraestructura</span>
+                <span className="text-gray-600 font-bold bg-white/40 px-2 py-0.5 rounded border border-gray-200 shadow-sm">
+                  {activeProject.tags}
+                </span>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 mt-12">
-                <button 
-                  onClick={() => setIsVideoModalOpen(true)}
-                  className="flex items-center gap-3 bg-[#0033a0] text-white px-10 py-4 rounded-full font-black hover:bg-[#002880] transition-all shadow-[0_10px_30px_rgba(0,51,160,0.3)] group cursor-pointer"
-                >
-                  <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                  </div>
-                  Conocer más
-                </button>
-                <a 
-                  href="https://www.transadvanced.tech/contacto" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white text-[#0033a0] px-10 py-4 rounded-full font-black hover:bg-gray-50 transition-all border-2 border-[#0033a0]/10 shadow-xl"
-                >
-                  Más info
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                </a>
+              <div className="space-y-6 mt-6">
+                <p className="text-xl sm:text-3xl text-gray-800 max-w-2xl font-black leading-tight border-l-4 border-[#ff9900] pl-6 py-2">
+                  {activeProject.description || "Solución tecnológica de alto impacto"}
+                </p>
+
+                {/* Action Buttons */}
+                <div className="flex flex-wrap items-center gap-4 pt-2">
+                  <button 
+                    onClick={() => setIsVideoModalOpen(true)}
+                    className="flex items-center gap-3 bg-[#0033a0] text-white px-10 py-4 rounded-full font-black hover:bg-[#002880] transition-all shadow-[0_10px_30px_rgba(0,51,160,0.3)] group cursor-pointer"
+                  >
+                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    Conocer más
+                  </button>
+                  <a 
+                    href="https://www.transadvanced.tech/contacto" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 bg-white text-[#0033a0] px-10 py-4 rounded-full font-black hover:bg-gray-50 transition-all border-2 border-[#0033a0]/10 shadow-xl"
+                  >
+                    Más info
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                  </a>
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>
