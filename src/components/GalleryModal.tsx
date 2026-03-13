@@ -28,7 +28,7 @@ export function GalleryModal({ isOpen, onClose, title, images }: GalleryModalPro
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-12 bg-black/80 backdrop-blur-xl"
+                    className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-12 bg-black/80 backdrop-blur-xl cursor-pointer"
                     onClick={onClose}
                 >
                     <motion.div
@@ -36,11 +36,10 @@ export function GalleryModal({ isOpen, onClose, title, images }: GalleryModalPro
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.95, opacity: 0 }}
                         transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                        className="relative w-full h-full flex flex-col"
-                        onClick={(e) => e.stopPropagation()}
+                        className="relative w-full h-full flex flex-col pointer-events-none cursor-default"
                     >
                         {/* Encabezado del Modal (Transparente) */}
-                        <div className="relative z-50 flex justify-between items-center px-4 sm:px-8 py-6">
+                        <div className="relative z-50 flex justify-between items-center px-4 sm:px-8 py-6 pointer-events-auto">
                             <h3 className="text-white text-2xl sm:text-4xl font-bold tracking-tight drop-shadow-lg">{title}</h3>
                             <button
                                 onClick={onClose}
@@ -51,7 +50,7 @@ export function GalleryModal({ isOpen, onClose, title, images }: GalleryModalPro
                         </div>
 
                         {/* Contenido del Carrusel (Sin restricciones de fondo) */}
-                        <div className="flex-grow flex items-center justify-center min-h-0">
+                        <div className="flex-grow flex items-center justify-center min-h-0 pointer-events-auto" onClick={(e) => e.stopPropagation()}>
                             <ImageCarousel images={images} minimal={true} align="center" />
                         </div>
                     </motion.div>

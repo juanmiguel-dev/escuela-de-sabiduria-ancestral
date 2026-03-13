@@ -28,7 +28,7 @@ export function VideoModal({ isOpen, onClose, title, videoSrc }: VideoModalProps
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/50 backdrop-blur-md"
+                    className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/50 backdrop-blur-md cursor-pointer"
                     onClick={onClose}
                 >
                     <motion.div
@@ -36,8 +36,11 @@ export function VideoModal({ isOpen, onClose, title, videoSrc }: VideoModalProps
                         animate={{ scale: 1, y: 0, opacity: 1 }}
                         exit={{ scale: 0.9, y: 30, opacity: 0 }}
                         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                        className="relative w-full max-w-6xl aspect-video bg-black rounded-3xl overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.6)] border border-white/10"
+                        className="relative w-full max-w-5xl aspect-video bg-black rounded-3xl overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.6)] border border-white/10 cursor-default"
                         onClick={(e) => e.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label={title}
                     >
                         {/* Botón de cierre elegante */}
                         <button

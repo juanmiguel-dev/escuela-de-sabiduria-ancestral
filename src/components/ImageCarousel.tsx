@@ -217,14 +217,14 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/60 backdrop-blur-md"
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/60 backdrop-blur-md cursor-pointer"
                         onClick={() => setSelectedPdf(null)}
                     >
                         <motion.div
                             initial={{ scale: 0.95, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.95, opacity: 0 }}
-                            className="relative w-full max-w-5xl h-[90vh] bg-white rounded-2xl overflow-hidden shadow-2xl"
+                            className="relative w-full max-w-5xl h-[90vh] bg-white rounded-2xl overflow-hidden shadow-2xl cursor-default"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Cabecera del Modal PDF */}
@@ -263,7 +263,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/50 backdrop-blur-md"
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/50 backdrop-blur-md cursor-pointer"
                         onClick={() => setSelectedImg(null)}
                     >
                         <motion.div
@@ -271,7 +271,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                            className="relative max-w-7xl max-h-screen w-full flex items-center justify-center p-4"
+                            className="relative max-w-7xl max-h-screen w-full flex items-center justify-center p-4 cursor-default"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Botón de cierre elegante */}
@@ -299,7 +299,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/50 backdrop-blur-md"
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/50 backdrop-blur-md cursor-pointer"
                         onClick={() => setSelectedVideo(null)}
                     >
                         <motion.div
@@ -307,7 +307,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                            className="relative w-full max-w-4xl aspect-video"
+                            className="relative w-full max-w-4xl aspect-video cursor-default"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Botón de cierre elegante */}
