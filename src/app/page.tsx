@@ -508,6 +508,7 @@ export default function Home() {
               year: "2019", 
               tags: "#Educación #Innovación", 
               match: "97% de coincidencia",
+              pdfSrc: "/salud-educacion-ciudadania/Aulas Inteligentes (Fundación Rocca)/Nota de blog 7 - Transformar el aula para transformar el futuro.pdf",
               isGallery: true,
               gallery: [
                 { id: 1, src: "/salud-educacion-ciudadania/Aulas Inteligentes (Fundación Rocca)/Portada Aulas inteligentes-100.jpg" }
@@ -520,6 +521,7 @@ export default function Home() {
               year: "2018", 
               tags: "#Justicia #Infraestructura", 
               match: "96% de coincidencia",
+              pdfSrc: "/salud-educacion-ciudadania/Palacio de Justicia/Nota de blog 4/Nota de blog 4.pdf",
               isGallery: true,
               gallery: [
                 { id: 1, src: "/salud-educacion-ciudadania/Palacio de Justicia/Nota de blog 4/Portada palacio de justicia 1-100.jpg" }
