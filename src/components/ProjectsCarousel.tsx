@@ -69,7 +69,7 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
                 {/* Container: Limpio sin márgenes negativos conflictivos */}
                 <div className="flex">
                     {projects.map((p) => (
-                        <div key={p.id} className="flex-[0_0_auto] px-4 py-8">
+                        <div key={p.id} className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] px-4 py-8">
                             <ProjectCard
                                 title={p.title}
                                 videoSrc={p.videoSrc}
