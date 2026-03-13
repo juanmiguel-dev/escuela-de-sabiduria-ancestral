@@ -17,10 +17,10 @@ interface Project {
 }
 
 interface ProjectsCarouselProps {
-    onProjectHover?: (project: Project) => void;
+    onProjectClick?: (project: Project) => void;
 }
 
-export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
+export function ProjectsCarousel({ onProjectClick }: ProjectsCarouselProps) {
     const [emblaRef, emblaApi] = useEmblaCarousel({
         align: "start",
         loop: true,
@@ -76,8 +76,7 @@ export function ProjectsCarousel({ onProjectHover }: ProjectsCarouselProps) {
                                 year={p.year}
                                 tags={p.tags}
                                 match={p.match}
-                                onClick={() => setSelectedVideo({ title: p.title, src: p.videoSrc })}
-                                onHover={() => onProjectHover?.(p)}
+                                onClick={() => onProjectClick?.(p)}
                             />
                         </div>
                     ))}

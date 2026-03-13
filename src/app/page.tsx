@@ -172,7 +172,7 @@ export default function Home() {
             <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
           </div>
 
-          <ProjectsCarousel onProjectHover={(p) => setActiveProject({
+          <ProjectsCarousel onProjectClick={(p) => setActiveProject({
              title: p.title,
              videoSrc: p.videoSrc,
              year: p.year,
