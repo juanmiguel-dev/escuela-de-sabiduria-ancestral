@@ -72,7 +72,7 @@ export const project = {
       title: 'Galería de Imágenes',
       type: 'array',
       of: [{ type: 'image' }],
-      hidden: ({ document }) => !document?.isGallery,
+      hidden: ({ document }: any) => !document?.isGallery,
     },
     {
       name: 'section',
