@@ -9,11 +9,14 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@sanity/image-url": "^2.0.3",
+    "@sanity/vision": "^5.15.0",
     "embla-carousel-auto-scroll": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.34.3",
     "lucide-react": "^0.575.0",
     "next": "16.1.6",
+    "next-sanity": "^12.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },

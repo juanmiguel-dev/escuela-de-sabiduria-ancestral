@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ProjectsCarousel } from "@/components/ProjectsCarousel";
@@ -8,10 +8,27 @@ import { ImageCarousel } from "@/components/ImageCarousel";
 import { TechBackground } from "@/components/TechBackground";
 import { VideoModal } from "@/components/VideoModal";
 import { GalleryModal } from "@/components/GalleryModal";
+import { getSections } from "@/sanity/lib/queries";
 
 export default function Home() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [selectedGallery, setSelectedGallery] = useState<{ title: string, images: { id: string | number; src: string; }[] } | null>(null);
+  const [sanitySections, setSanitySections] = useState<any[]>([]);
+
+  // Cargar datos de Sanity
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const sections = await getSections();
+        if (sections && sections.length > 0) {
+          setSanitySections(sections);
+        }
+      } catch (error) {
+        console.error("Error cargando datos de Sanity:", error);
+      }
+    }
+    loadData();
+  }, []);
 
   // Estado para el proyecto activo en el Hero
   const [activeProject, setActiveProject] = useState({
@@ -200,50 +217,85 @@ export default function Home() {
         title={selectedGallery?.title || ""}
         images={selectedGallery?.images || []}
       />
- 
-       {/* Nueva Sección: Cuando la tecnología no puede fallar (Abajo de los videos) */}
-      <section className="relative z-30 pt-16 pb-12 w-full overflow-hidden">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={fadeUpVariant}
-        >
-          <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
-              Cuando la tecnología <span className="text-[#37e4af]">no puede fallar</span>
-            </h2>
-            <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
-          </div>
-          
-          <ImageCarousel 
-            onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
-            images={[
-            { id: "emergencias", src: "/tecnologia-no-puede-fallar/emergencias.mp4", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo #Center", match: "100% de coincidencia" },
-            { id: "salud", src: "/tecnologia-no-puede-fallar/salud.mp4", title: "Tecnología en sector salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA #Center", match: "99% de coincidencia" },
-            { id: "ciberseguridad", src: "/tecnologia-no-puede-fallar/ciberseguridad.mp4", title: "Ciberseguridad pública con Cisco", year: "2012", tags: "#Ciberseguridad #Cisco", match: "98% de coincidencia" },
-            { 
-              id: "frontera", 
-              src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg", 
-              title: "Videovigilancia fronteriza", 
-              year: "2011", 
-              tags: "#CCTV", 
-              match: "97% de coincidencia", 
-              isGallery: true,
-              gallery: [
-                { id: 1, src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg" },
-                { id: 2, src: "/tecnologia-no-puede-fallar/2011/Publicación 6B-100.jpg" },
-                { id: 3, src: "/tecnologia-no-puede-fallar/2011/Publicación 6C-100.jpg" },
-                { id: 4, src: "/tecnologia-no-puede-fallar/2011/Publicación 6D-100.jpg" },
-                { id: 5, src: "/tecnologia-no-puede-fallar/2011/Publicación 6E-100.jpg" },
-              ]
-            },
-            { id: "hospitales", src: "/tecnologia-no-puede-fallar/hospitales.jpg", title: "Hospitales CABA", year: "2005", tags: "#Cableado #Switches #Networking", match: "96% de coincidencia" },
 
-            { id: "arsat", src: "/tecnologia-no-puede-fallar/arsat.jpg", title: "Data center ARSAT", year: "2014", tags: "#Data center #Cisco", match: "99% de coincidencia" },
-          ]} />
-        </motion.div>
-      </section>
+      {/* Renderizado Dinámico de Secciones de Sanity */}
+      {sanitySections.map((sec) => (
+        <section key={sec._id} className="pb-24 relative w-full overflow-hidden">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={fadeUpVariant}
+          >
+            <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
+              <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
+                {sec.title} <span className="text-[#37e4af]">{sec.highlightText}</span>
+              </h2>
+              <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
+            </div>
+            <ImageCarousel 
+              onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
+              images={sec.projects.map((p: any) => ({
+                id: p._id,
+                src: p.mediaUrl,
+                title: p.title,
+                year: p.year,
+                tags: p.tags,
+                pdfSrc: p.pdfUrl,
+                isGallery: p.isGallery,
+                gallery: p.gallery?.map((url: string, idx: number) => ({ id: idx, src: url }))
+              }))} 
+            />
+          </motion.div>
+        </section>
+      ))}
+
+      {/* Secciones Estáticas (Solo se muestran si no hay datos en Sanity para evitar duplicados si decides migrar todo) */}
+      {sanitySections.length === 0 && (
+        <>
+          {/* Nueva Sección: Cuando la tecnología no puede fallar (Abajo de los videos) */}
+          <section className="relative z-30 pt-16 pb-12 w-full overflow-hidden">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={fadeUpVariant}
+            >
+              <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
+                <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
+                  Cuando la tecnología <span className="text-[#37e4af]">no puede fallar</span>
+                </h2>
+                <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
+              </div>
+              
+              <ImageCarousel 
+                onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
+                images={[
+                { id: "emergencias", src: "/tecnologia-no-puede-fallar/emergencias.mp4", title: "Atención emergencias 107", year: "2010", tags: "#Contact Center #Desarrollo #Center", match: "100% de coincidencia" },
+                { id: "salud", src: "/tecnologia-no-puede-fallar/salud.mp4", title: "Tecnología en sector salud", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA #Center", match: "99% de coincidencia" },
+                { id: "ciberseguridad", src: "/tecnologia-no-puede-fallar/ciberseguridad.mp4", title: "Ciberseguridad pública con Cisco", year: "2012", tags: "#Ciberseguridad #Cisco", match: "98% de coincidencia" },
+                { 
+                  id: "frontera", 
+                  src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg", 
+                  title: "Videovigilancia fronteriza", 
+                  year: "2011", 
+                  tags: "#CCTV", 
+                  match: "97% de coincidencia", 
+                  isGallery: true,
+                  gallery: [
+                    { id: 1, src: "/tecnologia-no-puede-fallar/2011/Publicación 6A-100.jpg" },
+                    { id: 2, src: "/tecnologia-no-puede-fallar/2011/Publicación 6B-100.jpg" },
+                    { id: 3, src: "/tecnologia-no-puede-fallar/2011/Publicación 6C-100.jpg" },
+                    { id: 4, src: "/tecnologia-no-puede-fallar/2011/Publicación 6D-100.jpg" },
+                    { id: 5, src: "/tecnologia-no-puede-fallar/2011/Publicación 6E-100.jpg" },
+                  ]
+                },
+                { id: "hospitales", src: "/tecnologia-no-puede-fallar/hospitales.jpg", title: "Hospitales CABA", year: "2005", tags: "#Cableado #Switches #Networking", match: "96% de coincidencia" },
+
+                { id: "arsat", src: "/tecnologia-no-puede-fallar/arsat.jpg", title: "Data center ARSAT", year: "2014", tags: "#Data center #Cisco", match: "99% de coincidencia" },
+              ]} />
+            </motion.div>
+          </section>
 
       {/* Segunda Sección: Implementaciones de escala nacional (Infraestructura) */}
       <section className="pb-16 relative w-full overflow-hidden">
@@ -533,6 +585,8 @@ export default function Home() {
           ]} />
         </motion.div>
       </section>
+    </>
+  )}
 
 
       {/* Footer / Logo a pie de página */}
