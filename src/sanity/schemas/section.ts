@@ -7,7 +7,7 @@ export const section = {
       name: 'title',
       title: 'Título de la Sección',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: 'highlightText',
