@@ -130,7 +130,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                         {/* Badge de Año */}
                                         {img.year && (
                                             <div className="absolute top-4 left-4 z-20">
-                                                <div className="bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-white/20 shadow-lg">
+                                                <div className="bg-[#ff9900] text-[#0033a0] px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider border border-[#ff9900]/20 shadow-sm">
                                                     {img.year}
                                                 </div>
                                             </div>
@@ -181,14 +181,14 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                     {tagList.map((tag, idx) => (
                                                         <span 
                                                             key={idx} 
-                                                            className="bg-[#ff9900] text-[#0033a0] px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border border-[#ff9900]/20 shadow-sm"
+                                                            className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-[10px] font-medium border border-gray-200 uppercase tracking-wider"
                                                         >
-                                                            #{tag}
+                                                            {tag}
                                                         </span>
                                                     ))}
                                                     {tagList.length === 0 && (
-                                                        <span className="bg-[#ff9900] text-[#0033a0] px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border border-[#ff9900]/20 shadow-sm">
-                                                            #NETWORKING
+                                                        <span className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-[10px] font-medium border border-gray-200 uppercase tracking-wider">
+                                                            Networking
                                                         </span>
                                                     )}
                                                 </div>
