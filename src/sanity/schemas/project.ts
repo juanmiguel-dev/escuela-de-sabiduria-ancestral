@@ -36,15 +36,23 @@ export const project = {
     },
     {
       name: 'mainMedia',
-      title: 'Media Principal (Imagen o Video)',
+      title: 'Imagen Principal',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: 'videoFile',
+      title: 'Archivo de Video (Opcional)',
       type: 'file',
       options: {
-        accept: 'image/*,video/mp4',
+        accept: 'video/mp4',
       },
     },
     {
       name: 'mediaType',
-      title: 'Tipo de Media',
+      title: '¿Qué mostrar primero?',
       type: 'string',
       options: {
         list: [
@@ -52,6 +60,7 @@ export const project = {
           { title: 'Video', value: 'video' },
         ],
       },
+      initialValue: 'image',
     },
     {
       name: 'pdfFile',
@@ -87,4 +96,11 @@ export const project = {
       initialValue: false,
     },
   ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'year',
+      media: 'mainMedia',
+    },
+  },
 };

@@ -8,12 +8,13 @@ import { ImageCarousel } from "@/components/ImageCarousel";
 import { TechBackground } from "@/components/TechBackground";
 import { VideoModal } from "@/components/VideoModal";
 import { GalleryModal } from "@/components/GalleryModal";
-import { getSections } from "@/sanity/lib/queries";
+import { getSections, getFeaturedProjects } from "@/sanity/lib/queries";
 
 export default function Home() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [selectedGallery, setSelectedGallery] = useState<{ title: string, images: { id: string | number; src: string; }[] } | null>(null);
   const [sanitySections, setSanitySections] = useState<any[]>([]);
+  const [featuredProjects, setFeaturedProjects] = useState<any[]>([]);
 
   // Cargar datos de Sanity
   useEffect(() => {
@@ -22,6 +23,11 @@ export default function Home() {
         const sections = await getSections();
         if (sections && sections.length > 0) {
           setSanitySections(sections);
+        }
+
+        const featured = await getFeaturedProjects();
+        if (featured && featured.length > 0) {
+          setFeaturedProjects(featured);
         }
       } catch (error) {
         console.error("Error cargando datos de Sanity:", error);
@@ -189,7 +195,17 @@ export default function Home() {
             <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
           </div>
 
-          <ProjectsCarousel onProjectClick={(p) => setActiveProject({
+          <ProjectsCarousel 
+            projects={featuredProjects.length > 0 ? featuredProjects.map(p => ({
+              id: p._id,
+              title: p.title,
+              videoSrc: p.videoUrl,
+              imageSrc: p.mediaUrl,
+              year: p.year,
+              tags: p.tags,
+              match: "99% de coincidencia"
+            })) : undefined}
+            onProjectClick={(p) => setActiveProject({
              title: p.title,
              videoSrc: p.videoSrc,
              year: p.year,
@@ -235,9 +251,9 @@ export default function Home() {
             </div>
             <ImageCarousel 
               onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
-              images={sec.projects?.filter((p: any) => p.mediaUrl).map((p: any) => ({
+              images={sec.projects?.filter((p: any) => p.mediaUrl || p.videoUrl).map((p: any) => ({
                 id: p._id,
-                src: p.mediaUrl,
+                src: p.mediaType === 'video' ? (p.videoUrl || p.mediaUrl) : (p.mediaUrl || p.videoUrl),
                 title: p.title,
                 year: p.year,
                 tags: p.tags,

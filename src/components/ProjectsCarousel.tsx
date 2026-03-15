@@ -8,9 +8,10 @@ import { VideoModal } from "./VideoModal";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface Project {
-    id: number;
+    id: number | string;
     title: string;
-    videoSrc: string;
+    videoSrc?: string;
+    imageSrc?: string;
     year: string;
     tags: string;
     match: string;
@@ -18,9 +19,10 @@ interface Project {
 
 interface ProjectsCarouselProps {
     onProjectClick?: (project: Project) => void;
+    projects?: Project[];
 }
 
-export function ProjectsCarousel({ onProjectClick }: ProjectsCarouselProps) {
+export function ProjectsCarousel({ onProjectClick, projects: externalProjects }: ProjectsCarouselProps) {
     const [emblaRef, emblaApi] = useEmblaCarousel({
         align: "start",
         loop: true,
@@ -44,7 +46,7 @@ export function ProjectsCarousel({ onProjectClick }: ProjectsCarouselProps) {
     const [selectedVideo, setSelectedVideo] = useState<{ title: string, src: string } | null>(null);
 
     // 6 videos destacados de la carpeta /videos mapeados según el JSON
-    const projects: Project[] = [
+    const defaultProjects: Project[] = [
         { id: 6, title: "Atención emergencias 107", videoSrc: "/videos/6.mp4", year: "2010", tags: "#Contact Center #Desarrollo", match: "99% de coincidencia" },
         { id: 3, title: "Tecnología en sector salud", videoSrc: "/videos/3.mp4", year: "2008-Hoy", tags: "#Colaboración #Contact Center #Desarrollo #Networking #IA", match: "98% de coincidencia" },
         { id: 2, title: "Ciberseguridad pública con Cisco", videoSrc: "/videos/2.mp4", year: "2012", tags: "#Ciberseguridad #Cisco", match: "97% de coincidencia" },
@@ -52,6 +54,8 @@ export function ProjectsCarousel({ onProjectClick }: ProjectsCarouselProps) {
         { id: 1, title: "El inicio de todo", videoSrc: "/videos/1.mp4", year: "1993", tags: "#Switches #Networking", match: "99% de coincidencia" },
         { id: 7, title: "Mirando al futuro", videoSrc: "/videos/7.mp4", year: "2025", tags: "#IA #Integración #Futuro", match: "100% de coincidencia" },
     ];
+
+    const displayProjects = externalProjects || defaultProjects;
 
     // Manejar bloqueo de scroll cuando el modal esta abierto
     useEffect(() => {
@@ -68,11 +72,12 @@ export function ProjectsCarousel({ onProjectClick }: ProjectsCarouselProps) {
             <div className="overflow-hidden" ref={emblaRef}>
                 {/* Container: Limpio sin márgenes negativos conflictivos */}
                 <div className="flex">
-                    {projects.map((p) => (
+                    {displayProjects.map((p) => (
                         <div key={p.id} className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] px-4 py-8">
                             <ProjectCard
                                 title={p.title}
                                 videoSrc={p.videoSrc}
+                                imageSrc={p.imageSrc}
                                 year={p.year}
                                 tags={p.tags}
                                 match={p.match}

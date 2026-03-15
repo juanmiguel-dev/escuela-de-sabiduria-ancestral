@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface ProjectCardProps {
   title: string;
-  videoSrc: string;
+  videoSrc?: string;
+  imageSrc?: string;
   year?: string;
   tags?: string;
   match?: string;
@@ -12,7 +14,7 @@ interface ProjectCardProps {
   onHover?: () => void;
 }
 
-export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coincidencia", onClick, onHover }: ProjectCardProps) {
+export function ProjectCard({ title, videoSrc, imageSrc, year, tags, match = "98% de coincidencia", onClick, onHover }: ProjectCardProps) {
   const tagList = tags ? tags.split(' ').filter(t => t.startsWith('#')).map(t => t.replace('#', '')) : [];
 
   return (
@@ -28,23 +30,34 @@ export function ProjectCard({ title, videoSrc, year, tags, match = "98% de coinc
     >
       {/* Parte Superior: Media (Video/Imagen) */}
       <div className="relative w-full aspect-[4/3] overflow-hidden">
-        <video
-          src={videoSrc}
-          className="w-full h-full object-cover"
-          preload="metadata"
-          muted
-          loop
-          playsInline
-          onMouseEnter={(e) => {
-            const video = e.target as HTMLVideoElement;
-            video.play().catch(() => { });
-          }}
-          onMouseLeave={(e) => {
-            const video = e.target as HTMLVideoElement;
-            video.pause();
-            video.currentTime = 0;
-          }}
-        />
+        {videoSrc?.endsWith('.mp4') ? (
+          <video
+            src={videoSrc}
+            className="w-full h-full object-cover"
+            preload="metadata"
+            muted
+            loop
+            playsInline
+            onMouseEnter={(e) => {
+              const video = e.target as HTMLVideoElement;
+              video.play().catch(() => { });
+            }}
+            onMouseLeave={(e) => {
+              const video = e.target as HTMLVideoElement;
+              video.pause();
+              video.currentTime = 0;
+            }}
+          />
+        ) : (
+          (imageSrc || videoSrc) && (
+            <Image
+              src={imageSrc || videoSrc || ""}
+              alt={title}
+              fill
+              className="object-cover"
+            />
+          )
+        )}
         
         {/* Overlay Azul Gradiente sutil (siempre visible para estética) */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0033a0]/20 to-transparent pointer-events-none" />

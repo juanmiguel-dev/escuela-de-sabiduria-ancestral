@@ -9,6 +9,26 @@ export async function getProjects() {
     description,
     tags,
     "mediaUrl": mainMedia.asset->url,
+    "videoUrl": videoFile.asset->url,
+    mediaType,
+    "pdfUrl": pdfFile.asset->url,
+    isGallery,
+    "gallery": gallery[].asset->url,
+    "section": section->title,
+    isHeroFeatured
+  }`);
+}
+
+export async function getFeaturedProjects() {
+  return await client.fetch(`*[_type == "project" && isHeroFeatured == true] {
+    _id,
+    title,
+    "slug": slug.current,
+    year,
+    description,
+    tags,
+    "mediaUrl": mainMedia.asset->url,
+    "videoUrl": videoFile.asset->url,
     mediaType,
     "pdfUrl": pdfFile.asset->url,
     isGallery,
@@ -31,6 +51,7 @@ export async function getSections() {
       description,
       tags,
       "mediaUrl": mainMedia.asset->url,
+      "videoUrl": videoFile.asset->url,
       mediaType,
       "pdfUrl": pdfFile.asset->url,
       isGallery,
