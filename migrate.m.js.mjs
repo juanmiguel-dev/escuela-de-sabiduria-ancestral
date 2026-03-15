@@ -41,7 +41,7 @@ const sectionsData = [
   }
 ];
 
-async function uploadFile(filePath: string) {
+async function uploadFile(filePath) {
   const absolutePath = path.join(process.cwd(), 'public', filePath);
   if (!fs.existsSync(absolutePath)) {
     console.warn(`Archivo no encontrado: ${absolutePath}`);
@@ -53,7 +53,7 @@ async function uploadFile(filePath: string) {
   });
 }
 
-async function uploadImage(filePath: string) {
+async function uploadImage(filePath) {
   const absolutePath = path.join(process.cwd(), 'public', filePath);
   if (!fs.existsSync(absolutePath)) {
     console.warn(`Imagen no encontrada: ${absolutePath}`);
