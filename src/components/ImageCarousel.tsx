@@ -127,7 +127,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                     >
                                         {/* Contenedor de la Media (Video o Imagen) */}
                                     <div className="relative w-full aspect-[4/3] shrink-0 overflow-hidden">
-                                        {img.src.endsWith('.mp4') ? (
+                                        {img.src?.endsWith('.mp4') ? (
                                             <video
                                                 src={img.src}
                                                 className="w-full h-full object-cover"
@@ -146,13 +146,15 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                 }}
                                             />
                                         ) : (
-                                            <Image
-                                                src={img.src}
-                                                alt={img.title || "Galería"}
-                                                fill
-                                                className="object-cover"
-                                                sizes="(max-width: 768px) 100vw, 33vw"
-                                            />
+                                            img.src && (
+                                                <Image
+                                                    src={img.src}
+                                                    alt={img.title || "Galería"}
+                                                    fill
+                                                    className="object-cover"
+                                                    sizes="(max-width: 768px) 100vw, 33vw"
+                                                />
+                                            )
                                         )}
                                         
                                         {/* Overlay Azul Gradiente sutil */}

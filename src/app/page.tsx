@@ -235,7 +235,7 @@ export default function Home() {
             </div>
             <ImageCarousel 
               onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
-              images={sec.projects.map((p: any) => ({
+              images={sec.projects?.filter((p: any) => p.mediaUrl).map((p: any) => ({
                 id: p._id,
                 src: p.mediaUrl,
                 title: p.title,
@@ -243,8 +243,8 @@ export default function Home() {
                 tags: p.tags,
                 pdfSrc: p.pdfUrl,
                 isGallery: p.isGallery,
-                gallery: p.gallery?.map((url: string, idx: number) => ({ id: idx, src: url }))
-              }))} 
+                gallery: p.gallery?.map((url: string, idx: number) => ({ id: idx, src: url })) || []
+              })) || []} 
             />
           </motion.div>
         </section>
