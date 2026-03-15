@@ -176,19 +176,19 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                     {img.title}
                                                 </h3>
                                                 
-                                                {/* Tags Estilo Referencia */}
+                                                {/* Tags */}
                                                 <div className="flex flex-wrap gap-2">
                                                     {tagList.map((tag, idx) => (
                                                         <span 
                                                             key={idx} 
-                                                            className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-[10px] font-medium border border-gray-200 uppercase tracking-wider"
+                                                            className="bg-[#ff9900] text-[#0033a0] px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border border-[#ff9900]/20 shadow-sm"
                                                         >
-                                                            {tag}
+                                                            #{tag}
                                                         </span>
                                                     ))}
                                                     {tagList.length === 0 && (
-                                                        <span className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-[10px] font-medium border border-gray-200 uppercase tracking-wider">
-                                                            Networking
+                                                        <span className="bg-[#ff9900] text-[#0033a0] px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border border-[#ff9900]/20 shadow-sm">
+                                                            #NETWORKING
                                                         </span>
                                                     )}
                                                 </div>

@@ -85,14 +85,14 @@ export function ProjectCard({ title, videoSrc, imageSrc, year, tags, match = "98
             {title}
           </h3>
           
-          {/* Tags Estilo Referencia */}
-          <div className="flex flex-wrap gap-1.5">
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
             {tagList.map((tag, idx) => (
-              <span 
-                key={idx} 
-                className="bg-[#0033a0]/10 text-[#0033a0] px-2.5 py-0.5 rounded-lg text-[10px] font-medium border border-[#0033a0]/10 uppercase tracking-wider"
+              <span
+                key={idx}
+                className="bg-[#ff9900] text-[#0033a0] px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border border-[#ff9900]/20 shadow-sm"
               >
-                {tag}
+                #{tag}
               </span>
             ))}
           </div>
