@@ -130,7 +130,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                         {/* Badge de Año */}
                                         {img.year && (
                                             <div className="absolute top-4 left-4 z-20">
-                                                <div className="bg-[#ff9900] text-[#0033a0] px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider border border-[#ff9900]/20 shadow-sm">
+                                                <div className="bg-[#eee] text-[#0033a0] px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider border border-gray-200 shadow-sm">
                                                     {img.year}
                                                 </div>
                                             </div>
