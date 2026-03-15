@@ -207,7 +207,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                         <div className="p-1.5 bg-[#0033a0]/5 group-hover/pdf:bg-[#ff9900]/10 rounded-md transition-colors">
                                                             <FileText size={16} />
                                                         </div>
-                                                        Ver documento PDF
+                                                        LEER NOTA
                                                     </button>
                                                 </div>
                                             )}
