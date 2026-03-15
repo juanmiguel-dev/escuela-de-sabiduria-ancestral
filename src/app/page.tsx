@@ -37,7 +37,14 @@ export default function Home() {
   }, []);
 
   // Estado para el proyecto activo en el Hero
-  const [activeProject, setActiveProject] = useState({
+  const [activeProject, setActiveProject] = useState<{
+    title: string;
+    videoSrc?: string;
+    imageSrc?: string;
+    year: string;
+    tags: string;
+    description: string;
+  }>({
     title: "Educación y conectividad satelital",
     videoSrc: "/videos/7.mp4",
     year: "1985 - 2025",
@@ -91,21 +98,35 @@ export default function Home() {
           {/* Video for Desktop */}
           <AnimatePresence mode="wait">
             <motion.div 
-              key={activeProject.videoSrc}
+              key={activeProject.videoSrc || activeProject.imageSrc}
               className="absolute inset-0 z-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1 }}
             >
-              <video
-                src={activeProject.videoSrc}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="hidden sm:block w-full h-full object-cover"
-              />
+              {activeProject.videoSrc ? (
+                <video
+                  src={activeProject.videoSrc}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="hidden sm:block w-full h-full object-cover"
+                />
+              ) : (
+                activeProject.imageSrc && (
+                  <div className="hidden sm:block relative w-full h-full">
+                    <Image
+                      src={activeProject.imageSrc}
+                      alt={activeProject.title}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                )
+              )}
               
               {/* Light Overlay Gradient for Readability */}
               <div className="absolute inset-0 bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/60 to-transparent z-10" />
@@ -208,6 +229,7 @@ export default function Home() {
             onProjectClick={(p) => setActiveProject({
              title: p.title,
              videoSrc: p.videoSrc,
+             imageSrc: p.imageSrc,
              year: p.year,
              tags: p.tags,
              description: p.title === "Atención emergencias 107" ? "Gestión crítica de emergencias médicas" : 
@@ -224,7 +246,7 @@ export default function Home() {
         isOpen={isVideoModalOpen}
         onClose={() => setIsVideoModalOpen(false)}
         title={activeProject.title}
-        videoSrc={activeProject.videoSrc}
+        videoSrc={activeProject.videoSrc || ""}
       />
 
       <GalleryModal 
