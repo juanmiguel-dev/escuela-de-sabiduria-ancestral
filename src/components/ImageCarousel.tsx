@@ -127,6 +127,14 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                     >
                                         {/* Contenedor de la Media (Video o Imagen) */}
                                     <div className="relative w-full aspect-[4/3] shrink-0 overflow-hidden">
+                                        {/* Badge de Año */}
+                                        {img.year && (
+                                            <div className="absolute top-4 left-4 z-20">
+                                                <div className="bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-white/20 shadow-lg">
+                                                    {img.year}
+                                                </div>
+                                            </div>
+                                        )}
                                         {img.src?.endsWith('.mp4') ? (
                                             <video
                                                 src={img.src}

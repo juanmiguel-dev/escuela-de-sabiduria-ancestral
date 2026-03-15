@@ -30,6 +30,14 @@ export function ProjectCard({ title, videoSrc, imageSrc, year, tags, match = "98
     >
       {/* Parte Superior: Media (Video/Imagen) */}
       <div className="relative w-full aspect-[4/3] overflow-hidden">
+        {/* Badge de Año */}
+        {year && (
+          <div className="absolute top-4 left-4 z-20">
+            <div className="bg-black/60 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/20 shadow-lg">
+              {year}
+            </div>
+          </div>
+        )}
         {videoSrc?.endsWith('.mp4') ? (
           <video
             src={videoSrc}
