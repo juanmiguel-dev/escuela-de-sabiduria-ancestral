@@ -14,6 +14,7 @@ interface Project {
     imageSrc?: string;
     year: string;
     tags: string;
+    sections?: string[];
     match: string;
 }
 
@@ -80,6 +81,7 @@ export function ProjectsCarousel({ onProjectClick, projects: externalProjects }:
                                 imageSrc={p.imageSrc}
                                 year={p.year}
                                 tags={p.tags}
+                                sections={p.sections}
                                 match={p.match}
                                 onClick={() => onProjectClick?.(p)}
                             />

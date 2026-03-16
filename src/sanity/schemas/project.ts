@@ -84,10 +84,12 @@ export const project = {
       hidden: ({ document }: any) => !document?.isGallery,
     },
     {
-      name: 'section',
-      title: 'Sección',
-      type: 'reference',
-      to: [{ type: 'section' }],
+      name: 'sections',
+      title: 'Secciones',
+      description: 'Seleccioná una o más secciones para este proyecto',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'section' }] }],
+      validation: (Rule: any) => Rule.required().min(1),
     },
     {
       name: 'isHeroFeatured',

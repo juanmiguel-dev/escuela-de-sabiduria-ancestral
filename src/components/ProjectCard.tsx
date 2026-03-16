@@ -9,12 +9,13 @@ interface ProjectCardProps {
   imageSrc?: string;
   year?: string;
   tags?: string;
+  sections?: string[];
   match?: string;
   onClick?: () => void;
   onHover?: () => void;
 }
 
-export function ProjectCard({ title, videoSrc, imageSrc, year, tags, match = "98% de coincidencia", onClick, onHover }: ProjectCardProps) {
+export function ProjectCard({ title, videoSrc, imageSrc, year, tags, sections, match = "98% de coincidencia", onClick, onHover }: ProjectCardProps) {
   const tagList = tags ? tags.split(' ').filter(t => t.startsWith('#')).map(t => t.replace('#', '')) : [];
 
   return (
@@ -84,6 +85,13 @@ export function ProjectCard({ title, videoSrc, imageSrc, year, tags, match = "98
           <h3 className="text-[#1a2b4e] text-lg font-black leading-tight tracking-tight">
             {title}
           </h3>
+
+          {/* Secciones */}
+          {sections && sections.length > 0 && (
+            <div className="text-[10px] font-bold text-[#0033a0]/60 uppercase tracking-widest">
+              {sections.join(' / ')}
+            </div>
+          )}
           
           {/* Tags */}
         <div className="flex flex-wrap gap-2">

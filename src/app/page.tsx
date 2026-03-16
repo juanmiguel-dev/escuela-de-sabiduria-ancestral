@@ -44,12 +44,14 @@ export default function Home() {
     year: string;
     tags: string;
     description: string;
+    sections?: string[];
   }>({
     title: "Educación y conectividad satelital",
     videoSrc: "/videos/7.mp4",
     year: "1985 - 2025",
     tags: "#Starlink #Meraki #Wifi #Enlaces",
-    description: "1000 escuelas rurales conectadas en 90 días"
+    description: "1000 escuelas rurales conectadas en 90 días",
+    sections: ["Infraestructura"]
   });
 
   const galleryImages = [
@@ -163,7 +165,7 @@ export default function Home() {
                 <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">Caso destacado</span>
                 <span className="font-black">{activeProject.year}</span>
                 <span className="opacity-40">|</span>
-                <span className="font-black">Infraestructura</span>
+                <span className="font-black">{activeProject.sections?.join(' / ') || "Tecnología"}</span>
                 <span className="text-[#0033a0] text-xs font-medium bg-[#ff9900] px-3 py-1 rounded border border-white/30 shadow-lg animate-orange-glow uppercase tracking-wider">
                   {activeProject.tags}
                 </span>
@@ -224,14 +226,16 @@ export default function Home() {
               imageSrc: p.mediaUrl,
               year: p.year,
               tags: p.tags,
+              sections: p.sections,
               match: "99% de coincidencia"
             })) : undefined}
-            onProjectClick={(p) => setActiveProject({
+            onProjectClick={(p: any) => setActiveProject({
              title: p.title,
              videoSrc: p.videoSrc,
              imageSrc: p.imageSrc,
              year: p.year,
              tags: p.tags,
+             sections: p.sections,
              description: p.title === "Atención emergencias 107" ? "Gestión crítica de emergencias médicas" : 
                           p.title === "Tecnología en sector salud" ? "Digitalización integral hospitalaria" :
                           p.title === "Ciberseguridad pública con Cisco" ? "Protección de datos a nivel nacional" :
@@ -279,6 +283,7 @@ export default function Home() {
                 title: p.title,
                 year: p.year,
                 tags: p.tags,
+                sections: p.sections,
                 pdfSrc: p.pdfUrl,
                 isGallery: p.isGallery,
                 gallery: p.gallery?.map((url: string, idx: number) => ({ id: idx, src: url })) || []

@@ -12,6 +12,7 @@ interface ImageItem {
     title?: string;
     year?: string;
     tags?: string;
+    sections?: string[];
     match?: string;
     isGallery?: boolean;
     gallery?: { id: string | number; src: string; }[];
@@ -172,10 +173,17 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                         {/* Parte Inferior: Información Blanca */}
                                         <div className="p-6 bg-white space-y-4 min-h-[140px] flex flex-col justify-between">
                                             <div className="space-y-3">
-                                                <h3 className="text-[#1a2b4e] text-xl font-black leading-tight tracking-tight">
+                                                <h3 className="text-[#1a2b4e] text-lg font-black leading-tight tracking-tight">
                                                     {img.title}
                                                 </h3>
-                                                
+
+                                                {/* Secciones */}
+                                                {img.sections && img.sections.length > 0 && (
+                                                    <div className="text-[10px] font-bold text-[#0033a0]/60 uppercase tracking-widest">
+                                                        {img.sections.join(' / ')}
+                                                    </div>
+                                                )}
+
                                                 {/* Tags */}
                                                 <div className="flex flex-wrap gap-2">
                                                     {tagList.map((tag, idx) => (
