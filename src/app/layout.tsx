@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { Libre_Franklin, Geist_Mono } from "next/font/google";
+import { Libre_Franklin } from "next/font/google";
 import "./globals.css";
 import { TechBackground } from "@/components/TechBackground";
 
 const libreFranklin = Libre_Franklin({
   variable: "--font-libre-franklin",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
