@@ -131,7 +131,12 @@ export default function Home() {
               )}
               
               {/* Light Overlay Gradient for Readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/60 to-transparent z-10" />
+              {/* Desktop: Horizontal gradient */}
+              <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/60 to-transparent z-10" />
+              {/* Mobile: Stronger vertical and full white overlay */}
+              <div className="block sm:hidden absolute inset-0 bg-white/70 z-10" />
+              <div className="block sm:hidden absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent z-10" />
+              
               <div className="absolute inset-0 bg-gradient-to-t from-[#eeeeee] via-transparent to-transparent z-10" />
             </motion.div>
           </AnimatePresence>
