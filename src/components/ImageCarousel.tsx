@@ -197,7 +197,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
 
                                             {/* Botón PDF si existe */}
                                             {img.pdfSrc && (
-                                                <div className="pt-2 border-t border-gray-100">
+                                                <div className="pt-4 border-t border-gray-100">
                                                     <button 
                                                         onClick={(e) => {
                                                             e.stopPropagation();
