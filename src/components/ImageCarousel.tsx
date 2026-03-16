@@ -177,13 +177,6 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                     {img.title}
                                                 </h3>
 
-                                                {/* Secciones */}
-                                                {img.sections && img.sections.length > 0 && (
-                                                    <div className="text-[10px] font-bold text-[#0033a0]/60 uppercase tracking-widest">
-                                                        {img.sections.join(' / ')}
-                                                    </div>
-                                                )}
-
                                                 {/* Tags */}
                                                 <div className="flex flex-wrap gap-2">
                                                     {tagList.map((tag, idx) => (
