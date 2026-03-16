@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${libreFranklin.variable} ${geistMono.variable} antialiased`}
+        className={`${libreFranklin.variable} antialiased`}
       >
         <TechBackground />
         <div className="scanlines" />
