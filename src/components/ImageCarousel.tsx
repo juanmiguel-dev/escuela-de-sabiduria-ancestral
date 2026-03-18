@@ -117,10 +117,10 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
 
                             // MODO NORMAL (CARD): Estilo tipo referencia con parte inferior blanca
                             return (
-                                <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex-[0_0_auto] mr-6 sm:mr-10">
+                                <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex items-stretch mr-6 sm:mr-10">
                                     <motion.div
                                         onClick={() => handleCardClick(img)}
-                                        className="relative flex-none w-[300px] sm:w-[340px] h-[480px] rounded-[2rem] overflow-hidden cursor-pointer group bg-white shadow-[0_15px_35px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-500 flex flex-col"
+                                        className="relative flex-none w-[300px] sm:w-[340px] min-h-[480px] rounded-[2rem] overflow-hidden cursor-pointer group bg-white shadow-[0_15px_35px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-500 flex flex-col"
                                         whileHover={{
                                             y: -10,
                                             boxShadow: "0 25px 50px rgba(0,0,0,0.15)",
