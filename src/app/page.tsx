@@ -16,13 +16,6 @@ export default function Home() {
   const [sanitySections, setSanitySections] = useState<any[]>([]);
   const [featuredProjects, setFeaturedProjects] = useState<any[]>([]);
 
-  // Separar secciones: la de "Casos Destacados" va arriba, el resto abajo
-  const normalSections = sanitySections.filter(s => s.title.toLowerCase() !== "casos destacados");
-  const featuredSection = sanitySections.find(s => s.title.toLowerCase() === "casos destacados");
-
-  // Los proyectos para el carrusel superior vienen de la sección especial si existe, sino del flag isHeroFeatured
-  const displayFeaturedProjects = featuredSection?.projects || featuredProjects;
-
   // Cargar datos de Sanity
   useEffect(() => {
     async function loadData() {
@@ -231,7 +224,7 @@ export default function Home() {
           </div>
 
           <ProjectsCarousel 
-            projects={displayFeaturedProjects.length > 0 ? displayFeaturedProjects.map((p: any) => ({
+            projects={featuredProjects.length > 0 ? featuredProjects.map((p: any) => ({
               id: p._id,
               title: p.title,
               videoSrc: p.videoUrl || (p.mediaType === 'video' ? p.mediaUrl : undefined),
@@ -273,7 +266,7 @@ export default function Home() {
       />
 
       {/* Renderizado Dinámico de Secciones de Sanity */}
-      {normalSections.map((sec) => (
+      {sanitySections.map((sec) => (
         <section key={sec._id} className="pb-24 relative w-full overflow-hidden">
           <motion.div
             initial="hidden"
