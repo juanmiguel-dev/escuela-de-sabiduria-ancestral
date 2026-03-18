@@ -96,6 +96,14 @@ export const project = {
       type: 'boolean',
       initialValue: false,
     },
+    {
+      name: 'heroOrder',
+      title: 'Orden en Hero',
+      description: 'El número 1 será el primero en aparecer',
+      type: 'number',
+      hidden: ({ document }: any) => !document?.isHeroFeatured,
+      initialValue: 1,
+    },
   ],
   preview: {
     select: {

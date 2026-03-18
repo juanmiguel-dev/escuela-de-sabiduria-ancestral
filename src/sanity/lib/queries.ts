@@ -20,7 +20,7 @@ export async function getProjects() {
 }
 
 export async function getFeaturedProjects() {
-  return await client.fetch(`*[_type == "project" && isHeroFeatured == true] {
+  return await client.fetch(`*[_type == "project" && isHeroFeatured == true] | order(heroOrder asc, _createdAt desc) {
     _id,
     title,
     "slug": slug.current,
@@ -34,7 +34,8 @@ export async function getFeaturedProjects() {
     isGallery,
     "gallery": gallery[].asset->url,
     "sections": sections[]->title,
-    isHeroFeatured
+    isHeroFeatured,
+    heroOrder
   }`);
 }
 

@@ -62,9 +62,9 @@ export function ProjectsCarousel({ onProjectClick, projects: externalProjects }:
             {/* Viewport: Único lugar con overflow-hidden para el slider */}
             <div className="overflow-hidden" ref={emblaRef}>
                 {/* Container: Limpio sin márgenes negativos conflictivos */}
-                <div className="flex">
+                <div className="flex items-stretch">
                     {displayProjects.map((p) => (
-                        <div key={p.id} className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] px-4 py-8">
+                        <div key={p.id} className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] px-4 py-8 flex">
                             <ProjectCard
                                 title={p.title}
                                 videoSrc={p.videoSrc}
