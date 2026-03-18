@@ -73,7 +73,14 @@ export function ProjectsCarousel({ onProjectClick, projects: externalProjects }:
                                 tags={p.tags}
                                 sections={p.sections}
                                 match={p.match}
-                                onClick={() => onProjectClick?.(p)}
+                                onClick={() => {
+                                    // Cambiar el Hero
+                                    onProjectClick?.(p);
+                                    // Abrir el video si existe
+                                    if (p.videoSrc) {
+                                        setSelectedVideo({ title: p.title, src: p.videoSrc });
+                                    }
+                                }}
                             />
                         </div>
                     ))}
