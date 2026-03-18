@@ -89,7 +89,6 @@ export const project = {
       description: 'Seleccioná una o más secciones para este proyecto',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'section' }] }],
-      validation: (Rule: any) => Rule.required().min(1),
     },
     {
       name: 'isHeroFeatured',
