@@ -71,7 +71,7 @@ export default function Home() {
     <main className="min-h-screen selection:bg-[#0033a0] selection:text-white pb-24 overflow-x-hidden font-sans relative text-gray-900">
 
       {/* Header / Top Navigation (Logo de Trans Advanced Technologies) */}
-      <header className="absolute top-0 left-0 w-full px-6 py-8 sm:px-12 sm:py-10 z-50">
+      <header className="absolute top-0 left-0 w-full px-6 py-8 sm:px-12 sm:py-10 z-50 flex items-center justify-between">
         <Image
           src="/logo-full.svg"
           alt="Trans Advanced Technologies"
@@ -80,6 +80,14 @@ export default function Home() {
           className="h-10 sm:h-14 w-auto"
           priority
         />
+        <a 
+          href="https://www.transadvanced.tech/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="bg-[#00b491] hover:bg-[#009a7b] text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full font-black text-xs sm:text-sm tracking-widest transition-all shadow-[0_8px_20px_rgba(0,180,145,0.3)] hover:scale-105 active:scale-95 uppercase"
+        >
+          Contacto
+        </a>
       </header>
 
       {/* Hero Section (Netflix Style) */}
@@ -169,18 +177,12 @@ export default function Home() {
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-base font-bold text-gray-700 mt-8">
                 <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">Caso destacado</span>
                 <span className="font-black">{activeProject.year}</span>
-                <span className="opacity-40">|</span>
-                <span className="font-black">{activeProject.sections?.join(' / ') || "Tecnología"}</span>
                 <span className="text-[#0033a0] text-xs font-medium bg-[#ff9900] px-3 py-1 rounded border border-white/30 shadow-lg animate-orange-glow uppercase tracking-wider">
                   {activeProject.tags}
                 </span>
               </div>
 
               <div className="space-y-6 mt-6">
-                <p className="text-xl sm:text-3xl text-gray-800 max-w-2xl font-black leading-tight border-l-4 border-[#37e4af] pl-6 py-2">
-                  {activeProject.description || "Solución tecnológica de alto impacto"}
-                </p>
-
                 {/* Action Buttons */}
                 <div className="flex flex-wrap items-center gap-4 pt-2">
                   <button 
@@ -192,15 +194,6 @@ export default function Home() {
                     </div>
                     Ver caso
                   </button>
-                  <a 
-                    href="https://www.transadvanced.tech/contacto" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-white text-[#0033a0] px-10 py-4 rounded-full font-black hover:bg-gray-50 transition-all border-2 border-[#0033a0]/10 shadow-xl"
-                  >
-                    Más info
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                  </a>
                 </div>
               </div>
             </motion.div>
