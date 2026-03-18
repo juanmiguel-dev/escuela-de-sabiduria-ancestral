@@ -305,22 +305,3 @@ export default function Home() {
     </main>
   );
 }
-
-
-      {/* Footer / Logo a pie de página */}
-      <footer className="py-20 bg-[#f8f9fc] border-t border-gray-100 flex flex-col items-center justify-center">
-        <Image
-          src="/logo-full.svg"
-          alt="Trans Advanced Technologies Footer"
-          width={280}
-          height={80}
-          className="h-12 sm:h-16 w-auto opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
-        />
-        <p className="mt-8 text-sm text-gray-400 font-medium tracking-widest">
-          © {new Date().getFullYear()} Trans Advanced Technologies
-        </p>
-      </footer>
-
-    </main>
-  );
-}
