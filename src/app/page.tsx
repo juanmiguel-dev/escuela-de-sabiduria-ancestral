@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ProjectsCarousel } from "@/components/ProjectsCarousel";
 import { ImageCarousel } from "@/components/ImageCarousel";
 import { TechBackground } from "@/components/TechBackground";
+import { TechHeroMobile } from "@/components/TechHeroMobile";
 import { VideoModal } from "@/components/VideoModal";
 import { GalleryModal } from "@/components/GalleryModal";
 import { getSections, getFeaturedProjects } from "@/sanity/lib/queries";
@@ -95,16 +96,9 @@ export default function Home() {
             {/* Featured Background: Video on Desktop, Static Image on Mobile */}
             <div className="absolute inset-0 z-0">
               {/* Static Image for Mobile (Netflix Style) */}
-              <div className="block sm:hidden w-full h-full">
-                {(activeProject.mobileImageSrc || activeProject.imageSrc) && (
-                  <Image
-                    src={activeProject.mobileImageSrc || activeProject.imageSrc || ""}
-                    alt={activeProject.title}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                )}
+              {/* Subtle Tech Background for Mobile */}
+              <div className="block sm:hidden absolute inset-0 w-full h-full bg-[#f8f9fc]">
+                <TechHeroMobile />
               </div>
               
               {/* Video for Desktop */}
