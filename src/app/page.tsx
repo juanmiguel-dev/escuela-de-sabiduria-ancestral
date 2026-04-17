@@ -21,6 +21,7 @@ export default function Home() {
     title: string;
     videoSrc?: string;
     imageSrc?: string;
+    mobileImageSrc?: string;
     year: string;
     tags: string;
     description: string;
@@ -45,6 +46,7 @@ export default function Home() {
             title: p.title,
             videoSrc: p.videoUrl || (p.mediaType === 'video' ? p.mediaUrl : undefined),
             imageSrc: p.mediaUrl,
+            mobileImageSrc: p.mobileMediaUrl,
             year: p.year,
             tags: p.tags,
             description: p.description || "",
@@ -94,9 +96,9 @@ export default function Home() {
             <div className="absolute inset-0 z-0">
               {/* Static Image for Mobile (Netflix Style) */}
               <div className="block sm:hidden w-full h-full">
-                {activeProject.imageSrc && (
+                {(activeProject.mobileImageSrc || activeProject.imageSrc) && (
                   <Image
-                    src={activeProject.imageSrc}
+                    src={activeProject.mobileImageSrc || activeProject.imageSrc || ""}
                     alt={activeProject.title}
                     fill
                     className="object-cover"
@@ -224,6 +226,7 @@ export default function Home() {
               title: p.title,
               videoSrc: p.videoUrl || (p.mediaType === 'video' ? p.mediaUrl : undefined),
               imageSrc: p.mediaUrl,
+              mobileImageSrc: p.mobileMediaUrl,
               year: p.year,
               tags: p.tags,
               sections: p.sections,
@@ -233,6 +236,7 @@ export default function Home() {
              title: p.title,
              videoSrc: p.videoSrc,
              imageSrc: p.imageSrc,
+             mobileImageSrc: p.mobileImageSrc,
              year: p.year,
              tags: p.tags,
              sections: p.sections,

@@ -43,6 +43,16 @@ export const project = {
       },
     },
     {
+      name: 'mobileHeroImage',
+      title: 'Imagen para Mobile (Opcional - Hero)',
+      description: 'Si se deja vacío, se usará la Imagen Principal en mobile.',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      hidden: ({ document }: any) => !document?.isHeroFeatured,
+    },
+    {
       name: 'videoFile',
       title: 'Archivo de Video (Opcional)',
       type: 'file',
