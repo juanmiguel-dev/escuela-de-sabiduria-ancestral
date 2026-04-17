@@ -5,7 +5,7 @@ export const project = {
   fields: [
     {
       name: 'title',
-      title: 'Título',
+      title: 'Título del Proyecto',
       type: 'string',
       validation: (Rule: any) => Rule.required(),
     },
@@ -107,7 +107,7 @@ export const project = {
     },
     {
       name: 'mobileHeroImage',
-      title: 'Imagen para Mobile (Hero)',
+      title: '⚠️ Imagen Mobile (TEST)',
       description: 'Imagen específica para el fondo en dispositivos móviles. Si se deja vacío, se usará la Imagen Principal.',
       type: 'image',
       options: {
