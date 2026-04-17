@@ -42,16 +42,7 @@ export const project = {
         hotspot: true,
       },
     },
-    {
-      name: 'mobileHeroImage',
-      title: 'Imagen para Mobile (Opcional - Hero)',
-      description: 'Si se deja vacío, se usará la Imagen Principal en mobile.',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      hidden: ({ document }: any) => !document?.isHeroFeatured,
-    },
+
     {
       name: 'videoFile',
       title: 'Archivo de Video (Opcional)',
@@ -113,6 +104,15 @@ export const project = {
       type: 'number',
       hidden: ({ document }: any) => !document?.isHeroFeatured,
       initialValue: 1,
+    },
+    {
+      name: 'mobileHeroImage',
+      title: 'Imagen para Mobile (Hero)',
+      description: 'Imagen específica para el fondo en dispositivos móviles. Si se deja vacío, se usará la Imagen Principal.',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     },
   ],
   preview: {
