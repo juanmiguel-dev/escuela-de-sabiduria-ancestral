@@ -90,14 +90,14 @@ export default function Home() {
       </header>
 
       {/* Hero Section (Netflix Style) */}
-      <section className="relative h-[85vh] sm:h-[95vh] w-full flex items-center overflow-hidden bg-white">
+      <section className="relative h-[85vh] sm:h-[95vh] w-full flex items-center overflow-hidden">
         {activeProject && (
           <>
             {/* Featured Background: Video on Desktop, Static Image on Mobile */}
             <div className="absolute inset-0 z-0">
               {/* Static Image for Mobile (Netflix Style) */}
               {/* Subtle Tech Background for Mobile */}
-              <div className="block sm:hidden absolute inset-0 w-full h-full bg-[#f8f9fc]">
+              <div className="block sm:hidden absolute inset-0 w-full h-full">
                 <TechHeroMobile />
               </div>
               
