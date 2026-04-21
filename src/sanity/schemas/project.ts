@@ -85,8 +85,8 @@ export const project = {
       hidden: ({ document }: any) => !document?.isGallery,
     },
     {
-      name: 'sections',
-      title: 'Secciones',
+      name: 'implementacionesDe',
+      title: 'Implementaciones de',
       description: 'Seleccioná una o más secciones para este proyecto',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'section' }] }],

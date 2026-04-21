@@ -15,7 +15,7 @@ export async function getProjects() {
     "pdfUrl": pdfFile.asset->url,
     isGallery,
     "gallery": gallery[].asset->url,
-    "sections": sections[]->title,
+    "sections": implementacionesDe[]->title,
     isHeroFeatured
   }`);
 }
@@ -35,7 +35,7 @@ export async function getFeaturedProjects() {
     "pdfUrl": pdfFile.asset->url,
     isGallery,
     "gallery": gallery[].asset->url,
-    "sections": sections[]->title,
+    "sections": implementacionesDe[]->title,
     isHeroFeatured,
     heroOrder
   }`);
@@ -59,7 +59,7 @@ export async function getSections() {
       "pdfUrl": pdfFile.asset->url,
       isGallery,
       "gallery": gallery[].asset->url,
-      "sections": sections[]->title
+      "sections": implementacionesDe[]->title
     }
   }`);
 }
