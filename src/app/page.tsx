@@ -90,7 +90,7 @@ export default function Home() {
       </header>
 
       {/* Hero Section (Netflix Style) */}
-      <section className="relative h-[85vh] sm:h-[95vh] w-full flex items-center overflow-hidden">
+      <section className="relative h-[68vh] sm:h-[95vh] w-full flex items-center overflow-hidden">
         {activeProject && (
           <>
             {/* Featured Background: Video on Desktop, Static Image on Mobile */}
