@@ -73,12 +73,20 @@ export default function Escuela() {
           className="w-[160px] sm:w-[220px] h-auto object-contain"
           priority
         />
-        <a 
-          href="/dashboard" 
-          className="bg-[#00b491] hover:bg-[#009a7b] text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full font-black text-xs sm:text-sm tracking-widest transition-all shadow-[0_8px_20px_rgba(0,180,145,0.3)] hover:scale-105 active:scale-95 uppercase"
-        >
-          Acceder
-        </a>
+        <div className="flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
+            <a href="#" className="hover:text-white transition-colors">Mis Cursos</a>
+            <a href="#" className="hover:text-white transition-colors">Comunidad</a>
+            <a href="#" className="hover:text-white transition-colors">Soporte</a>
+            <a href="/portal" className="text-[#d4af37] font-bold border-b-2 border-[#d4af37] pb-1">Portal de Alumnos</a>
+          </nav>
+          <a 
+            href="/portal" 
+            className="bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full font-bold text-xs sm:text-sm tracking-widest transition-all shadow-md hover:scale-105 active:scale-95 uppercase"
+          >
+            Acceder
+          </a>
+        </div>
       </header>
 
       {/* Hero Section (Netflix Style) */}

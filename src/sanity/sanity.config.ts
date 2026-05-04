@@ -26,6 +26,17 @@ export default defineConfig({
               ),
             S.divider(),
             S.listItem()
+              .title('Gestión de Alumnos')
+              .id('alumnos')
+              .schemaType('alumno')
+              .child(
+                S.documentList()
+                  .schemaType('alumno')
+                  .title('Alumnos')
+                  .filter('_type == "alumno"')
+              ),
+            S.divider(),
+            S.listItem()
               .title('Videos Destacados')
               .id('featured')
               .schemaType('video')

@@ -49,7 +49,7 @@ export default function Home() {
           <a href="#" className="hover:text-white transition-colors">Formaciones</a>
           <a href="#" className="text-white border-b-2 border-white pb-1 font-bold">Rueda Medicinal</a>
           <a href="#" className="hover:text-white transition-colors">Comunidad</a>
-          <a href="#" className="hover:text-white transition-colors">Blog</a>
+          <a href="/portal" className="text-[#d4af37] font-bold hover:text-white transition-colors">Portal de Alumnos</a>
         </nav>
         <a 
           href="/escuela" 
