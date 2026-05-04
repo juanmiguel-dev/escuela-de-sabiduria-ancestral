@@ -46,7 +46,7 @@ export default function Home() {
         {/* Enlaces de Navegación simulados */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
           <a href="#" className="hover:text-white transition-colors">Inicio</a>
-          <a href="#" className="hover:text-white transition-colors">Formaciones</a>
+          <a href="/formaciones" className="hover:text-white transition-colors">Formaciones</a>
           <a href="#" className="text-white border-b-2 border-white pb-1 font-bold">Rueda Medicinal</a>
           <a href="#" className="hover:text-white transition-colors">Comunidad</a>
           <a href="/portal" className="text-[#d4af37] font-bold hover:text-white transition-colors">Portal de Alumnos</a>
