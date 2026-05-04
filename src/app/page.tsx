@@ -43,12 +43,12 @@ export default function Home() {
           className="w-[160px] sm:w-[220px] h-auto object-contain"
           priority
         />
-        {/* Enlaces de Navegación simulados */}
+        {/* Enlaces de Navegación */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
           <a href="#" className="hover:text-white transition-colors">Inicio</a>
           <a href="/formaciones" className="hover:text-white transition-colors">Formaciones</a>
-          <a href="#" className="text-white border-b-2 border-white pb-1 font-bold">Rueda Medicinal</a>
-          <a href="#" className="hover:text-white transition-colors">Comunidad</a>
+          <a href="/sesiones" className="hover:text-white transition-colors">Agendar Sesión</a>
+          <a href="/contacto" className="hover:text-white transition-colors">Contacto</a>
           <a href="/portal" className="text-[#d4af37] font-bold hover:text-white transition-colors">Portal de Alumnos</a>
         </nav>
         <a 
