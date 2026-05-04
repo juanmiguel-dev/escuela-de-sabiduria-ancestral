@@ -91,10 +91,12 @@ export default function Home() {
           animate="visible"
           variants={fadeUpVariant}
         >
-          <span className="block text-xs sm:text-sm text-white/80 font-bold tracking-[0.3em] uppercase">
-            {landingData?.preTitle || "INICIACIÓN PROFUNDA"}
-          </span>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1] text-white drop-shadow-lg">
+          {landingData?.preTitle && (
+            <span className="block text-xs sm:text-sm text-white/80 font-bold tracking-[0.3em] uppercase mb-4">
+              {landingData.preTitle}
+            </span>
+          )}
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.2] text-white drop-shadow-lg max-w-[800px] mx-auto break-words">
             {landingData?.title || "La Rueda Medicinal"}
           </h1>
           <p className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto font-medium italic drop-shadow-md">
