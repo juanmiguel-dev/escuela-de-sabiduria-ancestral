@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Libre_Franklin } from "next/font/google";
+import { Cinzel } from "next/font/google";
 import "./globals.css";
 import { TechBackground } from "@/components/TechBackground";
 
-const libreFranklin = Libre_Franklin({
-  variable: "--font-libre-franklin",
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "Trans Advanced Technologies - 40 Años",
-  description: "Cuatro décadas resolviendo desafíos complejos en infraestructura, integración y conectividad avanzada.",
+  title: "ROMINA CASTAÑEDA",
+  description: "Plataforma de talleres y videos de Romina Castañeda.",
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${libreFranklin.variable} antialiased`}
+        className={`${cinzel.variable} antialiased`}
       >
         <TechBackground />
         <div className="scanlines" />

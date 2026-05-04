@@ -29,14 +29,14 @@ export default function AltPage() {
   return (
     <main className="min-h-screen selection:bg-[#0033a0] selection:text-white pb-24 overflow-x-hidden font-sans relative text-gray-900">
 
-      {/* Header / Top Navigation (Logo de Trans Advanced Technologies) */}
-      <header className="absolute top-0 left-0 w-full px-6 py-8 sm:px-12 sm:py-10 z-50">
+      {/* Header / Top Navigation (Logo de ROMINA CASTAÑEDA) */}
+      <header className="absolute top-0 left-0 w-full px-6 py-6 sm:px-12 z-50 bg-transparent flex items-center">
         <Image
-          src="/logo-full.svg"
-          alt="Trans Advanced Technologies"
-          width={280}
-          height={80}
-          className="h-10 sm:h-14 w-auto"
+          src="/logo.png"
+          alt="Romina Castañeda Logo"
+          width={220}
+          height={73}
+          className="w-[160px] sm:w-[220px] h-auto object-contain"
           priority
         />
       </header>
@@ -114,13 +114,10 @@ export default function AltPage() {
                 CONOCER MÁS
               </button>
               <a 
-                href="https://www.transadvanced.tech/contacto" 
-                target="_blank" 
-                rel="noopener noreferrer"
+                href="/dashboard" 
                 className="flex items-center gap-3 bg-white text-[#0033a0] px-10 py-4 rounded-full font-black hover:bg-gray-50 transition-all border-2 border-[#0033a0]/10 shadow-xl"
               >
-                MÁS INFO
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                <span>Acceder</span>
               </a>
             </div>
           </div>
@@ -262,14 +259,14 @@ export default function AltPage() {
       {/* Footer / Logo a pie de página */}
       <footer className="py-20 bg-[#f8f9fc] border-t border-gray-100 flex flex-col items-center justify-center">
         <Image
-          src="/logo-full.svg"
-          alt="Trans Advanced Technologies Footer"
-          width={280}
-          height={80}
-          className="h-12 sm:h-16 w-auto opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+          src="/logo.png"
+          alt="Romina Castañeda Footer Logo"
+          width={180}
+          height={60}
+          className="h-12 sm:h-14 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
         />
-        <p className="mt-8 text-sm text-gray-400 font-medium tracking-widest uppercase">
-          © {new Date().getFullYear()} Trans Advanced Technologies
+        <p className="mt-8 text-sm text-gray-400 font-medium tracking-widest">
+          © {new Date().getFullYear()} Romina Castañeda
         </p>
       </footer>
 

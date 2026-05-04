@@ -1,61 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, Variants, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
-import { ProjectsCarousel } from "@/components/ProjectsCarousel";
-import { ImageCarousel } from "@/components/ImageCarousel";
-import { TechBackground } from "@/components/TechBackground";
-import { TechHeroMobile } from "@/components/TechHeroMobile";
-import { VideoModal } from "@/components/VideoModal";
-import { GalleryModal } from "@/components/GalleryModal";
-import { getSections, getFeaturedProjects } from "@/sanity/lib/queries";
+import { getLandingData, getFormaciones } from "@/sanity/lib/queries";
 
 export default function Home() {
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const [selectedGallery, setSelectedGallery] = useState<{ title: string, images: { id: string | number; src: string; }[] } | null>(null);
-  const [sanitySections, setSanitySections] = useState<any[]>([]);
-  const [featuredProjects, setFeaturedProjects] = useState<any[]>([]);
+  const [landingData, setLandingData] = useState<any>(null);
+  const [formaciones, setFormaciones] = useState<any[]>([]);
 
-  // Estado para el proyecto activo en el Hero
-  const [activeProject, setActiveProject] = useState<{
-    title: string;
-    videoSrc?: string;
-    imageSrc?: string;
-    mobileImageSrc?: string;
-    year: string;
-    tags: string;
-    description: string;
-    sections?: string[];
-  } | null>(null);
-
-  // Cargar datos de Sanity
   useEffect(() => {
     async function loadData() {
       try {
-        const sections = await getSections();
-        if (sections && sections.length > 0) {
-          setSanitySections(sections);
-        }
-
-        const featured = await getFeaturedProjects();
-        if (featured && featured.length > 0) {
-          setFeaturedProjects(featured);
-          // Establecer el primer proyecto como activo por defecto
-          const p = featured[0];
-          setActiveProject({
-            title: p.title,
-            videoSrc: p.videoUrl || (p.mediaType === 'video' ? p.mediaUrl : undefined),
-            imageSrc: p.mediaUrl,
-            mobileImageSrc: p.mobileMediaUrl,
-            year: p.year,
-            tags: p.tags,
-            description: p.description || "",
-            sections: p.sections
-          });
-        }
+        const [landing, forms] = await Promise.all([
+          getLandingData(),
+          getFormaciones()
+        ]);
+        if (landing) setLandingData(landing);
+        if (forms) setFormaciones(forms);
       } catch (error) {
-        console.error("Error cargando datos de Sanity:", error);
+        console.error("Error loading Sanity data:", error);
       }
     }
     loadData();
@@ -67,233 +31,172 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen selection:bg-[#0033a0] selection:text-white pb-24 overflow-x-hidden font-sans relative text-gray-900">
+    <main className="min-h-screen selection:bg-[#333333] selection:text-white pb-24 overflow-x-hidden font-sans relative text-gray-900">
 
-      {/* Header / Top Navigation (Logo de Trans Advanced Technologies) */}
-      <header className="absolute top-0 left-0 w-full px-6 py-8 sm:px-12 sm:py-10 z-50 flex items-center justify-between">
+      {/* Header / Top Navigation */}
+      <header className="absolute top-0 left-0 w-full px-6 py-6 sm:px-12 z-50 flex items-center justify-between bg-transparent">
         <Image
-          src="/logo-full.svg"
-          alt="Trans Advanced Technologies"
-          width={280}
-          height={80}
-          className="h-10 sm:h-14 w-auto"
+          src="/logo.png"
+          alt="Romina Castañeda Logo"
+          width={220}
+          height={73}
+          className="w-[160px] sm:w-[220px] h-auto object-contain"
           priority
         />
+        {/* Enlaces de Navegación simulados */}
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
+          <a href="#" className="hover:text-white transition-colors">Inicio</a>
+          <a href="#" className="hover:text-white transition-colors">Formaciones</a>
+          <a href="#" className="text-white border-b-2 border-white pb-1 font-bold">Rueda Medicinal</a>
+          <a href="#" className="hover:text-white transition-colors">Comunidad</a>
+          <a href="#" className="hover:text-white transition-colors">Blog</a>
+        </nav>
         <a 
-          href="https://www.transadvanced.tech/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="bg-[#00b491] hover:bg-[#009a7b] text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full font-black text-xs sm:text-sm tracking-widest transition-all shadow-[0_8px_20px_rgba(0,180,145,0.3)] hover:scale-105 active:scale-95 uppercase"
+          href="/escuela" 
+          className="bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full font-bold text-xs sm:text-sm tracking-widest transition-all shadow-md hover:scale-105 active:scale-95"
         >
-          Contacto
+          Inscribirse
         </a>
       </header>
 
-      {/* Hero Section (Netflix Style) */}
-      <section className="relative h-[68vh] sm:h-[95vh] w-full flex items-center overflow-hidden">
-        {activeProject && (
-          <>
-            {/* Featured Background: Video on Desktop, Static Image on Mobile */}
-            <div className="absolute inset-0 z-0">
-              {/* Static Image for Mobile (Netflix Style) */}
-              {/* Subtle Tech Background for Mobile */}
-              <div className="block sm:hidden absolute inset-0 w-full h-full">
-                <TechHeroMobile />
-              </div>
-              
-              {/* Video for Desktop */}
-              <AnimatePresence mode="wait">
-                <motion.div 
-                  key={activeProject.videoSrc || activeProject.imageSrc}
-                  className="absolute inset-0 z-0"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 1 }}
-                >
-                  {activeProject.videoSrc ? (
-                    <video
-                      src={activeProject.videoSrc}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="hidden sm:block w-full h-full object-cover"
-                    />
-                  ) : (
-                    activeProject.imageSrc && (
-                      <div className="hidden sm:block relative w-full h-full">
-                        <Image
-                          src={activeProject.imageSrc}
-                          alt={activeProject.title}
-                          fill
-                          className="object-cover"
-                          priority
-                        />
-                      </div>
-                    )
-                  )}
-                  
-                  {/* Light Overlay Gradient for Readability */}
-                  {/* Desktop: Horizontal gradient */}
-                  <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-[#eeeeee] via-[#eeeeee]/60 to-transparent z-10" />
-                  
-                  <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-[#eeeeee] via-transparent to-transparent z-10" />
-                </motion.div>
-              </AnimatePresence>
-            </div>
+      {/* Hero Section */}
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        {/* Background Images with Ken Burns & Crossfade */}
+        <div className="absolute inset-0 z-0 bg-black">
+          <div className="absolute inset-0 animate-crossfade-1">
+            <Image
+              src={landingData?.backgroundImages?.[0] || "/inicio.JPG"}
+              alt="Inicio 1"
+              fill
+              className="object-cover opacity-60 animate-ken-burns"
+              priority
+            />
+          </div>
+          <div className="absolute inset-0 animate-crossfade-2">
+            <Image
+              src={landingData?.backgroundImages?.[1] || "/inicio-2.jpeg"}
+              alt="Inicio 2"
+              fill
+              className="object-cover opacity-60 animate-ken-burns"
+              priority
+            />
+          </div>
+          {/* Gradiente oscuro inferior para legibilidad */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
+        </div>
 
-            <motion.div
-              className="relative z-20 max-w-5xl px-6 sm:px-12 space-y-6 sm:space-y-8"
-              initial="hidden"
-              animate="visible"
-              variants={fadeUpVariant}
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeProject.title}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight leading-[1.1] flex flex-col items-start font-sans">
-                    <span className="text-[#0033a0] drop-shadow-sm">
-                      {activeProject.title.split(' ').slice(0, Math.ceil(activeProject.title.split(' ').length / 2)).join(' ')}
-                    </span>
-                    <span className="text-[#37e4af] drop-shadow-sm">
-                      {activeProject.title.split(' ').slice(Math.ceil(activeProject.title.split(' ').length / 2)).join(' ')}
-                    </span>
-                  </h1>
-
-                  {/* Meta Info Bar Unificada */}
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-base font-bold text-gray-700 mt-8">
-                    <span className="text-[#0033a0] font-black border-b-2 border-[#0033a0]">Caso destacado</span>
-                    <span className="font-black">{activeProject.year}</span>
-                    <span className="text-[#0033a0] text-xs font-medium bg-[#ff9900] px-3 py-1 rounded border border-white/30 shadow-lg animate-orange-glow uppercase tracking-wider">
-                      {activeProject.tags}
-                    </span>
-                  </div>
-
-                  <div className="space-y-6 mt-6">
-                    {/* Action Buttons */}
-                    <div className="flex flex-wrap items-center gap-4 pt-2">
-                      <button 
-                        onClick={() => setIsVideoModalOpen(true)}
-                        className="flex items-center gap-3 bg-[#0033a0] text-white px-10 py-4 rounded-full font-black hover:bg-[#002880] transition-all shadow-[0_10px_30px_rgba(0,51,160,0.3)] group cursor-pointer"
-                      >
-                        <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                        Ver caso
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </motion.div>
-          </>
-        )}
-      </section>
-
-      {/* Sección Carrusel: Casos Destacados - Overlap Effect */}
-      <section className="relative z-30 -mt-16 sm:-mt-24 pb-12 w-full overflow-hidden">
         <motion.div
+          className="relative z-20 max-w-4xl px-6 sm:px-12 text-center space-y-6 sm:space-y-8 mt-16"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          animate="visible"
           variants={fadeUpVariant}
         >
-          <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-            <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight">
-              Casos <span className="text-[#37e4af]">destacados</span>
-            </h2>
-            <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
+          <span className="block text-xs sm:text-sm text-white/80 font-bold tracking-[0.3em] uppercase">
+            {landingData?.preTitle || "INICIACIÓN PROFUNDA"}
+          </span>
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[1.1] text-white drop-shadow-lg">
+            {landingData?.title || "La Rueda Medicinal"}
+          </h1>
+          <p className="text-xl sm:text-2xl text-white/90 max-w-2xl mx-auto font-medium italic drop-shadow-md">
+            {landingData?.subtitle || "Un viaje a través de los cuatro cuadrantes del alma y la conexión con la Madre Tierra."}
+          </p>
+
+          <div className="pt-8 flex flex-wrap justify-center gap-4">
+            <a 
+              href={landingData?.primaryButtonLink || "/escuela"} 
+              className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-xl"
+            >
+              {landingData?.primaryButtonText || "Comenzar el camino"}
+            </a>
+            <a 
+              href={landingData?.secondaryButtonLink || "#"} 
+              className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-xl"
+            >
+              {landingData?.secondaryButtonText || "Ver programa"}
+            </a>
           </div>
-
-          <ProjectsCarousel 
-            projects={featuredProjects.length > 0 ? featuredProjects.map((p: any) => ({
-              id: p._id,
-              title: p.title,
-              videoSrc: p.videoUrl || (p.mediaType === 'video' ? p.mediaUrl : undefined),
-              imageSrc: p.mediaUrl,
-              mobileImageSrc: p.mobileMediaUrl,
-              year: p.year,
-              tags: p.tags,
-              sections: p.sections,
-              match: "99% de coincidencia"
-            })) : undefined}
-            onProjectClick={(p: any) => setActiveProject({
-             title: p.title,
-             videoSrc: p.videoSrc,
-             imageSrc: p.imageSrc,
-             mobileImageSrc: p.mobileImageSrc,
-             year: p.year,
-             tags: p.tags,
-             sections: p.sections,
-             description: p.description || ""
-           })} />
         </motion.div>
-       </section>
+      </section>
 
-      <VideoModal 
-        isOpen={isVideoModalOpen}
-        onClose={() => setIsVideoModalOpen(false)}
-        title={activeProject?.title || ""}
-        videoSrc={activeProject?.videoSrc || ""}
-      />
-
-      <GalleryModal 
-        isOpen={!!selectedGallery}
-        onClose={() => setSelectedGallery(null)}
-        title={selectedGallery?.title || ""}
-        images={selectedGallery?.images || []}
-      />
-
-      {/* Renderizado Dinámico de Secciones de Sanity */}
-      {sanitySections.map((sec) => (
-        <section key={sec._id} className="pb-24 relative w-full overflow-hidden">
+      {/* Sección de Formaciones */}
+      <section className="py-24 bg-[#fdfbf7] w-full">
+        <div className="max-w-6xl mx-auto px-6 sm:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             variants={fadeUpVariant}
+            className="text-center mb-16"
           >
-            <div className="max-w-5xl px-6 sm:px-12 mb-8 text-left">
-              <h2 className="text-3xl sm:text-4xl font-medium text-[#0033a0] tracking-tight leading-none">
-                {sec.title} <span className="text-[#37e4af]">{sec.highlightText}</span>
-              </h2>
-              <div className="w-24 h-1.5 bg-[#37e4af] mt-4" />
-            </div>
-            <ImageCarousel 
-              onGalleryClick={(img) => setSelectedGallery({ title: img.title || "", images: img.gallery || [] })}
-              images={sec.projects?.filter((p: any) => p.mediaUrl || p.videoUrl).map((p: any) => ({
-                id: p._id,
-                src: p.mediaType === 'video' ? (p.videoUrl || p.mediaUrl) : (p.mediaUrl || p.videoUrl),
-                title: p.title,
-                year: p.year,
-                tags: p.tags,
-                sections: p.sections,
-                pdfSrc: p.pdfUrl,
-                isGallery: p.isGallery,
-                gallery: p.gallery?.map((url: string, idx: number) => ({ id: idx, src: url })) || []
-              })) || []} 
-            />
+            <h2 className="text-4xl sm:text-5xl font-title text-[#333333] tracking-wide mb-4">
+              Nuestras Formaciones
+            </h2>
+            <div className="w-24 h-1 bg-[#5b2c1d] mx-auto opacity-50" />
           </motion.div>
-        </section>
-      ))}
 
-      {/* Footer / Logo a pie de página */}
-      <footer className="py-20 bg-[#f8f9fc] border-t border-gray-100 flex flex-col items-center justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {formaciones.map((formacion, idx) => (
+              <motion.a
+                key={formacion._id}
+                href={`/formaciones/${formacion.slug}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.5 }}
+                className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 flex flex-col h-full"
+              >
+                <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+                  {formacion.imageUrl && (
+                    <Image
+                      src={formacion.imageUrl}
+                      alt={formacion.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  )}
+                  {formacion.duration && (
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#5b2c1d] shadow-sm">
+                      {formacion.duration}
+                    </div>
+                  )}
+                </div>
+                <div className="p-6 flex-grow flex flex-col">
+                  <h3 className="text-xl font-bold text-[#333333] mb-3 leading-tight">
+                    {formacion.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-6 flex-grow line-clamp-3">
+                    {formacion.shortDescription}
+                  </p>
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                    <span className="font-bold text-[#5b2c1d]">
+                      {formacion.price || "Ver detalles"}
+                    </span>
+                    <span className="text-sm font-bold text-gray-400 group-hover:text-[#5b2c1d] transition-colors flex items-center gap-1">
+                      Info <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </span>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+          
+          {formaciones.length === 0 && (
+            <p className="text-center text-gray-500 py-12">No hay formaciones disponibles en este momento.</p>
+          )}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-20 bg-[#f8f9fc] border-t border-gray-100 flex flex-col items-center justify-center mt-24">
         <Image
-          src="/logo-full.svg"
-          alt="Trans Advanced Technologies Footer"
-          width={280}
-          height={80}
-          className="h-12 sm:h-16 w-auto opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+          src="/logo.png"
+          alt="Romina Castañeda Footer Logo"
+          width={180}
+          height={60}
+          className="h-12 sm:h-14 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
         />
         <p className="mt-8 text-sm text-gray-400 font-medium tracking-widest">
-          © {new Date().getFullYear()} Trans Advanced Technologies
+          © {new Date().getFullYear()} Romina Castañeda
         </p>
       </footer>
 

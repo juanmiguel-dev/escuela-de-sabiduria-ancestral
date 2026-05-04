@@ -36,8 +36,8 @@ export const TechBackground: React.FC = () => {
         this.length = Math.random() * maxLineLength + 50;
         this.angle = Math.random() * Math.PI * 2;
         this.opacity = Math.random() * 0.1 + 0.05;
-        this.color = 'rgba(0, 51, 160, '; // Dark Blue for lines
-        this.nodeColor = 'rgba(0, 51, 160, '; // Dark Blue for nodes
+        this.color = 'rgba(51, 51, 51, '; // Neutral color for lines
+        this.nodeColor = 'rgba(51, 51, 51, '; // Neutral color for nodes
       }
 
       update(width: number, height: number) {

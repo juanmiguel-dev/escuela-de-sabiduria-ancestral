@@ -7,17 +7,12 @@ interface ProjectCardProps {
   title: string;
   videoSrc?: string;
   imageSrc?: string;
-  year?: string;
-  tags?: string;
   sections?: string[];
-  match?: string;
   onClick?: () => void;
   onHover?: () => void;
 }
 
-export function ProjectCard({ title, videoSrc, imageSrc, year, tags, sections, match = "98% de coincidencia", onClick, onHover }: ProjectCardProps) {
-  const tagList = tags ? tags.split(' ').filter(t => t.startsWith('#')).map(t => t.replace('#', '')) : [];
-
+export function ProjectCard({ title, videoSrc, imageSrc, sections, onClick, onHover }: ProjectCardProps) {
   return (
     <motion.div
       onClick={onClick}
@@ -31,14 +26,6 @@ export function ProjectCard({ title, videoSrc, imageSrc, year, tags, sections, m
     >
       {/* Parte Superior: Media (Video/Imagen) */}
       <div className="relative w-full aspect-[4/3] overflow-hidden">
-        {/* Badge de Año */}
-        {year && (
-          <div className="absolute top-4 left-4 z-20">
-            <div className="bg-[#eee] text-[#0033a0] px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider border border-gray-200 shadow-sm">
-              {year}
-            </div>
-          </div>
-        )}
         {videoSrc?.endsWith('.mp4') ? (
           <video
             src={videoSrc}
@@ -69,34 +56,15 @@ export function ProjectCard({ title, videoSrc, imageSrc, year, tags, sections, m
         )}
         
         {/* Overlay Azul Gradiente sutil (siempre visible para estética) */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0033a0]/20 to-transparent pointer-events-none" />
-
-        {/* Badge de Año (Arriba Izquierda) */}
-        <div className="absolute top-4 left-4 z-20">
-          <div className="bg-gray-500/40 backdrop-blur-md px-3 py-1 rounded-lg border border-white/30">
-            <span className="text-white text-sm font-bold">{year}</span>
-          </div>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#333333]/20 to-transparent pointer-events-none" />
       </div>
 
       {/* Parte Inferior: Información Glassmorphism */}
       <div className="p-4 flex-grow flex flex-col justify-between">
         <div className="space-y-2">
-          <h3 className="text-[#1a2b4e] text-lg font-black leading-tight tracking-tight">
+          <h3 className="text-[#333333] text-lg font-black leading-tight tracking-tight">
             {title}
           </h3>
-          
-          {/* Tags */}
-        <div className="flex flex-wrap gap-2">
-          {tagList.map((tag, idx) => (
-            <span
-              key={idx}
-              className="bg-gray-100 text-[#0033a0] px-3 py-1 rounded-lg text-[10px] font-medium border border-gray-200 uppercase tracking-wider"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
         </div>
       </div>
     </motion.div>

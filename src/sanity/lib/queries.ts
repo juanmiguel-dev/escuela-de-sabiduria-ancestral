@@ -1,65 +1,84 @@
 import { client } from './client';
 
-export async function getProjects() {
-  return await client.fetch(`*[_type == "project"] {
+export async function getLandingData() {
+  return await client.fetch(`*[_type == "landing"][0] {
+    preTitle,
+    title,
+    subtitle,
+    primaryButtonText,
+    primaryButtonLink,
+    secondaryButtonText,
+    secondaryButtonLink,
+    "backgroundImages": backgroundImages[].asset->url
+  }`);
+}
+
+export async function getFormaciones() {
+  return await client.fetch(`*[_type == "formacion"] | order(_createdAt desc) {
     _id,
     title,
     "slug": slug.current,
-    year,
+    shortDescription,
+    duration,
+    price,
+    paymentLink,
+    "imageUrl": mainImage.asset->url
+  }`);
+}
+
+export async function getFormacionBySlug(slug: string) {
+  return await client.fetch(`*[_type == "formacion" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    shortDescription,
+    duration,
+    price,
+    paymentLink,
+    "imageUrl": mainImage.asset->url,
+    detailedDescription
+  }`, { slug });
+}
+
+export async function getProjects() {
+  return await client.fetch(`*[_type == "video"] {
+    _id,
+    title,
+    "slug": slug.current,
     description,
-    tags,
     "mediaUrl": mainMedia.asset->url,
-    "mobileMediaUrl": mobileHeroImage.asset->url,
     "videoUrl": videoFile.asset->url,
-    mediaType,
-    "pdfUrl": pdfFile.asset->url,
-    isGallery,
-    "gallery": gallery[].asset->url,
-    "sections": implementacionesDe[]->title,
+    "sections": talleres[]->title,
     isHeroFeatured
   }`);
 }
 
 export async function getFeaturedProjects() {
-  return await client.fetch(`*[_type == "project" && isHeroFeatured == true] | order(heroOrder asc, _createdAt desc) {
+  return await client.fetch(`*[_type == "video" && isHeroFeatured == true] | order(_createdAt desc) {
     _id,
     title,
     "slug": slug.current,
-    year,
     description,
-    tags,
     "mediaUrl": mainMedia.asset->url,
-    "mobileMediaUrl": mobileHeroImage.asset->url,
     "videoUrl": videoFile.asset->url,
-    mediaType,
-    "pdfUrl": pdfFile.asset->url,
-    isGallery,
-    "gallery": gallery[].asset->url,
-    "sections": implementacionesDe[]->title,
-    isHeroFeatured,
-    heroOrder
+    "sections": talleres[]->title,
+    isHeroFeatured
   }`);
 }
 
 export async function getSections() {
-  return await client.fetch(`*[_type == "section"] | order(order asc) {
+  return await client.fetch(`*[_type == "taller"] | order(order asc) {
     _id,
     title,
     highlightText,
-    "projects": *[_type == "project" && references(^._id)] {
+    "projects": *[_type == "video" && references(^._id)] {
       _id,
       title,
       "slug": slug.current,
-      year,
       description,
-      tags,
       "mediaUrl": mainMedia.asset->url,
       "videoUrl": videoFile.asset->url,
-      mediaType,
-      "pdfUrl": pdfFile.asset->url,
-      isGallery,
-      "gallery": gallery[].asset->url,
-      "sections": implementacionesDe[]->title
+      "sections": talleres[]->title
     }
   }`);
 }

@@ -12,10 +12,8 @@ interface Project {
     title: string;
     videoSrc?: string;
     imageSrc?: string;
-    year: string;
-    tags: string;
     sections?: string[];
-    match: string;
+    description?: string;
 }
 
 interface ProjectsCarouselProps {
@@ -69,10 +67,7 @@ export function ProjectsCarousel({ onProjectClick, projects: externalProjects }:
                                 title={p.title}
                                 videoSrc={p.videoSrc}
                                 imageSrc={p.imageSrc}
-                                year={p.year}
-                                tags={p.tags}
                                 sections={p.sections}
-                                match={p.match}
                                 onClick={() => {
                                     // Cambiar el Hero
                                     onProjectClick?.(p);

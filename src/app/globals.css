@@ -1,24 +1,34 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Brittany';
+  src: url('/fonts/brittany.woff2') format('woff2'),
+       url('/fonts/brittany.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: var(--font-libre-franklin), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: var(--font-cinzel), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-title: 'Brittany', cursive;
 }
 
 :root {
   --background: #eeeeee;
   --foreground: #111121;
   
-  /* TransAdvanced Branding */
-  --brand-blue: #0033a0;
-  --brand-teal: #00b491;
+  /* ROMINA CASTAÑEDA Branding (Neutral Palette) */
+  --brand-blue: #333333;
+  --brand-teal: #666666;
   --brand-dark: #111112;
-  --brand-accent: #008c8e;
+  --brand-accent: #999999;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-libre-franklin), sans-serif;
+  font-family: var(--font-cinzel), serif;
   overflow-x: hidden;
 }
 
@@ -37,6 +47,30 @@ body {
 /* Scanline and Noise effects are not suitable for light theme, so they are removed */
 .scanlines::before, .noise-bg::before {
   display: none;
+}
+
+@keyframes ken-burns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
+
+@keyframes crossfade {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-ken-burns {
+  animation: ken-burns 20s ease-out infinite alternate;
+}
+
+.animate-crossfade-1 {
+  animation: crossfade 16s infinite;
+}
+
+.animate-crossfade-2 {
+  animation: crossfade 16s infinite;
+  animation-delay: -8s;
 }
 
 @keyframes smooth-blink {

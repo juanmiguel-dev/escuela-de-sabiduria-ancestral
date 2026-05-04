@@ -5,9 +5,9 @@ import { schema } from './schemas';
 
 export default defineConfig({
   basePath: '/studio',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'bksr8znm',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  title: 'Trans Advanced Technologies CMS',
+  title: 'ROMINA CASTAÑEDA CMS',
   schema,
   plugins: [
     deskTool({
@@ -16,18 +16,29 @@ export default defineConfig({
           .title('Contenido')
           .items([
             S.listItem()
-              .title('Casos Destacados')
-              .id('featured')
-              .schemaType('project')
+              .title('Configuración de Inicio')
+              .id('landingConfig')
               .child(
-                S.documentList()
-                  .schemaType('project')
-                  .title('Casos Destacados')
-                  .filter('_type == "project" && isHeroFeatured == true')
-                  .defaultOrdering([{ field: 'heroOrder', direction: 'asc' }])
+                S.document()
+                  .schemaType('landing')
+                  .documentId('landingConfig')
+                  .title('Página de Inicio')
               ),
             S.divider(),
-            ...S.documentTypeListItems(),
+            S.listItem()
+              .title('Videos Destacados')
+              .id('featured')
+              .schemaType('video')
+              .child(
+                S.documentList()
+                  .schemaType('video')
+                  .title('Videos Destacados')
+                  .filter('_type == "video" && isHeroFeatured == true')
+              ),
+            S.divider(),
+            ...S.documentTypeListItems().filter(
+              (listItem) => !['landing'].includes(listItem.getId() as string)
+            ),
           ]),
     }),
     visionTool(),
