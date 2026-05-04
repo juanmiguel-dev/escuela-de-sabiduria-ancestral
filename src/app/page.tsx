@@ -103,23 +103,23 @@ export default function Home() {
 
           <div className="pt-8 flex flex-wrap justify-center gap-4">
             <a 
-              href={landingData?.primaryButtonLink || "/escuela"} 
-              className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-xl"
+              href={landingData?.primaryButtonLink || "#formaciones"} 
+              className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-xl text-sm sm:text-base uppercase tracking-wider"
             >
-              {landingData?.primaryButtonText || "Comenzar el camino"}
+              {landingData?.primaryButtonText || "EXPLORAR FORMACIONES"}
             </a>
             <a 
-              href={landingData?.secondaryButtonLink || "#"} 
-              className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-xl"
+              href={landingData?.secondaryButtonLink || "/sesiones"} 
+              className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-xl text-sm sm:text-base uppercase tracking-wider"
             >
-              {landingData?.secondaryButtonText || "Ver programa"}
+              {landingData?.secondaryButtonText || "RESERVAR UNA SESIÓN"}
             </a>
           </div>
         </motion.div>
       </section>
 
       {/* Sección de Formaciones */}
-      <section className="py-24 bg-[#fdfbf7] w-full">
+      <section id="formaciones" className="py-24 bg-[#fdfbf7] w-full scroll-mt-20">
         <div className="max-w-6xl mx-auto px-6 sm:px-12">
           <motion.div
             initial="hidden"

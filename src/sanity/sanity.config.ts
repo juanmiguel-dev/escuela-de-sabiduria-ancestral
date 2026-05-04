@@ -36,19 +36,8 @@ export default defineConfig({
                   .filter('_type == "alumno"')
               ),
             S.divider(),
-            S.listItem()
-              .title('Videos Destacados')
-              .id('featured')
-              .schemaType('video')
-              .child(
-                S.documentList()
-                  .schemaType('video')
-                  .title('Videos Destacados')
-                  .filter('_type == "video" && isHeroFeatured == true')
-              ),
-            S.divider(),
             ...S.documentTypeListItems().filter(
-              (listItem) => !['landing'].includes(listItem.getId() as string)
+              (listItem) => !['landing', 'video'].includes(listItem.getId() as string)
             ),
           ]),
     }),

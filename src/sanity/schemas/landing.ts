@@ -22,25 +22,25 @@ export const landing = {
       name: 'primaryButtonText',
       title: 'Texto Botón Principal',
       type: 'string',
-      initialValue: 'Comenzar el camino'
+      initialValue: 'EXPLORAR FORMACIONES'
     },
     {
       name: 'primaryButtonLink',
       title: 'Link Botón Principal',
       type: 'string',
-      initialValue: '/escuela'
+      initialValue: '#formaciones'
     },
     {
       name: 'secondaryButtonText',
       title: 'Texto Botón Secundario',
       type: 'string',
-      initialValue: 'Ver programa'
+      initialValue: 'RESERVAR UNA SESIÓN'
     },
     {
       name: 'secondaryButtonLink',
       title: 'Link Botón Secundario',
       type: 'string',
-      initialValue: '#'
+      initialValue: '/sesiones'
     },
     {
       name: 'backgroundImages',
