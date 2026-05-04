@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import NextLink from "next/link";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 export default async function FormacionPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -14,25 +16,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
 
   return (
     <main className="min-h-screen bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900 pb-24">
-      {/* Header Transparente con Logo */}
-      <header className="absolute top-0 left-0 w-full px-6 py-6 sm:px-12 z-50 flex items-center justify-between">
-        <NextLink href="/">
-          <Image
-            src="/logo.png"
-            alt="Romina Castañeda Logo"
-            width={220}
-            height={73}
-            className="w-[160px] sm:w-[220px] h-auto object-contain drop-shadow-md"
-            priority
-          />
-        </NextLink>
-        <NextLink 
-          href="/" 
-          className="text-sm font-bold text-white tracking-wider hover:text-gray-200 transition-colors drop-shadow-md uppercase"
-        >
-          Volver al Inicio
-        </NextLink>
-      </header>
+      <Navbar theme="dark" position="absolute" />
 
       {/* Hero Section de la Formación */}
       <section className="relative h-[60vh] sm:h-[70vh] w-full flex items-end pb-16 justify-center overflow-hidden bg-black">
@@ -108,16 +92,8 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 bg-white border-t border-gray-100 flex flex-col items-center justify-center">
-        <Image
-          src="/logo.png"
-          alt="Romina Castañeda Footer Logo"
-          width={140}
-          height={45}
-          className="h-10 w-auto object-contain opacity-40 grayscale"
-        />
-      </footer>
+      {/* Footer Unificado */}
+      <Footer />
     </main>
   );
 }

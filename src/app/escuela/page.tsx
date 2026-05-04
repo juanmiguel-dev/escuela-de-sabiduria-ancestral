@@ -10,6 +10,7 @@ import { TechHeroMobile } from "@/components/TechHeroMobile";
 import { VideoModal } from "@/components/VideoModal";
 import { GalleryModal } from "@/components/GalleryModal";
 import { getSections, getFeaturedProjects } from "@/sanity/lib/queries";
+import { Navbar } from "@/components/Navbar";
 
 export default function Escuela() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
@@ -63,31 +64,8 @@ export default function Escuela() {
   return (
     <main className="min-h-screen selection:bg-[#0033a0] selection:text-white pb-24 overflow-x-hidden font-sans relative text-gray-900">
 
-      {/* Header / Top Navigation (Logo de ROMINA CASTAÑEDA) */}
-      <header className="absolute top-0 left-0 w-full px-6 py-6 sm:px-12 z-50 flex items-center justify-between bg-transparent">
-        <Image
-          src="/logo.png"
-          alt="Romina Castañeda Logo"
-          width={220}
-          height={73}
-          className="w-[160px] sm:w-[220px] h-auto object-contain"
-          priority
-        />
-        <div className="flex items-center gap-6">
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
-            <a href="#" className="hover:text-white transition-colors">Mis Cursos</a>
-            <a href="#" className="hover:text-white transition-colors">Comunidad</a>
-            <a href="#" className="hover:text-white transition-colors">Soporte</a>
-            <a href="/portal" className="text-[#d4af37] font-bold border-b-2 border-[#d4af37] pb-1">Portal de Alumnos</a>
-          </nav>
-          <a 
-            href="/portal" 
-            className="bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full font-bold text-xs sm:text-sm tracking-widest transition-all shadow-md hover:scale-105 active:scale-95 uppercase"
-          >
-            Acceder
-          </a>
-        </div>
-      </header>
+      {/* Header Unificado */}
+      <Navbar theme="dark" position="absolute" />
 
       {/* Hero Section (Netflix Style) */}
       <section className="relative h-[68vh] sm:h-[95vh] w-full flex items-center overflow-hidden">

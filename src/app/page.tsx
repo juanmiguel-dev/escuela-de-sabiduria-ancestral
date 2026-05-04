@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { getLandingData, getFormaciones } from "@/sanity/lib/queries";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   const [landingData, setLandingData] = useState<any>(null);
@@ -33,31 +35,8 @@ export default function Home() {
   return (
     <main className="min-h-screen selection:bg-[#333333] selection:text-white pb-24 overflow-x-hidden font-sans relative text-gray-900">
 
-      {/* Header / Top Navigation */}
-      <header className="absolute top-0 left-0 w-full px-6 py-6 sm:px-12 z-50 flex items-center justify-between bg-transparent">
-        <Image
-          src="/logo.png"
-          alt="Romina Castañeda Logo"
-          width={220}
-          height={73}
-          className="w-[160px] sm:w-[220px] h-auto object-contain"
-          priority
-        />
-        {/* Enlaces de Navegación */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
-          <a href="#" className="hover:text-white transition-colors">Inicio</a>
-          <a href="/formaciones" className="hover:text-white transition-colors">Formaciones</a>
-          <a href="/sesiones" className="hover:text-white transition-colors">Agendar Sesión</a>
-          <a href="/contacto" className="hover:text-white transition-colors">Contacto</a>
-          <a href="/portal" className="text-[#d4af37] font-bold hover:text-white transition-colors">Portal de Alumnos</a>
-        </nav>
-        <a 
-          href="/escuela" 
-          className="bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full font-bold text-xs sm:text-sm tracking-widest transition-all shadow-md hover:scale-105 active:scale-95"
-        >
-          Inscribirse
-        </a>
-      </header>
+      {/* Header Unificado */}
+      <Navbar theme="dark" position="absolute" />
 
       {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
@@ -188,19 +167,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-20 bg-[#f8f9fc] border-t border-gray-100 flex flex-col items-center justify-center mt-24">
-        <Image
-          src="/logo.png"
-          alt="Romina Castañeda Footer Logo"
-          width={180}
-          height={60}
-          className="h-12 sm:h-14 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700"
-        />
-        <p className="mt-8 text-sm text-gray-400 font-medium tracking-widest">
-          © {new Date().getFullYear()} Romina Castañeda
-        </p>
-      </footer>
+      {/* Footer Unificado */}
+      <Footer />
 
     </main>
   );

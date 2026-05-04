@@ -1,31 +1,15 @@
 import Image from "next/image";
 import NextLink from "next/link";
 import { getFormaciones } from "@/sanity/lib/queries";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 export default async function FormacionesPage() {
   const formaciones = await getFormaciones();
 
   return (
     <main className="min-h-screen bg-[#fdfbf7] font-sans selection:bg-[#5b2c1d] selection:text-white">
-      {/* Header */}
-      <header className="absolute top-0 left-0 w-full px-6 py-6 sm:px-12 z-50 flex items-center justify-between bg-transparent">
-        <NextLink href="/">
-          <Image
-            src="/logo.png"
-            alt="Romina Castañeda Logo"
-            width={220}
-            height={73}
-            className="w-[160px] sm:w-[220px] h-auto object-contain drop-shadow-sm"
-            priority
-          />
-        </NextLink>
-        <NextLink 
-          href="/" 
-          className="text-sm font-bold text-white tracking-wider hover:text-gray-200 transition-colors drop-shadow-md uppercase"
-        >
-          Volver al Inicio
-        </NextLink>
-      </header>
+      <Navbar theme="dark" position="absolute" />
 
       {/* Hero Header para Formaciones */}
       <section className="relative h-[45vh] w-full flex items-center justify-center overflow-hidden bg-black">
@@ -100,16 +84,8 @@ export default async function FormacionesPage() {
         )}
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 bg-white border-t border-gray-100 flex flex-col items-center justify-center mt-auto">
-        <Image
-          src="/logo.png"
-          alt="Romina Castañeda Footer Logo"
-          width={140}
-          height={45}
-          className="h-10 w-auto object-contain opacity-40 grayscale"
-        />
-      </footer>
+      {/* Footer Unificado */}
+      <Footer />
     </main>
   );
 }

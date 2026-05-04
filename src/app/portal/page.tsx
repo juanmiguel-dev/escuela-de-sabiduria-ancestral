@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
 import { motion } from "framer-motion";
+import { Navbar } from "@/components/Navbar";
 
 export default function PortalAlumnos() {
   const [email, setEmail] = useState("");
@@ -16,7 +17,12 @@ export default function PortalAlumnos() {
   };
 
   return (
-    <main className="min-h-screen bg-[#fdfbf7] flex flex-col md:flex-row font-sans">
+    <main className="min-h-screen bg-[#fdfbf7] flex flex-col md:flex-row font-sans relative">
+      {/* Navbar superpuesta */}
+      <div className="absolute top-0 left-0 w-full z-50">
+        <Navbar theme="dark" position="absolute" />
+      </div>
+
       {/* Mitad Izquierda - Imagen / Branding */}
       <div className="w-full md:w-1/2 h-[40vh] md:h-screen relative overflow-hidden bg-black">
         <Image
@@ -47,12 +53,6 @@ export default function PortalAlumnos() {
 
       {/* Mitad Derecha - Formulario de Login */}
       <div className="w-full md:w-1/2 h-[60vh] md:h-screen flex items-center justify-center p-8 sm:p-16 relative">
-        <div className="absolute top-8 right-8">
-          <NextLink href="/" className="text-sm font-bold text-gray-400 hover:text-[#5b2c1d] transition-colors">
-            Volver al inicio
-          </NextLink>
-        </div>
-
         <motion.div 
           className="w-full max-w-md"
           initial={{ opacity: 0, x: 20 }}

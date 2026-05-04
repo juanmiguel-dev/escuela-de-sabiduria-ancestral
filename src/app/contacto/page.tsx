@@ -4,6 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
 import { motion } from "framer-motion";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 export default function ContactoPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,32 +24,7 @@ export default function ContactoPage() {
 
   return (
     <main className="min-h-screen bg-[#f5f5f7] font-sans selection:bg-[#5b2c1d] selection:text-white flex flex-col">
-      {/* Header Minimalista (Fondo blanco puro, estilo Apple) */}
-      <header className="w-full px-6 py-4 sm:px-12 z-50 flex items-center justify-between bg-white/80 backdrop-blur-md sticky top-0 border-b border-gray-200/50">
-        <NextLink href="/">
-          <Image
-            src="/logo.png"
-            alt="Romina Castañeda Logo"
-            width={160}
-            height={53}
-            className="w-[120px] sm:w-[160px] h-auto object-contain filter invert"
-            priority
-          />
-        </NextLink>
-        <div className="flex items-center gap-6">
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-800">
-            <NextLink href="/" className="hover:text-[#5b2c1d] transition-colors">Inicio</NextLink>
-            <NextLink href="/formaciones" className="hover:text-[#5b2c1d] transition-colors">Formaciones</NextLink>
-            <NextLink href="/sesiones" className="hover:text-[#5b2c1d] transition-colors">Agendar Sesión</NextLink>
-          </nav>
-          <NextLink 
-            href="/portal" 
-            className="text-xs font-bold text-[#5b2c1d] tracking-wider hover:opacity-70 transition-opacity uppercase"
-          >
-            Portal
-          </NextLink>
-        </div>
-      </header>
+      <Navbar theme="light" position="sticky" />
 
       {/* Contenido Principal */}
       <div className="flex-grow flex items-center justify-center px-6 py-24 sm:py-32">
@@ -176,10 +153,8 @@ export default function ContactoPage() {
         </div>
       </div>
       
-      {/* Footer Minimalista */}
-      <footer className="py-8 bg-white border-t border-gray-200/50 flex items-center justify-center">
-        <p className="text-xs text-[#86868b] font-medium">© {new Date().getFullYear()} Romina Castañeda. Todos los derechos reservados.</p>
-      </footer>
+      {/* Footer Unificado */}
+      <Footer />
     </main>
   );
 }
