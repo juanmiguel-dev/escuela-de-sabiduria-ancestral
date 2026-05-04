@@ -4,8 +4,9 @@ import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import NextLink from "next/link";
 
-export default async function FormacionPage({ params }: { params: { slug: string } }) {
-  const formacion = await getFormacionBySlug(params.slug);
+export default async function FormacionPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const formacion = await getFormacionBySlug(slug);
 
   if (!formacion) {
     notFound();
