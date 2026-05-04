@@ -94,10 +94,10 @@ export default function Home() {
           <span className="block text-xs sm:text-sm text-white/80 font-bold tracking-[0.3em] uppercase">
             {landingData?.preTitle || "INICIACIÓN PROFUNDA"}
           </span>
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[1.1] text-white drop-shadow-lg">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1] text-white drop-shadow-lg">
             {landingData?.title || "La Rueda Medicinal"}
           </h1>
-          <p className="text-xl sm:text-2xl text-white/90 max-w-2xl mx-auto font-medium italic drop-shadow-md">
+          <p className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto font-medium italic drop-shadow-md">
             {landingData?.subtitle || "Un viaje a través de los cuatro cuadrantes del alma y la conexión con la Madre Tierra."}
           </p>
 

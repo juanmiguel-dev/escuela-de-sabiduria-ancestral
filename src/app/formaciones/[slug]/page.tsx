@@ -52,10 +52,10 @@ export default async function FormacionPage({ params }: { params: { slug: string
               DURACIÓN: {formacion.duration}
             </span>
           )}
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white drop-shadow-lg mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white drop-shadow-lg mb-4 sm:mb-6">
             {formacion.title}
           </h1>
-          <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto font-medium">
+          <p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto font-medium">
             {formacion.shortDescription}
           </p>
         </div>

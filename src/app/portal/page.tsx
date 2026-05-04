@@ -34,11 +34,11 @@ export default function PortalAlumnos() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight drop-shadow-lg mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight drop-shadow-lg mb-4">
               Tu viaje <br />
               <span className="text-[#d4af37] italic font-medium">interior</span>
             </h1>
-            <p className="text-white/80 text-lg max-w-md">
+            <p className="text-white/80 text-base sm:text-lg max-w-md">
               Bienvenido de nuevo al Portal de Alumnos. Accede a tus formaciones y continúa tu camino de aprendizaje.
             </p>
           </motion.div>
