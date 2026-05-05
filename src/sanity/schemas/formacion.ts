@@ -1,65 +1,48 @@
-export const formacion = {
+import { defineType, defineField } from 'sanity';
+
+export const formacion = defineType({
   name: 'formacion',
-  title: 'Formación',
+  title: 'Formación (Memoria del Clan)',
   type: 'document',
   fields: [
-    {
+    defineField({
       name: 'title',
-      title: 'Título de la Formación',
+      title: 'Título Principal',
       type: 'string',
-      validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: 'slug',
-      title: 'Slug (URL)',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
-      validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: 'shortDescription',
-      title: 'Descripción Corta (Para la tarjeta en el Inicio)',
-      type: 'text',
-      validation: (Rule: any) => Rule.max(200),
-    },
-    {
-      name: 'mainImage',
-      title: 'Imagen de Portada',
+      initialValue: 'Memoria del Clan™',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'subtitle',
+      title: 'Subtítulo',
+      type: 'string',
+      initialValue: 'Formación Profesional e Iniciática de 9 meses',
+    }),
+    defineField({
+      name: 'heroImage',
+      title: 'Hero Image (Tambor o Sahumo)',
       type: 'image',
       options: {
         hotspot: true,
       },
-    },
-    {
-      name: 'duration',
-      title: 'Duración (ej: 4 Semanas, 3 Meses)',
-      type: 'string',
-    },
-    {
-      name: 'price',
-      title: 'Precio (ej: $150 USD)',
-      type: 'string',
-    },
-    {
-      name: 'paymentLink',
-      title: 'Link de Pago / Reserva',
-      type: 'url',
-    },
-    {
-      name: 'detailedDescription',
-      title: 'Descripción Detallada (Landing de la Formación)',
+    }),
+    defineField({
+      name: 'intro',
+      title: 'Intro (¿Sientes que cargas con silencios...?)',
       type: 'array',
       of: [{ type: 'block' }],
-    },
+    }),
+    defineField({
+      name: 'cuerpoPorQue',
+      title: 'Cuerpo: ¿Por qué elegir este camino?',
+      type: 'array',
+      of: [{ type: 'block' }],
+    }),
+    defineField({
+      name: 'cuerpoDirigidoA',
+      title: 'Cuerpo: ¿A quiénes está dirigida?',
+      type: 'array',
+      of: [{ type: 'block' }],
+    }),
   ],
-  preview: {
-    select: {
-      title: 'title',
-      media: 'mainImage',
-      subtitle: 'price'
-    },
-  },
-};
+});

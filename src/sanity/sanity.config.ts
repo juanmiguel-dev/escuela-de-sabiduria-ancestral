@@ -16,6 +16,16 @@ export default defineConfig({
           .title('Contenido')
           .items([
             S.listItem()
+              .title('Formación: Memoria del Clan')
+              .id('formacionConfig')
+              .child(
+                S.document()
+                  .schemaType('formacion')
+                  .documentId('formacionConfig')
+                  .title('Formación: Memoria del Clan')
+              ),
+            S.divider(),
+            S.listItem()
               .title('Configuración de Inicio')
               .id('landingConfig')
               .child(
@@ -37,7 +47,7 @@ export default defineConfig({
               ),
             S.divider(),
             ...S.documentTypeListItems().filter(
-              (listItem) => !['landing', 'video'].includes(listItem.getId() as string)
+              (listItem) => !['landing', 'video', 'formacion'].includes(listItem.getId() as string)
             ),
           ]),
     }),
