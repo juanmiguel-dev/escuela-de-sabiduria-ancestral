@@ -77,13 +77,14 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
               </div>
             )}
 
-            {/* Fallback a Detailed Description antigua si existe y no hay campos nuevos */}
-            {!formacion.intro && !formacion.cuerpoPorQue && !formacion.cuerpoDirigidoA && formacion.detailedDescription && (
-              <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed">
+            {/* Descripción Detallada General (Si existe) */}
+            {formacion.detailedDescription && (
+              <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
                 <PortableText value={formacion.detailedDescription} />
               </div>
             )}
 
+            {/* Mensaje por defecto si todo está vacío */}
             {!formacion.intro && !formacion.cuerpoPorQue && !formacion.cuerpoDirigidoA && !formacion.detailedDescription && (
                <p className="text-gray-500 italic">No hay detalles adicionales disponibles para esta formación.</p>
             )}
