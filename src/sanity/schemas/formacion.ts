@@ -2,7 +2,7 @@ import { defineType, defineField } from 'sanity';
 
 export const formacion = defineType({
   name: 'formacion',
-  title: 'Formación (Memoria del Clan)',
+  title: 'Formación',
   type: 'document',
   fields: [
     defineField({

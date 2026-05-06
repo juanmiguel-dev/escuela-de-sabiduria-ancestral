@@ -16,13 +16,14 @@ export default defineConfig({
           .title('Contenido')
           .items([
             S.listItem()
-              .title('Formación: Memoria del Clan')
-              .id('formacionConfig')
+              .title('Formaciones')
+              .id('formaciones')
+              .schemaType('formacion')
               .child(
-                S.document()
+                S.documentList()
                   .schemaType('formacion')
-                  .documentId('formacionConfig')
-                  .title('Formación: Memoria del Clan')
+                  .title('Formaciones')
+                  .filter('_type == "formacion"')
               ),
             S.divider(),
             S.listItem()
