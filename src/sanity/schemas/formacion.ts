@@ -13,18 +13,57 @@ export const formacion = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'slug',
+      title: 'Slug (URL)',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'subtitle',
       title: 'Subtítulo',
       type: 'string',
       initialValue: 'Formación Profesional e Iniciática de 9 meses',
     }),
     defineField({
-      name: 'heroImage',
-      title: 'Hero Image (Tambor o Sahumo)',
+      name: 'shortDescription',
+      title: 'Descripción Corta (Para la tarjeta en el Inicio)',
+      type: 'text',
+      validation: (Rule) => Rule.max(200),
+    }),
+    defineField({
+      name: 'mainImage',
+      title: 'Imagen de Portada Principal',
       type: 'image',
       options: {
         hotspot: true,
       },
+    }),
+    defineField({
+      name: 'heroImage',
+      title: 'Hero Image (Tambor o Sahumo - Opcional)',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'duration',
+      title: 'Duración (ej: 4 Semanas, 9 Meses)',
+      type: 'string',
+    }),
+    defineField({
+      name: 'price',
+      title: 'Precio (ej: $150 USD o 788)',
+      type: 'string',
+    }),
+    defineField({
+      name: 'paymentLink',
+      title: 'Link de Pago / Reserva',
+      type: 'url',
     }),
     defineField({
       name: 'intro',
@@ -44,5 +83,18 @@ export const formacion = defineType({
       type: 'array',
       of: [{ type: 'block' }],
     }),
+    defineField({
+      name: 'detailedDescription',
+      title: 'Descripción Detallada (Genérica)',
+      type: 'array',
+      of: [{ type: 'block' }],
+    }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      media: 'mainImage',
+      subtitle: 'price'
+    },
+  },
 });
