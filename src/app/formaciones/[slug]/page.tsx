@@ -48,12 +48,12 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* Contenido Detallado - Diseño de 1 Columna Elegante */}
-      <section className="max-w-3xl mx-auto px-6 sm:px-12 py-16 sm:py-24 space-y-20">
+      {/* Contenido Detallado - Diseño Elegante y Más Amplio */}
+      <section className="max-w-5xl mx-auto px-6 sm:px-12 py-16 sm:py-24 space-y-24">
         
         {/* Intro */}
         {formacion.intro && (
-          <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-[#333333] leading-[1.8] text-center mx-auto text-xl font-light">
+          <div className="prose prose-xl prose-gray [font-family:system-ui,-apple-system,sans-serif] text-[#333333] leading-[1.8] text-center mx-auto font-light max-w-4xl">
             <PortableText value={formacion.intro} />
           </div>
         )}
@@ -61,18 +61,18 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
         {/* Separador Elegante */}
         {(formacion.intro && (formacion.cuerpoPorQue || formacion.cuerpoDirigidoA || formacion.detailedDescription)) && (
           <div className="flex justify-center">
-            <div className="w-16 h-[1px] bg-[#d4af37]/40"></div>
+            <div className="w-24 h-[1px] bg-[#d4af37]/40"></div>
           </div>
         )}
 
         {/* ¿Por qué elegir este camino? */}
         {formacion.cuerpoPorQue && (
-          <div className="relative bg-white p-10 sm:p-16 rounded-[2.5rem] shadow-[0_20px_40px_rgba(0,0,0,0.03)] border border-[#f0eee9]">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#fdfbf7] px-6">
-              <span className="text-xs font-bold tracking-[0.2em] text-[#d4af37] uppercase">El Propósito</span>
+          <div className="relative bg-white p-12 sm:p-20 md:p-24 rounded-[3rem] shadow-[0_20px_40px_rgba(0,0,0,0.03)] border border-[#f0eee9]">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#fdfbf7] px-8">
+              <span className="text-sm font-bold tracking-[0.2em] text-[#d4af37] uppercase">El Propósito</span>
             </div>
-            <h2 className="font-title text-4xl sm:text-5xl text-center text-[#5b2c1d] mb-10 mt-4">¿Por qué elegir este camino?</h2>
-            <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-600 leading-relaxed mx-auto">
+            <h2 className="font-title text-4xl sm:text-5xl md:text-6xl text-center text-[#5b2c1d] mb-12 mt-4">¿Por qué elegir este camino?</h2>
+            <div className="prose prose-lg sm:prose-xl prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-600 leading-relaxed mx-auto max-w-4xl">
               <PortableText value={formacion.cuerpoPorQue} />
             </div>
           </div>
@@ -80,12 +80,12 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
 
         {/* ¿A quiénes está dirigida? */}
         {formacion.cuerpoDirigidoA && (
-          <div className="relative bg-[#5b2c1d] text-white p-10 sm:p-16 rounded-[2.5rem] shadow-2xl overflow-hidden">
+          <div className="relative bg-[#5b2c1d] text-white p-12 sm:p-20 md:p-24 rounded-[3rem] shadow-2xl overflow-hidden">
             {/* Elemento decorativo de fondo */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
             
-            <h2 className="font-title text-4xl sm:text-5xl text-center text-[#fdfbf7] mb-10 relative z-10">¿A quiénes está dirigida?</h2>
-            <div className="prose prose-lg prose-invert [font-family:system-ui,-apple-system,sans-serif] text-white/90 leading-relaxed mx-auto relative z-10">
+            <h2 className="font-title text-4xl sm:text-5xl md:text-6xl text-center text-[#fdfbf7] mb-12 relative z-10">¿A quiénes está dirigida?</h2>
+            <div className="prose prose-lg sm:prose-xl prose-invert [font-family:system-ui,-apple-system,sans-serif] text-white/90 leading-relaxed mx-auto max-w-4xl relative z-10">
               <PortableText value={formacion.cuerpoDirigidoA} />
             </div>
           </div>
@@ -93,7 +93,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
 
         {/* Descripción Detallada General (Si existe) */}
         {formacion.detailedDescription && (
-          <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed mx-auto">
+          <div className="prose prose-lg sm:prose-xl prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed mx-auto max-w-4xl bg-white p-12 sm:p-20 rounded-[3rem] shadow-[0_20px_40px_rgba(0,0,0,0.02)] border border-[#f0eee9]">
             <PortableText value={formacion.detailedDescription} />
           </div>
         )}
