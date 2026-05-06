@@ -48,79 +48,89 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* Contenido Detallado */}
-      <section className="max-w-5xl mx-auto px-6 sm:px-12 py-16 sm:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-          
-          {/* Columna Principal (Descripción) */}
-          <div className="lg:col-span-2 space-y-12">
-            {/* Intro */}
-            {formacion.intro && (
-              <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed">
-                <PortableText value={formacion.intro} />
-              </div>
-            )}
-
-            {/* ¿Por qué elegir este camino? */}
-            {formacion.cuerpoPorQue && (
-              <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-                <h2 className="font-title text-3xl text-[#5b2c1d] mb-6">¿Por qué elegir este camino?</h2>
-                <PortableText value={formacion.cuerpoPorQue} />
-              </div>
-            )}
-
-            {/* ¿A quiénes está dirigida? */}
-            {formacion.cuerpoDirigidoA && (
-              <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed bg-[#5b2c1d]/5 p-8 rounded-3xl border border-[#5b2c1d]/10">
-                <h2 className="font-title text-3xl text-[#5b2c1d] mb-6">¿A quiénes está dirigida?</h2>
-                <PortableText value={formacion.cuerpoDirigidoA} />
-              </div>
-            )}
-
-            {/* Descripción Detallada General (Si existe) */}
-            {formacion.detailedDescription && (
-              <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-                <PortableText value={formacion.detailedDescription} />
-              </div>
-            )}
-
-            {/* Mensaje por defecto si todo está vacío */}
-            {!formacion.intro && !formacion.cuerpoPorQue && !formacion.cuerpoDirigidoA && !formacion.detailedDescription && (
-               <p className="text-gray-500 italic">No hay detalles adicionales disponibles para esta formación.</p>
-            )}
+      {/* Contenido Detallado - Diseño de 1 Columna Elegante */}
+      <section className="max-w-3xl mx-auto px-6 sm:px-12 py-16 sm:py-24 space-y-20">
+        
+        {/* Intro */}
+        {formacion.intro && (
+          <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-[#333333] leading-[1.8] text-center mx-auto text-xl font-light">
+            <PortableText value={formacion.intro} />
           </div>
+        )}
 
-          {/* Columna Lateral (Reserva y Precio) */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 bg-white p-8 rounded-2xl shadow-xl border border-gray-100 text-center">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Reserva tu lugar</h3>
-              <p className="text-gray-500 text-sm mb-6">Asegura tu participación en este programa transformador.</p>
-              
-              <div className="text-3xl font-black text-[#5b2c1d] mb-8">
-                {formacion.price || "Consultar"}
-              </div>
+        {/* Separador Elegante */}
+        {(formacion.intro && (formacion.cuerpoPorQue || formacion.cuerpoDirigidoA || formacion.detailedDescription)) && (
+          <div className="flex justify-center">
+            <div className="w-16 h-[1px] bg-[#d4af37]/40"></div>
+          </div>
+        )}
 
-              {formacion.paymentLink ? (
-                <a 
-                  href={formacion.paymentLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full bg-[#5b2c1d] hover:bg-[#4a2317] text-white py-4 rounded-xl font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-1"
-                >
-                  Inscribirse Ahora
-                </a>
-              ) : (
-                <button 
-                  disabled
-                  className="block w-full bg-gray-200 text-gray-500 py-4 rounded-xl font-bold cursor-not-allowed"
-                >
-                  Inscripciones Cerradas
-                </button>
-              )}
+        {/* ¿Por qué elegir este camino? */}
+        {formacion.cuerpoPorQue && (
+          <div className="relative bg-white p-10 sm:p-16 rounded-[2.5rem] shadow-[0_20px_40px_rgba(0,0,0,0.03)] border border-[#f0eee9]">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#fdfbf7] px-6">
+              <span className="text-xs font-bold tracking-[0.2em] text-[#d4af37] uppercase">El Propósito</span>
+            </div>
+            <h2 className="font-title text-4xl sm:text-5xl text-center text-[#5b2c1d] mb-10 mt-4">¿Por qué elegir este camino?</h2>
+            <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-600 leading-relaxed mx-auto">
+              <PortableText value={formacion.cuerpoPorQue} />
             </div>
           </div>
+        )}
 
+        {/* ¿A quiénes está dirigida? */}
+        {formacion.cuerpoDirigidoA && (
+          <div className="relative bg-[#5b2c1d] text-white p-10 sm:p-16 rounded-[2.5rem] shadow-2xl overflow-hidden">
+            {/* Elemento decorativo de fondo */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            
+            <h2 className="font-title text-4xl sm:text-5xl text-center text-[#fdfbf7] mb-10 relative z-10">¿A quiénes está dirigida?</h2>
+            <div className="prose prose-lg prose-invert [font-family:system-ui,-apple-system,sans-serif] text-white/90 leading-relaxed mx-auto relative z-10">
+              <PortableText value={formacion.cuerpoDirigidoA} />
+            </div>
+          </div>
+        )}
+
+        {/* Descripción Detallada General (Si existe) */}
+        {formacion.detailedDescription && (
+          <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed mx-auto">
+            <PortableText value={formacion.detailedDescription} />
+          </div>
+        )}
+
+        {/* Mensaje por defecto si todo está vacío */}
+        {!formacion.intro && !formacion.cuerpoPorQue && !formacion.cuerpoDirigidoA && !formacion.detailedDescription && (
+           <p className="text-gray-500 italic text-center">No hay detalles adicionales disponibles para esta formación.</p>
+        )}
+
+        {/* Tarjeta de Reserva Final */}
+        <div className="mt-24 pt-16 border-t border-[#f0eee9] flex flex-col items-center text-center">
+          <span className="text-sm font-bold tracking-[0.2em] text-[#a09e9a] uppercase mb-4">Asegura tu lugar</span>
+          <h3 className="font-title text-4xl sm:text-5xl text-[#333333] mb-6">Comienza tu viaje hoy</h3>
+          
+          <div className="text-5xl font-black text-[#5b2c1d] mb-10 tracking-tight">
+            {formacion.price || "Consultar"}
+          </div>
+
+          {formacion.paymentLink ? (
+            <a 
+              href={formacion.paymentLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-12 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(91,44,29,0.2)] hover:shadow-[0_15px_30px_rgba(91,44,29,0.3)] hover:-translate-y-1 text-sm uppercase tracking-widest"
+            >
+              Inscribirse Ahora
+            </a>
+          ) : (
+            <button 
+              disabled
+              className="inline-flex items-center justify-center bg-gray-200 text-gray-500 px-12 py-5 rounded-full font-medium cursor-not-allowed text-sm uppercase tracking-widest"
+            >
+              Inscripciones Cerradas
+            </button>
+          )}
         </div>
+
       </section>
 
       {/* Footer Unificado */}
