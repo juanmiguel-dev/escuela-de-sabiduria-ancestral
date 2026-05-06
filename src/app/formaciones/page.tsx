@@ -4,6 +4,8 @@ import { getFormaciones } from "@/sanity/lib/queries";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
+export const revalidate = 0;
+
 export default async function FormacionesPage() {
   const formaciones = await getFormaciones();
 

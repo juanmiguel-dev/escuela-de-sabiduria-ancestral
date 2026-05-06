@@ -6,6 +6,8 @@ import NextLink from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
+export const revalidate = 0; // Desactiva la caché de Next.js para esta ruta dinámica
+
 export default async function FormacionPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const formacion = await getFormacionBySlug(slug);
