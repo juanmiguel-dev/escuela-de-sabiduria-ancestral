@@ -7,8 +7,6 @@ import { getLandingData, getFormaciones } from "@/sanity/lib/queries";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
-export const revalidate = 0;
-
 export default function Home() {
   const [landingData, setLandingData] = useState<any>(null);
   const [formaciones, setFormaciones] = useState<any[]>([]);
