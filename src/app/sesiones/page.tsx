@@ -52,10 +52,10 @@ export default function SesionesPage() {
         </motion.div>
       </section>
 
-      {/* Contenedor del Formulario */}
+          {/* Contenedor del Formulario */}
       <section className="relative z-30 max-w-3xl mx-auto px-6 pb-24 -mt-16 sm:-mt-24">
         <motion.div 
-          className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
+          className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#f0eee9] overflow-hidden"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -64,53 +64,53 @@ export default function SesionesPage() {
             {!isSuccess ? (
               <>
                 <div className="text-center mb-10">
-                  <p className="text-gray-600 text-lg">
+                  <p className="text-[#86868b] text-base leading-relaxed max-w-xl mx-auto">
                     Completa el siguiente formulario para solicitar un espacio. Me pondré en contacto contigo a la brevedad para confirmar la disponibilidad.
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-8">
+                <form onSubmit={handleSubmit} className="space-y-8 [font-family:system-ui,-apple-system,sans-serif]">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Nombre */}
-                    <div className="space-y-2">
-                      <label className="block text-sm font-bold text-gray-700">Nombre Completo</label>
+                    <div className="space-y-2 group">
+                      <label className="block text-[10px] font-bold text-[#a09e9a] uppercase tracking-widest transition-colors group-focus-within:text-[#5b2c1d]">Nombre Completo</label>
                       <input 
                         type="text" 
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50"
+                        className="w-full px-0 py-3 bg-transparent border-b-2 border-[#f0eee9] focus:border-[#5b2c1d] outline-none transition-all text-[#333333] font-medium text-base placeholder:text-[#d4d4d4]"
                         placeholder="Ej. Ana García"
                       />
                     </div>
 
                     {/* Email */}
-                    <div className="space-y-2">
-                      <label className="block text-sm font-bold text-gray-700">Correo Electrónico</label>
+                    <div className="space-y-2 group">
+                      <label className="block text-[10px] font-bold text-[#a09e9a] uppercase tracking-widest transition-colors group-focus-within:text-[#5b2c1d]">Correo Electrónico</label>
                       <input 
                         type="email" 
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50"
+                        className="w-full px-0 py-3 bg-transparent border-b-2 border-[#f0eee9] focus:border-[#5b2c1d] outline-none transition-all text-[#333333] font-medium text-base placeholder:text-[#d4d4d4]"
                         placeholder="tu@correo.com"
                       />
                     </div>
 
                     {/* Día deseado */}
-                    <div className="space-y-2">
-                      <label className="block text-sm font-bold text-gray-700">Día de Preferencia</label>
+                    <div className="space-y-2 group">
+                      <label className="block text-[10px] font-bold text-[#a09e9a] uppercase tracking-widest transition-colors group-focus-within:text-[#5b2c1d]">Día de Preferencia</label>
                       <input 
                         type="date" 
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50 text-gray-700"
+                        className="w-full px-0 py-3 bg-transparent border-b-2 border-[#f0eee9] focus:border-[#5b2c1d] outline-none transition-all text-[#333333] font-medium text-base placeholder:text-[#d4d4d4]"
                       />
                     </div>
 
                     {/* Hora deseada */}
-                    <div className="space-y-2">
-                      <label className="block text-sm font-bold text-gray-700">Horario de Preferencia</label>
+                    <div className="space-y-2 group">
+                      <label className="block text-[10px] font-bold text-[#a09e9a] uppercase tracking-widest transition-colors group-focus-within:text-[#5b2c1d]">Horario de Preferencia</label>
                       <select 
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50 text-gray-700"
+                        className="w-full px-0 py-3 bg-transparent border-b-2 border-[#f0eee9] focus:border-[#5b2c1d] outline-none transition-all text-[#333333] font-medium text-base"
                       >
-                        <option value="">Selecciona un horario</option>
+                        <option value="" className="text-[#d4d4d4]">Selecciona un horario</option>
                         <option value="manana">Mañana (9:00 - 13:00)</option>
                         <option value="tarde">Tarde (14:00 - 18:00)</option>
                         <option value="noche">Noche (18:00 - 21:00)</option>
@@ -119,21 +119,21 @@ export default function SesionesPage() {
                   </div>
 
                   {/* Mensaje */}
-                  <div className="space-y-2">
-                    <label className="block text-sm font-bold text-gray-700">Motivo de Consulta (Opcional)</label>
+                  <div className="space-y-2 group">
+                    <label className="block text-[10px] font-bold text-[#a09e9a] uppercase tracking-widest transition-colors group-focus-within:text-[#5b2c1d]">Motivo de Consulta (Opcional)</label>
                     <textarea 
                       rows={4}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50 resize-none"
+                      className="w-full px-0 py-3 bg-transparent border-b-2 border-[#f0eee9] focus:border-[#5b2c1d] outline-none transition-all text-[#333333] font-medium text-base placeholder:text-[#d4d4d4] resize-none"
                       placeholder="Cuéntame brevemente qué te gustaría trabajar en nuestra sesión..."
                     ></textarea>
                   </div>
 
                   {/* Submit */}
-                  <div className="pt-4">
+                  <div className="pt-6">
                     <button 
                       type="submit" 
                       disabled={isSubmitting}
-                      className={`w-full bg-[#5b2c1d] hover:bg-[#4a2317] text-white font-bold py-4 rounded-xl transition-all shadow-lg text-lg flex items-center justify-center gap-3 ${isSubmitting ? 'opacity-80 cursor-not-allowed' : 'hover:-translate-y-1 hover:shadow-xl'}`}
+                      className={`w-full bg-[#5b2c1d] hover:bg-[#4a2317] text-white font-medium py-4 rounded-xl transition-all shadow-md text-sm uppercase tracking-widest flex items-center justify-center gap-3 ${isSubmitting ? 'opacity-80 cursor-not-allowed' : 'hover:-translate-y-1 hover:shadow-xl'}`}
                     >
                       {isSubmitting ? (
                         <>

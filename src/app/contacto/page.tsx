@@ -98,58 +98,58 @@ export default function ContactoPage() {
 
           {/* Formulario */}
           <motion.div 
-            className="bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
+            className="bg-white p-8 sm:p-12 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#f0eee9] overflow-hidden"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             {!isSuccess ? (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="block text-sm font-bold text-gray-700">Nombre</label>
+              <form onSubmit={handleSubmit} className="space-y-8 [font-family:system-ui,-apple-system,sans-serif]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  <div className="space-y-2 group">
+                    <label className="block text-[10px] font-bold text-[#a09e9a] uppercase tracking-widest transition-colors group-focus-within:text-[#5b2c1d]">Nombre</label>
                     <input 
                       type="text" 
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50"
+                      className="w-full px-0 py-3 bg-transparent border-b-2 border-[#f0eee9] focus:border-[#5b2c1d] outline-none transition-all text-[#333333] font-medium text-base placeholder:text-[#d4d4d4]"
                       placeholder="Tu nombre"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label className="block text-sm font-bold text-gray-700">Apellido</label>
+                  <div className="space-y-2 group">
+                    <label className="block text-[10px] font-bold text-[#a09e9a] uppercase tracking-widest transition-colors group-focus-within:text-[#5b2c1d]">Apellido</label>
                     <input 
                       type="text" 
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50"
+                      className="w-full px-0 py-3 bg-transparent border-b-2 border-[#f0eee9] focus:border-[#5b2c1d] outline-none transition-all text-[#333333] font-medium text-base placeholder:text-[#d4d4d4]"
                       placeholder="Tu apellido"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="block text-sm font-bold text-gray-700">Correo electrónico</label>
+                <div className="space-y-2 group">
+                  <label className="block text-[10px] font-bold text-[#a09e9a] uppercase tracking-widest transition-colors group-focus-within:text-[#5b2c1d]">Correo electrónico</label>
                   <input 
                     type="email" 
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50"
+                    className="w-full px-0 py-3 bg-transparent border-b-2 border-[#f0eee9] focus:border-[#5b2c1d] outline-none transition-all text-[#333333] font-medium text-base placeholder:text-[#d4d4d4]"
                     placeholder="correo@ejemplo.com"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label className="block text-sm font-bold text-gray-700">Mensaje</label>
+                <div className="space-y-2 group">
+                  <label className="block text-[10px] font-bold text-[#a09e9a] uppercase tracking-widest transition-colors group-focus-within:text-[#5b2c1d]">Mensaje</label>
                   <textarea 
                     required
-                    rows={5}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50 resize-none"
+                    rows={4}
+                    className="w-full px-0 py-3 bg-transparent border-b-2 border-[#f0eee9] focus:border-[#5b2c1d] outline-none transition-all text-[#333333] font-medium text-base placeholder:text-[#d4d4d4] resize-none"
                     placeholder="¿En qué te podemos ayudar?"
                   ></textarea>
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-6">
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className={`w-full bg-[#5b2c1d] hover:bg-[#4a2317] text-white font-bold py-4 rounded-xl transition-all shadow-lg text-lg flex items-center justify-center gap-3 ${isSubmitting ? 'opacity-80 cursor-not-allowed' : 'hover:-translate-y-1 hover:shadow-xl'}`}
+                    className={`w-full bg-[#5b2c1d] hover:bg-[#4a2317] text-white font-medium py-4 rounded-xl transition-all shadow-md text-sm uppercase tracking-widest flex items-center justify-center gap-3 ${isSubmitting ? 'opacity-80 cursor-not-allowed' : 'hover:-translate-y-1 hover:shadow-xl'}`}
                   >
                     {isSubmitting ? (
                       <>
