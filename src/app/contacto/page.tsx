@@ -23,96 +23,133 @@ export default function ContactoPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f5f5f7] font-sans selection:bg-[#5b2c1d] selection:text-white flex flex-col">
-      <Navbar theme="light" position="sticky" />
+    <main className="min-h-screen bg-[#fdfbf7] font-sans selection:bg-[#5b2c1d] selection:text-white">
+      <Navbar theme="dark" position="absolute" />
 
-      {/* Contenido Principal */}
-      <div className="flex-grow flex items-center justify-center px-6 py-24 sm:py-32">
-        <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      {/* Hero Header para Contacto */}
+      <section className="relative h-[45vh] w-full flex items-center justify-center overflow-hidden bg-black">
+        <Image
+          src="/inicio-2.jpeg"
+          alt="Fondo Contacto"
+          fill
+          className="object-cover opacity-50"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf7] via-transparent to-black/40 z-10" />
+        
+        <motion.div 
+          className="relative z-20 text-center mt-12 px-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="block text-xs sm:text-sm text-[#d4af37] font-bold tracking-[0.3em] uppercase mb-4 drop-shadow-md">
+            Conecta con nosotros
+          </span>
+          <h1 className="text-4xl sm:text-6xl font-black text-white drop-shadow-lg font-title tracking-wide">
+            Contacto
+          </h1>
+        </motion.div>
+      </section>
+
+      {/* Contenedor del Formulario y Texto */}
+      <section className="relative z-30 max-w-6xl mx-auto px-6 pb-24 -mt-16 sm:-mt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           
           {/* Texto / Copywriting */}
           <motion.div 
-            className="space-y-8"
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="bg-white/80 backdrop-blur-sm p-8 sm:p-12 rounded-3xl shadow-xl border border-gray-100 lg:sticky lg:top-32"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
           >
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#1d1d1f] leading-[1.05]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#333333] mb-6">
               Hablemos.
-            </h1>
-            <p className="text-xl sm:text-2xl text-[#86868b] font-medium leading-relaxed max-w-md">
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed mb-8">
               Estamos aquí para acompañarte. Escríbenos para resolver tus dudas sobre formaciones, sesiones o colaboraciones.
             </p>
             
-            <div className="pt-8 space-y-4">
-              <div>
-                <p className="text-sm font-bold text-[#1d1d1f] uppercase tracking-widest mb-1">Email Directo</p>
-                <a href="mailto:hola@rominacastaneda.com" className="text-lg text-[#0066cc] hover:underline">hola@rominacastaneda.com</a>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#5b2c1d]/10 flex items-center justify-center shrink-0 mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5b2c1d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-1">Email Directo</p>
+                  <a href="mailto:hola@rominacastaneda.com" className="text-lg text-[#5b2c1d] hover:text-[#4a2317] font-medium transition-colors">hola@rominacastaneda.com</a>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-bold text-[#1d1d1f] uppercase tracking-widest mb-1">Redes Sociales</p>
-                <div className="flex gap-4">
-                  <a href="#" className="text-lg text-[#0066cc] hover:underline">Instagram</a>
-                  <a href="#" className="text-lg text-[#0066cc] hover:underline">YouTube</a>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#5b2c1d]/10 flex items-center justify-center shrink-0 mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5b2c1d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-1">Redes Sociales</p>
+                  <div className="flex gap-4">
+                    <a href="#" className="text-lg text-[#5b2c1d] hover:text-[#4a2317] font-medium transition-colors">Instagram</a>
+                    <a href="#" className="text-lg text-[#5b2c1d] hover:text-[#4a2317] font-medium transition-colors">YouTube</a>
+                  </div>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Formulario Estilo Apple */}
+          {/* Formulario */}
           <motion.div 
-            className="bg-white p-8 sm:p-12 rounded-[2rem] shadow-[0_20px_40px_rgba(0,0,0,0.04)] border border-gray-100"
-            initial={{ opacity: 0, y: 30 }}
+            className="bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             {!isSuccess ? (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="block text-xs font-semibold text-[#86868b] ml-1">Nombre</label>
+                    <label className="block text-sm font-bold text-gray-700">Nombre</label>
                     <input 
                       type="text" 
                       required
-                      className="w-full px-5 py-4 bg-[#f5f5f7] hover:bg-[#ebebeb] focus:bg-white rounded-2xl border-2 border-transparent focus:border-[#0066cc] focus:ring-4 focus:ring-[#0066cc]/10 outline-none transition-all text-[#1d1d1f] font-medium"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50"
                       placeholder="Tu nombre"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-xs font-semibold text-[#86868b] ml-1">Apellido</label>
+                    <label className="block text-sm font-bold text-gray-700">Apellido</label>
                     <input 
                       type="text" 
-                      className="w-full px-5 py-4 bg-[#f5f5f7] hover:bg-[#ebebeb] focus:bg-white rounded-2xl border-2 border-transparent focus:border-[#0066cc] focus:ring-4 focus:ring-[#0066cc]/10 outline-none transition-all text-[#1d1d1f] font-medium"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50"
                       placeholder="Tu apellido"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-[#86868b] ml-1">Correo electrónico</label>
+                  <label className="block text-sm font-bold text-gray-700">Correo electrónico</label>
                   <input 
                     type="email" 
                     required
-                    className="w-full px-5 py-4 bg-[#f5f5f7] hover:bg-[#ebebeb] focus:bg-white rounded-2xl border-2 border-transparent focus:border-[#0066cc] focus:ring-4 focus:ring-[#0066cc]/10 outline-none transition-all text-[#1d1d1f] font-medium"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50"
                     placeholder="correo@ejemplo.com"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-[#86868b] ml-1">Mensaje</label>
+                  <label className="block text-sm font-bold text-gray-700">Mensaje</label>
                   <textarea 
                     required
-                    rows={4}
-                    className="w-full px-5 py-4 bg-[#f5f5f7] hover:bg-[#ebebeb] focus:bg-white rounded-2xl border-2 border-transparent focus:border-[#0066cc] focus:ring-4 focus:ring-[#0066cc]/10 outline-none transition-all text-[#1d1d1f] font-medium resize-none"
+                    rows={5}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-gray-50/50 resize-none"
                     placeholder="¿En qué te podemos ayudar?"
                   ></textarea>
                 </div>
 
-                <div className="pt-2">
+                <div className="pt-4">
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className={`w-full bg-[#1d1d1f] text-white font-medium py-4 rounded-2xl transition-all flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-wait' : 'hover:bg-black hover:scale-[1.02] active:scale-[0.98]'}`}
+                    className={`w-full bg-[#5b2c1d] hover:bg-[#4a2317] text-white font-bold py-4 rounded-xl transition-all shadow-lg text-lg flex items-center justify-center gap-3 ${isSubmitting ? 'opacity-80 cursor-not-allowed' : 'hover:-translate-y-1 hover:shadow-xl'}`}
                   >
                     {isSubmitting ? (
                       <>
@@ -130,28 +167,30 @@ export default function ContactoPage() {
               </form>
             ) : (
               <motion.div 
-                className="text-center py-12 space-y-6"
-                initial={{ opacity: 0, scale: 0.9 }}
+                className="text-center py-16 space-y-6"
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
               >
-                <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div className="w-24 h-24 bg-[#5b2c1d]/10 text-[#5b2c1d] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
-                <h3 className="text-2xl font-bold text-[#1d1d1f]">Mensaje enviado</h3>
-                <p className="text-[#86868b] max-w-sm mx-auto">
+                <h3 className="text-3xl font-black text-[#333333]">¡Mensaje enviado!</h3>
+                <p className="text-gray-600 text-lg max-w-md mx-auto">
                   Gracias por comunicarte. Hemos recibido tu mensaje y te responderemos a la brevedad.
                 </p>
-                <button 
-                  onClick={() => setIsSuccess(false)}
-                  className="mt-6 text-[#0066cc] font-medium hover:underline"
-                >
-                  Enviar otro mensaje
-                </button>
+                <div className="pt-8">
+                  <button 
+                    onClick={() => setIsSuccess(false)}
+                    className="inline-block bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold px-8 py-3 rounded-xl transition-colors"
+                  >
+                    Enviar otro mensaje
+                  </button>
+                </div>
               </motion.div>
             )}
           </motion.div>
         </div>
-      </div>
+      </section>
       
       {/* Footer Unificado */}
       <Footer />
