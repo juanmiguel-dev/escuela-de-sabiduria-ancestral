@@ -108,8 +108,34 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
           <span className="text-sm font-bold tracking-[0.2em] text-[#a09e9a] uppercase mb-4">Asegura tu lugar</span>
           <h3 className="font-title text-4xl sm:text-5xl text-[#333333] mb-6">Comienza tu viaje hoy</h3>
           
-          <div className="text-5xl font-black text-[#5b2c1d] mb-10 tracking-tight">
-            {formacion.price || "Consultar"}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 mb-10">
+            {formacion.price && (
+              <div className="flex flex-col items-center">
+                <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Internacional</span>
+                <div className="text-5xl font-black text-[#5b2c1d] tracking-tight">
+                  <span className="text-3xl mr-1 font-medium">$</span>{formacion.price} <span className="text-xl font-bold ml-1 text-gray-400">USD</span>
+                </div>
+              </div>
+            )}
+            
+            {(formacion.price && formacion.priceArs) && (
+              <div className="hidden sm:block w-[1px] h-16 bg-gray-200"></div>
+            )}
+
+            {formacion.priceArs && (
+              <div className="flex flex-col items-center">
+                <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Argentina</span>
+                <div className="text-5xl font-black text-[#5b2c1d] tracking-tight">
+                  <span className="text-3xl mr-1 font-medium">$</span>{formacion.priceArs.toLocaleString('es-AR')} <span className="text-xl font-bold ml-1 text-gray-400">ARS</span>
+                </div>
+              </div>
+            )}
+
+            {(!formacion.price && !formacion.priceArs) && (
+              <div className="text-3xl font-black text-[#5b2c1d] tracking-tight">
+                Consultar valor
+              </div>
+            )}
           </div>
 
           {formacion.paymentLink ? (

@@ -57,8 +57,13 @@ export const formacion = defineType({
     }),
     defineField({
       name: 'price',
-      title: 'Precio (ej: $150 USD o 788)',
-      type: 'string',
+      title: 'Precio en Dólares (Solo el número, ej: 788)',
+      type: 'number',
+    }),
+    defineField({
+      name: 'priceArs',
+      title: 'Precio en Pesos Argentinos (Solo el número, ej: 880000)',
+      type: 'number',
     }),
     defineField({
       name: 'paymentLink',

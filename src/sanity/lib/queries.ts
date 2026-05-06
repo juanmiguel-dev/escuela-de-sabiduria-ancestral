@@ -21,6 +21,7 @@ export async function getFormaciones() {
     shortDescription,
     duration,
     price,
+    priceArs,
     paymentLink,
     "imageUrl": mainImage.asset->url
   }`);
@@ -35,6 +36,7 @@ export async function getFormacionBySlug(slug: string) {
     shortDescription,
     duration,
     price,
+    priceArs,
     paymentLink,
     "imageUrl": mainImage.asset->url,
     "heroImageUrl": heroImage.asset->url,

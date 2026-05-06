@@ -149,9 +149,16 @@ export default function Home() {
                     {formacion.shortDescription}
                   </p>
                   <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
-                    <span className="font-bold text-[#5b2c1d]">
-                      {formacion.price || "Ver detalles"}
-                    </span>
+                    <div className="flex flex-col">
+                      {(formacion.price || formacion.priceArs) ? (
+                        <>
+                          {formacion.price && <span className="font-bold text-[#5b2c1d] text-sm">${formacion.price} USD</span>}
+                          {formacion.priceArs && <span className="font-bold text-[#5b2c1d] text-sm">${formacion.priceArs.toLocaleString('es-AR')} ARS</span>}
+                        </>
+                      ) : (
+                        <span className="font-bold text-[#5b2c1d]">Consultar</span>
+                      )}
+                    </div>
                     <span className="text-sm font-bold text-gray-400 group-hover:text-[#5b2c1d] transition-colors flex items-center gap-1">
                       Info <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </span>
