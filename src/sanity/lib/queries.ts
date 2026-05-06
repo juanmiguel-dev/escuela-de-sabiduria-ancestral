@@ -30,13 +30,18 @@ export async function getFormacionBySlug(slug: string) {
   return await client.fetch(`*[_type == "formacion" && slug.current == $slug][0] {
     _id,
     title,
+    subtitle,
     "slug": slug.current,
     shortDescription,
     duration,
     price,
     paymentLink,
     "imageUrl": mainImage.asset->url,
-    detailedDescription
+    "heroImageUrl": heroImage.asset->url,
+    detailedDescription,
+    intro,
+    cuerpoPorQue,
+    cuerpoDirigidoA
   }`, { slug });
 }
 

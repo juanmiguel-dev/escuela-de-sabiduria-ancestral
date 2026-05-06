@@ -22,9 +22,9 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
 
       {/* Hero Section de la Formación */}
       <section className="relative h-[60vh] sm:h-[70vh] w-full flex items-end pb-16 justify-center overflow-hidden bg-black">
-        {formacion.imageUrl && (
+        {(formacion.heroImageUrl || formacion.imageUrl) && (
           <Image
-            src={formacion.imageUrl}
+            src={formacion.heroImageUrl || formacion.imageUrl}
             alt={formacion.title}
             fill
             className="object-cover opacity-50"
@@ -43,26 +43,54 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
             {formacion.title}
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto font-medium">
-            {formacion.shortDescription}
+            {formacion.subtitle || formacion.shortDescription}
           </p>
         </div>
       </section>
 
       {/* Contenido Detallado */}
-      <section className="max-w-4xl mx-auto px-6 sm:px-12 py-16 sm:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <section className="max-w-5xl mx-auto px-6 sm:px-12 py-16 sm:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           
           {/* Columna Principal (Descripción) */}
-          <div className="md:col-span-2 prose prose-lg prose-gray">
-            {formacion.detailedDescription ? (
-              <PortableText value={formacion.detailedDescription} />
-            ) : (
-              <p className="text-gray-600">No hay detalles adicionales disponibles para esta formación.</p>
+          <div className="lg:col-span-2 space-y-12">
+            {/* Intro */}
+            {formacion.intro && (
+              <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed">
+                <PortableText value={formacion.intro} />
+              </div>
+            )}
+
+            {/* ¿Por qué elegir este camino? */}
+            {formacion.cuerpoPorQue && (
+              <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                <h2 className="font-title text-3xl text-[#5b2c1d] mb-6">¿Por qué elegir este camino?</h2>
+                <PortableText value={formacion.cuerpoPorQue} />
+              </div>
+            )}
+
+            {/* ¿A quiénes está dirigida? */}
+            {formacion.cuerpoDirigidoA && (
+              <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed bg-[#5b2c1d]/5 p-8 rounded-3xl border border-[#5b2c1d]/10">
+                <h2 className="font-title text-3xl text-[#5b2c1d] mb-6">¿A quiénes está dirigida?</h2>
+                <PortableText value={formacion.cuerpoDirigidoA} />
+              </div>
+            )}
+
+            {/* Fallback a Detailed Description antigua si existe y no hay campos nuevos */}
+            {!formacion.intro && !formacion.cuerpoPorQue && !formacion.cuerpoDirigidoA && formacion.detailedDescription && (
+              <div className="prose prose-lg prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed">
+                <PortableText value={formacion.detailedDescription} />
+              </div>
+            )}
+
+            {!formacion.intro && !formacion.cuerpoPorQue && !formacion.cuerpoDirigidoA && !formacion.detailedDescription && (
+               <p className="text-gray-500 italic">No hay detalles adicionales disponibles para esta formación.</p>
             )}
           </div>
 
           {/* Columna Lateral (Reserva y Precio) */}
-          <div className="md:col-span-1">
+          <div className="lg:col-span-1">
             <div className="sticky top-24 bg-white p-8 rounded-2xl shadow-xl border border-gray-100 text-center">
               <h3 className="text-xl font-bold text-gray-900 mb-2">Reserva tu lugar</h3>
               <p className="text-gray-500 text-sm mb-6">Asegura tu participación en este programa transformador.</p>
