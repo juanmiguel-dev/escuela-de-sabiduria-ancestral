@@ -40,10 +40,37 @@ export async function getFormacionBySlug(slug: string) {
     paymentLink,
     "imageUrl": mainImage.asset->url,
     "heroImageUrl": heroImage.asset->url,
-    detailedDescription,
-    intro,
-    cuerpoPorQue,
-    cuerpoDirigidoA
+    contentBlocks[] {
+      _type,
+      _key,
+      defined(intro) => {
+        intro[]
+      },
+      defined(cuerpoPorQue) => {
+        cuerpoPorQue[]
+      },
+      defined(cuerpoDirigidoA) => {
+        cuerpoDirigidoA[]
+      },
+      defined(detailedDescription) => {
+        detailedDescription[]
+      },
+      defined(introduccionApertura) => {
+        introduccionApertura[] {
+          _key,
+          title,
+          content[]
+        }
+      },
+      defined(testimonios) => {
+        testimonios[] {
+          _key,
+          nombre,
+          mensaje,
+          "avatarUrl": avatar.asset->url
+        }
+      }
+    }
   }`, { slug });
 }
 

@@ -6,6 +6,14 @@ import NextLink from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
+// Importar los componentes de bloque
+import { IntroBlockRenderer } from "@/components/FormacionBlocks/IntroBlockRenderer";
+import { CuerpoPorQueBlockRenderer } from "@/components/FormacionBlocks/CuerpoPorQueBlockRenderer";
+import { CuerpoDirigidoABlockRenderer } from "@/components/FormacionBlocks/CuerpoDirigidoABlockRenderer";
+import { DetailedDescriptionBlockRenderer } from "@/components/FormacionBlocks/DetailedDescriptionBlockRenderer";
+import { IntroduccionAperturaBlockRenderer } from "@/components/FormacionBlocks/IntroduccionAperturaBlockRenderer";
+import { TestimoniosBlockRenderer } from "@/components/FormacionBlocks/TestimoniosBlockRenderer";
+
 export const revalidate = 0; // Desactiva la caché de Next.js para esta ruta dinámica
 
 export default async function FormacionPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -15,6 +23,15 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
   if (!formacion) {
     notFound();
   }
+
+  const blockRenderers: { [key: string]: React.ComponentType<any> } = {
+    introBlock: IntroBlockRenderer,
+    cuerpoPorQueBlock: CuerpoPorQueBlockRenderer,
+    cuerpoDirigidoABlock: CuerpoDirigidoABlockRenderer,
+    detailedDescriptionBlock: DetailedDescriptionBlockRenderer,
+    introduccionAperturaBlock: IntroduccionAperturaBlockRenderer,
+    testimoniosBlock: TestimoniosBlockRenderer,
+  };
 
   return (
     <main className="min-h-screen bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900 pb-24">
@@ -50,56 +67,17 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
 
       {/* Contenido Detallado - Diseño Elegante y Más Amplio */}
       <section className="max-w-5xl mx-auto px-6 sm:px-12 py-16 sm:py-24 space-y-24">
-        
-        {/* Intro */}
-        {formacion.intro && (
-          <div className="prose prose-xl prose-gray [font-family:system-ui,-apple-system,sans-serif] text-[#333333] leading-[1.8] text-center mx-auto font-light max-w-4xl">
-            <PortableText value={formacion.intro} />
-          </div>
-        )}
-
-        {/* Separador Elegante */}
-        {(formacion.intro && (formacion.cuerpoPorQue || formacion.cuerpoDirigidoA || formacion.detailedDescription)) && (
-          <div className="flex justify-center">
-            <div className="w-24 h-[1px] bg-[#d4af37]/40"></div>
-          </div>
-        )}
-
-        {/* ¿Por qué elegir este camino? */}
-        {formacion.cuerpoPorQue && (
-          <div className="relative bg-white p-12 sm:p-20 md:p-24 rounded-[3rem] shadow-[0_20px_40px_rgba(0,0,0,0.03)] border border-[#f0eee9]">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#fdfbf7] px-8">
-              <span className="text-sm font-bold tracking-[0.2em] text-[#d4af37] uppercase">El Propósito</span>
-            </div>
-            <h2 className="font-title text-4xl sm:text-5xl md:text-6xl text-center text-[#5b2c1d] mb-12 mt-4">¿Por qué elegir este camino?</h2>
-            <div className="prose prose-lg sm:prose-xl prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-600 leading-relaxed mx-auto max-w-4xl">
-              <PortableText value={formacion.cuerpoPorQue} />
-            </div>
-          </div>
-        )}
-
-        {/* ¿A quiénes está dirigida? */}
-        {formacion.cuerpoDirigidoA && (
-          <div className="relative bg-[#5b2c1d] text-white p-12 sm:p-20 md:p-24 rounded-[3rem] shadow-2xl overflow-hidden">
-            {/* Elemento decorativo de fondo */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-            
-            <h2 className="font-title text-4xl sm:text-5xl md:text-6xl text-center text-[#fdfbf7] mb-12 relative z-10">¿A quiénes está dirigida?</h2>
-            <div className="prose prose-lg sm:prose-xl prose-invert [font-family:system-ui,-apple-system,sans-serif] text-white/90 leading-relaxed mx-auto max-w-4xl relative z-10">
-              <PortableText value={formacion.cuerpoDirigidoA} />
-            </div>
-          </div>
-        )}
-
-        {/* Descripción Detallada General (Si existe) */}
-        {formacion.detailedDescription && (
-          <div className="prose prose-lg sm:prose-xl prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-700 leading-relaxed mx-auto max-w-4xl bg-white p-12 sm:p-20 rounded-[3rem] shadow-[0_20px_40px_rgba(0,0,0,0.02)] border border-[#f0eee9]">
-            <PortableText value={formacion.detailedDescription} />
-          </div>
-        )}
+        {formacion.contentBlocks?.map((block: any) => {
+          const BlockComponent = blockRenderers[block._type];
+          if (!BlockComponent) {
+            console.warn(`No renderer found for block type: ${block._type}`);
+            return null;
+          }
+          return <BlockComponent key={block._key} {...block} />;
+        })}
 
         {/* Mensaje por defecto si todo está vacío */}
-        {!formacion.intro && !formacion.cuerpoPorQue && !formacion.cuerpoDirigidoA && !formacion.detailedDescription && (
+        {(!formacion.contentBlocks || formacion.contentBlocks.length === 0) && (
            <p className="text-gray-500 italic text-center">No hay detalles adicionales disponibles para esta formación.</p>
         )}
 
