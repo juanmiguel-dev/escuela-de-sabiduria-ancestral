@@ -78,8 +78,8 @@ export async function getFormacionBySlug(slug: string) {
         masonryRows,
         images[] {
           _key,
-          "imageUrl": image.asset->url,
-          "alt": image.alt
+          "imageUrl": asset->url,
+          alt
         }
       }
     }

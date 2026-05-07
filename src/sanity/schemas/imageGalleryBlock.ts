@@ -15,21 +15,19 @@ export const imageGalleryBlock = defineType({
       title: 'Imágenes',
       type: 'array',
       of: [
-        defineField({
-          name: 'image',
-          title: 'Imagen',
+        {
           type: 'image',
           options: {
             hotspot: true,
           },
           fields: [
-            defineField({
+            {
               name: 'alt',
               title: 'Texto Alternativo',
               type: 'string',
-            }),
+            },
           ],
-        }),
+        },
       ],
       validation: (Rule) => Rule.min(1).error('Se requiere al menos una imagen para la galería.'),
     }),
