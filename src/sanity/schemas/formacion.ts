@@ -94,6 +94,12 @@ export const formacion = defineType({
       type: 'array',
       of: [{ type: 'block' }],
     }),
+    defineField({
+      name: 'introduccionApertura',
+      title: 'Introducción y Apertura del Camino',
+      type: 'array',
+      of: [{ type: 'accordionItem' }],
+    }),
   ],
   preview: {
     select: {

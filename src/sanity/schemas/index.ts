@@ -6,7 +6,8 @@ import { alumno } from './alumno';
 import { encuentro } from './encuentro';
 import { testimonio } from './testimonio';
 import { planDePago } from './planDePago';
+import { accordionItem } from './accordionItem';
 
 export const schema = {
-  types: [video, taller, landing, formacion, alumno, encuentro, testimonio, planDePago],
+  types: [video, taller, landing, formacion, alumno, encuentro, testimonio, planDePago, accordionItem],
 };
