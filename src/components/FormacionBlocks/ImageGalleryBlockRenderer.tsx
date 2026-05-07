@@ -71,7 +71,7 @@ export function ImageGalleryBlockRenderer({
             gridTemplateRows: `repeat(${masonryRows}, minmax(180px, 1fr))`
           }}
         >
-          {images.map((image, idx) => (
+          {images.filter(img => img.imageUrl).map((image, idx) => (
             <motion.div 
               key={image._key} 
               initial={{ opacity: 0, y: 20 }}
@@ -108,7 +108,7 @@ export function ImageGalleryBlockRenderer({
             {title}
           </motion.h3>
         )}
-        <ImageCarousel images={images.map(img => ({ id: img._key, src: img.imageUrl, alt: img.alt || 'Slider image' }))} />
+        <ImageCarousel images={images.filter(img => img.imageUrl).map(img => ({ id: img._key, src: img.imageUrl, alt: img.alt || 'Slider image' }))} />
       </div>
     );
   };

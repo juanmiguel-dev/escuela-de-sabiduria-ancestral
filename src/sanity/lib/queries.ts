@@ -78,8 +78,8 @@ export async function getFormacionBySlug(slug: string) {
         masonryRows,
         images[] {
           _key,
-          "imageUrl": asset->url,
-          alt
+          "imageUrl": coalesce(asset->url, image.asset->url),
+          "alt": coalesce(alt, image.alt)
         }
       }
     }
