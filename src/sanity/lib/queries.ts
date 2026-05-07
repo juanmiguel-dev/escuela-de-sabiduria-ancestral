@@ -9,7 +9,7 @@ export async function getLandingData() {
     primaryButtonLink,
     secondaryButtonText,
     secondaryButtonLink,
-    "backgroundImages": backgroundImages[].asset->url
+    "backgroundImages": coalesce(backgroundImages[].asset->url, [])
   }`);
 }
 
@@ -45,22 +45,22 @@ export async function getFormacionBySlug(slug: string) {
       _type,
       _key,
       defined(intro) => {
-        intro[]
+        intro
       },
       defined(cuerpoPorQue) => {
-        cuerpoPorQue[]
+        cuerpoPorQue
       },
       defined(cuerpoDirigidoA) => {
-        cuerpoDirigidoA[]
+        cuerpoDirigidoA
       },
       defined(detailedDescription) => {
-        detailedDescription[]
+        detailedDescription
       },
       defined(introduccionApertura) => {
         introduccionApertura[] {
           _key,
           title,
-          content[]
+          content
         }
       },
       defined(testimonios) => {
