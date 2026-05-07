@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineField, defineType, defineArrayMember } from 'sanity';
 
 export const imageGalleryBlock = defineType({
   name: 'imageGalleryBlock',
@@ -18,19 +18,19 @@ export const imageGalleryBlock = defineType({
         layout: 'grid',
       },
       of: [
-        {
+        defineArrayMember({
           type: 'image',
           options: {
             hotspot: true,
           },
           fields: [
-            {
+            defineField({
               name: 'alt',
               title: 'Texto Alternativo',
               type: 'string',
-            },
+            }),
           ],
-        },
+        }),
       ],
       validation: (Rule) => Rule.min(1).error('Se requiere al menos una imagen para la galería.'),
     }),
