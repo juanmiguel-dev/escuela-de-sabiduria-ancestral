@@ -1,4 +1,7 @@
+'use client';
+
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import { m, LazyMotion, domAnimation } from "framer-motion";
 
 interface TestimonialItem {
@@ -13,7 +16,17 @@ interface TestimoniosBlockProps {
 }
 
 export function TestimoniosBlockRenderer({ testimonios }: TestimoniosBlockProps) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   if (!testimonios || testimonios.length === 0) {
+    return null;
+  }
+
+  if (!isMounted) {
     return null;
   }
 
