@@ -76,7 +76,7 @@ export default function Home() {
                 {landingData.preTitle}
               </span>
             )}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.2] text-white drop-shadow-lg max-w-[800px] mx-auto break-words">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl font-title text-white drop-shadow-lg max-w-[900px] mx-auto break-words leading-tight">
               {landingData?.title || "La Rueda Medicinal"}
             </h1>
             <p className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto font-medium italic drop-shadow-md">
@@ -110,7 +110,7 @@ export default function Home() {
               variants={fadeUpVariant}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl sm:text-5xl font-title text-[#333333] tracking-wide mb-4">
+              <h2 className="text-5xl sm:text-6xl font-title text-[#333333] mb-4">
                 Nuestras Formaciones
               </h2>
               <div className="w-24 h-1 bg-[#5b2c1d] mx-auto opacity-50" />

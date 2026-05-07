@@ -60,7 +60,7 @@ export function ImageGalleryBlockRenderer({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-title text-4xl text-center text-[#5b2c1d] mb-12 tracking-tight"
+            className="font-title text-5xl text-center text-[#5b2c1d] mb-12"
           >
             {title}
           </m.h3>
@@ -103,7 +103,7 @@ export function ImageGalleryBlockRenderer({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-title text-4xl text-center text-[#5b2c1d] mb-12 tracking-tight"
+            className="font-title text-5xl text-center text-[#5b2c1d] mb-12"
           >
             {title}
           </m.h3>

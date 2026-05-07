@@ -37,7 +37,7 @@ export function TestimoniosBlockRenderer({ testimonios }: TestimoniosBlockProps)
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-title text-4xl sm:text-5xl md:text-6xl text-center text-[#5b2c1d] mb-16 tracking-tight"
+          className="font-title text-5xl sm:text-6xl md:text-7xl text-center text-[#5b2c1d] mb-16"
         >
           Testimonios
         </m.h2>

@@ -22,7 +22,7 @@ export function IntroduccionAperturaBlockRenderer({ introduccionApertura }: Intr
 
   return (
     <div className="space-y-4">
-      <h2 className="font-title text-4xl sm:text-5xl md:text-6xl text-center text-[#5b2c1d] mb-12 mt-4">Introducción y Apertura del Camino</h2>
+      <h2 className="font-title text-5xl sm:text-6xl md:text-7xl text-center text-[#5b2c1d] mb-12 mt-4">Introducción y Apertura del Camino</h2>
       {introduccionApertura.map((item) => (
         <div key={item._key} className="border border-[#f0eee9] rounded-lg overflow-hidden">
           <button

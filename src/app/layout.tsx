@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cinzel } from "next/font/google";
+import { Cinzel, La_Belle_Aurore } from "next/font/google";
 import "./globals.css";
 import { TechBackground } from "@/components/TechBackground";
 
@@ -7,6 +7,12 @@ const cinzel = Cinzel({
   variable: "--font-cinzel",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const laBelleAurore = La_Belle_Aurore({
+  variable: "--font-script",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -22,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cinzel.variable} antialiased`}
+        className={`${cinzel.variable} ${laBelleAurore.variable} antialiased`}
       >
         <TechBackground />
         <div className="scanlines" />

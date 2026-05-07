@@ -58,7 +58,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
               DURACIÓN: {formacion.duration}
             </span>
           )}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white drop-shadow-lg mb-4 sm:mb-6">
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-title text-white drop-shadow-lg mb-4 sm:mb-6 leading-tight">
             {formacion.title}
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto font-medium">
