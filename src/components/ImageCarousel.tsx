@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X, FileText } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m, LazyMotion, domAnimation } from "framer-motion";
 
 interface ImageItem {
     id: string | number;
@@ -71,7 +71,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
     };
 
     return (
-        <>
+        <LazyMotion features={domAnimation}>
             <div className="relative group w-full">
                 {/* Flechas de Navegación (Solo visibles en hover del contenedor principal) */}
                 <button 
@@ -96,7 +96,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                             if (minimal) {
                                 return (
                                     <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex-[0_0_auto] mr-4 sm:mr-8">
-                                        <motion.div
+                                        <m.div
                                             onClick={() => handleCardClick(img)}
                                             className="relative flex-none w-[50vw] sm:w-[23vw] max-w-[500px] aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer border border-white/10 transition-all duration-500"
                                             whileHover={{ scale: 1.05 }}
@@ -110,7 +110,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                             />
                                             {/* Sutil overlay al hover en minimal */}
                                             <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                                        </motion.div>
+                                        </m.div>
                                     </div>
                                 );
                             }
@@ -118,7 +118,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                             // MODO NORMAL (CARD): Estilo tipo referencia con parte inferior blanca
                             return (
                                 <div key={img.id} className="relative z-10 hover:z-[100] shrink-0 flex items-stretch mr-6 sm:mr-10">
-                                    <motion.div
+                                    <m.div
                                         onClick={() => handleCardClick(img)}
                                         className="relative flex-none w-[300px] sm:w-[340px] min-h-[480px] rounded-[2rem] overflow-hidden cursor-pointer group bg-white shadow-[0_15px_35px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-500 flex flex-col"
                                         whileHover={{
@@ -213,7 +213,7 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                                 </div>
                                             )}
                                         </div>
-                                    </motion.div>
+                                    </m.div>
                                 </div>
                             );
                         })}
@@ -224,14 +224,14 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
             {/* MODAL / POPUP DE PDF */}
             <AnimatePresence>
                 {selectedPdf && (
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/60 backdrop-blur-md cursor-pointer"
                         onClick={() => setSelectedPdf(null)}
                     >
-                        <motion.div
+                        <m.div
                             initial={{ scale: 0.95, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.95, opacity: 0 }}
@@ -262,22 +262,22 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                     title="Visor PDF"
                                 />
                             </div>
-                        </motion.div>
-                    </motion.div>
+                        </m.div>
+                    </m.div>
                 )}
             </AnimatePresence>
 
             {/* MODAL / POPUP DE IMAGEN */}
             <AnimatePresence>
                 {selectedImg && (
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/50 backdrop-blur-md cursor-pointer"
                         onClick={() => setSelectedImg(null)}
                     >
-                        <motion.div
+                        <m.div
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
@@ -298,22 +298,22 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                 alt="Vista ampliada"
                                 className="w-auto h-auto max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl border border-white/10"
                             />
-                        </motion.div>
-                    </motion.div>
+                        </m.div>
+                    </m.div>
                 )}
             </AnimatePresence>
 
             {/* MODAL / POPUP DE VIDEO */}
             <AnimatePresence>
                 {selectedVideo && (
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-black/50 backdrop-blur-md cursor-pointer"
                         onClick={() => setSelectedVideo(null)}
                     >
-                        <motion.div
+                        <m.div
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
@@ -336,10 +336,12 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
                                 autoPlay
                                 loop
                             />
-                        </motion.div>
-                    </motion.div>
+                        </m.div>
+                    </m.div>
                 )}
             </AnimatePresence>
-        </>
+        </LazyMotion>
+    );
+}
     );
 }
