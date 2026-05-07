@@ -116,23 +116,36 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
             )}
           </div>
 
-          {formacion.paymentLink ? (
-            <a 
-              href={formacion.paymentLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-12 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(91,44,29,0.2)] hover:shadow-[0_15px_30px_rgba(91,44,29,0.3)] hover:-translate-y-1 text-sm uppercase tracking-widest"
-            >
-              Inscribirse Ahora
-            </a>
-          ) : (
-            <button 
-              disabled
-              className="inline-flex items-center justify-center bg-gray-200 text-gray-500 px-12 py-5 rounded-full font-medium cursor-not-allowed text-sm uppercase tracking-widest"
-            >
-              Inscripciones Cerradas
-            </button>
-          )}
+          <div className="flex flex-col sm:flex-row gap-4">
+            {formacion.paymentLink && (
+              <a 
+                href={formacion.paymentLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-12 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(91,44,29,0.2)] hover:shadow-[0_15px_30px_rgba(91,44,29,0.3)] hover:-translate-y-1 text-sm uppercase tracking-widest"
+              >
+                Inscribirse Ahora (USD)
+              </a>
+            )}
+            {formacion.paymentLinkArs && (
+              <a 
+                href={formacion.paymentLinkArs}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-[#d4af37] hover:bg-[#b89a2f] text-white px-12 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(212,175,55,0.2)] hover:shadow-[0_15px_30px_rgba(212,175,55,0.3)] hover:-translate-y-1 text-sm uppercase tracking-widest"
+              >
+                Inscribirse Ahora (ARS)
+              </a>
+            )}
+            {(!formacion.paymentLink && !formacion.paymentLinkArs) && (
+              <button 
+                disabled
+                className="inline-flex items-center justify-center bg-gray-200 text-gray-500 px-12 py-5 rounded-full font-medium cursor-not-allowed text-sm uppercase tracking-widest"
+              >
+                Inscripciones Cerradas
+              </button>
+            )}
+          </div>
         </div>
 
       </section>

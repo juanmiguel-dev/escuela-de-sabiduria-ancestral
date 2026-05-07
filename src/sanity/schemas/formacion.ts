@@ -67,7 +67,12 @@ export const formacion = defineType({
     }),
     defineField({
       name: 'paymentLink',
-      title: 'Link de Pago / Reserva',
+      title: 'Link de Pago / Reserva (USD)',
+      type: 'url',
+    }),
+    defineField({
+      name: 'paymentLinkArs',
+      title: 'Link de Pago / Reserva (ARS)',
       type: 'url',
     }),
     defineField({

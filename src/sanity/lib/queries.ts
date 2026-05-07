@@ -23,6 +23,7 @@ export async function getFormaciones() {
     price,
     priceArs,
     paymentLink,
+    paymentLinkArs,
     "imageUrl": mainImage.asset->url
   }`);
 }
