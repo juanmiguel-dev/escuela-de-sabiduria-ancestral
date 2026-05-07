@@ -39,6 +39,7 @@ export async function getFormacionBySlug(slug: string) {
     price,
     priceArs,
     paymentLink,
+    paymentLinkArs,
     "imageUrl": mainImage.asset->url,
     "heroImageUrl": heroImage.asset->url,
     contentBlocks[] {
