@@ -6,14 +6,24 @@ import NextLink from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
+import dynamic from "next/dynamic";
+
 // Importar los componentes de bloque
 import { IntroBlockRenderer } from "@/components/FormacionBlocks/IntroBlockRenderer";
 import { CuerpoPorQueBlockRenderer } from "@/components/FormacionBlocks/CuerpoPorQueBlockRenderer";
 import { CuerpoDirigidoABlockRenderer } from "@/components/FormacionBlocks/CuerpoDirigidoABlockRenderer";
 import { DetailedDescriptionBlockRenderer } from "@/components/FormacionBlocks/DetailedDescriptionBlockRenderer";
 import { IntroduccionAperturaBlockRenderer } from "@/components/FormacionBlocks/IntroduccionAperturaBlockRenderer";
-import { TestimoniosBlockRenderer } from "@/components/FormacionBlocks/TestimoniosBlockRenderer";
-import { ImageGalleryBlockRenderer } from "@/components/FormacionBlocks/ImageGalleryBlockRenderer";
+
+// Componentes con Framer Motion (Carga dinámica para evitar errores de SSR en Next.js 15)
+const TestimoniosBlockRenderer = dynamic(() => 
+  import("@/components/FormacionBlocks/TestimoniosBlockRenderer").then(mod => mod.TestimoniosBlockRenderer), 
+  { ssr: false }
+);
+const ImageGalleryBlockRenderer = dynamic(() => 
+  import("@/components/FormacionBlocks/ImageGalleryBlockRenderer").then(mod => mod.ImageGalleryBlockRenderer), 
+  { ssr: false }
+);
 
 export const revalidate = 0; // Desactiva la caché de Next.js para esta ruta dinámica
 
