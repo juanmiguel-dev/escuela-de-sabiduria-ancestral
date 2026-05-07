@@ -48,7 +48,7 @@ export default defineConfig({
               ),
             S.divider(),
             ...S.documentTypeListItems().filter(
-              (listItem) => !['landing', 'video', 'formacion'].includes(listItem.getId() as string)
+              (listItem) => !['landing', 'video', 'formacion', 'testimonio'].includes(listItem.getId() as string)
             ),
           ]),
     }),

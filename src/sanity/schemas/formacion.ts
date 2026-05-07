@@ -100,6 +100,12 @@ export const formacion = defineType({
       type: 'array',
       of: [{ type: 'accordionItem' }],
     }),
+    defineField({
+      name: 'testimonios',
+      title: 'Testimonios de la Formación',
+      type: 'array',
+      of: [{ type: 'testimonialItem' }],
+    }),
   ],
   preview: {
     select: {
