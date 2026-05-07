@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { ImageCarousel } from "@/components/ImageCarousel"; // Reutilizar el componente existente
 
-import { motion } from "framer-motion";
+import { m, LazyMotion, domAnimation } from "framer-motion";
 
 interface ImageAsset {
   _key: string;
@@ -56,14 +56,14 @@ export function ImageGalleryBlockRenderer({
     return (
       <div className="my-12">
         {title && (
-          <motion.h3 
+          <m.h3 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="font-title text-4xl text-center text-[#5b2c1d] mb-12 tracking-tight"
           >
             {title}
-          </motion.h3>
+          </m.h3>
         )}
         <div
           className={`grid ${gridColsClass} gap-6`}
@@ -72,7 +72,7 @@ export function ImageGalleryBlockRenderer({
           }}
         >
           {images.filter(img => img.imageUrl).map((image, idx) => (
-            <motion.div 
+            <m.div 
               key={image._key} 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -88,7 +88,7 @@ export function ImageGalleryBlockRenderer({
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>
@@ -99,14 +99,14 @@ export function ImageGalleryBlockRenderer({
     return (
       <div className="my-12">
         {title && (
-          <motion.h3 
+          <m.h3 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="font-title text-4xl text-center text-[#5b2c1d] mb-12 tracking-tight"
           >
             {title}
-          </motion.h3>
+          </m.h3>
         )}
         <ImageCarousel images={images.filter(img => img.imageUrl).map(img => ({ id: img._key, src: img.imageUrl, alt: img.alt || 'Slider image' }))} />
       </div>
@@ -114,8 +114,10 @@ export function ImageGalleryBlockRenderer({
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6 sm:px-12 py-8">
-      {layoutType === 'masonry' ? renderMasonry() : renderSlider()}
-    </div>
+    <LazyMotion features={domAnimation}>
+      <div className="max-w-7xl mx-auto px-6 sm:px-12 py-8">
+        {layoutType === 'masonry' ? renderMasonry() : renderSlider()}
+      </div>
+    </LazyMotion>
   );
 }
