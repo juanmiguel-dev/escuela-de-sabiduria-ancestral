@@ -70,7 +70,7 @@ export function ImageGalleryBlockRenderer({
     return (
       <div className="my-12">
         {title && <h3 className="font-title text-3xl text-center text-[#5b2c1d] mb-8">{title}</h3>}
-        <ImageCarousel images={images.map(img => ({ src: img.imageUrl, alt: img.alt || 'Slider image' }))} />
+        <ImageCarousel images={images.map(img => ({ id: img._key, src: img.imageUrl, alt: img.alt || 'Slider image' }))} />
       </div>
     );
   };
