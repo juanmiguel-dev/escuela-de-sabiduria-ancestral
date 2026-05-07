@@ -343,5 +343,3 @@ export function ImageCarousel({ images, onGalleryClick, minimal = false, align =
         </LazyMotion>
     );
 }
-    );
-}
