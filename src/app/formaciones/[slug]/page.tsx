@@ -36,7 +36,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
   };
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900 pb-24">
+    <main className="min-h-screen flex flex-col bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900">
       <Navbar theme="dark" position="absolute" />
 
       {/* Hero Section de la Formación */}
