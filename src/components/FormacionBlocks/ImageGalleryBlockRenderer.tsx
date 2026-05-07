@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { ImageCarousel } from "@/components/ImageCarousel"; // Reutilizar el componente existente
 
+import { motion } from "framer-motion";
+
 interface ImageAsset {
   _key: string;
   imageUrl: string;
@@ -36,30 +38,57 @@ export function ImageGalleryBlockRenderer({
   }, []);
 
   if (!isMounted) {
-    return null; // Evitar renderizado en el servidor para componentes con 'use client' y hooks
+    return null;
   }
 
   const renderMasonry = () => {
-    const gridColsClass = `grid-cols-${masonryColumns}`;
-    const gridRowsClass = `grid-rows-${masonryRows}`;
+    const gridColsClasses: { [key: number]: string } = {
+      1: 'grid-cols-1',
+      2: 'grid-cols-2',
+      3: 'grid-cols-3',
+      4: 'grid-cols-4',
+      5: 'grid-cols-5',
+      6: 'grid-cols-6',
+    };
+
+    const gridColsClass = gridColsClasses[masonryColumns] || 'grid-cols-3';
 
     return (
       <div className="my-12">
-        {title && <h3 className="font-title text-3xl text-center text-[#5b2c1d] mb-8">{title}</h3>}
+        {title && (
+          <motion.h3 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-title text-4xl text-center text-[#5b2c1d] mb-12 tracking-tight"
+          >
+            {title}
+          </motion.h3>
+        )}
         <div
-          className={`grid ${gridColsClass} gap-4 auto-rows-fr`} // auto-rows-fr para filas flexibles
-          style={{ gridTemplateRows: `repeat(${masonryRows}, minmax(0, 1fr))` }}
+          className={`grid ${gridColsClass} gap-6`}
+          style={{ 
+            gridTemplateRows: `repeat(${masonryRows}, minmax(180px, 1fr))`
+          }}
         >
-          {images.map((image) => (
-            <div key={image._key} className="relative w-full h-full overflow-hidden rounded-lg shadow-md">
+          {images.map((image, idx) => (
+            <motion.div 
+              key={image._key} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.05 }}
+              className="relative w-full aspect-square overflow-hidden rounded-[2rem] shadow-[0_15px_35px_rgba(0,0,0,0.1)] group hover:shadow-[0_25px_50px_rgba(0,0,0,0.15)] transition-all duration-500 border border-white/20"
+            >
               <Image
                 src={image.imageUrl}
                 alt={image.alt || 'Gallery image'}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-            </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </motion.div>
           ))}
         </div>
       </div>
@@ -69,7 +98,16 @@ export function ImageGalleryBlockRenderer({
   const renderSlider = () => {
     return (
       <div className="my-12">
-        {title && <h3 className="font-title text-3xl text-center text-[#5b2c1d] mb-8">{title}</h3>}
+        {title && (
+          <motion.h3 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-title text-4xl text-center text-[#5b2c1d] mb-12 tracking-tight"
+          >
+            {title}
+          </motion.h3>
+        )}
         <ImageCarousel images={images.map(img => ({ id: img._key, src: img.imageUrl, alt: img.alt || 'Slider image' }))} />
       </div>
     );

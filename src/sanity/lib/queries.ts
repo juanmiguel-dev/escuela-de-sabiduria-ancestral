@@ -71,17 +71,15 @@ export async function getFormacionBySlug(slug: string) {
           "avatarUrl": avatar.asset->url
         }
       },
-      defined(images) => {
-        _type == "imageGalleryBlock" => {
-          title,
-          layoutType,
-          masonryColumns,
-          masonryRows,
-          images[] {
-            _key,
-            "imageUrl": asset->url,
-            alt
-          }
+      _type == "imageGalleryBlock" => {
+        title,
+        layoutType,
+        masonryColumns,
+        masonryRows,
+        images[] {
+          _key,
+          "imageUrl": image.asset->url,
+          "alt": image.alt
         }
       }
     }
