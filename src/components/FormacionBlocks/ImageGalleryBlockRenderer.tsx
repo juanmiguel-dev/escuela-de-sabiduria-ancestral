@@ -108,7 +108,7 @@ export function ImageGalleryBlockRenderer({
             {title}
           </m.h3>
         )}
-        <ImageCarousel images={images.filter(img => img.imageUrl).map(img => ({ id: img._key, src: img.imageUrl, alt: img.alt || 'Slider image' }))} />
+        <ImageCarousel minimal images={images.filter(img => img.imageUrl).map(img => ({ id: img._key, src: img.imageUrl, alt: img.alt || 'Slider image' }))} />
       </div>
     );
   };
