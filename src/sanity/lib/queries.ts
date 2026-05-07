@@ -70,6 +70,19 @@ export async function getFormacionBySlug(slug: string) {
           mensaje,
           "avatarUrl": avatar.asset->url
         }
+      },
+      defined(images) => {
+        _type == "imageGalleryBlock" => {
+          title,
+          layoutType,
+          masonryColumns,
+          masonryRows,
+          images[] {
+            _key,
+            "imageUrl": asset->url,
+            alt
+          }
+        }
       }
     }
   }`, { slug });

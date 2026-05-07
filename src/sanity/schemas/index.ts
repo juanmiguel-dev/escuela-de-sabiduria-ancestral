@@ -13,6 +13,7 @@ import { cuerpoDirigidoABlock } from './cuerpoDirigidoABlock';
 import { detailedDescriptionBlock } from './detailedDescriptionBlock';
 import { introduccionAperturaBlock } from './introduccionAperturaBlock';
 import { testimoniosBlock } from './testimoniosBlock';
+import { imageGalleryBlock } from './imageGalleryBlock';
 
 export const schema = {
   types: [
@@ -31,5 +32,6 @@ export const schema = {
     detailedDescriptionBlock,
     introduccionAperturaBlock,
     testimoniosBlock,
+    imageGalleryBlock,
   ],
 };

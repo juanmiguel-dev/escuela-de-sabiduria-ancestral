@@ -86,6 +86,7 @@ export const formacion = defineType({
         { type: 'detailedDescriptionBlock' },
         { type: 'introduccionAperturaBlock' },
         { type: 'testimoniosBlock' },
+        { type: 'imageGalleryBlock' },
       ],
     }),
   ],

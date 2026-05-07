@@ -13,6 +13,7 @@ import { CuerpoDirigidoABlockRenderer } from "@/components/FormacionBlocks/Cuerp
 import { DetailedDescriptionBlockRenderer } from "@/components/FormacionBlocks/DetailedDescriptionBlockRenderer";
 import { IntroduccionAperturaBlockRenderer } from "@/components/FormacionBlocks/IntroduccionAperturaBlockRenderer";
 import { TestimoniosBlockRenderer } from "@/components/FormacionBlocks/TestimoniosBlockRenderer";
+import { ImageGalleryBlockRenderer } from "@/components/FormacionBlocks/ImageGalleryBlockRenderer";
 
 export const revalidate = 0; // Desactiva la caché de Next.js para esta ruta dinámica
 
@@ -31,6 +32,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
     detailedDescriptionBlock: DetailedDescriptionBlockRenderer,
     introduccionAperturaBlock: IntroduccionAperturaBlockRenderer,
     testimoniosBlock: TestimoniosBlockRenderer,
+    imageGalleryBlock: ImageGalleryBlockRenderer,
   };
 
   return (
