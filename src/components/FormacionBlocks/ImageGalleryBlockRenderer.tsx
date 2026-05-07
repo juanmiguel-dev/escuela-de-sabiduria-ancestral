@@ -42,6 +42,30 @@ export function ImageGalleryBlockRenderer({
   }
 
   const renderMasonry = () => {
+    if (images.length === 1) {
+      const image = images[0];
+      return (
+        <div className="my-12 flex justify-center px-6">
+          <m.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="relative w-full max-w-3xl aspect-[16/10] sm:aspect-[16/9] overflow-hidden rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.12)] group border border-white/20"
+          >
+            <Image
+              src={image.imageUrl}
+              alt={image.alt || 'Featured image'}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 800px"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          </m.div>
+        </div>
+      );
+    }
+
     const gridColsClasses: { [key: number]: string } = {
       1: 'grid-cols-1',
       2: 'grid-cols-2',
@@ -66,7 +90,7 @@ export function ImageGalleryBlockRenderer({
           </m.h3>
         )}
         <div
-          className={`grid ${gridColsClass} gap-6`}
+          className={`grid ${gridColsClass} gap-6 px-6`}
           style={{ 
             gridTemplateRows: `repeat(${masonryRows}, minmax(180px, 1fr))`
           }}
