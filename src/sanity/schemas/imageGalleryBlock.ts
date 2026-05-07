@@ -14,6 +14,9 @@ export const imageGalleryBlock = defineType({
       name: 'images',
       title: 'Imágenes',
       type: 'array',
+      options: {
+        layout: 'grid',
+      },
       of: [
         {
           type: 'image',
