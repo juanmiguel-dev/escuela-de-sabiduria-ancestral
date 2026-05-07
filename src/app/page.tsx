@@ -34,7 +34,7 @@ export default function Home() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <main className="min-h-screen selection:bg-[#333333] selection:text-white pb-24 overflow-x-hidden font-sans relative text-gray-900">
+      <main className="min-h-screen flex flex-col selection:bg-[#333333] selection:text-white pb-24 overflow-x-hidden font-sans relative text-gray-900">
 
         {/* Header Unificado */}
         <Navbar theme="dark" position="absolute" />
