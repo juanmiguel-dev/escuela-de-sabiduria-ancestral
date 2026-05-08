@@ -119,22 +119,6 @@ function YouTubeAPIVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?
     });
   }, [playerReady, videoId]);
 
-  const handlePlayClick = () => {
-    if (playerRef.current) {
-      playerRef.current.playVideo();
-      setIsPlaying(true);
-    } else {
-      const checkAndPlay = setInterval(() => {
-        if (playerRef.current) {
-          playerRef.current.playVideo();
-          setIsPlaying(true);
-          clearInterval(checkAndPlay);
-        }
-      }, 100);
-      setTimeout(() => clearInterval(checkAndPlay), 5000);
-    }
-  };
-
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
     if (isPlaying && playerRef.current) {
@@ -199,11 +183,16 @@ function YouTubeAPIVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?
     hideTimeoutRef.current = setTimeout(() => setShowControls(false), 3000);
   };
 
-  if (!playerRef.current) {
+  if (!isReady) {
     return (
       <div 
         className="w-full aspect-video bg-black relative cursor-pointer group"
-        onClick={handlePlayClick}
+        onClick={() => {
+          if (playerRef.current) {
+            playerRef.current.playVideo();
+            setIsPlaying(true);
+          }
+        }}
       >
         {thumbnailUrl && (
           <Image
@@ -216,7 +205,17 @@ function YouTubeAPIVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?
         )}
         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <button className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
+          <button 
+            type="button"
+            className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (playerRef.current) {
+                playerRef.current.playVideo();
+                setIsPlaying(true);
+              }
+            }}
+          >
             <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>
