@@ -28,11 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cinzel.variable} ${laBelleAurore.variable} font-hand antialiased`
+        className={`${cinzel.variable} ${laBelleAurore.variable} font-hand antialiased`}
       >
         <TechBackground />
-        <div className="scanlines" />
-        <div className="noise-bg" />
         {children}
       </body>
     </html>
