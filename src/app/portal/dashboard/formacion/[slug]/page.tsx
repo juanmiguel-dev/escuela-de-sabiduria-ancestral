@@ -72,7 +72,6 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
     
     if (!videoId) return url;
     
-    // Parameters to hide YouTube branding as much as possible
     const params = new URLSearchParams({
       modestbranding: '1',
       rel: '0',
@@ -81,9 +80,13 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
       disablekb: '1',
       fs: '0',
       playsinline: '1',
+      cc_load_policy: '0',
+      controls: '0',
+      enablejsapi: '0',
+      origin: typeof window !== 'undefined' ? window.location.origin : '',
     });
     
-    return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+    return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
   };
 
   return (
@@ -109,8 +112,10 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                     src={getYoutubeEmbedUrl(selectedVideo.videoUrl)}
                     title="Video Player"
                     className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    style={{ border: 'none' }}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                     allowFullScreen
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
                   />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
