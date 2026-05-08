@@ -1,83 +1,294 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useState, use, useRef } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
-import { m, AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
+import { m, LazyMotion, domAnimation } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { getFormacionBySlug } from "@/sanity/lib/queries";
 
 function extractVideoId(url: string): string {
-    if (!url) return '';
-    if (url.includes('youtube.com/watch')) {
-      const urlParams = new URLSearchParams(new URL(url).search);
-      return urlParams.get('v') || '';
-    } else if (url.includes('youtu.be/')) {
-      return url.split('youtu.be/')[1]?.split('?')[0] || '';
-    } else if (url.includes('youtube.com/embed/')) {
-      return url.split('embed/')[1]?.split('?')[0] || '';
-    } else if (url.includes('youtube-nocookie.com/embed/')) {
-      return url.split('embed/')[1]?.split('?')[0] || '';
-    }
-    return '';
+  if (!url) return '';
+  if (url.includes('youtube.com/watch')) {
+    const urlParams = new URLSearchParams(new URL(url).search);
+    return urlParams.get('v') || '';
+  } else if (url.includes('youtu.be/')) {
+    return url.split('youtu.be/')[1]?.split('?')[0] || '';
+  } else if (url.includes('youtube.com/embed/')) {
+    return url.split('embed/')[1]?.split('?')[0] || '';
+  } else if (url.includes('youtube-nocookie.com/embed/')) {
+    return url.split('embed/')[1]?.split('?')[0] || '';
   }
+  return '';
+}
 
-  function getYouTubeThumbnail(videoId: string): string {
-    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-  }
+function getYouTubeThumbnail(videoId: string): string {
+  return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+}
 
-  function CustomVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?: string }) {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const videoId = extractVideoId(videoUrl);
-    const thumbnailUrl = poster || (videoId ? getYouTubeThumbnail(videoId) : '');
+interface YouTubePlayer {
+  playVideo(): void;
+  pauseVideo(): void;
+  seekTo(seconds: number, allowSeekAhead: boolean): void;
+  setVolume(volume: number): void;
+  getCurrentTime(): number;
+  getDuration(): number;
+  getPlayerState(): number;
+}
 
-    if (!isPlaying) {
-      return (
-        <div 
-          className="w-full aspect-video bg-black relative cursor-pointer group"
-          onClick={() => setIsPlaying(true)}
-        >
-          {thumbnailUrl && (
-            <Image
-              src={thumbnailUrl}
-              alt="Video thumbnail"
-              fill
-              className="object-cover"
-              unoptimized
-            />
-          )}
-          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <button className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
-              <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      );
+function YouTubeAPIVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?: string }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(100);
+  const [isMuted, setIsMuted] = useState(false);
+  const playerRef = useRef<YouTubePlayer | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoId = extractVideoId(videoUrl);
+  const thumbnailUrl = poster || (videoId ? getYouTubeThumbnail(videoId) : '');
+  const [playerReady, setPlayerReady] = useState(false);
+  const [showControls, setShowControls] = useState(false);
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (!videoId) return;
+
+    const existingScript = document.getElementById('youtube-api-script');
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.id = 'youtube-api-script';
+      script.src = 'https://www.youtube.com/iframe_api';
+      script.async = true;
+      document.body.appendChild(script);
     }
 
+    const checkAPI = () => {
+      if ((window as any).YT && (window as any).YT.Player) {
+        setPlayerReady(true);
+      } else {
+        setTimeout(checkAPI, 100);
+      }
+    };
+    checkAPI();
+
+    (window as any).onYouTubeIframeAPIReady = () => {
+      setPlayerReady(true);
+    };
+
+    return () => {
+      if (playerRef.current) {
+        try { playerRef.current.pauseVideo(); } catch (e) {}
+      }
+    };
+  }, [videoId]);
+
+  useEffect(() => {
+    if (!playerReady || !videoId || !containerRef.current || playerRef.current) return;
+
+    const player = new (window as any).YT.Player(containerRef.current, {
+      videoId: videoId,
+      playerVars: {
+        'controls': 0,
+        'showinfo': 0,
+        'modestbranding': 1,
+        'rel': 0,
+        'disablekb': 1,
+        'iv_load_policy': 3,
+        'fs': 0,
+        'playsinline': 1,
+        'autoplay': 0,
+      },
+      events: {
+        'onReady': (event: any) => {
+          playerRef.current = event.target;
+          setIsReady(true);
+          setDuration(event.target.getDuration());
+        },
+        'onStateChange': (event: any) => {
+          if (event.data === (window as any).YT.PlayerState.PLAYING) {
+            setIsPlaying(true);
+          } else if (event.data === (window as any).YT.PlayerState.PAUSED) {
+            setIsPlaying(false);
+          } else if (event.data === (window as any).YT.PlayerState.ENDED) {
+            setIsPlaying(false);
+            setProgress(0);
+          }
+        },
+      },
+    });
+  }, [playerReady, videoId]);
+
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+    if (isPlaying && playerRef.current) {
+      interval = setInterval(() => {
+        if (playerRef.current) {
+          const currentTime = playerRef.current.getCurrentTime();
+          const dur = playerRef.current.getDuration();
+          setProgress((currentTime / dur) * 100);
+        }
+      }, 100);
+    }
+    return () => clearInterval(interval);
+  }, [isPlaying]);
+
+  const handlePlayPause = () => {
+    if (!playerRef.current) return;
+    if (isPlaying) {
+      playerRef.current.pauseVideo();
+    } else {
+      playerRef.current.playVideo();
+    }
+  };
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!playerRef.current || !duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const percentage = x / rect.width;
+    const seekTime = percentage * duration;
+    playerRef.current.seekTo(seekTime, true);
+  };
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseInt(e.target.value);
+    setVolume(newVolume);
+    setIsMuted(newVolume === 0);
+    if (playerRef.current) {
+      playerRef.current.setVolume(newVolume);
+    }
+  };
+
+  const toggleMute = () => {
+    if (!playerRef.current) return;
+    if (isMuted) {
+      playerRef.current.setVolume(volume || 100);
+      setIsMuted(false);
+    } else {
+      playerRef.current.setVolume(0);
+      setIsMuted(true);
+    }
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const handleMouseMove = () => {
+    setShowControls(true);
+    if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+    hideTimeoutRef.current = setTimeout(() => setShowControls(false), 3000);
+  };
+
+  if (!isPlaying && !isReady) {
     return (
-      <div className="w-full aspect-video bg-black relative">
-        <iframe
-          src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&playsinline=1`}
-          title="Video Player"
-          className="w-full h-full"
-          style={{ border: 'none' }}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-          allowFullScreen
-        />
+      <div 
+        className="w-full aspect-video bg-black relative cursor-pointer group"
+        onClick={() => {
+          if (playerRef.current) {
+            playerRef.current.playVideo();
+          }
+        }}
+      >
+        {thumbnailUrl && (
+          <Image
+            src={thumbnailUrl}
+            alt="Video thumbnail"
+            fill
+            className="object-cover"
+            unoptimized
+          />
+        )}
+        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <button className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
+            <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </button>
+        </div>
       </div>
     );
   }
 
-  export default function FormacionPlayer({ params }: { params: Promise<{ slug: string }> }) {
-    const { slug } = use(params);
-    const router = useRouter();
-    const [formacion, setFormacion] = useState<any>(null);
-    const [loading, setLoading] = useState(true);
-    const [selectedVideo, setSelectedVideo] = useState<any>(null);
+  return (
+    <div 
+      className="w-full aspect-video bg-black relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setShowControls(false)}
+    >
+      <div ref={containerRef} className="w-full h-full" />
+      
+      <div 
+        className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}
+      >
+        <div 
+          className="h-1 bg-white/30 rounded-full cursor-pointer mb-3 group"
+          onClick={handleSeek}
+        >
+          <div 
+            className="h-full bg-[#d4af37] rounded-full relative"
+            style={{ width: `${progress}%` }}
+          >
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+          </div>
+        </div>
+        
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <button onClick={handlePlayPause} className="text-white hover:text-[#d4af37] transition-colors">
+              {isPlaying ? (
+                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+                </svg>
+              ) : (
+                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              )}
+            </button>
+            
+            <div className="flex items-center gap-2">
+              <button onClick={toggleMute} className="text-white hover:text-[#d4af37] transition-colors">
+                {isMuted || volume === 0 ? (
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                  </svg>
+                )}
+              </button>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={isMuted ? 0 : volume}
+                onChange={handleVolumeChange}
+                className="w-20 h-1 accent-[#d4af37]"
+              />
+            </div>
+            
+            <span className="text-white text-sm">
+              {formatTime(isReady ? (playerRef.current?.getCurrentTime() || 0) : 0)} / {formatTime(duration)}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function FormacionPlayer({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
+  const router = useRouter();
+  const [formacion, setFormacion] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedVideo, setSelectedVideo] = useState<any>(null);
 
   useEffect(() => {
     const userEmail = localStorage.getItem("alumno_email");
@@ -119,48 +330,10 @@ function extractVideoId(url: string): string {
     );
   }
 
-  const getYoutubeEmbedUrl = (url: string) => {
-    if (!url) return '';
-    
-    let videoId = '';
-    if (url.includes('youtube.com/watch')) {
-      const urlParams = new URLSearchParams(new URL(url).search);
-      videoId = urlParams.get('v') || '';
-    } else if (url.includes('youtu.be/')) {
-      videoId = url.split('youtu.be/')[1]?.split('?')[0] || '';
-    } else if (url.includes('youtube.com/embed/')) {
-      videoId = url.split('embed/')[1]?.split('?')[0] || '';
-    } else if (url.includes('youtube-nocookie.com/embed/')) {
-      videoId = url.split('embed/')[1]?.split('?')[0] || '';
-    }
-    
-    if (!videoId) return url;
-    
-    const params = new URLSearchParams({
-      modestbranding: '1',
-      rel: '0',
-      showinfo: '0',
-      iv_load_policy: '3',
-      disablekb: '1',
-      fs: '1',
-      playsinline: '1',
-      cc_load_policy: '0',
-      controls: '0',
-      enablejsapi: '0',
-      brand: '0',
-      hide_share: '1',
-      hide_annotations: '1',
-      xtags: '',
-    });
-    
-    return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
-  };
-
   return (
     <LazyMotion features={domAnimation}>
       <div className="min-h-screen bg-[#0f0f0f] flex flex-col text-white">
         
-        {/* Header */}
         <header className="p-6 bg-[#1a1a1a] flex items-center gap-4 border-b border-white/5">
           <NextLink href="/portal/dashboard" className="text-[#d4af37] hover:text-white transition-colors">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
@@ -168,14 +341,12 @@ function extractVideoId(url: string): string {
           <h1 className="text-lg font-bold tracking-tight">{formacion.title}</h1>
         </header>
 
-        {/* Main Content */}
         <main className="flex-grow flex flex-col overflow-y-auto">
           {selectedVideo ? (
             <div className="flex flex-col">
-              {/* Video Player */}
               <div className="w-full aspect-video bg-black relative shadow-2xl">
                 {selectedVideo.videoUrl ? (
-                  <CustomVideoPlayer videoUrl={selectedVideo.videoUrl} poster={formacion?.imageUrl} />
+                  <YouTubeAPIVideoPlayer videoUrl={selectedVideo.videoUrl} poster={formacion?.imageUrl} />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
                     <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6">
@@ -186,7 +357,6 @@ function extractVideoId(url: string): string {
                 )}
               </div>
 
-              {/* Info Area */}
               <div className="p-8 sm:p-12 lg:p-16 max-w-4xl mx-auto w-full">
                 <m.div
                   initial={{ opacity: 0, y: 20 }}
