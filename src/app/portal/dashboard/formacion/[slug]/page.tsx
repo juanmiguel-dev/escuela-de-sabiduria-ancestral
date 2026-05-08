@@ -26,17 +26,19 @@ function getYouTubeThumbnail(videoId: string): string {
   return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 }
 
-function CustomVideoPlayer({ videoUrl }: { videoUrl: string }) {
+function CustomVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?: string }) {
   const playerRef = useRef<any>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(100);
   const [muted, setMuted] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const playerId = useRef(`yt-player-${Math.random().toString(36).slice(2)}`).current;
   const videoId = extractVideoId(videoUrl);
+  const thumbnailUrl = poster || (videoId ? getYouTubeThumbnail(videoId) : '');
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -51,7 +53,7 @@ function CustomVideoPlayer({ videoUrl }: { videoUrl: string }) {
 
     const init = () => {
       if (!(window as any).YT?.Player) { setTimeout(init, 200); return; }
-      if (playerRef.current) playerRef.current.destroy();
+      if (playerRef.current) { try { playerRef.current.destroy(); } catch (e) {} }
 
       playerRef.current = new (window as any).YT.Player(playerId, {
         videoId,
@@ -78,7 +80,7 @@ function CustomVideoPlayer({ videoUrl }: { videoUrl: string }) {
     (window as any).onYouTubeIframeAPIReady = init;
     init();
 
-    return () => { if (playerRef.current) playerRef.current.destroy(); };
+    return () => { if (playerRef.current) { try { playerRef.current.destroy(); } catch (e) {} } };
   }, [videoId, playerId]);
 
   useEffect(() => {
@@ -89,6 +91,12 @@ function CustomVideoPlayer({ videoUrl }: { videoUrl: string }) {
       }
     }, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const onFullscreenChange = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
   }, []);
 
   const togglePlay = () => {
@@ -117,6 +125,15 @@ function CustomVideoPlayer({ videoUrl }: { videoUrl: string }) {
     if (v > 0 && muted) { playerRef.current.unMute(); setMuted(false); }
   };
 
+  const toggleFullscreen = () => {
+    if (!wrapperRef.current) return;
+    if (!document.fullscreenElement) {
+      wrapperRef.current.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
   const handleMouseMove = () => {
     setShowOverlay(true);
     if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
@@ -132,97 +149,123 @@ function CustomVideoPlayer({ videoUrl }: { videoUrl: string }) {
   if (!videoId) return null;
 
   return (
-    <div
-      className="w-full aspect-video bg-black relative overflow-hidden group"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => setShowOverlay(false)}
-    >
-      {/* Aggressive scale-crop to hide YouTube's persistent UI */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="w-[120%] h-[170%] -translate-x-[10%] -translate-y-[20%]">
-          <div id={playerId} />
-        </div>
-      </div>
-
-      {/* Interaction overlay - prevents YouTube from receiving clicks */}
+    <div className="w-full flex justify-center">
       <div
-        className="absolute inset-0 z-10 cursor-pointer"
-        onClick={togglePlay}
-      />
-
-      {/* Thumbnail overlay while loading */}
-      {!ready && (
-        <div className="absolute inset-0 z-10 bg-black" />
-      )}
-
-      {/* Center play icon when paused */}
-      {!playing && ready && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
-          <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-2xl">
-            <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
-        </div>
-      )}
-
-      {/* Controls bar */}
-      <div
-        className={`absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 to-transparent px-6 pb-6 pt-16 transition-all duration-500 ${showOverlay ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+        ref={wrapperRef}
+        className="w-full max-w-5xl aspect-video bg-black relative rounded-2xl overflow-hidden group shadow-2xl"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={() => setShowOverlay(false)}
       >
-        {/* Progress bar */}
-        <div
-          className="h-1 bg-white/20 rounded-full cursor-pointer mb-4 group/progress"
-          onClick={handleSeek}
-        >
-          <div
-            className="h-full bg-[#d4af37] rounded-full relative transition-all duration-200"
-            style={{ width: `${progress}%` }}
-          >
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover/progress:opacity-100 transition-opacity" />
+        {/* YouTube player - scale-crop to hide UI */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="w-[110%] h-[150%] -translate-x-[5%] -translate-y-[15%]">
+            <div id={playerId} />
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <button onClick={togglePlay} className="text-white hover:text-[#d4af37] transition-colors">
-              {playing ? (
-                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-                </svg>
-              ) : (
-                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+        {/* Interaction overlay */}
+        <div
+          className="absolute inset-0 z-10 cursor-pointer"
+          onClick={togglePlay}
+        />
+
+        {/* Thumbnail while loading */}
+        {!ready && thumbnailUrl && (
+          <div className="absolute inset-0 z-10">
+            <Image src={thumbnailUrl} alt="" fill className="object-cover" unoptimized />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-2xl">
+                <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
-              )}
-            </button>
+              </div>
+            </div>
+          </div>
+        )}
+        {!ready && !thumbnailUrl && (
+          <div className="absolute inset-0 z-10 bg-black" />
+        )}
 
-            <div className="flex items-center gap-3 group/vol">
-              <button onClick={toggleMute} className="text-white/60 hover:text-[#d4af37] transition-colors">
-                {muted || volume === 0 ? (
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+        {/* Center play icon when paused */}
+        {!playing && ready && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+            <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-2xl">
+              <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        )}
+
+        {/* Controls bar */}
+        <div
+          className={`absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 to-transparent px-6 pb-6 pt-16 transition-all duration-500 ${showOverlay ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+        >
+          <div
+            className="h-1 bg-white/20 rounded-full cursor-pointer mb-4 group/progress"
+            onClick={handleSeek}
+          >
+            <div
+              className="h-full bg-[#d4af37] rounded-full relative transition-all duration-200"
+              style={{ width: `${progress}%` }}
+            >
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover/progress:opacity-100 transition-opacity" />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <button onClick={togglePlay} className="text-white hover:text-[#d4af37] transition-colors">
+                {playing ? (
+                  <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
                   </svg>
                 ) : (
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                  <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
                   </svg>
                 )}
               </button>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={muted ? 0 : volume}
-                onChange={handleVolume}
-                onClick={(e) => e.stopPropagation()}
-                className="w-16 h-1 accent-[#d4af37]"
-              />
+
+              <div className="flex items-center gap-3 group/vol">
+                <button onClick={toggleMute} className="text-white/60 hover:text-[#d4af37] transition-colors">
+                  {muted || volume === 0 ? (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                    </svg>
+                  )}
+                </button>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={muted ? 0 : volume}
+                  onChange={handleVolume}
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-16 h-1 accent-[#d4af37]"
+                />
+              </div>
+
+              <span className="text-white/50 text-xs font-mono">
+                {formatTime(playerRef.current?.getCurrentTime?.() || 0)} / {formatTime(playerRef.current?.getDuration?.() || 0)}
+              </span>
             </div>
 
-            <span className="text-white/50 text-xs font-mono">
-              {formatTime(playerRef.current?.getCurrentTime?.() || 0)} / {formatTime(playerRef.current?.getDuration?.() || 0)}
-            </span>
+            <button onClick={toggleFullscreen} className="text-white/60 hover:text-[#d4af37] transition-colors">
+              {isFullscreen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                </svg>
+              )}
+            </button>
           </div>
         </div>
       </div>
@@ -293,7 +336,7 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
             <div className="flex flex-col">
               <div className="w-full aspect-video bg-black relative shadow-2xl">
                 {selectedVideo.videoUrl ? (
-                  <CustomVideoPlayer videoUrl={selectedVideo.videoUrl} />
+                  <CustomVideoPlayer videoUrl={selectedVideo.videoUrl} poster={formacion?.imageUrl} />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
                     <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6">
