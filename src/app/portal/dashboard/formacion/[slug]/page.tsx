@@ -158,9 +158,7 @@ function CustomVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?: st
       >
         {/* YouTube player - scale-crop to hide UI */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="w-[110%] h-[150%] -translate-x-[5%] -translate-y-[15%]">
-            <div id={playerId} />
-          </div>
+          <div id={playerId} className="w-[110%] h-[150%] -translate-x-[5%] -translate-y-[15%]" />
         </div>
 
         {/* Interaction overlay */}
