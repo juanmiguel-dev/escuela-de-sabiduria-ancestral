@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { m, Variants, LazyMotion, domAnimation } from "framer-motion";
 import Image from "next/image";
+import NextLink from "next/link";
 import { getLandingData, getFormaciones, getTalleres } from "@/sanity/lib/queries";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
