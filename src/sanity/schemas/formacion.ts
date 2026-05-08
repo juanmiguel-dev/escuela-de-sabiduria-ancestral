@@ -90,10 +90,10 @@ export const formacion = defineType({
       ],
     }),
     defineField({
-      name: 'videos',
-      title: 'Videos / Contenido Liberado',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'video' }] }],
+      name: 'videoUrl',
+      title: 'URL del Video de Contenido Liberado',
+      type: 'url',
+      description: 'URL del video de YouTube (usar URL de embed para videos ocultos)',
     }),
   ],
   preview: {
