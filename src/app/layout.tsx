@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-
-const gwendolyn = localFont({
-  src: "../public/fonts/Gwendolyn-Regular.ttf",
-  variable: "--font-gwendolyn",
-  weight: "400",
-  style: "normal",
-});
+import { Cinzel } from "next/font/google";
+import { La_Belle_Aurore } from "next/font/google";
+import { Calligraffitti } from "next/font/google";
 import "./globals.css";
 import { TechBackground } from "@/components/TechBackground";
+
+const calligraffitti = Calligraffitti({
+  variable: "--font-title",
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
@@ -35,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cinzel.variable} ${laBelleAurore.variable} font-hand antialiased`}
+        className={`${calligraffitti.variable} ${cinzel.variable} ${laBelleAurore.variable} font-hand antialiased`}
       >
         <TechBackground />
         {children}
