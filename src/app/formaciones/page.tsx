@@ -28,7 +28,7 @@ export default async function FormacionesPage() {
           <span className="block text-xs sm:text-sm text-[#d4af37] font-bold tracking-[0.3em] uppercase mb-4 drop-shadow-md">
             Crecimiento y Sabiduría
           </span>
-          <h1 className="text-4xl sm:text-6xl font-black text-white drop-shadow-lg font-title tracking-wide">
+          <h1 className="text-4xl sm:text-6xl text-white drop-shadow-lg font-title tracking-wide">
             Nuestras Formaciones
           </h1>
         </div>

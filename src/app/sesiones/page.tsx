@@ -46,7 +46,7 @@ export default function SesionesPage() {
           <span className="block text-xs sm:text-sm text-[#d4af37] font-bold tracking-[0.3em] uppercase mb-4 drop-shadow-md">
             Acompañamiento Personalizado
           </span>
-          <h1 className="text-4xl sm:text-6xl font-black text-white drop-shadow-lg font-title tracking-wide">
+          <h1 className="text-4xl sm:text-6xl text-white drop-shadow-lg font-title tracking-wide">
             Reserva tu Sesión
           </h1>
         </motion.div>
