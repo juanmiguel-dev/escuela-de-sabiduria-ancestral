@@ -151,17 +151,18 @@ export async function getTalleres() {
 
 
 export async function getAlumnoByEmail(email: string) {
-  return await client.fetch(*[_type == " alumno\ && email == ][0] {
- _id,
- name,
- email,
- isActive,
- \formaciones\: formaciones[]-> {
- _id,
- title,
- \slug\: slug.current,
- \imageUrl\: mainImage.asset->url,
- shortDescription
- }
- }, { email });
+  return await client.fetch(`*[_type == "alumno" && email == $email][0] {
+    _id,
+    name,
+    email,
+    isActive,
+    "formaciones": formaciones[]-> {
+      _id,
+      title,
+      "slug": slug.current,
+      "imageUrl": mainImage.asset->url,
+      shortDescription
+    }
+  }`, { email });
 }
+
