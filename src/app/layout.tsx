@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Cinzel } from "next/font/google";
 import { La_Belle_Aurore } from "next/font/google";
-import { Calligraffitti } from "next/font/google";
+import { Parisienne } from "next/font/google";
 import "./globals.css";
 import { TechBackground } from "@/components/TechBackground";
 
-const calligraffitti = Calligraffitti({
+const parisienne = Parisienne({
   variable: "--font-title",
   subsets: ["latin"],
   weight: "400",
@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${calligraffitti.variable} ${cinzel.variable} ${laBelleAurore.variable} font-hand antialiased`}
+        className={`${parisienne.variable} ${cinzel.variable} ${laBelleAurore.variable} font-hand antialiased`}
       >
         <TechBackground />
         {children}
