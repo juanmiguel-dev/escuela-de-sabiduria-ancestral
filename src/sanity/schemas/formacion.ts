@@ -95,6 +95,31 @@ export const formacion = defineType({
       type: 'url',
       description: 'URL del video de YouTube (usar URL de embed para videos ocultos)',
     }),
+    defineField({
+      name: 'recursos',
+      title: 'Recursos / PDFs',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'titulo',
+              title: 'Título del Recurso',
+              type: 'string',
+            }),
+            defineField({
+              name: 'archivo',
+              title: 'Archivo PDF',
+              type: 'file',
+              options: {
+                accept: '.pdf',
+              },
+            }),
+          ],
+        },
+      ],
+    }),
   ],
   preview: {
     select: {

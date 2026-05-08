@@ -43,6 +43,10 @@ export async function getFormacionBySlug(slug: string) {
 "imageUrl": mainImage.asset->url,
     "heroImageUrl": heroImage.asset->url,
     videoUrl,
+    "recursos": recursos[] {
+      titulo,
+      "archivoUrl": archivo.asset->url
+    },
     contentBlocks[] {
       _type,
       _key,
