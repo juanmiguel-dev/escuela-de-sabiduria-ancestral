@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, use, useRef } from "react";
+import { useEffect, useState, use } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
 import { m, LazyMotion, domAnimation } from "framer-motion";
@@ -36,163 +36,17 @@ interface YouTubePlayer {
   getPlayerState(): number;
 }
 
-function YouTubeAPIVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?: string }) {
+function SimpleVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isReady, setIsReady] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(100);
-  const [isMuted, setIsMuted] = useState(false);
-  const playerRef = useRef<YouTubePlayer | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const videoId = extractVideoId(videoUrl);
   const thumbnailUrl = poster || (videoId ? getYouTubeThumbnail(videoId) : '');
-  const [playerReady, setPlayerReady] = useState(false);
-  const [showControls, setShowControls] = useState(false);
-  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&playsinline=1&controls=0&disablekb=1`;
 
-  useEffect(() => {
-    if (!videoId) return;
-
-    const existingScript = document.getElementById('youtube-api-script');
-    if (!existingScript) {
-      const script = document.createElement('script');
-      script.id = 'youtube-api-script';
-      script.src = 'https://www.youtube.com/iframe_api';
-      script.async = true;
-      document.body.appendChild(script);
-    }
-
-    const checkAPI = () => {
-      if ((window as any).YT && (window as any).YT.Player) {
-        setPlayerReady(true);
-      } else {
-        setTimeout(checkAPI, 100);
-      }
-    };
-    checkAPI();
-
-    (window as any).onYouTubeIframeAPIReady = () => {
-      setPlayerReady(true);
-    };
-
-    return () => {
-      if (playerRef.current) {
-        try { playerRef.current.pauseVideo(); } catch (e) {}
-      }
-    };
-  }, [videoId]);
-
-  useEffect(() => {
-    if (!playerReady || !videoId || !containerRef.current) return;
-
-    const player = new (window as any).YT.Player(containerRef.current, {
-      videoId: videoId,
-      playerVars: {
-        'controls': 0,
-        'showinfo': 0,
-        'modestbranding': 1,
-        'rel': 0,
-        'disablekb': 1,
-        'iv_load_policy': 3,
-        'fs': 0,
-        'playsinline': 1,
-        'autoplay': 0,
-      },
-      events: {
-        'onReady': (event: any) => {
-          playerRef.current = event.target;
-          setIsReady(true);
-          setDuration(event.target.getDuration());
-        },
-        'onStateChange': (event: any) => {
-          if (event.data === (window as any).YT.PlayerState.PLAYING) {
-            setIsPlaying(true);
-          } else if (event.data === (window as any).YT.PlayerState.PAUSED) {
-            setIsPlaying(false);
-          } else if (event.data === (window as any).YT.PlayerState.ENDED) {
-            setIsPlaying(false);
-            setProgress(0);
-          }
-        },
-      },
-    });
-  }, [playerReady, videoId]);
-
-  useEffect(() => {
-    let interval: ReturnType<typeof setInterval>;
-    if (isPlaying && playerRef.current) {
-      interval = setInterval(() => {
-        if (playerRef.current) {
-          const currentTime = playerRef.current.getCurrentTime();
-          const dur = playerRef.current.getDuration();
-          setProgress((currentTime / dur) * 100);
-        }
-      }, 100);
-    }
-    return () => clearInterval(interval);
-  }, [isPlaying]);
-
-  const handlePlayPause = () => {
-    if (!playerRef.current) return;
-    if (isPlaying) {
-      playerRef.current.pauseVideo();
-    } else {
-      playerRef.current.playVideo();
-    }
-  };
-
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!playerRef.current || !duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = x / rect.width;
-    const seekTime = percentage * duration;
-    playerRef.current.seekTo(seekTime, true);
-  };
-
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseInt(e.target.value);
-    setVolume(newVolume);
-    setIsMuted(newVolume === 0);
-    if (playerRef.current) {
-      playerRef.current.setVolume(newVolume);
-    }
-  };
-
-  const toggleMute = () => {
-    if (!playerRef.current) return;
-    if (isMuted) {
-      playerRef.current.setVolume(volume || 100);
-      setIsMuted(false);
-    } else {
-      playerRef.current.setVolume(0);
-      setIsMuted(true);
-    }
-  };
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  const handleMouseMove = () => {
-    setShowControls(true);
-    if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
-    hideTimeoutRef.current = setTimeout(() => setShowControls(false), 3000);
-  };
-
-  if (!isReady) {
+  if (!isPlaying) {
     return (
       <div 
         className="w-full aspect-video bg-black relative cursor-pointer group"
-        onClick={() => {
-          if (playerRef.current) {
-            playerRef.current.playVideo();
-            setIsPlaying(true);
-          }
-        }}
+        onClick={() => setIsPlaying(true)}
       >
         {thumbnailUrl && (
           <Image
@@ -204,92 +58,27 @@ function YouTubeAPIVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?
           />
         )}
         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <button 
-            type="button"
-            className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (playerRef.current) {
-                playerRef.current.playVideo();
-                setIsPlaying(true);
-              }
-            }}
-          >
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
             <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>
-          </button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div 
-      className="w-full aspect-video bg-black relative overflow-hidden"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => setShowControls(false)}
-    >
-      <div ref={containerRef} className="w-full h-full" />
-      
-      <div 
-        className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <div 
-          className="h-1 bg-white/30 rounded-full cursor-pointer mb-3 group"
-          onClick={handleSeek}
-        >
-          <div 
-            className="h-full bg-[#d4af37] rounded-full relative"
-            style={{ width: `${progress}%` }}
-          >
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-          </div>
-        </div>
-        
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <button onClick={handlePlayPause} className="text-white hover:text-[#d4af37] transition-colors">
-              {isPlaying ? (
-                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-                </svg>
-              ) : (
-                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              )}
-            </button>
-            
-            <div className="flex items-center gap-2">
-              <button onClick={toggleMute} className="text-white hover:text-[#d4af37] transition-colors">
-                {isMuted || volume === 0 ? (
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
-                  </svg>
-                ) : (
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-                  </svg>
-                )}
-              </button>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={isMuted ? 0 : volume}
-                onChange={handleVolumeChange}
-                className="w-20 h-1 accent-[#d4af37]"
-              />
-            </div>
-            
-            <span className="text-white text-sm">
-              {formatTime(isReady ? (playerRef.current?.getCurrentTime() || 0) : 0)} / {formatTime(duration)}
-            </span>
-          </div>
-        </div>
-      </div>
+    <div className="w-full aspect-video bg-black relative">
+      <iframe
+        src={embedUrl}
+        title="Video Player"
+        className="w-full h-full"
+        style={{ border: 'none' }}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+        allowFullScreen
+      />
     </div>
   );
 }
@@ -357,7 +146,7 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
             <div className="flex flex-col">
               <div className="w-full aspect-video bg-black relative shadow-2xl">
                 {selectedVideo.videoUrl ? (
-                  <YouTubeAPIVideoPlayer videoUrl={selectedVideo.videoUrl} poster={formacion?.imageUrl} />
+                  <SimpleVideoPlayer videoUrl={selectedVideo.videoUrl} poster={formacion?.imageUrl} />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
                     <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6">
