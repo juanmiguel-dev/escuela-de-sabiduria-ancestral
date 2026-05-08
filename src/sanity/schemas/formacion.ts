@@ -52,7 +52,7 @@ export const formacion = defineType({
     }),
     defineField({
       name: 'duration',
-      title: 'Duración (ej: 4 Semanas, 9 Meses)',
+      title: 'Duración (ej: 7 Semanas, 9 Meses)',
       type: 'string',
     }),
     defineField({

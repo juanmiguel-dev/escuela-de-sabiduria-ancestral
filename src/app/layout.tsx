@@ -10,7 +10,7 @@ const cinzel = Cinzel({
 });
 
 const laBelleAurore = La_Belle_Aurore({
-  variable: "--font-script",
+  variable: "--font-hand",
   subsets: ["latin"],
   weight: "400",
 });
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cinzel.variable} ${laBelleAurore.variable} antialiased`}
+        className={`${cinzel.variable} ${laBelleAurore.variable} font-hand antialiased`
       >
         <TechBackground />
         <div className="scanlines" />
