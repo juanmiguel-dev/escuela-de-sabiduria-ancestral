@@ -76,7 +76,7 @@ export default function Home() {
                 {landingData.preTitle}
               </span>
             )}
-            <h1 className="text-5xl sm:text-7xl md:text-8xl font-title text-white drop-shadow-lg max-w-[900px] mx-auto break-words leading-tight">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-title text-white drop-shadow-lg max-w-[900px] mx-auto break-words leading-tight">
               {landingData?.title || "La Rueda Medicinal"}
             </h1>
             <p className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto font-medium italic drop-shadow-md">
