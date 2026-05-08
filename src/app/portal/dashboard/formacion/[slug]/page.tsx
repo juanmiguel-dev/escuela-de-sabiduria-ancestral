@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useState, use, useRef } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
 import { m, LazyMotion, domAnimation } from "framer-motion";
@@ -26,27 +26,64 @@ function getYouTubeThumbnail(videoId: string): string {
   return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 }
 
-interface YouTubePlayer {
-  playVideo(): void;
-  pauseVideo(): void;
-  seekTo(seconds: number, allowSeekAhead: boolean): void;
-  setVolume(volume: number): void;
-  getCurrentTime(): number;
-  getDuration(): number;
-  getPlayerState(): number;
-}
-
 function SimpleVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?: string }) {
-  const [showModal, setShowModal] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const playerContainerRef = useRef<HTMLDivElement>(null);
+  const [player, setPlayer] = useState<any>(null);
+  const [apiLoaded, setApiLoaded] = useState(false);
   const videoId = extractVideoId(videoUrl);
   const thumbnailUrl = poster || (videoId ? getYouTubeThumbnail(videoId) : '');
-  const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&playsinline=1&controls=0&disablekb=1`;
 
-  return (
-    <>
+  useEffect(() => {
+    if (!videoId || !showVideo || apiLoaded) return;
+
+    const existingScript = document.getElementById('youtube-api');
+    if (!existingScript) {
+      const tag = document.createElement('script');
+      tag.id = 'youtube-api';
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScript = document.getElementsByTagName('script')[0];
+      firstScript.parentNode?.insertBefore(tag, firstScript);
+    }
+
+    const checkReady = setInterval(() => {
+      if ((window as any).YT && (window as any).YT.Player) {
+        clearInterval(checkReady);
+        setApiLoaded(true);
+      }
+    }, 200);
+
+    return () => clearInterval(checkReady);
+  }, [videoId, showVideo, apiLoaded]);
+
+  useEffect(() => {
+    if (!apiLoaded || !showVideo || !playerContainerRef.current || player) return;
+
+    const p = new (window as any).YT.Player(playerContainerRef.current, {
+      videoId: videoId,
+      playerVars: {
+        'controls': 0,
+        'showinfo': 0,
+        'modestbranding': 1,
+        'rel': 0,
+        'disablekb': 1,
+        'iv_load_policy': 3,
+        'fs': 0,
+        'playsinline': 1,
+        'autoplay': 1,
+        'cc_load_policy': 0,
+      },
+      events: {
+        'onReady': () => setPlayer(p),
+      },
+    });
+  }, [apiLoaded, showVideo, videoId, player]);
+
+  if (!showVideo) {
+    return (
       <div 
         className="w-full aspect-video bg-black relative cursor-pointer group"
-        onClick={() => setShowModal(true)}
+        onClick={() => setShowVideo(true)}
       >
         {thumbnailUrl && (
           <Image
@@ -66,30 +103,11 @@ function SimpleVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?: st
           </div>
         </div>
       </div>
+    );
+  }
 
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95" onClick={() => setShowModal(false)}>
-          <div className="relative w-full max-w-6xl aspect-video mx-4" onClick={(e) => e.stopPropagation()}>
-            <button 
-              className="absolute -top-12 right-0 text-white/70 hover:text-white transition-colors"
-              onClick={() => setShowModal(false)}
-            >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <iframe
-              src={embedUrl.replace('autoplay=1', 'autoplay=1')}
-              title="Video Player"
-              className="w-full h-full rounded-lg"
-              style={{ border: 'none' }}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-              allowFullScreen
-            />
-          </div>
-        </div>
-      )}
-    </>
+  return (
+    <div className="w-full aspect-video bg-black relative overflow-hidden" ref={playerContainerRef} />
   );
 }
 
