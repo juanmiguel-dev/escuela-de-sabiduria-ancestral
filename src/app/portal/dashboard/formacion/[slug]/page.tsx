@@ -84,7 +84,7 @@ function YouTubeAPIVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?
   }, [videoId]);
 
   useEffect(() => {
-    if (!playerReady || !videoId || !containerRef.current || playerRef.current) return;
+    if (!playerReady || !videoId || !containerRef.current) return;
 
     const player = new (window as any).YT.Player(containerRef.current, {
       videoId: videoId,
@@ -118,6 +118,22 @@ function YouTubeAPIVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?
       },
     });
   }, [playerReady, videoId]);
+
+  const handlePlayClick = () => {
+    if (playerRef.current) {
+      playerRef.current.playVideo();
+      setIsPlaying(true);
+    } else {
+      const checkAndPlay = setInterval(() => {
+        if (playerRef.current) {
+          playerRef.current.playVideo();
+          setIsPlaying(true);
+          clearInterval(checkAndPlay);
+        }
+      }, 100);
+      setTimeout(() => clearInterval(checkAndPlay), 5000);
+    }
+  };
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -183,15 +199,11 @@ function YouTubeAPIVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?
     hideTimeoutRef.current = setTimeout(() => setShowControls(false), 3000);
   };
 
-  if (!isPlaying && !isReady) {
+  if (!playerRef.current) {
     return (
       <div 
         className="w-full aspect-video bg-black relative cursor-pointer group"
-        onClick={() => {
-          if (playerRef.current) {
-            playerRef.current.playVideo();
-          }
-        }}
+        onClick={handlePlayClick}
       >
         {thumbnailUrl && (
           <Image
