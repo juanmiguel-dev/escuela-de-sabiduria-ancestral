@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { La_Belle_Aurore } from "next/font/google";
-import { Parisienne } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { TechBackground } from "@/components/TechBackground";
 
-const parisienne = Parisienne({
+const playfairDisplay = Playfair_Display({
   variable: "--font-title",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
  
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${parisienne.variable} ${laBelleAurore.variable} font-hand antialiased`}
+        className={`${playfairDisplay.variable} ${laBelleAurore.variable} font-hand antialiased`}
       >
         <TechBackground />
         {children}
