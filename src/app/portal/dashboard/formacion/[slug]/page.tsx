@@ -388,7 +388,7 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                     <p>Contenido exclusivo de la formación.</p>
                   </div>
 
-<div className="pt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="pt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="p-8 bg-white/5 rounded-[2.5rem] border border-white/5">
                       <h5 className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] mb-4">Recursos Extra</h5>
                       {formacion?.recursos && formacion.recursos.length > 0 ? (
@@ -414,12 +414,7 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                     </div>
                     <div className="p-8 bg-white/5 rounded-[2.5rem] border border-white/5">
                       <h5 className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] mb-4">Apuntes</h5>
-                      <p className="text-sm text-white/40 italic">Función de notas próximamente disponible.</p>
-                    </div>
-                  </div>
-                    <div className="p-8 bg-white/5 rounded-[2.5rem] border border-white/5">
-                      <h5 className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] mb-4">Apuntes</h5>
-                      <p className="text-sm text-white/40 italic">Función de notas próximamente disponible.</p>
+                      <p className="text-sm text-white/40 italic">Función de notas próximosmente disponible.</p>
                     </div>
                   </div>
                 </m.div>
