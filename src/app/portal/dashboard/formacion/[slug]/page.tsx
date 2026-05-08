@@ -7,13 +7,77 @@ import { m, AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { getFormacionBySlug } from "@/sanity/lib/queries";
 
-export default function FormacionPlayer({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
-  const router = useRouter();
-  const [formacion, setFormacion] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [selectedVideo, setSelectedVideo] = useState<any>(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+function extractVideoId(url: string): string {
+    if (!url) return '';
+    if (url.includes('youtube.com/watch')) {
+      const urlParams = new URLSearchParams(new URL(url).search);
+      return urlParams.get('v') || '';
+    } else if (url.includes('youtu.be/')) {
+      return url.split('youtu.be/')[1]?.split('?')[0] || '';
+    } else if (url.includes('youtube.com/embed/')) {
+      return url.split('embed/')[1]?.split('?')[0] || '';
+    } else if (url.includes('youtube-nocookie.com/embed/')) {
+      return url.split('embed/')[1]?.split('?')[0] || '';
+    }
+    return '';
+  }
+
+  function getYouTubeThumbnail(videoId: string): string {
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  }
+
+  function CustomVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?: string }) {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const videoId = extractVideoId(videoUrl);
+    const thumbnailUrl = poster || (videoId ? getYouTubeThumbnail(videoId) : '');
+
+    if (!isPlaying) {
+      return (
+        <div 
+          className="w-full aspect-video bg-black relative cursor-pointer group"
+          onClick={() => setIsPlaying(true)}
+        >
+          {thumbnailUrl && (
+            <Image
+              src={thumbnailUrl}
+              alt="Video thumbnail"
+              fill
+              className="object-cover"
+              unoptimized
+            />
+          )}
+          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <button className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
+              <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="w-full aspect-video bg-black relative">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0&modestbranding=1&iv_load_policy=3&playsinline=1`}
+          title="Video Player"
+          className="w-full h-full"
+          style={{ border: 'none' }}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          allowFullScreen
+        />
+      </div>
+    );
+  }
+
+  export default function FormacionPlayer({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = use(params);
+    const router = useRouter();
+    const [formacion, setFormacion] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+    const [selectedVideo, setSelectedVideo] = useState<any>(null);
 
   useEffect(() => {
     const userEmail = localStorage.getItem("alumno_email");
@@ -109,19 +173,9 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
           {selectedVideo ? (
             <div className="flex flex-col">
               {/* Video Player */}
-              <div className="w-full aspect-video bg-black relative shadow-2xl overflow-hidden">
+              <div className="w-full aspect-video bg-black relative shadow-2xl">
                 {selectedVideo.videoUrl ? (
-                  <div className="absolute inset-0 [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:w-full [&>iframe]:h-full">
-                    <iframe
-                      src={getYoutubeEmbedUrl(selectedVideo.videoUrl)}
-                      title="Video Player"
-                      className="w-full h-full"
-                      style={{ border: 'none', display: 'block' }}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                      allowFullScreen
-                      sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
-                    />
-                  </div>
+                  <CustomVideoPlayer videoUrl={selectedVideo.videoUrl} poster={formacion?.imageUrl} />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
                     <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6">
