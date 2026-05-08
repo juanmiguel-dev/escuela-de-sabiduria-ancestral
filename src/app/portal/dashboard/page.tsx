@@ -68,7 +68,7 @@ export default function StudentDashboard() {
               alt="Logo"
               width={140}
               height={40}
-              className="brightness-0 invert opacity-90 object-contain"
+              className="opacity-90 object-contain"
             />
           </div>
 
