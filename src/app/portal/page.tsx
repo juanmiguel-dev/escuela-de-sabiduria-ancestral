@@ -3,17 +3,45 @@
 import { useState } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
+import { getAlumnoByEmail } from "@/sanity/lib/queries";
 
 export default function PortalAlumnos() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí iría la integración con NextAuth o el backend
-    alert("Funcionalidad de login en desarrollo. \n\nCredenciales:\n" + email);
+    setLoading(true);
+    setError("");
+
+    try {
+      // Búsqueda de alumno en Sanity por email
+      const alumno = await getAlumnoByEmail(email);
+
+      if (alumno && alumno.isActive) {
+        // Mock de sesión: guardamos en localStorage
+        localStorage.setItem("alumno_email", email);
+        localStorage.setItem("alumno_name", alumno.name);
+        
+        // Redirigir al dashboard
+        router.push("/portal/dashboard");
+      } else if (alumno && !alumno.isActive) {
+        setError("Tu cuenta está inactiva. Por favor, contacta con soporte.");
+      } else {
+        setError("No se encontró una cuenta con este correo electrónico.");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Ocurrió un error al intentar ingresar. Reintenta luego.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -71,6 +99,12 @@ export default function PortalAlumnos() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {error && (
+              <div className="bg-red-50 text-red-600 p-4 rounded-xl text-sm font-medium border border-red-100">
+                {error}
+              </div>
+            )}
+
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">Correo Electrónico</label>
               <input
@@ -93,6 +127,7 @@ export default function PortalAlumnos() {
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-white"
                 placeholder="••••••••"
               />
+              <p className="text-[10px] text-gray-400 mt-2">Usa cualquier contraseña (mock habilitado)</p>
             </div>
 
             <div className="flex items-center justify-between text-sm">
@@ -107,9 +142,11 @@ export default function PortalAlumnos() {
 
             <button
               type="submit"
-              className="w-full bg-[#5b2c1d] hover:bg-[#4a2317] text-white font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              disabled={loading}
+              className={`w-full bg-[#5b2c1d] hover:bg-[#4a2317] text-white font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-3 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
             >
-              Ingresar al Portal
+              {loading && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>}
+              {loading ? "Verificando..." : "Ingresar al Portal"}
             </button>
           </form>
 
