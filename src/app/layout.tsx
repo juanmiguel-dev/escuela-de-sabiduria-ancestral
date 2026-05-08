@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { Cinzel, La_Belle_Aurore } from "next/font/google";
+import localFont from "next/font/local";
+
+const gwendolyn = localFont({
+  src: "../public/fonts/Gwendolyn-Regular.ttf",
+  variable: "--font-gwendolyn",
+  weight: "400",
+  style: "normal",
+});
 import "./globals.css";
 import { TechBackground } from "@/components/TechBackground";
 
