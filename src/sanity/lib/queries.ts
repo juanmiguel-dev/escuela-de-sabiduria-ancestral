@@ -83,9 +83,17 @@ export async function getFormacionBySlug(slug: string) {
           "alt": coalesce(alt, image.alt)
         }
       }
+    },
+    "videos": videos[]-> {
+      _id,
+      title,
+      description,
+      "mediaUrl": mainMedia.asset->url,
+      "videoUrl": videoFile.asset->url
     }
   }`, { slug });
 }
+
 
 export async function getProjects() {
   return await client.fetch(`*[_type == "video"] {

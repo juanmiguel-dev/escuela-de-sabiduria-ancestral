@@ -89,6 +89,12 @@ export const formacion = defineType({
         { type: 'imageGalleryBlock' },
       ],
     }),
+    defineField({
+      name: 'videos',
+      title: 'Videos / Contenido Liberado',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'video' }] }],
+    }),
   ],
   preview: {
     select: {
