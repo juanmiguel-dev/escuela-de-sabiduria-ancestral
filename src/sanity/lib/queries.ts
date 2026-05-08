@@ -129,3 +129,23 @@ export async function getSections() {
     }
   }`);
 }
+export async function getTallerCount() {
+  return await client.fetch(`count(*[_type == "taller"])`);
+}
+
+export async function getTalleres() {
+  return await client.fetch(`*[_type == "taller"] | order(order asc) {
+    _id,
+    title,
+    highlightText,
+    "projects": *[_type == "video" && references(^._id)] {
+      _id,
+      title,
+      "slug": slug.current,
+      description,
+      "mediaUrl": mainMedia.asset->url,
+      "videoUrl": videoFile.asset->url
+    }
+  }`);
+}
+

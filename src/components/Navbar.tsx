@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import NextLink from "next/link";
+import { useState, useEffect } from "react";
+import { getTallerCount } from "@/sanity/lib/queries";
 
 interface NavbarProps {
   theme?: "light" | "dark";
@@ -8,6 +12,19 @@ interface NavbarProps {
 
 export function Navbar({ theme = "dark", position = "absolute" }: NavbarProps) {
   const isLight = theme === "light";
+  const [showTalleres, setShowTalleres] = useState(false);
+
+  useEffect(() => {
+    async function checkTalleres() {
+      try {
+        const count = await getTallerCount();
+        setShowTalleres(count > 0);
+      } catch (e) {
+        console.error("Error fetching taller count:", e);
+      }
+    }
+    checkTalleres();
+  }, []);
   
   return (
     <header className={`${position} top-0 left-0 w-full px-6 sm:px-12 z-50 flex items-center justify-between transition-all duration-300 ${isLight ? 'bg-white/80 backdrop-blur-md border-b border-gray-200/50 py-4' : 'bg-transparent py-6'}`}>
@@ -26,6 +43,9 @@ export function Navbar({ theme = "dark", position = "absolute" }: NavbarProps) {
         <nav className={`hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium ${isLight ? 'text-gray-800' : 'text-white/90'}`}>
           <NextLink href="/" className={`transition-colors ${isLight ? 'hover:text-[#5b2c1d]' : 'hover:text-white'}`}>Inicio</NextLink>
           <NextLink href="/formaciones" className={`transition-colors ${isLight ? 'hover:text-[#5b2c1d]' : 'hover:text-white'}`}>Formaciones</NextLink>
+          {showTalleres && (
+            <NextLink href="/#talleres" className={`transition-colors ${isLight ? 'hover:text-[#5b2c1d]' : 'hover:text-white'}`}>Talleres</NextLink>
+          )}
           <NextLink href="/sesiones" className={`transition-colors ${isLight ? 'hover:text-[#5b2c1d]' : 'hover:text-white'}`}>Agendar Sesión</NextLink>
           <NextLink href="/contacto" className={`transition-colors ${isLight ? 'hover:text-[#5b2c1d]' : 'hover:text-white'}`}>Contacto</NextLink>
         </nav>
