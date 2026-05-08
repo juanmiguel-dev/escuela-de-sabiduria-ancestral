@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Cinzel } from "next/font/google";
 import { La_Belle_Aurore } from "next/font/google";
 import { Parisienne } from "next/font/google";
 import "./globals.css";
@@ -11,11 +10,7 @@ const parisienne = Parisienne({
   weight: "400",
 });
 
-const cinzel = Cinzel({
-  variable: "--font-cinzel",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
+ 
 
 const laBelleAurore = La_Belle_Aurore({
   variable: "--font-hand",
@@ -36,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${parisienne.variable} ${cinzel.variable} ${laBelleAurore.variable} font-hand antialiased`}
+        className={`${parisienne.variable} ${laBelleAurore.variable} font-hand antialiased`}
       >
         <TechBackground />
         {children}
