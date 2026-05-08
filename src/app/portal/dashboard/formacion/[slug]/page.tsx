@@ -55,11 +55,9 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
     );
   }
 
-  // Function to extract YouTube video ID and create embed URL with hidden branding
   const getYoutubeEmbedUrl = (url: string) => {
     if (!url) return '';
     
-    // Extract video ID from various YouTube URL formats
     let videoId = '';
     if (url.includes('youtube.com/watch')) {
       const urlParams = new URLSearchParams(new URL(url).search);
@@ -67,6 +65,8 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
     } else if (url.includes('youtu.be/')) {
       videoId = url.split('youtu.be/')[1]?.split('?')[0] || '';
     } else if (url.includes('youtube.com/embed/')) {
+      videoId = url.split('embed/')[1]?.split('?')[0] || '';
+    } else if (url.includes('youtube-nocookie.com/embed/')) {
       videoId = url.split('embed/')[1]?.split('?')[0] || '';
     }
     
@@ -78,12 +78,15 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
       showinfo: '0',
       iv_load_policy: '3',
       disablekb: '1',
-      fs: '0',
+      fs: '1',
       playsinline: '1',
       cc_load_policy: '0',
       controls: '0',
       enablejsapi: '0',
-      origin: typeof window !== 'undefined' ? window.location.origin : '',
+      brand: '0',
+      hide_share: '1',
+      hide_annotations: '1',
+      xtags: '',
     });
     
     return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
@@ -106,17 +109,19 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
           {selectedVideo ? (
             <div className="flex flex-col">
               {/* Video Player */}
-              <div className="w-full aspect-video bg-black relative shadow-2xl">
+              <div className="w-full aspect-video bg-black relative shadow-2xl overflow-hidden">
                 {selectedVideo.videoUrl ? (
-                  <iframe
-                    src={getYoutubeEmbedUrl(selectedVideo.videoUrl)}
-                    title="Video Player"
-                    className="w-full h-full"
-                    style={{ border: 'none' }}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                    allowFullScreen
-                    sandbox="allow-scripts allow-same-origin allow-presentation"
-                  />
+                  <div className="absolute inset-0 [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:w-full [&>iframe]:h-full">
+                    <iframe
+                      src={getYoutubeEmbedUrl(selectedVideo.videoUrl)}
+                      title="Video Player"
+                      className="w-full h-full"
+                      style={{ border: 'none', display: 'block' }}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                      allowFullScreen
+                      sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
+                    />
+                  </div>
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
                     <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6">
