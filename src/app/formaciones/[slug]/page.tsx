@@ -84,11 +84,11 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
         )}
 
         {/* Tarjeta de Reserva Final */}
-        <div className="mt-24 pt-16 border-t border-[#f0eee9] flex flex-col items-center text-center">
+        <div className="mt-24 pt-16 border-t border-[#f0eee9] flex flex-col items-center text-center -mx-6 sm:-mx-12 px-6 sm:px-12">
           <span className="text-sm font-bold tracking-[0.2em] text-[#a09e9a] uppercase mb-4">Asegura tu lugar</span>
           <h3 className="font-title text-4xl sm:text-5xl text-[#333333] mb-6">Comienza tu viaje hoy</h3>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 mb-10">
+          <div className="w-full max-w-3xl flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 mb-10">
             {formacion.price && (
               <div className="flex flex-col items-center">
                 <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Internacional</span>
@@ -118,13 +118,13 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
             )}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xl justify-center">
             {formacion.paymentLink && (
               <a 
                 href={formacion.paymentLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-12 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(91,44,29,0.2)] hover:shadow-[0_15px_30px_rgba(91,44,29,0.3)] hover:-translate-y-1 text-sm uppercase tracking-widest"
+                className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-14 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(91,44,29,0.2)] hover:shadow-[0_15px_30px_rgba(91,44,29,0.3)] hover:-translate-y-1 text-base uppercase tracking-widest"
               >
                 Inscribirse Ahora (USD)
               </a>
@@ -134,7 +134,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
                 href={formacion.paymentLinkArs}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-[#d4af37] hover:bg-[#b89a2f] text-white px-12 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(212,175,55,0.2)] hover:shadow-[0_15px_30px_rgba(212,175,55,0.3)] hover:-translate-y-1 text-sm uppercase tracking-widest"
+                className="inline-flex items-center justify-center bg-[#d4af37] hover:bg-[#b89a2f] text-white px-14 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(212,175,55,0.2)] hover:shadow-[0_15px_30px_rgba(212,175,55,0.3)] hover:-translate-y-1 text-base uppercase tracking-widest"
               >
                 Inscribirse Ahora (ARS)
               </a>
@@ -142,7 +142,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
             {(!formacion.paymentLink && !formacion.paymentLinkArs) && (
               <button 
                 disabled
-                className="inline-flex items-center justify-center bg-gray-200 text-gray-500 px-12 py-5 rounded-full font-medium cursor-not-allowed text-sm uppercase tracking-widest"
+                className="inline-flex items-center justify-center bg-gray-200 text-gray-500 px-14 py-5 rounded-full font-medium cursor-not-allowed text-base uppercase tracking-widest"
               >
                 Inscripciones Cerradas
               </button>
