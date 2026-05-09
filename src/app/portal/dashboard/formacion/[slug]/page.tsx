@@ -329,14 +329,15 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
           <h1 className="text-lg font-bold tracking-tight">{formacion.title}</h1>
         </header>
 
-        <main className="flex-grow flex flex-col overflow-y-auto">
+        <main className="flex-grow flex flex-col lg:flex-row overflow-hidden">
           {selectedVideo ? (
-            <div className="flex flex-col">
-              <div className="w-full aspect-video bg-black relative shadow-2xl">
+            <>
+              {/* Video Player - left/top */}
+              <div className="flex-shrink-0 w-full lg:w-[65%] bg-black relative">
                 {selectedVideo.videoUrl ? (
                   <CustomVideoPlayer videoUrl={selectedVideo.videoUrl} poster={formacion?.imageUrl} />
                 ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
+                  <div className="w-full aspect-video flex flex-col items-center justify-center p-12 text-center">
                     <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6">
                       <svg className="w-10 h-10 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
@@ -345,59 +346,57 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                 )}
               </div>
 
-              <div className="p-8 sm:p-12 lg:p-16 max-w-4xl mx-auto w-full">
+              {/* Sidebar - right/bottom */}
+              <div className="flex-1 overflow-y-auto p-6 sm:p-8 lg:p-10 space-y-6">
                 <m.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
                   className="space-y-6"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <h1 className="text-3xl sm:text-4xl font-bold leading-tight">{selectedVideo.title}</h1>
-                    <div className="flex items-center gap-2">
-                       <span className="bg-[#d4af37]/10 text-[#d4af37] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Liberado</span>
-                    </div>
+                  <div className="flex flex-col gap-2">
+                    <h1 className="text-2xl sm:text-3xl font-bold leading-tight">{selectedVideo.title}</h1>
+                    <span className="self-start bg-[#d4af37]/10 text-[#d4af37] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Liberado</span>
                   </div>
                   
-                  <div className="w-16 h-1 bg-[#d4af37] rounded-full opacity-50" />
+                  <div className="w-12 h-[2px] bg-[#d4af37]/50 rounded-full" />
 
-                  <div className="prose prose-invert prose-lg max-w-none text-white/70 leading-relaxed">
-                    <p>Contenido exclusivo de la formación.</p>
+                  <p className="text-sm text-white/60 leading-relaxed">Contenido exclusivo de la formación.</p>
+
+                  {/* Recursos */}
+                  <div className="p-6 bg-white/5 rounded-2xl border border-white/5">
+                    <h5 className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] mb-4">Recursos Extra</h5>
+                    {formacion?.recursos && formacion.recursos.length > 0 ? (
+                      <div className="space-y-3">
+                        {formacion.recursos.map((recurso: any, index: number) => (
+                          <a
+                            key={index}
+                            href={recurso.archivoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 text-white/70 hover:text-[#d4af37] transition-colors group"
+                          >
+                            <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                            </svg>
+                            <span className="text-sm group-hover:underline">{recurso.titulo}</span>
+                          </a>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-white/40 italic">No hay archivos adjuntos para este módulo.</p>
+                    )}
                   </div>
 
-                  <div className="pt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="p-8 bg-white/5 rounded-[2.5rem] border border-white/5">
-                      <h5 className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] mb-4">Recursos Extra</h5>
-                      {formacion?.recursos && formacion.recursos.length > 0 ? (
-                        <div className="space-y-3">
-                          {formacion.recursos.map((recurso: any, index: number) => (
-                            <a
-                              key={index}
-                              href={recurso.archivoUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center gap-3 text-white/70 hover:text-[#d4af37] transition-colors group"
-                            >
-                              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
-                              </svg>
-                              <span className="text-sm group-hover:underline">{recurso.titulo}</span>
-                            </a>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="text-sm text-white/40 italic">No hay archivos adjuntos para este módulo.</p>
-                      )}
-                    </div>
-                    <div className="p-8 bg-white/5 rounded-[2.5rem] border border-white/5">
-                      <h5 className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] mb-4">Apuntes</h5>
-                      <p className="text-sm text-white/40 italic">Función de notas próximosmente disponible.</p>
-                    </div>
+                  {/* Apuntes */}
+                  <div className="p-6 bg-white/5 rounded-2xl border border-white/5">
+                    <h5 className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] mb-4">Apuntes</h5>
+                    <p className="text-sm text-white/40 italic">Función de notas próximamente disponible.</p>
                   </div>
                 </m.div>
               </div>
-            </div>
+            </>
           ) : (
-            <div className="flex-grow flex items-center justify-center p-12 text-center">
+            <div className="flex-1 flex items-center justify-center p-12 text-center">
               <div className="max-w-md">
                 <h3 className="text-2xl font-bold mb-4 text-white/50">Contenido no disponible</h3>
                 <p className="text-gray-500">No hay contenido liberado para esta formación en este momento.</p>
