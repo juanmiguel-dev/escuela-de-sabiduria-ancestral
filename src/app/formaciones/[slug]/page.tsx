@@ -89,26 +89,46 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
           <span className="text-sm font-bold tracking-[0.2em] text-[#a09e9a] uppercase mb-4">Asegura tu lugar</span>
           <h3 className="font-title text-4xl sm:text-5xl text-[#333333] mb-8">Comienza tu viaje hoy</h3>
           
-          <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-20 mb-10">
+          <div className="w-full flex flex-col sm:flex-row items-start justify-center gap-10 sm:gap-20">
             {formacion.price && (
-              <div className="flex flex-col items-center">
-                <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Internacional</span>
-                <div className="text-5xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
-                  <span className="text-3xl sm:text-4xl mr-1 font-medium">$</span>{formacion.price} <span className="text-xl font-bold ml-1 text-gray-400">USD</span>
+              <div className="flex flex-col items-center gap-6">
+                <div className="flex flex-col items-center">
+                  <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Internacional</span>
+                  <div className="text-5xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
+                    <span className="text-3xl sm:text-4xl mr-1 font-medium">$</span>{formacion.price} <span className="text-xl font-bold ml-1 text-gray-400">USD</span>
+                  </div>
                 </div>
+                {formacion.paymentLink && (
+                  <a 
+                    href={formacion.paymentLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-14 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(91,44,29,0.2)] hover:shadow-[0_15px_30px_rgba(91,44,29,0.3)] hover:-translate-y-1 text-sm uppercase tracking-widest"
+                  >
+                    Inscribirme (USD)
+                  </a>
+                )}
               </div>
-            )}
-            
-            {(formacion.price && formacion.priceArs) && (
-              <div className="hidden sm:block w-[1px] h-20 bg-gray-200"></div>
             )}
 
             {formacion.priceArs && (
-              <div className="flex flex-col items-center">
-                <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Argentina</span>
-                <div className="text-5xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
-                  <span className="text-3xl sm:text-4xl mr-1 font-medium">$</span>{formacion.priceArs.toLocaleString('es-AR')} <span className="text-xl font-bold ml-1 text-gray-400">ARS</span>
+              <div className="flex flex-col items-center gap-6">
+                <div className="flex flex-col items-center">
+                  <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Argentina</span>
+                  <div className="text-5xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
+                    <span className="text-3xl sm:text-4xl mr-1 font-medium">$</span>{formacion.priceArs.toLocaleString('es-AR')} <span className="text-xl font-bold ml-1 text-gray-400">ARS</span>
+                  </div>
                 </div>
+                {formacion.paymentLinkArs && (
+                  <a 
+                    href={formacion.paymentLinkArs}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center bg-[#d4af37] hover:bg-[#b89a2f] text-white px-14 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(212,175,55,0.2)] hover:shadow-[0_15px_30px_rgba(212,175,55,0.3)] hover:-translate-y-1 text-sm uppercase tracking-widest"
+                  >
+                    Inscribirme (ARS)
+                  </a>
+                )}
               </div>
             )}
 
@@ -116,37 +136,6 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
               <div className="text-4xl font-black text-[#5b2c1d] tracking-tight">
                 Consultar valor
               </div>
-            )}
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-5">
-            {formacion.paymentLink && (
-              <a 
-                href={formacion.paymentLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-16 py-6 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(91,44,29,0.2)] hover:shadow-[0_15px_30px_rgba(91,44,29,0.3)] hover:-translate-y-1 text-base uppercase tracking-widest"
-              >
-                Inscribirse Ahora (USD)
-              </a>
-            )}
-            {formacion.paymentLinkArs && (
-              <a 
-                href={formacion.paymentLinkArs}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-[#d4af37] hover:bg-[#b89a2f] text-white px-16 py-6 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(212,175,55,0.2)] hover:shadow-[0_15px_30px_rgba(212,175,55,0.3)] hover:-translate-y-1 text-base uppercase tracking-widest"
-              >
-                Inscribirse Ahora (ARS)
-              </a>
-            )}
-            {(!formacion.paymentLink && !formacion.paymentLinkArs) && (
-              <button 
-                disabled
-                className="inline-flex items-center justify-center bg-gray-200 text-gray-500 px-16 py-6 rounded-full font-medium cursor-not-allowed text-base uppercase tracking-widest"
-              >
-                Inscripciones Cerradas
-              </button>
             )}
           </div>
         </div>
