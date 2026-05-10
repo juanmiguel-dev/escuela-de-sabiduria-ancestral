@@ -16,7 +16,7 @@ export const TituloAncestral: React.FC<TituloAncestralProps> = ({
   return (
     <div className={`relative inline-block w-fit ${className}`}>
       <Component 
-        className="font-hand rotate-[-2deg] text-[#3d2b1f] transition-transform duration-300 hover:rotate-0"
+        className="font-title rotate-[-2deg] text-[#3d2b1f] transition-transform duration-300 hover:rotate-0"
       >
         {children}
       </Component>

@@ -4,11 +4,6 @@
   --font-sans: var(--font-cinzel), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
-h1, h2, .font-ancestral {
-  font-family: var(--font-hand), cursive;
-  letter-spacing: 0.05em; /* wide */
-  line-height: 1.4; /* orgánico */
-}
 
 :root {
   --background: #eeeeee;
