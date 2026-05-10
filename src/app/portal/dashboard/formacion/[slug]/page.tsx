@@ -277,6 +277,25 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
   const [formacion, setFormacion] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState<any>(null);
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("dashboard_theme");
+    if (saved === "dark") {
+      setDark(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (dark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("dashboard_theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("dashboard_theme", "light");
+    }
+  }, [dark]);
 
   useEffect(() => {
     const userEmail = localStorage.getItem("alumno_email");
@@ -320,13 +339,27 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
 
   return (
     <LazyMotion features={domAnimation}>
-      <div className="min-h-screen bg-[#0f0f0f] flex flex-col text-white">
+      <div className={`min-h-screen flex flex-col ${dark ? 'bg-[#0f0f0f] text-white' : 'bg-[#fdfbf7] text-[#333333]'}`}>
         
-        <header className="p-6 bg-[#1a1a1a] flex items-center gap-4 border-b border-white/5">
+        <header className={`p-6 flex items-center gap-4 border-b ${dark ? 'bg-[#1a1a1a] border-white/5' : 'bg-white border-gray-100'}`}>
           <NextLink href="/portal/dashboard" className="text-[#d4af37] hover:text-white transition-colors">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
           </NextLink>
-          <h1 className="text-lg font-bold tracking-tight">{formacion.title}</h1>
+          <h1 className="text-lg font-bold tracking-tight flex-1">{formacion.title}</h1>
+          <button
+            onClick={() => setDark(!dark)}
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all flex-shrink-0 ${dark ? 'bg-[#d4af37]/10 text-[#d4af37]' : 'bg-[#5b2c1d]/10 text-[#5b2c1d]'}`}
+          >
+            {dark ? (
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z"/>
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/>
+              </svg>
+            )}
+          </button>
         </header>
 
         <main className="flex-grow flex flex-col lg:flex-row overflow-hidden">
@@ -347,7 +380,7 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
               </div>
 
               {/* Sidebar - right/bottom */}
-              <div className="flex-1 overflow-y-auto p-6 sm:p-8 lg:p-10 space-y-6">
+              <div className={`flex-1 overflow-y-auto p-6 sm:p-8 lg:p-10 space-y-6 ${dark ? 'text-white' : 'text-[#333333]'}`}>
                 <m.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -360,10 +393,10 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                   
                   <div className="w-12 h-[2px] bg-[#d4af37]/50 rounded-full" />
 
-                  <p className="text-sm text-white/60 leading-relaxed">Contenido exclusivo de la formación.</p>
+                  <p className={`text-sm leading-relaxed ${dark ? 'text-white/60' : 'text-gray-500'}`}>Contenido exclusivo de la formación.</p>
 
                   {/* Recursos */}
-                  <div className="p-6 bg-white/5 rounded-2xl border border-white/5">
+                  <div className={`p-6 rounded-2xl border ${dark ? 'bg-white/5 border-white/5' : 'bg-gray-50 border-gray-100'}`}>
                     <h5 className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] mb-4">Recursos Extra</h5>
                     {formacion?.recursos && formacion.recursos.length > 0 ? (
                       <div className="space-y-3">
@@ -373,7 +406,7 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                             href={recurso.archivoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-3 text-white/70 hover:text-[#d4af37] transition-colors group"
+                            className={`flex items-center gap-3 transition-colors group ${dark ? 'text-white/70 hover:text-[#d4af37]' : 'text-gray-600 hover:text-[#5b2c1d]'}`}
                           >
                             <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
@@ -383,14 +416,14 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                         ))}
                       </div>
                     ) : (
-                      <p className="text-sm text-white/40 italic">No hay archivos adjuntos para este módulo.</p>
+                      <p className={`text-sm italic ${dark ? 'text-white/40' : 'text-gray-400'}`}>No hay archivos adjuntos para este módulo.</p>
                     )}
                   </div>
 
                   {/* Apuntes */}
-                  <div className="p-6 bg-white/5 rounded-2xl border border-white/5">
+                  <div className={`p-6 rounded-2xl border ${dark ? 'bg-white/5 border-white/5' : 'bg-gray-50 border-gray-100'}`}>
                     <h5 className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] mb-4">Apuntes</h5>
-                    <p className="text-sm text-white/40 italic">Función de notas próximamente disponible.</p>
+                    <p className={`text-sm italic ${dark ? 'text-white/40' : 'text-gray-400'}`}>Función de notas próximamente disponible.</p>
                   </div>
                 </m.div>
               </div>
