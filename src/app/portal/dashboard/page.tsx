@@ -12,6 +12,25 @@ export default function StudentDashboard() {
   const [alumno, setAlumno] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("mis-cursos");
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("dashboard_theme");
+    if (saved === "dark") {
+      setDark(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (dark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("dashboard_theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("dashboard_theme", "light");
+    }
+  }, [dark]);
 
   useEffect(() => {
     const userEmail = localStorage.getItem("alumno_email");
@@ -58,10 +77,10 @@ export default function StudentDashboard() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <div className="min-h-screen bg-[#fdfbf7] flex">
+      <div className={`min-h-screen flex ${dark ? 'bg-[#0f0f0f]' : 'bg-[#fdfbf7]'}`}>
         
         {/* Sidebar */}
-        <aside className="hidden lg:flex w-72 bg-[#1a1a1a] flex-col sticky top-0 h-screen text-white">
+        <aside className={`hidden lg:flex w-72 flex-col sticky top-0 h-screen ${dark ? 'bg-black text-white/80' : 'bg-[#1a1a1a] text-white'}`}>
           <div className="p-8">
             <Image
               src="/logo.png"
@@ -112,11 +131,25 @@ export default function StudentDashboard() {
         <main className="flex-grow p-6 sm:p-12 lg:p-16 overflow-y-auto max-h-screen">
           <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-title text-[#333333]">Hola, {alumno.name.split(' ')[0]}</h2>
-              <p className="text-gray-500 font-medium">Bienvenido a tu espacio de crecimiento.</p>
+              <h2 className={`text-3xl sm:text-4xl font-title ${dark ? 'text-white' : 'text-[#333333]'}`}>Hola, {alumno.name.split(' ')[0]}</h2>
+              <p className={`font-medium ${dark ? 'text-gray-400' : 'text-gray-500'}`}>Bienvenido a tu espacio de crecimiento.</p>
             </div>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-[#5b2c1d]/10 flex items-center justify-center text-[#5b2c1d] font-bold text-lg">
+              <button
+                onClick={() => setDark(!dark)}
+                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${dark ? 'bg-[#d4af37]/10 text-[#d4af37]' : 'bg-[#5b2c1d]/10 text-[#5b2c1d]'}`}
+              >
+                {dark ? (
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z"/>
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/>
+                  </svg>
+                )}
+              </button>
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${dark ? 'bg-[#d4af37]/10 text-[#d4af37]' : 'bg-[#5b2c1d]/10 text-[#5b2c1d]'}`}>
                 {alumno.name[0]}
               </div>
             </div>
@@ -130,8 +163,8 @@ export default function StudentDashboard() {
               className="space-y-8"
             >
               <div className="flex items-center justify-between">
-                <h3 className="text-xl font-black text-[#333333] uppercase tracking-widest">Mis Formaciones</h3>
-                <span className="text-sm font-bold text-[#5b2c1d] bg-[#5b2c1d]/5 px-4 py-1 rounded-full">
+                <h3 className={`text-xl font-black uppercase tracking-widest ${dark ? 'text-white' : 'text-[#333333]'}`}>Mis Formaciones</h3>
+                <span className={`text-sm font-bold px-4 py-1 rounded-full ${dark ? 'text-[#d4af37] bg-[#d4af37]/10' : 'text-[#5b2c1d] bg-[#5b2c1d]/5'}`}>
                   {alumno.formaciones?.length || 0} cursos
                 </span>
               </div>
@@ -141,7 +174,7 @@ export default function StudentDashboard() {
                   <NextLink 
                     key={formacion._id} 
                     href={`/portal/dashboard/formacion/${formacion.slug}`}
-                    className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 flex flex-col"
+                    className={`group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border flex flex-col ${dark ? 'bg-[#1a1a1a] border-white/5 hover:shadow-black/30' : 'bg-white border-gray-100'}`}
                   >
                     <div className="relative aspect-video overflow-hidden">
                       {formacion.imageUrl && (
@@ -157,8 +190,8 @@ export default function StudentDashboard() {
                       </div>
                     </div>
                     <div className="p-8">
-                      <h4 className="text-xl font-bold text-[#333333] mb-2 group-hover:text-[#5b2c1d] transition-colors">{formacion.title}</h4>
-                      <p className="text-gray-500 text-sm line-clamp-2 mb-6">{formacion.shortDescription}</p>
+                      <h4 className={`text-xl font-bold mb-2 group-hover:text-[#d4af37] transition-colors ${dark ? 'text-white' : 'text-[#333333]'}`}>{formacion.title}</h4>
+                      <p className={`text-sm line-clamp-2 mb-6 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>{formacion.shortDescription}</p>
                       <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
                         <div className="w-1/3 h-full bg-[#d4af37]"></div>
                       </div>
@@ -171,8 +204,8 @@ export default function StudentDashboard() {
                 ))}
 
                 {(!alumno.formaciones || alumno.formaciones.length === 0) && (
-                  <div className="col-span-full py-20 text-center bg-white rounded-3xl border-2 border-dashed border-gray-100">
-                    <p className="text-gray-400 font-medium">Aún no estás inscrito en ninguna formación.</p>
+                  <div className={`col-span-full py-20 text-center rounded-3xl border-2 border-dashed ${dark ? 'bg-[#1a1a1a] border-white/5 text-gray-400' : 'bg-white border-gray-100 text-gray-400'}`}>
+                    <p className="font-medium">Aún no estás inscrito en ninguna formación.</p>
                     <NextLink href="/#formaciones" className="text-[#5b2c1d] font-bold mt-4 inline-block hover:underline">Explorar cursos</NextLink>
                   </div>
                 )}
@@ -186,8 +219,8 @@ export default function StudentDashboard() {
               animate={{ opacity: 1, y: 0 }}
               className="text-center py-20"
             >
-              <h3 className="text-2xl font-bold text-[#333333] mb-2">Próximas Sesiones</h3>
-              <p className="text-gray-500">No tienes sesiones programadas por el momento.</p>
+              <h3 className={`text-2xl font-bold mb-2 ${dark ? 'text-white' : 'text-[#333333]'}`}>Próximas Sesiones</h3>
+              <p className={dark ? 'text-gray-400' : 'text-gray-500'}>No tienes sesiones programadas por el momento.</p>
               <NextLink href="/sesiones" className="mt-8 inline-block bg-[#5b2c1d] text-white px-8 py-3 rounded-full font-bold">Agendar Sesión</NextLink>
             </m.div>
           )}
@@ -196,20 +229,20 @@ export default function StudentDashboard() {
             <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="max-w-2xl bg-white p-10 rounded-3xl shadow-sm border border-gray-100"
+              className={`max-w-2xl p-10 rounded-3xl shadow-sm border ${dark ? 'bg-[#1a1a1a] border-white/5' : 'bg-white border-gray-100'}`}
             >
-              <h3 className="text-2xl font-bold text-[#333333] mb-8">Información del Perfil</h3>
+              <h3 className={`text-2xl font-bold mb-8 ${dark ? 'text-white' : 'text-[#333333]'}`}>Información del Perfil</h3>
               <div className="space-y-6">
                 <div>
-                  <label className="block text-xs font-black uppercase text-gray-400 mb-2">Nombre Completo</label>
-                  <p className="text-lg font-bold text-[#333333]">{alumno.name}</p>
+                  <label className={`block text-xs font-black uppercase mb-2 ${dark ? 'text-gray-500' : 'text-gray-400'}`}>Nombre Completo</label>
+                  <p className={`text-lg font-bold ${dark ? 'text-white' : 'text-[#333333]'}`}>{alumno.name}</p>
                 </div>
                 <div>
-                  <label className="block text-xs font-black uppercase text-gray-400 mb-2">Email</label>
-                  <p className="text-lg font-bold text-[#333333]">{alumno.email}</p>
+                  <label className={`block text-xs font-black uppercase mb-2 ${dark ? 'text-gray-500' : 'text-gray-400'}`}>Email</label>
+                  <p className={`text-lg font-bold ${dark ? 'text-white' : 'text-[#333333]'}`}>{alumno.email}</p>
                 </div>
                 <div className="pt-8">
-                  <button className="text-sm font-bold text-[#5b2c1d] hover:underline">Cambiar Contraseña</button>
+                  <button className={`text-sm font-bold hover:underline ${dark ? 'text-[#d4af37]' : 'text-[#5b2c1d]'}`}>Cambiar Contraseña</button>
                 </div>
               </div>
             </m.div>
