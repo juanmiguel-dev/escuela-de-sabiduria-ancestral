@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        hand: "var(--font-hand)",
-        title: "var(--font-hand)"
+        title: "var(--font-title), serif",
+        hand: "var(--font-hand), cursive"
       }
     }
   },

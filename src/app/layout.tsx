@@ -10,8 +10,6 @@ const caveat = Caveat({
   weight: ["400", "500", "600", "700"],
 });
 
- 
-
 const laBelleAurore = La_Belle_Aurore({
   variable: "--font-hand",
   subsets: ["latin"],
@@ -29,9 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
-        className={`${caveat.variable} ${laBelleAurore.variable} font-hand antialiased`}
+        className={`${caveat.variable} ${laBelleAurore.variable} antialiased`}
       >
         <TechBackground />
         {children}
