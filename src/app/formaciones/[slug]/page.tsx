@@ -15,6 +15,7 @@ import { IntroduccionAperturaBlockRenderer } from "@/components/FormacionBlocks/
 import { TestimoniosBlockRenderer } from "@/components/FormacionBlocks/TestimoniosBlockRenderer";
 import { ImageGalleryBlockRenderer } from "@/components/FormacionBlocks/ImageGalleryBlockRenderer";
 import { FaqBlockRenderer } from "@/components/FormacionBlocks/FaqBlockRenderer";
+import { CronogramaBlockRenderer } from "@/components/FormacionBlocks/CronogramaBlockRenderer";
 
 export const revalidate = 0; // Desactiva la caché de Next.js para esta ruta dinámica
 
@@ -35,6 +36,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
     testimoniosBlock: TestimoniosBlockRenderer,
     imageGalleryBlock: ImageGalleryBlockRenderer,
     faqBlock: FaqBlockRenderer,
+    cronogramaBlock: CronogramaBlockRenderer,
   };
 
   return (

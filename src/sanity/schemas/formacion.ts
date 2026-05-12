@@ -88,6 +88,7 @@ export const formacion = defineType({
         { type: 'testimoniosBlock' },
         { type: 'imageGalleryBlock' },
         { type: 'faqBlock' },
+        { type: 'cronogramaBlock' },
       ],
     }),
     defineField({

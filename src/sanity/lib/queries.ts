@@ -95,6 +95,16 @@ export async function getFormacionBySlug(slug: string) {
           title,
           content
         }
+      },
+      _type == "cronogramaBlock" => {
+        title,
+        description,
+        items[] {
+          _key,
+          indicator,
+          title,
+          content
+        }
       }
     },
     "videos": videos[]-> {

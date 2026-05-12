@@ -15,6 +15,7 @@ import { introduccionAperturaBlock } from './introduccionAperturaBlock';
 import { testimoniosBlock } from './testimoniosBlock';
 import { imageGalleryBlock } from './imageGalleryBlock';
 import { faqBlock } from './faqBlock';
+import { cronogramaBlock } from './cronogramaBlock';
 
 export const schema = {
   types: [
@@ -35,5 +36,6 @@ export const schema = {
     testimoniosBlock,
     imageGalleryBlock,
     faqBlock,
+    cronogramaBlock,
   ],
 };
