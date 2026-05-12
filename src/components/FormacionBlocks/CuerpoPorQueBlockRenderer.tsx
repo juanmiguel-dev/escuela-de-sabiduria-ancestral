@@ -40,7 +40,7 @@ export function CuerpoPorQueBlockRenderer({ cuerpoPorQue }: CuerpoPorQueBlockPro
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent mt-8" />
         </div>
         
-        <div className="prose prose-lg sm:prose-xl prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-600 leading-relaxed mx-auto max-w-4xl pt-4">
+        <div className="prose prose-lg sm:prose-xl prose-gray [font-family:system-ui,-apple-system,sans-serif] text-gray-600 leading-relaxed mx-auto max-w-4xl pt-4 w-full break-words">
           <PortableText value={cuerpoPorQue} />
         </div>
       </div>

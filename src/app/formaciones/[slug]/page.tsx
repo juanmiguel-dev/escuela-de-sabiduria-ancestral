@@ -41,7 +41,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
   };
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900 relative">
+    <main className="min-h-screen flex flex-col bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900 relative overflow-x-hidden">
       <ChakanaBackground />
       <Navbar theme="dark" position="absolute" />
 

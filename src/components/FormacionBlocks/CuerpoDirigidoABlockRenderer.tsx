@@ -18,7 +18,7 @@ export function CuerpoDirigidoABlockRenderer({ cuerpoDirigidoA }: CuerpoDirigido
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-      className="relative bg-[#5b2c1d] text-white p-6 sm:p-20 md:p-24 rounded-[2rem] sm:rounded-[3rem] shadow-[0_30px_70px_rgba(91,44,29,0.2)] overflow-hidden"
+      className="relative bg-[#5b2c1d] text-white p-6 sm:p-20 md:p-24 rounded-[2rem] sm:rounded-[3rem] shadow-[0_30px_70px_rgba(91,44,29,0.2)] overflow-hidden w-full"
     >
       {/* Elementos decorativos de fondo */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white opacity-[0.03] rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
