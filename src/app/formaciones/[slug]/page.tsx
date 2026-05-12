@@ -74,7 +74,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Contenido Detallado */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 sm:px-12 py-20 sm:py-32 space-y-32">
+      <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-12 py-16 sm:py-32 space-y-20 sm:space-y-32">
         {formacion.contentBlocks?.map((block: any) => {
           const BlockComponent = blockRenderers[block._type];
           if (!BlockComponent) {
@@ -93,14 +93,14 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
       <section className="relative z-10 w-full bg-[#fdfbf7] border-t border-[#f0eee9]">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 py-16 sm:py-24 flex flex-col items-center text-center">
           <span className="text-sm font-bold tracking-[0.2em] text-[#a09e9a] uppercase mb-4">Asegura tu lugar</span>
-          <h3 className="font-title text-4xl sm:text-5xl text-[#333333] mb-8">Comienza tu viaje hoy</h3>
+          <h3 className="font-title text-3xl sm:text-5xl text-[#333333] mb-8">Comienza tu viaje hoy</h3>
           
           <div className="w-full flex flex-col sm:flex-row items-start justify-center gap-10 sm:gap-20">
             {formacion.price && (
               <div className="flex flex-col items-center gap-6">
                 <div className="flex flex-col items-center">
                   <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Internacional</span>
-                  <div className="text-5xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
+                  <div className="text-4xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
                     <span className="text-3xl sm:text-4xl mr-1 font-medium">$</span>{formacion.price} <span className="text-xl font-bold ml-1 text-gray-400">USD</span>
                   </div>
                 </div>
@@ -121,7 +121,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
               <div className="flex flex-col items-center gap-6">
                 <div className="flex flex-col items-center">
                   <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Argentina</span>
-                  <div className="text-5xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
+                  <div className="text-4xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
                     <span className="text-3xl sm:text-4xl mr-1 font-medium">$</span>{formacion.priceArs.toLocaleString('es-AR')} <span className="text-xl font-bold ml-1 text-gray-400">ARS</span>
                   </div>
                 </div>

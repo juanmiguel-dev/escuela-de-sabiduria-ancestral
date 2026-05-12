@@ -18,7 +18,7 @@ export function CuerpoPorQueBlockRenderer({ cuerpoPorQue }: CuerpoPorQueBlockPro
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative bg-white p-10 sm:p-20 md:p-24 rounded-[3rem] shadow-[0_30px_60px_rgba(91,44,29,0.05)] border border-[#f0eee9] overflow-hidden"
+      className="relative bg-white p-6 sm:p-20 md:p-24 rounded-[2rem] sm:rounded-[3rem] shadow-[0_30px_60px_rgba(91,44,29,0.05)] border border-[#f0eee9] overflow-hidden"
     >
       {/* Elemento decorativo sutil */}
       <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#fdfbf7] rounded-full opacity-50" />

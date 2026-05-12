@@ -23,7 +23,7 @@ export function FaqBlockRenderer({ title, faqs }: FaqBlockProps) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto w-full py-12">
+    <div className="max-w-4xl mx-auto w-full py-8 sm:py-16">
       <h2 className="font-title text-3xl sm:text-4xl md:text-5xl text-center text-[#5b2c1d] mb-12">
         {title || "Preguntas Frecuentes"}
       </h2>

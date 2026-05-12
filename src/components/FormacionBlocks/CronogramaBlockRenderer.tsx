@@ -36,8 +36,8 @@ export function CronogramaBlockRenderer({ title, description, items }: Cronogram
   }
 
   return (
-    <section ref={containerRef} className="py-24 sm:py-32 max-w-6xl mx-auto w-full px-6">
-      <div className="text-center mb-20 sm:mb-28 space-y-4">
+    <section ref={containerRef} className="py-16 sm:py-32 max-w-6xl mx-auto w-full px-6">
+      <div className="text-center mb-16 sm:mb-28 space-y-4">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -102,7 +102,7 @@ export function CronogramaBlockRenderer({ title, description, items }: Cronogram
                   <motion.div 
                     whileHover={{ y: -10 }}
                     transition={{ duration: 0.4 }}
-                    className="p-10 sm:p-14 rounded-[3.5rem] bg-[#5b2c1d] shadow-[0_30px_70px_rgba(91,44,29,0.3)] relative overflow-hidden border border-white/5"
+                    className="p-6 sm:p-14 rounded-[2rem] sm:rounded-[3.5rem] bg-[#5b2c1d] shadow-[0_30px_70px_rgba(91,44,29,0.3)] relative overflow-hidden border border-white/5"
                   >
                     {/* Resplandor decorativo interno */}
                     <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#ffeb3b] opacity-[0.03] rounded-full blur-3xl group-hover:opacity-[0.07] transition-opacity duration-700" />
