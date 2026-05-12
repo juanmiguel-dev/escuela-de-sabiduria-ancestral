@@ -56,7 +56,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30 z-10" />
 
-        <div className="relative z-20 w-full max-w-4xl px-6 sm:px-12 text-center">
+        <div className="relative z-20 w-full md:max-w-[80%] px-6 sm:px-12 text-center mx-auto">
           {formacion.duration && (
             <span className="block text-xs sm:text-sm text-[#d4af37] font-bold tracking-[0.3em] uppercase mb-4">
               DURACIÓN: {formacion.duration}
