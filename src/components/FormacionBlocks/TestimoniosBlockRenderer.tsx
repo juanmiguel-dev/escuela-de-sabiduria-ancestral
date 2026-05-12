@@ -40,7 +40,7 @@ export function TestimoniosBlockRenderer({ testimonios }: TestimoniosBlockProps)
         className="text-center mb-20"
       >
         <span className="text-xs sm:text-sm font-bold tracking-[0.4em] text-[#d4af37] uppercase mb-4 block">Experiencias</span>
-        <h2 className="font-title text-6xl sm:text-7xl md:text-8xl text-[#5b2c1d]">Voces del Alma</h2>
+        <h2 className="font-title text-5xl sm:text-6xl md:text-7xl text-[#5b2c1d]">Voces del Alma</h2>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto px-6">

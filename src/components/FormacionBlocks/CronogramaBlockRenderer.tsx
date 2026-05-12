@@ -42,7 +42,7 @@ export function CronogramaBlockRenderer({ title, description, items }: Cronogram
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-title text-6xl sm:text-8xl text-[#5b2c1d] leading-tight"
+          className="font-title text-5xl sm:text-7xl text-[#5b2c1d] leading-tight"
         >
           {title || "Programa de la Formación"}
         </motion.h2>

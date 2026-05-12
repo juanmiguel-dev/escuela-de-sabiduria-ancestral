@@ -34,7 +34,7 @@ export function CuerpoPorQueBlockRenderer({ cuerpoPorQue }: CuerpoPorQueBlockPro
           >
             El Propósito
           </motion.span>
-          <h2 className="font-title text-4xl sm:text-6xl text-center text-[#5b2c1d] leading-tight">
+          <h2 className="font-title text-3xl sm:text-5xl text-center text-[#5b2c1d] leading-tight">
             ¿Por qué elegir este camino?
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent mt-8" />

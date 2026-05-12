@@ -35,7 +35,7 @@ export function CuerpoDirigidoABlockRenderer({ cuerpoDirigidoA }: CuerpoDirigido
           >
             Apertura
           </motion.span>
-          <h2 className="font-title text-4xl sm:text-6xl text-center text-[#fdfbf7] leading-tight">
+          <h2 className="font-title text-3xl sm:text-5xl text-center text-[#fdfbf7] leading-tight">
             ¿A quiénes está dirigida?
           </h2>
         </div>

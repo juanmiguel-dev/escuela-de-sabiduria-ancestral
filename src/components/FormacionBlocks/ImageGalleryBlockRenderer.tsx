@@ -86,7 +86,7 @@ export function ImageGalleryBlockRenderer({
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h3 className="font-title text-5xl sm:text-7xl text-[#5b2c1d]">
+            <h3 className="font-title text-4xl sm:text-6xl text-[#5b2c1d]">
               {title}
             </h3>
           </motion.div>
@@ -131,7 +131,7 @@ export function ImageGalleryBlockRenderer({
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h3 className="font-title text-5xl sm:text-7xl text-[#5b2c1d]">
+            <h3 className="font-title text-4xl sm:text-6xl text-[#5b2c1d]">
               {title}
             </h3>
           </motion.div>

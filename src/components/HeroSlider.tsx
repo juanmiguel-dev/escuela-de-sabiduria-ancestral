@@ -89,7 +89,7 @@ export function HeroSlider({ slides }: HeroSliderProps) {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="max-w-4xl space-y-8"
                   >
-                    <h1 className="text-5xl sm:text-7xl md:text-8xl font-title text-white drop-shadow-2xl leading-tight">
+                    <h1 className="text-4xl sm:text-6xl md:text-7xl font-title text-white drop-shadow-2xl leading-tight">
                       {slide.title}
                     </h1>
                     <p className="text-xl sm:text-2xl text-white/90 max-w-2xl mx-auto font-medium italic drop-shadow-lg">

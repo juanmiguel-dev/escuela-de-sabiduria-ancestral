@@ -30,7 +30,7 @@ export function IntroduccionAperturaBlockRenderer({ introduccionApertura }: Intr
         className="text-center mb-16"
       >
         <span className="text-xs sm:text-sm font-bold tracking-[0.3em] text-[#d4af37] uppercase mb-4 block">Estructura</span>
-        <h2 className="font-title text-5xl sm:text-6xl md:text-7xl text-[#5b2c1d]">Introducción y Apertura</h2>
+        <h2 className="font-title text-4xl sm:text-5xl md:text-6xl text-[#5b2c1d]">Introducción y Apertura</h2>
       </motion.div>
 
       <div className="space-y-6">
