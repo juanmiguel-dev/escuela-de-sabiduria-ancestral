@@ -14,6 +14,7 @@ import { DetailedDescriptionBlockRenderer } from "@/components/FormacionBlocks/D
 import { IntroduccionAperturaBlockRenderer } from "@/components/FormacionBlocks/IntroduccionAperturaBlockRenderer";
 import { TestimoniosBlockRenderer } from "@/components/FormacionBlocks/TestimoniosBlockRenderer";
 import { ImageGalleryBlockRenderer } from "@/components/FormacionBlocks/ImageGalleryBlockRenderer";
+import { FaqBlockRenderer } from "@/components/FormacionBlocks/FaqBlockRenderer";
 
 export const revalidate = 0; // Desactiva la caché de Next.js para esta ruta dinámica
 
@@ -33,6 +34,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
     introduccionAperturaBlock: IntroduccionAperturaBlockRenderer,
     testimoniosBlock: TestimoniosBlockRenderer,
     imageGalleryBlock: ImageGalleryBlockRenderer,
+    faqBlock: FaqBlockRenderer,
   };
 
   return (
