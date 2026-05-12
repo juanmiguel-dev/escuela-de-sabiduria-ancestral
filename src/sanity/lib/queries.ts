@@ -87,6 +87,14 @@ export async function getFormacionBySlug(slug: string) {
           "imageUrl": coalesce(asset->url, image.asset->url),
           "alt": coalesce(alt, image.alt)
         }
+      },
+      _type == "faqBlock" => {
+        title,
+        faqs[] {
+          _key,
+          title,
+          content
+        }
       }
     },
     "videos": videos[]-> {
