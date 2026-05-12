@@ -2,14 +2,18 @@ import { client } from './client';
 
 export async function getLandingData() {
   return await client.fetch(`*[_type == "landing"][0] {
-    preTitle,
-    title,
-    subtitle,
-    primaryButtonText,
-    primaryButtonLink,
-    secondaryButtonText,
-    secondaryButtonLink,
-    "backgroundImages": coalesce(backgroundImages[].asset->url, [])
+    heroSlides[] {
+      mediaType,
+      "imageUrl": image.asset->url,
+      videoUrl,
+      "videoFileUrl": videoFile.asset->url,
+      title,
+      subtitle,
+      button1Text,
+      button1Link,
+      button2Text,
+      button2Link
+    }
   }`);
 }
 

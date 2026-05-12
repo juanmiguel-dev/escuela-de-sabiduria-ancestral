@@ -7,6 +7,7 @@ import NextLink from "next/link";
 import { getLandingData, getFormaciones, getTalleres } from "@/sanity/lib/queries";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { HeroSlider } from "@/components/HeroSlider";
 
 export default function Home() {
   const [landingData, setLandingData] = useState<any>(null);
@@ -43,66 +44,14 @@ export default function Home() {
         {/* Header Unificado */}
         <Navbar theme="dark" position="absolute" />
 
-        {/* Hero Section */}
-        <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-          {/* Background Images with Ken Burns & Crossfade */}
-          <div className="absolute inset-0 z-0 bg-black">
-            <div className="absolute inset-0 animate-crossfade-1">
-              <Image
-                src={landingData?.backgroundImages?.[0] || "/inicio.JPG"}
-                alt="Inicio 1"
-                fill
-                className="object-cover opacity-60 animate-ken-burns"
-                priority
-              />
-            </div>
-            <div className="absolute inset-0 animate-crossfade-2">
-              <Image
-                src={landingData?.backgroundImages?.[1] || "/inicio-2.jpeg"}
-                alt="Inicio 2"
-                fill
-                className="object-cover opacity-60 animate-ken-burns"
-                priority
-              />
-            </div>
-            {/* Gradiente oscuro inferior para legibilidad */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
-          </div>
-
-          <m.div
-            className="relative z-20 max-w-4xl px-6 sm:px-12 text-center space-y-6 sm:space-y-8 mt-16"
-            initial="hidden"
-            animate="visible"
-            variants={fadeUpVariant}
-          >
-            {landingData?.preTitle && (
-              <span className="block text-xs sm:text-sm text-white/80 font-bold tracking-[0.3em] uppercase mb-4">
-                {landingData.preTitle}
-              </span>
-            )}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-title text-white drop-shadow-lg max-w-[900px] mx-auto break-words leading-tight">
-              {landingData?.title || "La Rueda Medicinal"}
-            </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/90 max-w-2xl mx-auto font-medium italic drop-shadow-md">
-              {landingData?.subtitle || "Un viaje a través de los cuatro cuadrantes del alma y la conexión con la Madre Tierra."}
-            </p>
-
-            <div className="pt-8 flex flex-wrap justify-center gap-4">
-              <a 
-                href={landingData?.primaryButtonLink || "#formaciones"} 
-                className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-xl text-sm sm:text-base uppercase tracking-wider"
-              >
-                {landingData?.primaryButtonText || "EXPLORAR FORMACIONES"}
-              </a>
-              <a 
-                href={landingData?.secondaryButtonLink || "/sesiones"} 
-                className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-xl text-sm sm:text-base uppercase tracking-wider"
-              >
-                {landingData?.secondaryButtonText || "RESERVAR UNA SESIÓN"}
-              </a>
-            </div>
-          </m.div>
-        </section>
+        {/* Hero Slider Section */}
+        {landingData?.heroSlides && landingData.heroSlides.length > 0 ? (
+          <HeroSlider slides={landingData.heroSlides} />
+        ) : (
+          <section className="h-screen w-full bg-black flex items-center justify-center">
+            <p className="text-white">Cargando...</p>
+          </section>
+        )}
 
         {/* Sección de Formaciones */}
         <section id="formaciones" className="py-24 bg-[#fdfbf7] w-full scroll-mt-20">
