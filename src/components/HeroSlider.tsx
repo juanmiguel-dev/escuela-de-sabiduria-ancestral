@@ -133,19 +133,9 @@ export function HeroSlider({ slides }: HeroSliderProps) {
         </div>
       </div>
 
-      {/* Navigation Arrows (Bottom Left) */}
+      {/* Navigation Arrows (Bottom Right) */}
       {slides.length > 1 && (
-        <div className="absolute bottom-10 left-10 z-30 flex items-center gap-4">
-          <button
-            onClick={scrollPrev}
-            className="w-12 h-12 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all active:scale-95 shadow-lg group"
-            aria-label="Anterior"
-          >
-            <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-1" />
-          </button>
-          
-          <div className="h-px w-8 bg-white/20" />
-          
+        <div className="absolute bottom-10 right-10 z-30 flex flex-row-reverse items-center gap-4">
           <button
             onClick={scrollNext}
             className="w-12 h-12 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all active:scale-95 shadow-lg group"
@@ -154,8 +144,18 @@ export function HeroSlider({ slides }: HeroSliderProps) {
             <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
           </button>
           
+          <div className="h-px w-8 bg-white/20" />
+          
+          <button
+            onClick={scrollPrev}
+            className="w-12 h-12 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all active:scale-95 shadow-lg group"
+            aria-label="Anterior"
+          >
+            <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-1" />
+          </button>
+          
           {/* Indicador de número sutil */}
-          <span className="ml-4 text-white/40 text-sm font-bold tracking-widest font-sans">
+          <span className="mr-4 text-white/40 text-sm font-bold tracking-widest font-sans">
             0{selectedIndex + 1} / 0{slides.length}
           </span>
         </div>
