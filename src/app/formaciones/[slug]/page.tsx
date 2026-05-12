@@ -1,8 +1,6 @@
 import { getFormacionBySlug } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { PortableText } from "@portabletext/react";
-import NextLink from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ChakanaBackground } from "@/components/ChakanaBackground";
@@ -18,7 +16,7 @@ import { ImageGalleryBlockRenderer } from "@/components/FormacionBlocks/ImageGal
 import { FaqBlockRenderer } from "@/components/FormacionBlocks/FaqBlockRenderer";
 import { CronogramaBlockRenderer } from "@/components/FormacionBlocks/CronogramaBlockRenderer";
 
-export const revalidate = 0; // Desactiva la caché de Next.js para esta ruta dinámica
+export const revalidate = 0;
 
 export default async function FormacionPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -41,11 +39,11 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
   };
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900 relative w-full max-w-full overflow-x-hidden">
+    <main className="min-h-screen flex flex-col bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900 relative w-full overflow-x-hidden">
       <ChakanaBackground />
       <Navbar theme="dark" position="absolute" />
 
-      {/* Hero Section de la Formación */}
+      {/* Hero Section */}
       <section className="relative z-10 h-[60vh] sm:h-[70vh] w-full flex items-end pb-16 justify-center overflow-hidden bg-black">
         {(formacion.heroImageUrl || formacion.imageUrl) && (
           <Image
@@ -58,30 +56,31 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30 z-10" />
 
-        <div className="relative z-20 max-w-4xl px-6 sm:px-12 text-center">
+        <div className="relative z-20 w-full max-w-4xl px-6 sm:px-12 text-center">
           {formacion.duration && (
             <span className="block text-xs sm:text-sm text-[#d4af37] font-bold tracking-[0.3em] uppercase mb-4">
               DURACIÓN: {formacion.duration}
             </span>
           )}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-title text-white drop-shadow-2xl max-w-[900px] mx-auto break-words leading-tight">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-title text-white drop-shadow-2xl max-w-[900px] mx-auto break-words leading-tight px-2">
             {formacion.title}
           </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto font-medium">
+          <p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto font-medium mt-4">
             {formacion.subtitle || formacion.shortDescription}
           </p>
         </div>
       </section>
 
       {/* Contenido Detallado */}
-      <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-12 py-16 sm:py-32 space-y-20 sm:space-y-32">
+      <section className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-12 py-16 sm:py-32 space-y-20 sm:space-y-32 flex flex-col items-center">
         {formacion.contentBlocks?.map((block: any) => {
           const BlockComponent = blockRenderers[block._type];
-          if (!BlockComponent) {
-            console.warn(`No renderer found for block type: ${block._type}`);
-            return null;
-          }
-          return <BlockComponent key={block._key} {...block} />;
+          if (!BlockComponent) return null;
+          return (
+            <div key={block._key} className="w-full flex justify-center">
+              <BlockComponent {...block} />
+            </div>
+          );
         })}
 
         {(!formacion.contentBlocks || formacion.contentBlocks.length === 0) && (
@@ -89,19 +88,19 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
         )}
       </section>
 
-      {/* Tarjeta de Reserva Final - Full Width */}
+      {/* Tarjeta de Reserva Final */}
       <section className="relative z-10 w-full bg-[#fdfbf7] border-t border-[#f0eee9]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-12 py-16 sm:py-24 flex flex-col items-center text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-12 py-16 sm:py-24 flex flex-col items-center text-center">
           <span className="text-sm font-bold tracking-[0.2em] text-[#a09e9a] uppercase mb-4">Asegura tu lugar</span>
-          <h3 className="font-title text-3xl sm:text-5xl text-[#333333] mb-8">Comienza tu viaje hoy</h3>
+          <h3 className="font-title text-3xl sm:text-5xl text-[#333333] mb-12">Comienza tu viaje hoy</h3>
           
-          <div className="w-full flex flex-col sm:flex-row items-start justify-center gap-10 sm:gap-20">
+          <div className="w-full flex flex-col sm:flex-row items-center sm:items-start justify-center gap-16 sm:gap-24">
             {formacion.price && (
-              <div className="flex flex-col items-center gap-6">
+              <div className="flex flex-col items-center gap-6 w-full max-w-[300px]">
                 <div className="flex flex-col items-center">
-                  <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Internacional</span>
+                  <span className="text-sm font-medium text-gray-500 mb-2 uppercase tracking-widest">Internacional</span>
                   <div className="text-3xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
-                    <span className="text-3xl sm:text-4xl mr-1 font-medium">$</span>{formacion.price} <span className="text-xl font-bold ml-1 text-gray-400">USD</span>
+                    <span className="text-2xl sm:text-4xl mr-1 font-medium">$</span>{formacion.price} <span className="text-lg font-bold ml-1 text-gray-400">USD</span>
                   </div>
                 </div>
                 {formacion.paymentLink && (
@@ -109,7 +108,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
                     href={formacion.paymentLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-14 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(91,44,29,0.2)] hover:shadow-[0_15px_30px_rgba(91,44,29,0.3)] hover:-translate-y-1 text-sm uppercase tracking-widest"
+                    className="w-full inline-flex items-center justify-center bg-[#5b2c1d] hover:bg-[#4a2317] text-white px-10 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(91,44,29,0.2)] text-xs uppercase tracking-widest"
                   >
                     Inscribirme (USD)
                   </a>
@@ -118,11 +117,11 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
             )}
 
             {formacion.priceArs && (
-              <div className="flex flex-col items-center gap-6">
+              <div className="flex flex-col items-center gap-6 w-full max-w-[300px]">
                 <div className="flex flex-col items-center">
-                  <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Argentina</span>
-                  <div className="text-3xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
-                    <span className="text-3xl sm:text-4xl mr-1 font-medium">$</span>{formacion.priceArs.toLocaleString('es-AR')} <span className="text-xl font-bold ml-1 text-gray-400">ARS</span>
+                  <span className="text-sm font-medium text-gray-500 mb-2 uppercase tracking-widest">Argentina</span>
+                  <div className="text-3xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight whitespace-nowrap">
+                    <span className="text-2xl sm:text-4xl mr-1 font-medium">$</span>{formacion.priceArs.toLocaleString('es-AR')} <span className="text-lg font-bold ml-1 text-gray-400">ARS</span>
                   </div>
                 </div>
                 {formacion.paymentLinkArs && (
@@ -130,24 +129,17 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
                     href={formacion.paymentLinkArs}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center bg-[#d4af37] hover:bg-[#b89a2f] text-white px-14 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(212,175,55,0.2)] hover:shadow-[0_15px_30px_rgba(212,175,55,0.3)] hover:-translate-y-1 text-sm uppercase tracking-widest"
+                    className="w-full inline-flex items-center justify-center bg-[#d4af37] hover:bg-[#b89a2f] text-white px-10 py-5 rounded-full font-medium transition-all shadow-[0_10px_20px_rgba(212,175,55,0.2)] text-xs uppercase tracking-widest"
                   >
                     Inscribirme (ARS)
                   </a>
                 )}
               </div>
             )}
-
-            {(!formacion.price && !formacion.priceArs) && (
-              <div className="text-4xl font-black text-[#5b2c1d] tracking-tight">
-                Consultar valor
-              </div>
-            )}
           </div>
         </div>
       </section>
 
-      {/* Footer Unificado */}
       <Footer />
     </main>
   );

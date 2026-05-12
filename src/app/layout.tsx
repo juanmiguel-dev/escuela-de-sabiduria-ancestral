@@ -22,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${caveat.variable} antialiased`}>
-        <TechBackground />
         {children}
       </body>
     </html>
