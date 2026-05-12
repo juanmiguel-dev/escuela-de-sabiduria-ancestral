@@ -1,7 +1,8 @@
 'use client';
 
 import { PortableText } from "@portabletext/react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 interface CronogramaItem {
   _key: string;
@@ -17,18 +18,31 @@ interface CronogramaBlockProps {
 }
 
 export function CronogramaBlockRenderer({ title, description, items }: CronogramaBlockProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   if (!items || items.length === 0) {
     return null;
   }
 
   return (
-    <section className="py-16 sm:py-24 max-w-5xl mx-auto w-full">
-      <div className="text-center mb-16 sm:mb-20 space-y-4">
+    <section ref={containerRef} className="py-24 sm:py-32 max-w-6xl mx-auto w-full px-6">
+      <div className="text-center mb-20 sm:mb-28 space-y-4">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-title text-5xl sm:text-7xl text-[#5b2c1d] leading-tight"
+          className="font-title text-6xl sm:text-8xl text-[#5b2c1d] leading-tight"
         >
           {title || "Programa de la Formación"}
         </motion.h2>
@@ -38,7 +52,7 @@ export function CronogramaBlockRenderer({ title, description, items }: Cronogram
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-gray-500 max-w-2xl mx-auto font-medium italic"
+            className="text-xl text-gray-500 max-w-2xl mx-auto font-medium italic"
           >
             {description}
           </motion.p>
@@ -46,50 +60,76 @@ export function CronogramaBlockRenderer({ title, description, items }: Cronogram
       </div>
 
       <div className="relative">
-        {/* Línea central decorativa */}
-        <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#d4af37]/0 via-[#d4af37]/30 to-[#d4af37]/0 hidden sm:block" />
+        {/* Línea central base (fondo) */}
+        <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-1 bg-[#f0eee9] -translate-x-1/2 hidden sm:block rounded-full" />
+        
+        {/* Línea central animada (llenado) */}
+        <motion.div 
+          style={{ scaleY, originY: 0 }}
+          className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#d4af37] to-[#ffeb3b] -translate-x-1/2 hidden sm:block rounded-full z-10 shadow-[0_0_15px_rgba(255,235,59,0.5)]" 
+        />
 
-        <div className="space-y-12 sm:space-y-24">
+        <div className="space-y-16 sm:space-y-32">
           {items.map((item, index) => {
             const isEven = index % 2 === 0;
             
             return (
               <motion.div 
                 key={item._key}
-                initial={{ opacity: 0, x: isEven ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className={`relative flex flex-col sm:flex-row items-center gap-8 ${isEven ? 'sm:flex-row-reverse' : ''}`}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className={`relative flex flex-col sm:flex-row items-center gap-12 ${isEven ? 'sm:flex-row-reverse' : ''}`}
               >
-                {/* Indicador / Punto en la línea */}
-                <div className="absolute left-4 sm:left-1/2 top-0 sm:top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 hidden sm:block">
-                  <div className="w-4 h-4 rounded-full bg-white border-2 border-[#d4af37] shadow-[0_0_15px_rgba(212,175,55,0.4)]" />
+                {/* Punto en la línea con iluminación animada */}
+                <div className="absolute left-4 sm:left-1/2 top-0 sm:top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden sm:block">
+                  <motion.div 
+                    initial={{ scale: 0.8, backgroundColor: "#f0eee9", boxShadow: "none" }}
+                    whileInView={{ 
+                      scale: 1.2, 
+                      backgroundColor: "#ffeb3b",
+                      boxShadow: "0 0 20px rgba(255, 235, 59, 0.8), 0 0 40px rgba(255, 235, 59, 0.4)"
+                    }}
+                    viewport={{ once: false, margin: "-50% 0px -50% 0px" }}
+                    transition={{ duration: 0.5 }}
+                    className="w-5 h-5 rounded-full border-2 border-white"
+                  />
                 </div>
 
-                {/* Contenido */}
+                {/* Contenido (Card Color Tierra) */}
                 <div className="w-full sm:w-[45%] group">
-                  <div className={`p-8 sm:p-10 rounded-3xl bg-white border border-[#f0eee9] transition-all duration-500 hover:shadow-[0_20px_50px_rgba(91,44,29,0.08)] hover:border-[#d4af37]/20 relative overflow-hidden`}>
-                    
-                    {/* Fondo decorativo sutil */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#fdfbf7] rounded-full -translate-y-1/2 translate-x-1/2 opacity-50 group-hover:scale-110 transition-transform duration-700" />
+                  <motion.div 
+                    whileHover={{ y: -10 }}
+                    transition={{ duration: 0.4 }}
+                    className="p-10 sm:p-14 rounded-[3.5rem] bg-[#5b2c1d] shadow-[0_30px_70px_rgba(91,44,29,0.3)] relative overflow-hidden border border-white/5"
+                  >
+                    {/* Resplandor decorativo interno */}
+                    <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#ffeb3b] opacity-[0.03] rounded-full blur-3xl group-hover:opacity-[0.07] transition-opacity duration-700" />
 
                     <div className="relative z-10">
                       {item.indicator && (
-                        <span className="inline-block px-4 py-1 rounded-full bg-[#fdfbf7] text-[#d4af37] text-xs font-bold tracking-widest uppercase mb-4 border border-[#f0eee9]">
+                        <span className="inline-block px-5 py-1.5 rounded-full bg-white/10 text-[#ffeb3b] text-xs font-bold tracking-[0.2em] uppercase mb-6 border border-white/10">
                           {item.indicator}
                         </span>
                       )}
                       
-                      <h3 className="text-2xl sm:text-3xl font-bold text-[#333333] mb-4 group-hover:text-[#5b2c1d] transition-colors duration-300">
+                      <h3 className="text-3xl sm:text-4xl font-bold text-[#fdfbf7] mb-6 group-hover:text-[#ffeb3b] transition-colors duration-300 leading-tight">
                         {item.title}
                       </h3>
 
-                      <div className="prose prose-gray prose-sm sm:prose-base max-w-none text-gray-600 leading-relaxed">
-                        <PortableText value={item.content} />
+                      <div className="prose prose-invert prose-lg max-w-none text-white/80 leading-relaxed [font-family:system-ui,-apple-system,sans-serif]">
+                        <PortableText 
+                          value={item.content} 
+                          components={{
+                            marks: {
+                              strong: ({children}) => <strong className="text-[#ffeb3b] font-bold">{children}</strong>,
+                            }
+                          }}
+                        />
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Espacio vacío para el otro lado en desktop */}
