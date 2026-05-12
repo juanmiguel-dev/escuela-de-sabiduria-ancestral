@@ -5,6 +5,7 @@ import { PortableText } from "@portabletext/react";
 import NextLink from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { ChakanaBackground } from "@/components/ChakanaBackground";
 
 // Importar los componentes de bloque
 import { IntroBlockRenderer } from "@/components/FormacionBlocks/IntroBlockRenderer";
@@ -40,11 +41,12 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
   };
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900">
+    <main className="min-h-screen flex flex-col bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900 relative">
+      <ChakanaBackground />
       <Navbar theme="dark" position="absolute" />
 
       {/* Hero Section de la Formación */}
-      <section className="relative h-[60vh] sm:h-[70vh] w-full flex items-end pb-16 justify-center overflow-hidden bg-black">
+      <section className="relative z-10 h-[60vh] sm:h-[70vh] w-full flex items-end pb-16 justify-center overflow-hidden bg-black">
         {(formacion.heroImageUrl || formacion.imageUrl) && (
           <Image
             src={formacion.heroImageUrl || formacion.imageUrl}
@@ -72,7 +74,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Contenido Detallado */}
-      <section className="max-w-6xl mx-auto px-6 sm:px-12 py-20 sm:py-32 space-y-32">
+      <section className="relative z-10 max-w-6xl mx-auto px-6 sm:px-12 py-20 sm:py-32 space-y-32">
         {formacion.contentBlocks?.map((block: any) => {
           const BlockComponent = blockRenderers[block._type];
           if (!BlockComponent) {
@@ -88,7 +90,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Tarjeta de Reserva Final - Full Width */}
-      <section className="w-full bg-[#fdfbf7] border-t border-[#f0eee9]">
+      <section className="relative z-10 w-full bg-[#fdfbf7] border-t border-[#f0eee9]">
         <div className="max-w-7xl mx-auto px-6 sm:px-12 py-16 sm:py-24 flex flex-col items-center text-center">
           <span className="text-sm font-bold tracking-[0.2em] text-[#a09e9a] uppercase mb-4">Asegura tu lugar</span>
           <h3 className="font-title text-4xl sm:text-5xl text-[#333333] mb-8">Comienza tu viaje hoy</h3>
