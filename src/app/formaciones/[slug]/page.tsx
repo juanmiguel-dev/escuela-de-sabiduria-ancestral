@@ -41,7 +41,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
   };
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900 relative overflow-x-hidden">
+    <main className="min-h-screen flex flex-col bg-[#fdfbf7] selection:bg-[#333333] selection:text-white font-sans text-gray-900 relative w-full max-w-full overflow-x-hidden">
       <ChakanaBackground />
       <Navbar theme="dark" position="absolute" />
 
@@ -100,7 +100,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
               <div className="flex flex-col items-center gap-6">
                 <div className="flex flex-col items-center">
                   <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Internacional</span>
-                  <div className="text-4xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
+                  <div className="text-3xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
                     <span className="text-3xl sm:text-4xl mr-1 font-medium">$</span>{formacion.price} <span className="text-xl font-bold ml-1 text-gray-400">USD</span>
                   </div>
                 </div>
@@ -121,7 +121,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
               <div className="flex flex-col items-center gap-6">
                 <div className="flex flex-col items-center">
                   <span className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-widest">Argentina</span>
-                  <div className="text-4xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
+                  <div className="text-3xl sm:text-6xl font-black text-[#5b2c1d] tracking-tight">
                     <span className="text-3xl sm:text-4xl mr-1 font-medium">$</span>{formacion.priceArs.toLocaleString('es-AR')} <span className="text-xl font-bold ml-1 text-gray-400">ARS</span>
                   </div>
                 </div>

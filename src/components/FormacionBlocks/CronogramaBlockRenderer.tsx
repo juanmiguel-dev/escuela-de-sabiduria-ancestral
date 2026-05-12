@@ -36,7 +36,7 @@ export function CronogramaBlockRenderer({ title, description, items }: Cronogram
   }
 
   return (
-    <section ref={containerRef} className="py-16 sm:py-32 max-w-6xl mx-auto w-full px-6">
+    <section ref={containerRef} className="py-16 sm:py-32 max-w-6xl mx-auto w-full px-6 overflow-hidden">
       <div className="text-center mb-16 sm:mb-28 space-y-4">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
