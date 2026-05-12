@@ -72,7 +72,7 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Contenido Detallado */}
-      <section className="max-w-5xl mx-auto px-6 sm:px-12 py-16 sm:py-24 space-y-24">
+      <section className="max-w-6xl mx-auto px-6 sm:px-12 py-20 sm:py-32 space-y-32">
         {formacion.contentBlocks?.map((block: any) => {
           const BlockComponent = blockRenderers[block._type];
           if (!BlockComponent) {
