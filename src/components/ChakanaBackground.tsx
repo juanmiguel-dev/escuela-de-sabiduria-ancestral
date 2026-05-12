@@ -14,7 +14,6 @@ export function ChakanaBackground() {
     <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
       {/* Capa 1: Chakanas grandes con movimiento sutil on-scroll */}
       <motion.div 
-        style={{ y: y1, x: x1 }}
         className="absolute inset-[-200px] opacity-[0.035]"
         style={{
           y: y1,
@@ -26,7 +25,6 @@ export function ChakanaBackground() {
 
       {/* Capa 2: Chakanas medianas con movimiento opuesto */}
       <motion.div 
-        style={{ y: y2 }}
         className="absolute inset-[-200px] opacity-[0.025]"
         style={{
           y: y2,
