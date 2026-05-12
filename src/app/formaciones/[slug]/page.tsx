@@ -71,13 +71,13 @@ export default async function FormacionPage({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* Contenido Detallado */}
-      <section className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-12 py-16 sm:py-32 space-y-20 sm:space-y-32 flex flex-col items-center">
+      {/* Contenido Detallado - Sin restricción de ancho en el padre para que los bloques respiren */}
+      <section className="relative z-10 w-full py-16 sm:py-32 space-y-24 sm:space-y-40">
         {formacion.contentBlocks?.map((block: any) => {
           const BlockComponent = blockRenderers[block._type];
           if (!BlockComponent) return null;
           return (
-            <div key={block._key} className="w-full flex justify-center">
+            <div key={block._key} className="w-full">
               <BlockComponent {...block} />
             </div>
           );
