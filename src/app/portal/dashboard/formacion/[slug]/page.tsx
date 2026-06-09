@@ -278,6 +278,7 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
   const [loading, setLoading] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState<any>(null);
   const [dark, setDark] = useState(false);
+  const [activeTab, setActiveTab] = useState<number>(0);
 
   useEffect(() => {
     const saved = localStorage.getItem("dashboard_theme");
@@ -308,7 +309,12 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
       try {
         const data = await getFormacionBySlug(slug);
         setFormacion(data);
-        if (data?.videoUrl) {
+        if (data?.modulos && data.modulos.length > 0) {
+          setSelectedVideo({ 
+            videoUrl: data.modulos[0].videoUrl, 
+            title: data.modulos[0].titulo 
+          });
+        } else if (data?.videoUrl) {
           setSelectedVideo({ videoUrl: data.videoUrl, title: 'Contenido Liberado' });
         }
       } catch (error) {
@@ -319,6 +325,16 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
     }
     loadData();
   }, [slug, router]);
+
+  useEffect(() => {
+    if (formacion?.modulos && formacion.modulos.length > 0) {
+      const activeModule = formacion.modulos[activeTab];
+      setSelectedVideo({
+        videoUrl: activeModule.videoUrl,
+        title: activeModule.titulo
+      });
+    }
+  }, [activeTab, formacion]);
 
   if (loading) {
     return (
@@ -386,8 +402,28 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                   animate={{ opacity: 1, x: 0 }}
                   className="space-y-6"
                 >
+                  {formacion?.modulos && formacion.modulos.length > 0 && (
+                    <div className="flex gap-2 overflow-x-auto pb-2 mb-4 scrollbar-hide">
+                      {formacion.modulos.map((modulo: any, index: number) => (
+                        <button
+                          key={index}
+                          onClick={() => setActiveTab(index)}
+                          className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-colors ${
+                            activeTab === index 
+                              ? 'bg-[#d4af37] text-white' 
+                              : dark 
+                                ? 'bg-white/5 text-white/50 hover:bg-white/10' 
+                                : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                          }`}
+                        >
+                          {modulo.titulo}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
                   <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl sm:text-3xl font-bold leading-tight">{selectedVideo.title}</h1>
+                    <h1 className="text-2xl sm:text-3xl font-bold leading-tight">{selectedVideo?.title || 'Contenido Liberado'}</h1>
                     <span className="self-start bg-[#d4af37]/10 text-[#d4af37] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Liberado</span>
                   </div>
                   
@@ -398,26 +434,32 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                   {/* Recursos */}
                   <div className={`p-6 rounded-2xl border ${dark ? 'bg-white/5 border-white/5' : 'bg-gray-50 border-gray-100'}`}>
                     <h5 className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] mb-4">Recursos Extra</h5>
-                    {formacion?.recursos && formacion.recursos.length > 0 ? (
-                      <div className="space-y-3">
-                        {formacion.recursos.map((recurso: any, index: number) => (
-                          <a
-                            key={index}
-                            href={recurso.archivoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`flex items-center gap-3 transition-colors group ${dark ? 'text-white/70 hover:text-[#d4af37]' : 'text-gray-600 hover:text-[#5b2c1d]'}`}
-                          >
-                            <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
-                            </svg>
-                            <span className="text-sm group-hover:underline">{recurso.titulo}</span>
-                          </a>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className={`text-sm italic ${dark ? 'text-white/40' : 'text-gray-400'}`}>No hay archivos adjuntos para este módulo.</p>
-                    )}
+                    {(() => {
+                      const currentRecursos = formacion?.modulos && formacion.modulos.length > 0 
+                        ? formacion.modulos[activeTab]?.recursos 
+                        : formacion?.recursos;
+                        
+                      return currentRecursos && currentRecursos.length > 0 ? (
+                        <div className="space-y-3">
+                          {currentRecursos.map((recurso: any, index: number) => (
+                            <a
+                              key={index}
+                              href={recurso.archivoUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`flex items-center gap-3 transition-colors group ${dark ? 'text-white/70 hover:text-[#d4af37]' : 'text-gray-600 hover:text-[#5b2c1d]'}`}
+                            >
+                              <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                              </svg>
+                              <span className="text-sm group-hover:underline">{recurso.titulo}</span>
+                            </a>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className={`text-sm italic ${dark ? 'text-white/40' : 'text-gray-400'}`}>No hay archivos adjuntos para este módulo.</p>
+                      );
+                    })()}
                   </div>
 
                   {/* Apuntes */}

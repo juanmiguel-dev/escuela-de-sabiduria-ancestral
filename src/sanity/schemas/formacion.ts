@@ -122,6 +122,55 @@ export const formacion = defineType({
         },
       ],
     }),
+    defineField({
+      name: 'modulos',
+      title: 'Módulos / Pestañas',
+      description: 'Si agregas módulos, el alumno verá pestañas para navegar entre ellos. Cada pestaña tiene su propio video y recursos.',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'titulo',
+              title: 'Nombre de la Pestaña',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'videoUrl',
+              title: 'URL del Video del Módulo',
+              type: 'url',
+            }),
+            defineField({
+              name: 'recursos',
+              title: 'Recursos del Módulo',
+              type: 'array',
+              of: [
+                {
+                  type: 'object',
+                  fields: [
+                    defineField({
+                      name: 'titulo',
+                      title: 'Título del Recurso',
+                      type: 'string',
+                    }),
+                    defineField({
+                      name: 'archivo',
+                      title: 'Archivo PDF',
+                      type: 'file',
+                      options: {
+                        accept: '.pdf',
+                      },
+                    }),
+                  ],
+                },
+              ],
+            }),
+          ],
+        },
+      ],
+    }),
   ],
   preview: {
     select: {
