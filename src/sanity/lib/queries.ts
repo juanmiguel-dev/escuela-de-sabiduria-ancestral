@@ -53,7 +53,10 @@ export async function getFormacionBySlug(slug: string) {
     },
     "modulos": modulos[] {
       titulo,
-      videoUrl,
+      "videos": videos[] {
+        titulo,
+        videoUrl
+      },
       "recursos": recursos[] {
         titulo,
         "archivoUrl": archivo.asset->url

@@ -138,9 +138,28 @@ export const formacion = defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
-              name: 'videoUrl',
-              title: 'URL del Video del Módulo',
-              type: 'url',
+              name: 'videos',
+              title: 'Videos de la Pestaña',
+              type: 'array',
+              of: [
+                {
+                  type: 'object',
+                  fields: [
+                    defineField({
+                      name: 'titulo',
+                      title: 'Título del Video',
+                      type: 'string',
+                      validation: (Rule) => Rule.required(),
+                    }),
+                    defineField({
+                      name: 'videoUrl',
+                      title: 'URL del Video',
+                      type: 'url',
+                      validation: (Rule) => Rule.required(),
+                    }),
+                  ],
+                },
+              ],
             }),
             defineField({
               name: 'recursos',

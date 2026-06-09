@@ -279,6 +279,7 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
   const [selectedVideo, setSelectedVideo] = useState<any>(null);
   const [dark, setDark] = useState(false);
   const [activeTab, setActiveTab] = useState<number>(0);
+  const [activeVideo, setActiveVideo] = useState<number>(0);
 
   useEffect(() => {
     const saved = localStorage.getItem("dashboard_theme");
@@ -310,10 +311,13 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
         const data = await getFormacionBySlug(slug);
         setFormacion(data);
         if (data?.modulos && data.modulos.length > 0) {
-          setSelectedVideo({ 
-            videoUrl: data.modulos[0].videoUrl, 
-            title: data.modulos[0].titulo 
-          });
+          const firstModule = data.modulos[0];
+          if (firstModule.videos && firstModule.videos.length > 0) {
+            setSelectedVideo({ 
+              videoUrl: firstModule.videos[0].videoUrl, 
+              title: firstModule.videos[0].titulo 
+            });
+          }
         } else if (data?.videoUrl) {
           setSelectedVideo({ videoUrl: data.videoUrl, title: 'Contenido Liberado' });
         }
@@ -326,15 +330,22 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
     loadData();
   }, [slug, router]);
 
+  // Reset active video when tab changes
+  useEffect(() => {
+    setActiveVideo(0);
+  }, [activeTab]);
+
   useEffect(() => {
     if (formacion?.modulos && formacion.modulos.length > 0) {
       const activeModule = formacion.modulos[activeTab];
-      setSelectedVideo({
-        videoUrl: activeModule.videoUrl,
-        title: activeModule.titulo
-      });
+      if (activeModule?.videos && activeModule.videos.length > activeVideo) {
+        setSelectedVideo({
+          videoUrl: activeModule.videos[activeVideo].videoUrl,
+          title: activeModule.videos[activeVideo].titulo
+        });
+      }
     }
-  }, [activeTab, formacion]);
+  }, [activeTab, activeVideo, formacion]);
 
   if (loading) {
     return (
@@ -403,22 +414,49 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                   className="space-y-6"
                 >
                   {formacion?.modulos && formacion.modulos.length > 0 && (
-                    <div className="flex gap-2 overflow-x-auto pb-2 mb-4 scrollbar-hide">
-                      {formacion.modulos.map((modulo: any, index: number) => (
-                        <button
-                          key={index}
-                          onClick={() => setActiveTab(index)}
-                          className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-colors ${
-                            activeTab === index 
-                              ? 'bg-[#d4af37] text-white' 
-                              : dark 
-                                ? 'bg-white/5 text-white/50 hover:bg-white/10' 
-                                : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-                          }`}
-                        >
-                          {modulo.titulo}
-                        </button>
-                      ))}
+                    <div className="space-y-3">
+                      {/* Tabs de Módulos */}
+                      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                        {formacion.modulos.map((modulo: any, index: number) => (
+                          <button
+                            key={index}
+                            onClick={() => setActiveTab(index)}
+                            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-colors border ${
+                              activeTab === index 
+                                ? 'bg-[#d4af37] text-white border-[#d4af37]' 
+                                : dark 
+                                  ? 'bg-transparent text-white/50 border-white/10 hover:border-white/30' 
+                                  : 'bg-transparent text-gray-500 border-gray-200 hover:border-gray-400'
+                            }`}
+                          >
+                            {modulo.titulo}
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* Sub-Tabs de Videos (Solo si hay más de 1 video en el módulo activo) */}
+                      {formacion.modulos[activeTab]?.videos && formacion.modulos[activeTab].videos.length > 1 && (
+                        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                          {formacion.modulos[activeTab].videos.map((video: any, index: number) => (
+                            <button
+                              key={index}
+                              onClick={() => setActiveVideo(index)}
+                              className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-2 ${
+                                activeVideo === index 
+                                  ? dark ? 'bg-white/10 text-white' : 'bg-gray-200 text-gray-900'
+                                  : dark 
+                                    ? 'bg-transparent text-white/40 hover:text-white/80' 
+                                    : 'bg-transparent text-gray-400 hover:text-gray-700'
+                              }`}
+                            >
+                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
+                              {video.titulo}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   )}
 
