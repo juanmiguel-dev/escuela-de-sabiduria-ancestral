@@ -98,31 +98,6 @@ export const formacion = defineType({
       description: 'URL del video de YouTube (usar URL de embed para videos ocultos)',
     }),
     defineField({
-      name: 'recursos',
-      title: 'Recursos / PDFs',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'titulo',
-              title: 'Título del Recurso',
-              type: 'string',
-            }),
-            defineField({
-              name: 'archivo',
-              title: 'Archivo PDF',
-              type: 'file',
-              options: {
-                accept: '.pdf',
-              },
-            }),
-          ],
-        },
-      ],
-    }),
-    defineField({
       name: 'modulos',
       title: 'Módulos / Pestañas',
       description: 'Si agregas módulos, el alumno verá pestañas para navegar entre ellos. Cada pestaña tiene su propio video y recursos.',
