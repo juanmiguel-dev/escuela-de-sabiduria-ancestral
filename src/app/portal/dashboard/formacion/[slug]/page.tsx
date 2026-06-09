@@ -7,6 +7,28 @@ import { m, LazyMotion, domAnimation } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { getFormacionBySlug } from "@/sanity/lib/queries";
 
+import { IntroBlockRenderer } from "@/components/FormacionBlocks/IntroBlockRenderer";
+import { CuerpoPorQueBlockRenderer } from "@/components/FormacionBlocks/CuerpoPorQueBlockRenderer";
+import { CuerpoDirigidoABlockRenderer } from "@/components/FormacionBlocks/CuerpoDirigidoABlockRenderer";
+import { DetailedDescriptionBlockRenderer } from "@/components/FormacionBlocks/DetailedDescriptionBlockRenderer";
+import { IntroduccionAperturaBlockRenderer } from "@/components/FormacionBlocks/IntroduccionAperturaBlockRenderer";
+import { TestimoniosBlockRenderer } from "@/components/FormacionBlocks/TestimoniosBlockRenderer";
+import { ImageGalleryBlockRenderer } from "@/components/FormacionBlocks/ImageGalleryBlockRenderer";
+import { FaqBlockRenderer } from "@/components/FormacionBlocks/FaqBlockRenderer";
+import { CronogramaBlockRenderer } from "@/components/FormacionBlocks/CronogramaBlockRenderer";
+
+const blockRenderers: { [key: string]: React.ComponentType<any> } = {
+  introBlock: IntroBlockRenderer,
+  cuerpoPorQueBlock: CuerpoPorQueBlockRenderer,
+  cuerpoDirigidoABlock: CuerpoDirigidoABlockRenderer,
+  detailedDescriptionBlock: DetailedDescriptionBlockRenderer,
+  introduccionAperturaBlock: IntroduccionAperturaBlockRenderer,
+  testimoniosBlock: TestimoniosBlockRenderer,
+  imageGalleryBlock: ImageGalleryBlockRenderer,
+  faqBlock: FaqBlockRenderer,
+  cronogramaBlock: CronogramaBlockRenderer,
+};
+
 function extractVideoId(url: string): string {
   if (!url) return '';
   if (url.includes('youtube.com/watch')) {
@@ -517,6 +539,23 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
             </div>
           )}
         </main>
+
+        {/* Extra Content Blocks */}
+        {formacion?.modulos && formacion.modulos[activeTab]?.contentBlocks && formacion.modulos[activeTab].contentBlocks.length > 0 && (
+          <section className="w-full py-16 px-6 sm:px-12 space-y-24 bg-white dark:bg-[#111111]">
+            <div className="max-w-7xl mx-auto space-y-24">
+              {formacion.modulos[activeTab].contentBlocks.map((block: any) => {
+                const BlockComponent = blockRenderers[block._type];
+                if (!BlockComponent) return null;
+                return (
+                  <div key={block._key} className="w-full">
+                    <BlockComponent {...block} dark={dark} />
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
       </div>
     </LazyMotion>
   );

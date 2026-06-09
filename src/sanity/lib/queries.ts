@@ -60,6 +60,30 @@ export async function getFormacionBySlug(slug: string) {
       "recursos": recursos[] {
         titulo,
         "archivoUrl": archivo.asset->url
+      },
+      contentBlocks[] {
+        _type,
+        _key,
+        defined(intro) => { intro },
+        defined(cuerpoPorQue) => { cuerpoPorQue },
+        defined(cuerpoDirigidoA) => { cuerpoDirigidoA },
+        defined(detailedDescription) => { detailedDescription },
+        defined(introduccionApertura) => {
+          introduccionApertura[] { _key, title, content }
+        },
+        defined(testimonios) => {
+          testimonios[] { _key, nombre, mensaje, "avatarUrl": avatar.asset->url }
+        },
+        _type == "imageGalleryBlock" => {
+          title, layoutType, masonryColumns, masonryRows,
+          images[] { _key, "imageUrl": coalesce(asset->url, image.asset->url), "alt": coalesce(alt, image.alt) }
+        },
+        _type == "faqBlock" => {
+          title, faqs[] { _key, title, content }
+        },
+        _type == "cronogramaBlock" => {
+          title, description, items[] { _key, indicator, title, content }
+        }
       }
     },
     contentBlocks[] {
