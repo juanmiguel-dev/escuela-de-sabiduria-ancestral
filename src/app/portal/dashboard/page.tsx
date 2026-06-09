@@ -100,7 +100,7 @@ export default function StudentDashboard() {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all ${activeTab === item.id ? 'bg-[#5b2c1d] text-white shadow-lg shadow-[#5b2c1d]/20' : 'text-white/60 hover:bg-white/5 hover:text-white'}`}
+                className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all cursor-pointer ${activeTab === item.id ? 'bg-[#5b2c1d] text-white shadow-lg shadow-[#5b2c1d]/20' : 'text-white/60 hover:bg-white/5 hover:text-white'}`}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon}></path>
@@ -117,7 +117,7 @@ export default function StudentDashboard() {
                 localStorage.removeItem("alumno_name");
                 router.push("/portal");
               }}
-              className="flex items-center gap-4 text-white/50 hover:text-white transition-colors w-full text-left"
+              className="flex items-center gap-4 text-white/50 hover:text-white transition-colors w-full text-left cursor-pointer"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
@@ -137,7 +137,7 @@ export default function StudentDashboard() {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setDark(!dark)}
-                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${dark ? 'bg-[#d4af37]/10 text-[#d4af37]' : 'bg-[#5b2c1d]/10 text-[#5b2c1d]'}`}
+                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all cursor-pointer ${dark ? 'bg-[#d4af37]/10 text-[#d4af37]' : 'bg-[#5b2c1d]/10 text-[#5b2c1d]'}`}
               >
                 {dark ? (
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -171,7 +171,7 @@ export default function StudentDashboard() {
                   <NextLink 
                     key={formacion._id} 
                     href={`/portal/dashboard/formacion/${formacion.slug}`}
-                    className={`group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border flex flex-col ${dark ? 'bg-[#1a1a1a] border-white/5 hover:shadow-black/30' : 'bg-white border-gray-100'}`}
+                    className={`group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border flex flex-col cursor-pointer ${dark ? 'bg-[#1a1a1a] border-white/5 hover:shadow-black/30' : 'bg-white border-gray-100'}`}
                   >
                     <div className="relative aspect-video overflow-hidden">
                       {formacion.imageUrl && (
@@ -239,7 +239,7 @@ export default function StudentDashboard() {
                   <p className={`text-lg font-bold ${dark ? 'text-white' : 'text-[#333333]'}`}>{alumno.email}</p>
                 </div>
                 <div className="pt-8">
-                  <button className={`text-sm font-bold hover:underline ${dark ? 'text-[#d4af37]' : 'text-[#5b2c1d]'}`}>Cambiar Contraseña</button>
+                  <button className={`text-sm font-bold hover:underline cursor-pointer ${dark ? 'text-[#d4af37]' : 'text-[#5b2c1d]'}`}>Cambiar Contraseña</button>
                 </div>
               </div>
             </m.div>
