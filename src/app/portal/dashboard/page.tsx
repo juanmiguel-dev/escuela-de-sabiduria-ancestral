@@ -164,9 +164,6 @@ export default function StudentDashboard() {
             >
               <div className="flex items-center justify-between">
                 <h3 className={`text-xl font-black uppercase tracking-widest ${dark ? 'text-white' : 'text-[#333333]'}`}>Mis Formaciones</h3>
-                <span className={`text-sm font-bold px-4 py-1 rounded-full ${dark ? 'text-[#d4af37] bg-[#d4af37]/10' : 'text-[#5b2c1d] bg-[#5b2c1d]/5'}`}>
-                  {alumno.formaciones?.length || 0} cursos
-                </span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
