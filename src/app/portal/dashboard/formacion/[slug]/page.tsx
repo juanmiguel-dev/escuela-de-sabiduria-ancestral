@@ -438,12 +438,12 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                   {formacion?.modulos && formacion.modulos.length > 0 && (
                     <div className="space-y-3">
                       {/* Tabs de Módulos */}
-                      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                      <div className="flex flex-col gap-2">
                         {formacion.modulos.map((modulo: any, index: number) => (
                           <button
                             key={index}
                             onClick={() => setActiveTab(index)}
-                            className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-colors border cursor-pointer ${
+                            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors border cursor-pointer ${
                               activeTab === index 
                                 ? 'bg-[#d4af37] text-white border-[#d4af37]' 
                                 : dark 
@@ -458,23 +458,30 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
 
                       {/* Sub-Tabs de Videos (Solo si hay más de 1 video en el módulo activo) */}
                       {formacion.modulos[activeTab]?.videos && formacion.modulos[activeTab].videos.length > 1 && (
-                        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                        <div className="flex flex-col gap-2 mt-4">
+                          <h5 className="text-[10px] font-black uppercase tracking-[0.2em] text-[#d4af37] mb-1 px-1">Clases del Módulo</h5>
                           {formacion.modulos[activeTab].videos.map((video: any, index: number) => (
                             <button
                               key={index}
                               onClick={() => setActiveVideo(index)}
-                              className={`whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-2 cursor-pointer ${
+                              className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-colors flex items-center gap-3 cursor-pointer border ${
                                 activeVideo === index 
-                                  ? dark ? 'bg-white/10 text-white' : 'bg-gray-200 text-gray-900'
+                                  ? dark ? 'bg-[#d4af37]/10 text-[#d4af37] border-[#d4af37]/30' : 'bg-[#5b2c1d]/5 text-[#5b2c1d] border-[#5b2c1d]/20'
                                   : dark 
-                                    ? 'bg-transparent text-white/40 hover:text-white/80' 
-                                    : 'bg-transparent text-gray-400 hover:text-gray-700'
+                                    ? 'bg-transparent text-white/50 border-transparent hover:bg-white/5' 
+                                    : 'bg-transparent text-gray-500 border-transparent hover:bg-gray-50'
                               }`}
                             >
-                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M8 5v14l11-7z" />
-                              </svg>
-                              {video.titulo}
+                              <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                                activeVideo === index 
+                                  ? dark ? 'bg-[#d4af37]/20 text-[#d4af37]' : 'bg-[#5b2c1d]/10 text-[#5b2c1d]'
+                                  : dark ? 'bg-white/5 text-white/40' : 'bg-gray-100 text-gray-400'
+                              }`}>
+                                <svg className="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M8 5v14l11-7z" />
+                                </svg>
+                              </div>
+                              <span className="leading-tight">{video.titulo}</span>
                             </button>
                           ))}
                         </div>
