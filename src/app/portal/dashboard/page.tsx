@@ -189,13 +189,7 @@ export default function StudentDashboard() {
                     <div className="p-8">
                       <h4 className={`text-xl font-bold mb-2 group-hover:text-[#d4af37] transition-colors ${dark ? 'text-white' : 'text-[#333333]'}`}>{formacion.title}</h4>
                       <p className={`text-sm line-clamp-2 mb-6 ${dark ? 'text-gray-400' : 'text-gray-500'}`}>{formacion.shortDescription}</p>
-                      <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                        <div className="w-1/3 h-full bg-[#d4af37]"></div>
-                      </div>
-                      <div className="flex justify-between mt-2">
-                        <span className="text-[10px] font-black uppercase text-gray-400">Progreso</span>
-                        <span className="text-[10px] font-black uppercase text-[#d4af37]">33%</span>
-                      </div>
+
                     </div>
                   </NextLink>
                 ))}
