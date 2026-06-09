@@ -378,7 +378,7 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
           </button>
         </header>
 
-        <main className="flex-grow flex flex-col lg:flex-row overflow-hidden">
+        <main className="flex-grow flex flex-col lg:flex-row-reverse overflow-hidden">
           {selectedVideo ? (
             <>
               {/* Video Player - left/top */}
