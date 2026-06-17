@@ -21,13 +21,7 @@ export default function PortalAlumnos() {
     setError("");
 
     try {
-      // Búsqueda de alumno en Sanity por email
-      const alumno = await getAlumnoByEmail(email);
-
-      if (alumno && alumno.isActive) {
-        // Mock de sesión: guardamos en localStorage
-        localStorage.setItem("alumno_email", email);
-        localStorage.setItem("alumno_name", alumno.name);
+      // No hacemos query a Sanity aquí, la API lo hace
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
