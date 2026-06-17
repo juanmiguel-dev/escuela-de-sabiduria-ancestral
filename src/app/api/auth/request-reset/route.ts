@@ -1,10 +1,8 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { getAlumnoByEmail } from '@/sanity/lib/queries';
 import { writeClient } from '@/sanity/lib/write-client';
 import crypto from 'crypto';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
@@ -39,9 +37,18 @@ export async function POST(req: Request) {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
     const resetLink = `${baseUrl}/portal/reset?token=${resetToken}&email=${encodeURIComponent(email)}`;
 
+    // Configurar Nodemailer con Gmail
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
     // Enviar el correo electrónico
-    const { error: resendError } = await resend.emails.send({
-      from: 'Escuela de Sabiduría Ancestral <onboarding@resend.dev>',
+    await transporter.sendMail({
+      from: `"Escuela de Sabiduría Ancestral" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: 'Recuperación de Contraseña - Escuela de Sabiduría Ancestral',
       html: `
@@ -57,15 +64,10 @@ export async function POST(req: Request) {
       `
     });
 
-    if (resendError) {
-      console.error('Resend error:', resendError);
-      return NextResponse.json({ error: 'Error al enviar el correo. Intenta de nuevo más tarde.' }, { status: 500 });
-    }
-
     return NextResponse.json({ success: true, message: 'Si el correo existe, recibirás un enlace de recuperación.' });
 
   } catch (error) {
     console.error('Error in request-reset:', error);
-    return NextResponse.json({ error: 'Error interno del servidor.' }, { status: 500 });
+    return NextResponse.json({ error: 'Error al enviar el correo. Verifica las credenciales de Gmail o intenta más tarde.' }, { status: 500 });
   }
 }

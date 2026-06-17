@@ -1,14 +1,11 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import nodemailer from 'nodemailer';
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
 
     // Sanity envía el payload del documento recién creado
-    // Configuraremos el Webhook en Sanity para que envíe solo cuando _type == "alumno" y en operación "create"
     const { _type, email, name, password, isActive } = body;
 
     if (_type !== 'alumno') {
@@ -22,8 +19,17 @@ export async function POST(req: Request) {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
     const loginLink = `${baseUrl}/portal`;
 
-    const { error: resendError } = await resend.emails.send({
-      from: 'Escuela de Sabiduría Ancestral <onboarding@resend.dev>',
+    // Configurar Nodemailer con Gmail
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      from: `"Escuela de Sabiduría Ancestral" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: '¡Bienvenido a la Escuela de Sabiduría Ancestral!',
       html: `
@@ -52,14 +58,9 @@ export async function POST(req: Request) {
       `
     });
 
-    if (resendError) {
-      console.error('Error enviando email de bienvenida:', resendError);
-      return NextResponse.json({ error: 'Fallo al enviar correo.' }, { status: 500 });
-    }
-
     return NextResponse.json({ success: true, message: 'Correo de bienvenida enviado.' });
   } catch (error) {
     console.error('Webhook error:', error);
-    return NextResponse.json({ error: 'Error interno.' }, { status: 500 });
+    return NextResponse.json({ error: 'Error interno o credenciales de Gmail inválidas.' }, { status: 500 });
   }
 }
