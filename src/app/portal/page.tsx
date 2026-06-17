@@ -28,17 +28,24 @@ export default function PortalAlumnos() {
         // Mock de sesión: guardamos en localStorage
         localStorage.setItem("alumno_email", email);
         localStorage.setItem("alumno_name", alumno.name);
-        
-        // Redirigir al dashboard
-        router.push("/portal/dashboard");
-      } else if (alumno && !alumno.isActive) {
-        setError("Tu cuenta está inactiva. Por favor, contacta con soporte.");
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || "Ocurrió un error al intentar ingresar. Reintenta luego.");
       } else {
-        setError("No se encontró una cuenta con este correo electrónico.");
+        localStorage.setItem("alumno_email", data.alumno.email);
+        localStorage.setItem("alumno_name", data.alumno.name);
+        router.push("/portal/dashboard");
       }
     } catch (err) {
       console.error("Login error:", err);
-      setError("Ocurrió un error al intentar ingresar. Reintenta luego.");
+      setError("Ocurrió un error de red. Reintenta luego.");
     } finally {
       setLoading(false);
     }
@@ -127,7 +134,6 @@ export default function PortalAlumnos() {
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#5b2c1d] focus:ring-2 focus:ring-[#5b2c1d]/20 outline-none transition-all bg-white"
                 placeholder="••••••••"
               />
-              <p className="text-[10px] text-gray-400 mt-2">Usa cualquier contraseña (mock habilitado)</p>
             </div>
 
             <div className="flex items-center justify-between text-sm">
@@ -135,9 +141,9 @@ export default function PortalAlumnos() {
                 <input type="checkbox" className="rounded border-gray-300 text-[#5b2c1d] focus:ring-[#5b2c1d]" />
                 <span className="text-gray-600">Recordarme</span>
               </label>
-              <a href="#" className="font-bold text-[#5b2c1d] hover:underline">
+              <NextLink href="/portal/recuperar-password" className="font-bold text-[#5b2c1d] hover:underline">
                 ¿Olvidaste tu contraseña?
-              </a>
+              </NextLink>
             </div>
 
             <button

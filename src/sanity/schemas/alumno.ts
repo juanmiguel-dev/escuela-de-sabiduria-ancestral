@@ -44,6 +44,18 @@ export const alumno = {
       title: 'Fecha de Ingreso',
       type: 'datetime',
       initialValue: () => new Date().toISOString(),
+    },
+    {
+      name: 'resetToken',
+      title: 'Token de Recuperación',
+      type: 'string',
+      hidden: true,
+    },
+    {
+      name: 'resetTokenExpiry',
+      title: 'Expiración del Token',
+      type: 'datetime',
+      hidden: true,
     }
   ],
   preview: {

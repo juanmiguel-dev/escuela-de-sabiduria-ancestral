@@ -225,7 +225,10 @@ export async function getAlumnoByEmail(email: string) {
     _id,
     name,
     email,
+    password,
     isActive,
+    resetToken,
+    resetTokenExpiry,
     "formaciones": formaciones[]-> {
       _id,
       title,
