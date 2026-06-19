@@ -22,6 +22,9 @@ function ResetPasswordForm() {
   useEffect(() => {
     if (!token || !email) {
       setError("El enlace de recuperación es inválido o está incompleto.");
+    } else {
+      // Si ambos están presentes, nos aseguramos de no mostrar error inicial
+      setError("");
     }
   }, [token, email]);
 
