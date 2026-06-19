@@ -10,7 +10,7 @@ import { Suspense } from "react";
 function ResetPasswordForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const token = searchParams.get("token");
+  const token = searchParams.get("code");
   const email = searchParams.get("email");
 
   const [password, setPassword] = useState("");

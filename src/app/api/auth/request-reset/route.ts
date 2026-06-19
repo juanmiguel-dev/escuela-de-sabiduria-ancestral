@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 
     // Crear la URL de recuperación
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
-    const resetLink = `${baseUrl}/portal/reset?token=${resetToken}&email=${encodeURIComponent(email)}`;
+    const resetLink = `${baseUrl}/portal/reset?code=${resetToken}&email=${encodeURIComponent(email)}`;
 
     // Configurar Nodemailer con Gmail
     const transporter = nodemailer.createTransport({
