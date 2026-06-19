@@ -33,8 +33,10 @@ export async function POST(req: Request) {
       })
       .commit();
 
-    // Crear la URL de recuperación
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+    // Crear la URL de recuperación (Forzamos la URL oficial en producción para evitar URLs de preview de Vercel)
+    const baseUrl = process.env.NODE_ENV === 'development' 
+      ? 'http://localhost:3000' 
+      : 'https://escuela-de-sabiduria-ancestral.vercel.app';
     const resetLink = `${baseUrl}/portal/reset?code=${resetToken}&email=${encodeURIComponent(email)}`;
 
     // Configurar Nodemailer con Gmail

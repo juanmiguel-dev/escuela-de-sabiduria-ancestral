@@ -16,7 +16,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: 'Alumno sin email, inactivo o sin contraseña.' }, { status: 200 });
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+    // Forzamos la URL oficial en producción para evitar URLs de preview de Vercel
+    const baseUrl = process.env.NODE_ENV === 'development' 
+      ? 'http://localhost:3000' 
+      : 'https://escuela-de-sabiduria-ancestral.vercel.app';
     const loginLink = `${baseUrl}/portal`;
 
     // Configurar Nodemailer con Gmail
