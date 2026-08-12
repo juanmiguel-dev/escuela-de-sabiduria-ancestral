@@ -1,3 +1,4 @@
+// Schema para gestionar documentos de tipo Curso en Sanity CMS
 export const curso = {
   name: 'curso',
   title: 'Curso',
