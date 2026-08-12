@@ -3,7 +3,7 @@
 import Image from "next/image";
 import NextLink from "next/link";
 import { useState, useEffect } from "react";
-import { getTallerCount } from "@/sanity/lib/queries";
+import { getTallerCount, getCursoCount } from "@/sanity/lib/queries";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -15,23 +15,29 @@ interface NavbarProps {
 export function Navbar({ theme = "dark", position = "absolute" }: NavbarProps) {
   const isLight = theme === "light";
   const [showTalleres, setShowTalleres] = useState(false);
+  const [showCursos, setShowCursos] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    async function checkTalleres() {
+    async function checkSections() {
       try {
-        const count = await getTallerCount();
-        setShowTalleres(count > 0);
+        const [tallerCount, cursoCount] = await Promise.all([
+          getTallerCount(),
+          getCursoCount(),
+        ]);
+        setShowTalleres(tallerCount > 0);
+        setShowCursos(cursoCount > 0);
       } catch (e) {
-        console.error("Error fetching taller count:", e);
+        console.error("Error fetching section counts:", e);
       }
     }
-    checkTalleres();
+    checkSections();
   }, []);
 
   const navLinks = [
     { label: "Inicio", href: "/" },
     { label: "Formaciones", href: "/formaciones" },
+    ...(showCursos ? [{ label: "Cursos", href: "/cursos" }] : []),
     ...(showTalleres ? [{ label: "Talleres", href: "/#talleres" }] : []),
     { label: "Agendar Sesión", href: "/sesiones" },
     { label: "Contacto", href: "/contacto" },

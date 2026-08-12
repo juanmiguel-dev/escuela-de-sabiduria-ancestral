@@ -166,6 +166,7 @@ export async function getProjects() {
     "mediaUrl": mainMedia.asset->url,
     "videoUrl": videoFile.asset->url,
     "sections": talleres[]->title,
+    "cursosSections": cursos[]->title,
     isHeroFeatured
   }`);
 }
@@ -179,6 +180,7 @@ export async function getFeaturedProjects() {
     "mediaUrl": mainMedia.asset->url,
     "videoUrl": videoFile.asset->url,
     "sections": talleres[]->title,
+    "cursosSections": cursos[]->title,
     isHeroFeatured
   }`);
 }
@@ -199,6 +201,7 @@ export async function getSections() {
     }
   }`);
 }
+
 export async function getTallerCount() {
   return await client.fetch(`count(*[_type == "taller"])`);
 }
@@ -208,6 +211,27 @@ export async function getTalleres() {
     _id,
     title,
     highlightText,
+    "projects": *[_type == "video" && references(^._id)] {
+      _id,
+      title,
+      "slug": slug.current,
+      description,
+      "mediaUrl": mainMedia.asset->url,
+      "videoUrl": videoFile.asset->url
+    }
+  }`);
+}
+
+export async function getCursoCount() {
+  return await client.fetch(`count(*[_type == "curso"])`);
+}
+
+export async function getCursos() {
+  return await client.fetch(`*[_type == "curso"] | order(order asc) {
+    _id,
+    title,
+    highlightText,
+    htmlContent,
     "projects": *[_type == "video" && references(^._id)] {
       _id,
       title,

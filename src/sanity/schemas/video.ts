@@ -47,6 +47,12 @@ export const video = {
       of: [{ type: 'reference', to: [{ type: 'taller' }] }],
     },
     {
+      name: 'cursos',
+      title: 'Cursos a los que pertenece',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'curso' }] }],
+    },
+    {
       name: 'isHeroFeatured',
       title: 'Destacar en el Inicio',
       type: 'boolean',
