@@ -267,10 +267,13 @@ export default function DivinaMatrizPage() {
               href="https://wa.me/5492234480139?text=Hola%20Romi!%20Quiero%20sumarme%20al%20curso%20Divina%20Matriz"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#cba72f] hover:bg-[#b59325] text-[#241a00] font-bold text-base sm:text-lg rounded-full px-10 py-5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider"
+              className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-[#cba72f] via-[#e5c147] to-[#cba72f] hover:from-[#b59325] hover:to-[#b59325] text-[#241a00] font-bold text-base sm:text-lg rounded-full px-7 sm:px-9 py-4 sm:py-5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider border border-[#ffe088]/50"
             >
-              <Sparkles className="w-5 h-5" />
-              SÍ, QUIERO UNIRME
+              <Sparkles className="w-5 h-5 text-[#702e1d]" />
+              <span>SÍ, QUIERO UNIRME</span>
+              <span className="bg-[#702e1d] text-[#ffe088] text-xs sm:text-sm font-extrabold px-3 py-1 rounded-full border border-[#ffe088]/40 shadow-inner tracking-tight lowercase">
+                33 USD
+              </span>
             </a>
             <a
               href="#introduccion"
@@ -306,10 +309,13 @@ export default function DivinaMatrizPage() {
               href="https://wa.me/5492234480139?text=Hola%20Romi!%20Quiero%20sumarme%20al%20curso%20Divina%20Matriz"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#cba72f] hover:bg-[#b59325] text-[#241a00] font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider"
+              className="inline-flex items-center gap-2.5 bg-[#cba72f] hover:bg-[#b59325] text-[#241a00] font-bold text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5 rounded-full shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider"
             >
               <Sparkles className="w-4 h-4" />
-              QUIERO SUMARME
+              <span>QUIERO SUMARME</span>
+              <span className="bg-[#702e1d] text-[#ffe088] text-xs font-black px-2.5 py-0.5 rounded-full border border-[#ffe088]/40 shadow-inner tracking-tight lowercase">
+                33 USD
+              </span>
             </a>
           </motion.div>
         )}
@@ -513,14 +519,31 @@ export default function DivinaMatrizPage() {
               </ul>
 
               <div className="text-center">
+                <div className="mb-6 flex flex-col items-center gap-1">
+                  <span className="text-xs uppercase tracking-[0.2em] text-[#ffe088] font-bold">
+                    Inversión Especial de Lanzamiento
+                  </span>
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-4xl sm:text-5xl font-serif font-bold text-[#ffe088] drop-shadow-md">
+                      33 USD
+                    </span>
+                    <span className="text-sm text-white/50 line-through font-light">
+                      120 USD
+                    </span>
+                  </div>
+                </div>
+
                 <a
                   href="https://wa.me/5492234480139?text=Hola%20Romi!%20Quiero%20sanar%20mi%20%C3%BAtero%20ahora%20con%20Divina%20Matriz"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-[#cba72f] hover:bg-[#b59325] text-[#241a00] font-bold text-lg rounded-full px-12 py-5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider"
+                  className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#cba72f] via-[#e5c147] to-[#cba72f] hover:from-[#b59325] hover:to-[#b59325] text-[#241a00] font-bold text-base sm:text-xl rounded-full px-8 sm:px-12 py-5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider border border-[#ffe088]/50"
                 >
-                  <Flame className="w-6 h-6" />
-                  SÍ, QUIERO SANAR MI ÚTERO AHORA
+                  <Flame className="w-6 h-6 text-[#702e1d]" />
+                  <span>SÍ, QUIERO SANAR MI ÚTERO AHORA</span>
+                  <span className="bg-[#702e1d] text-[#ffe088] text-xs sm:text-sm font-extrabold px-3 py-1 rounded-full border border-[#ffe088]/40 shadow-inner tracking-tight lowercase">
+                    33 USD
+                  </span>
                 </a>
               </div>
             </div>
