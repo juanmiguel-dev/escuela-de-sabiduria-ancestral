@@ -82,5 +82,36 @@ export const landing = defineType({
         },
       ],
     }),
+    defineField({
+      name: 'footerDescription',
+      title: 'Pie de página: Descripción',
+      description: 'Texto corto descriptivo debajo del logo en el Footer.',
+      type: 'text',
+      initialValue: 'Acompañamiento en tu proceso de crecimiento personal y espiritual a través de formaciones y sesiones individuales.',
+    }),
+    defineField({
+      name: 'footerEmail',
+      title: 'Pie de página: Email de Contacto',
+      type: 'string',
+      initialValue: 'hola@rominacastaneda.com',
+    }),
+    defineField({
+      name: 'footerInstagram',
+      title: 'Pie de página: Link de Instagram',
+      type: 'string',
+      initialValue: 'https://instagram.com',
+    }),
+    defineField({
+      name: 'footerYoutube',
+      title: 'Pie de página: Link de YouTube',
+      type: 'string',
+      initialValue: 'https://youtube.com',
+    }),
+    defineField({
+      name: 'footerCopyright',
+      title: 'Pie de página: Texto Copyright (Opcional)',
+      description: 'Texto de derechos reservados al final del Footer. Dejar en blanco para usar el año actual automáticamente.',
+      type: 'string',
+    }),
   ],
 });

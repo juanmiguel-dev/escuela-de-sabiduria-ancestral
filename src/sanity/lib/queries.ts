@@ -13,7 +13,22 @@ export async function getLandingData() {
       button1Link,
       button2Text,
       button2Link
-    }
+    },
+    footerDescription,
+    footerEmail,
+    footerInstagram,
+    footerYoutube,
+    footerCopyright
+  }`);
+}
+
+export async function getFooterData() {
+  return await client.fetch(`*[_type == "landing"][0] {
+    footerDescription,
+    footerEmail,
+    footerInstagram,
+    footerYoutube,
+    footerCopyright
   }`);
 }
 
