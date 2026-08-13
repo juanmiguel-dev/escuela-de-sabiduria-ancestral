@@ -309,16 +309,16 @@ export default function DivinaMatrizPage() {
             {targetAudience.map((item, idx) => (
               <motion.div
                 key={idx}
-                className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 flex items-start gap-4 hover:shadow-md transition-all"
+                className="group bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-200/80 flex items-start gap-4 transition-all duration-500 hover:bg-[#702e1d] hover:border-purple-500/60 hover:shadow-[0_0_25px_rgba(147,51,234,0.4),0_0_50px_rgba(168,85,247,0.2)] hover:-translate-y-1"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="w-10 h-10 rounded-full bg-[#702e1d]/10 text-[#702e1d] flex items-center justify-center shrink-0 mt-1">
+                <div className="w-10 h-10 rounded-full bg-[#702e1d]/10 text-[#702e1d] group-hover:bg-white/20 group-hover:text-[#ffe088] flex items-center justify-center shrink-0 mt-1 transition-colors duration-500">
                   <Heart className="w-5 h-5" />
                 </div>
-                <p className="text-gray-700 text-base leading-relaxed font-light">
+                <p className="text-gray-700 font-normal group-hover:text-white text-base leading-relaxed transition-colors duration-500">
                   {item}
                 </p>
               </motion.div>
@@ -339,19 +339,19 @@ export default function DivinaMatrizPage() {
             return (
               <motion.div
                 key={idx}
-                className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center hover:border-[#702e1d]/30 hover:shadow-lg transition-all"
+                className="group bg-white p-6 rounded-2xl shadow-sm border border-gray-200/80 flex flex-col items-center transition-all duration-500 hover:bg-[#702e1d] hover:border-purple-500/60 hover:shadow-[0_0_25px_rgba(147,51,234,0.4),0_0_50px_rgba(168,85,247,0.2)] hover:-translate-y-1"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.08 }}
                 viewport={{ once: true }}
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#cba72f]/10 text-[#735c00] flex items-center justify-center mb-4">
+                <div className="w-14 h-14 rounded-2xl bg-[#cba72f]/10 text-[#735c00] group-hover:bg-white/20 group-hover:text-[#ffe088] flex items-center justify-center mb-4 transition-colors duration-500">
                   <Icon className="w-7 h-7" />
                 </div>
-                <h4 className="font-serif text-xl font-medium text-[#702e1d] mb-2">
+                <h4 className="font-serif text-xl font-normal text-[#702e1d] group-hover:text-[#ffe088] mb-2 transition-colors duration-500">
                   {b.title}
                 </h4>
-                <p className="text-gray-600 text-sm leading-relaxed font-light">
+                <p className="text-gray-600 font-normal group-hover:text-white/90 text-sm leading-relaxed transition-colors duration-500">
                   {b.desc}
                 </p>
               </motion.div>
@@ -367,7 +367,7 @@ export default function DivinaMatrizPage() {
             <h3 className="text-3xl sm:text-5xl font-serif text-[#702e1d] mb-4">
               El Viaje de 7 Semanas
             </h3>
-            <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto font-light">
+            <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto font-normal">
               Un currículo paso a paso diseñado para transformar tu relación contigo misma.
             </p>
           </div>
@@ -376,27 +376,27 @@ export default function DivinaMatrizPage() {
             {curriculum.map((m, idx) => (
               <motion.div
                 key={idx}
-                className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 hover:border-[#702e1d]/40 transition-all text-left"
+                className="group bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-200/80 transition-all duration-500 hover:bg-[#702e1d] hover:border-purple-500/60 hover:shadow-[0_0_25px_rgba(147,51,234,0.4),0_0_50px_rgba(168,85,247,0.2)] hover:-translate-y-1 text-left"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.08 }}
                 viewport={{ once: true }}
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="bg-[#702e1d] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                  <span className="bg-[#702e1d] group-hover:bg-[#cba72f] text-white group-hover:text-[#241a00] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider transition-colors duration-500">
                     {m.module}
                   </span>
-                  <h4 className="font-serif text-xl sm:text-2xl text-[#702e1d] font-medium">
+                  <h4 className="font-serif text-xl sm:text-2xl text-[#702e1d] group-hover:text-[#ffe088] font-normal transition-colors duration-500">
                     {m.title}
                   </h4>
                 </div>
-                <p className="text-gray-700 text-base mb-4 font-light leading-relaxed">
+                <p className="text-gray-700 group-hover:text-white/90 text-base mb-4 font-normal leading-relaxed transition-colors duration-500">
                   {m.description}
                 </p>
-                <div className="bg-[#f5f3ef] p-4 rounded-xl flex items-start gap-3 border border-gray-200/50">
-                  <Headphones className="w-5 h-5 text-[#cba72f] shrink-0 mt-0.5" />
-                  <p className="text-sm text-gray-800 font-medium">
-                    <strong className="text-[#702e1d]">Activación:</strong> {m.activation}
+                <div className="bg-[#f5f3ef] group-hover:bg-white/10 group-hover:border-white/20 p-4 rounded-xl flex items-start gap-3 border border-gray-200/50 transition-colors duration-500">
+                  <Headphones className="w-5 h-5 text-[#cba72f] group-hover:text-[#ffe088] shrink-0 mt-0.5 transition-colors duration-500" />
+                  <p className="text-sm text-gray-800 group-hover:text-white font-normal">
+                    <strong className="text-[#702e1d] group-hover:text-[#ffe088]">Activación:</strong> {m.activation}
                   </p>
                 </div>
               </motion.div>
@@ -412,7 +412,7 @@ export default function DivinaMatrizPage() {
             <h3 className="text-3xl sm:text-5xl font-serif text-[#ffe088] text-center mb-6">
               Bonus Especial: Rituales de Amor Propio
             </h3>
-            <p className="text-white/80 text-center mb-10 max-w-3xl mx-auto font-light text-base sm:text-lg">
+            <p className="text-white/80 text-center mb-10 max-w-3xl mx-auto font-normal text-base sm:text-lg">
               Para complementar tu viaje, te llevas esta guía práctica de rituales diarios para mantener la energía de tu útero vibrante y tu autoestima alta.
             </p>
 
@@ -425,7 +425,10 @@ export default function DivinaMatrizPage() {
                 "Ritual del Fuego Interno",
                 "Audios de apoyo diario (SOS emocional)"
               ].map((bonus, i) => (
-                <div key={i} className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/15 text-center text-sm font-medium">
+                <div
+                  key={i}
+                  className="group bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/15 text-center text-sm font-normal transition-all duration-500 hover:bg-white hover:text-[#702e1d] hover:border-purple-400/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:-translate-y-1"
+                >
                   {bonus}
                 </div>
               ))}
@@ -445,7 +448,7 @@ export default function DivinaMatrizPage() {
                   "Acceso a la Comunidad 'Círculo Matriz' (Espacio privado de contención)",
                   "1 Sesión de Preguntas y Respuestas Grupal (Grabada)"
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-base font-light text-white/90">
+                  <li key={i} className="flex items-start gap-3 text-base font-normal text-white/90">
                     <CheckCircle className="w-5 h-5 text-[#ffe088] shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </li>
@@ -477,17 +480,17 @@ export default function DivinaMatrizPage() {
             {testimonials.map((t, i) => (
               <motion.div
                 key={i}
-                className="bg-white p-8 rounded-2xl shadow-sm relative text-left border border-gray-100 flex flex-col justify-between"
+                className="group bg-white p-8 rounded-2xl shadow-sm relative text-left border border-gray-200/80 flex flex-col justify-between transition-all duration-500 hover:bg-[#702e1d] hover:border-purple-500/60 hover:shadow-[0_0_25px_rgba(147,51,234,0.4),0_0_50px_rgba(168,85,247,0.2)] hover:-translate-y-1"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Quote className="w-10 h-10 text-[#cba72f]/30 absolute top-6 right-6" />
-                <p className="text-gray-700 italic font-light leading-relaxed mb-6 relative z-10 text-base">
+                <Quote className="w-10 h-10 text-[#cba72f]/30 group-hover:text-[#ffe088]/40 absolute top-6 right-6 transition-colors duration-500" />
+                <p className="text-gray-700 group-hover:text-white/95 italic font-normal leading-relaxed mb-6 relative z-10 text-base transition-colors duration-500">
                   "{t.quote}"
                 </p>
-                <p className="font-bold text-[#702e1d] text-sm uppercase tracking-wider">
+                <p className="font-bold text-[#702e1d] group-hover:text-[#ffe088] text-sm uppercase tracking-wider transition-colors duration-500">
                   — {t.author}
                 </p>
               </motion.div>
@@ -506,15 +509,15 @@ export default function DivinaMatrizPage() {
           {faqs.map((faq, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl border border-gray-200/80 overflow-hidden shadow-sm transition-all"
+              className="group bg-white rounded-2xl border border-gray-200/80 overflow-hidden shadow-sm transition-all duration-500 hover:bg-[#702e1d] hover:border-purple-500/60 hover:shadow-[0_0_25px_rgba(147,51,234,0.4),0_0_50px_rgba(168,85,247,0.2)]"
             >
               <button
                 onClick={() => toggleFaq(i)}
-                className="w-full p-6 text-left flex justify-between items-center gap-4 font-serif text-lg sm:text-xl text-[#702e1d] font-medium"
+                className="w-full p-6 text-left flex justify-between items-center gap-4 font-serif text-lg sm:text-xl text-[#702e1d] group-hover:text-[#ffe088] font-normal transition-colors duration-500"
               >
                 <span>{faq.q}</span>
                 <ChevronDown
-                  className={`w-6 h-6 text-[#cba72f] transition-transform duration-300 shrink-0 ${
+                  className={`w-6 h-6 text-[#cba72f] group-hover:text-[#ffe088] transition-transform duration-300 shrink-0 ${
                     openFaq === i ? "rotate-180" : ""
                   }`}
                 />
@@ -528,7 +531,7 @@ export default function DivinaMatrizPage() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 text-gray-700 font-light leading-relaxed border-t border-gray-100 pt-4 text-base">
+                    <div className="px-6 pb-6 text-gray-700 group-hover:text-white/90 font-normal leading-relaxed border-t border-gray-100 group-hover:border-white/20 pt-4 text-base transition-colors duration-500">
                       {faq.a}
                     </div>
                   </motion.div>
