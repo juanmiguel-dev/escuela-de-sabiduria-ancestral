@@ -189,17 +189,7 @@ const DIVINA_MATRIZ_HTML = `<!DOCTYPE html>
 </head>
 <body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
 <!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl bg-transparent flat no shadows cursor-pointer transition-transform ease-in-out duration-300">
-<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style="font-variation-settings: 'FILL' 0;">unfold_more_double</span>
-<span class="font-display-lg text-headline-sm text-primary dark:text-primary-fixed-dim italic">Divina Matriz</span>
-</div>
-<button class="bg-primary text-on-primary font-label-sm rounded-full px-6 py-2 hover:bg-primary-container transition-colors duration-300">
-                Join Now
-            </button>
-</div>
-</header>
+
 <main class="pt-24 pb-section-gap">
 <!-- Hero Section -->
 <section class="relative w-full min-h-[795px] flex flex-col items-center justify-center text-center px-gutter overflow-hidden bg-surface-container-low py-20">
@@ -559,17 +549,17 @@ const DIVINA_MATRIZ_HTML = `<!DOCTYPE html>
 </body></html>`;
 
 export default function DivinaMatrizPage() {
-  return (
-    <main className="min-h-screen bg-[#fbf9f5]">
-      {/* Opcional: Navbar unificado arriba */}
-      <Navbar theme="dark" position="absolute" />
+        return (
+                <main className="min-h-screen bg-[#fbf9f5]">
+                        {/* Opcional: Navbar unificado arriba */}
+                        <Navbar theme="dark" position="absolute" />
 
-      <div className="w-full pt-16">
-        <HtmlCourseViewer
-          html={DIVINA_MATRIZ_HTML}
-          title="Divina Matriz: El Despertar de tu Útero Creador"
-        />
-      </div>
-    </main>
-  );
+                        <div className="w-full pt-16">
+                                <HtmlCourseViewer
+                                        html={DIVINA_MATRIZ_HTML}
+                                        title="Divina Matriz: El Despertar de tu Útero Creador"
+                                />
+                        </div>
+                </main>
+        );
 }
