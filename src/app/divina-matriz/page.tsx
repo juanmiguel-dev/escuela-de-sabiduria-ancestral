@@ -182,9 +182,7 @@ const DIVINA_MATRIZ_HTML = `<!DOCTYPE html>
             box-shadow: none;
             border-bottom: 2px solid #cba72f;
         }
-        body {
-            min-height: max(884px, 100dvh);
-        }
+         
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
