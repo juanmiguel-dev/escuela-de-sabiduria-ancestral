@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
@@ -20,11 +20,25 @@ import {
   Award,
   BookOpen,
   Star,
-  RefreshCw
+  RefreshCw,
+  ArrowDown
 } from "lucide-react";
 
 export default function DivinaMatrizPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showTopBar, setShowTopBar] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 450) {
+        setShowTopBar(true);
+      } else {
+        setShowTopBar(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -247,7 +261,7 @@ export default function DivinaMatrizPage() {
             Un viaje espiritual, terapéutico y energético hacia el centro de tu poder femenino. Sana memorias, libera bloqueos y reconecta con tu sabiduría cíclica.
           </p>
 
-          <div className="pt-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
             <a
               href="#unirme"
               className="inline-flex items-center gap-3 bg-[#cba72f] hover:bg-[#b59325] text-[#241a00] font-bold text-base sm:text-lg rounded-full px-10 py-5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider"
@@ -255,12 +269,51 @@ export default function DivinaMatrizPage() {
               <Sparkles className="w-5 h-5" />
               SÍ, QUIERO UNIRME
             </a>
+            <a
+              href="#introduccion"
+              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold text-base sm:text-lg rounded-full px-8 py-5 backdrop-blur-md border border-white/30 transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider"
+            >
+              VER MÁS
+              <ArrowDown className="w-5 h-5" />
+            </a>
           </div>
         </motion.div>
       </section>
 
+      {/* Top Bar Pegajoso en Scroll */}
+      <AnimatePresence>
+        {showTopBar && (
+          <motion.div
+            initial={{ opacity: 0, y: -70 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -70 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="fixed top-0 left-0 w-full z-[120] bg-[#702e1d]/95 backdrop-blur-md border-b border-[#cba72f]/40 shadow-xl px-6 sm:px-12 py-3 flex items-center justify-between"
+          >
+            <div className="flex items-center gap-3">
+              <span className="font-serif text-lg sm:text-2xl text-[#ffe088] font-bold tracking-wide drop-shadow-sm">
+                Divina Matriz
+              </span>
+              <span className="hidden md:inline-block text-xs text-white/70 font-light border-l border-white/20 pl-3">
+                El Despertar de tu Útero Creador
+              </span>
+            </div>
+
+            <a
+              href="https://wa.me/?text=Hola%20Romi!%20Quiero%20sumarme%20al%20curso%20Divina%20Matriz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#cba72f] hover:bg-[#b59325] text-[#241a00] font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider"
+            >
+              <Sparkles className="w-4 h-4" />
+              QUIERO SUMARME
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Introducción */}
-      <section className="py-20 px-6 sm:px-12 max-w-6xl mx-auto">
+      <section id="introduccion" className="py-20 px-6 sm:px-12 max-w-6xl mx-auto scroll-mt-24">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-16 items-center"
           initial="hidden"
