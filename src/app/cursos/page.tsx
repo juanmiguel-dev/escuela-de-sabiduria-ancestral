@@ -8,6 +8,7 @@ import { VideoModal } from "@/components/VideoModal";
 import { GalleryModal } from "@/components/GalleryModal";
 import { getCursos } from "@/sanity/lib/queries";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import { HtmlCourseViewer } from "@/components/HtmlCourseViewer";
 
 export default function CursosPage() {
