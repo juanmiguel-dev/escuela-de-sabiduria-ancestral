@@ -186,6 +186,43 @@ export default function DivinaMatrizPage() {
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#702e1d]/80 to-[#fbf9f5]" />
+
+          {/* Capas de Geometría Sagrada / Uterina Sutil */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {/* Geometría Central Vesica Piscis / Matriz */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[850px] h-[600px] sm:h-[850px] opacity-15 text-[#ffe088]">
+              <svg viewBox="0 0 400 400" className="w-full h-full animate-pulse">
+                <circle cx="200" cy="200" r="180" stroke="currentColor" strokeWidth="0.5" fill="none" strokeDasharray="4 4" />
+                <circle cx="200" cy="200" r="130" stroke="currentColor" strokeWidth="0.5" fill="none" />
+                <circle cx="200" cy="130" r="90" stroke="currentColor" strokeWidth="0.5" fill="none" />
+                <circle cx="200" cy="270" r="90" stroke="currentColor" strokeWidth="0.5" fill="none" />
+                <circle cx="130" cy="200" r="90" stroke="currentColor" strokeWidth="0.5" fill="none" />
+                <circle cx="270" cy="200" r="90" stroke="currentColor" strokeWidth="0.5" fill="none" />
+                <path d="M200 30 C 90 120, 70 280, 200 370 C 330 280, 310 120, 200 30 Z" stroke="currentColor" strokeWidth="0.8" fill="none" />
+                <path d="M200 30 C 130 140, 150 260, 200 370" stroke="currentColor" strokeWidth="0.5" fill="none" />
+                <path d="M200 30 C 270 140, 250 260, 200 370" stroke="currentColor" strokeWidth="0.5" fill="none" />
+              </svg>
+            </div>
+
+            {/* Ilustración Uterina Botánica Esquina Inferior Izquierda */}
+            <div className="absolute -bottom-16 -left-16 w-96 h-96 opacity-25 text-[#ffe088] rotate-12">
+              <svg viewBox="0 0 200 200" className="w-full h-full">
+                <path d="M100 180 C 40 160, 20 80, 100 20 C 180 80, 160 160, 100 180 Z" fill="none" stroke="currentColor" strokeWidth="0.8" />
+                <path d="M100 20 C 60 60, 80 120, 100 180" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                <path d="M100 20 C 140 60, 120 120, 100 180" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                <circle cx="100" cy="100" r="40" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="3 3" />
+              </svg>
+            </div>
+
+            {/* Fases Lunares & Ondas Esquina Superior Derecha */}
+            <div className="absolute -top-16 -right-16 w-96 h-96 opacity-25 text-[#ffe088] -rotate-12">
+              <svg viewBox="0 0 200 200" className="w-full h-full">
+                <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                <circle cx="100" cy="100" r="60" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
+                <path d="M20 100 Q 100 20 180 100 Q 100 180 20 100 Z" fill="none" stroke="currentColor" strokeWidth="0.8" />
+              </svg>
+            </div>
+          </div>
         </div>
 
         <motion.div
