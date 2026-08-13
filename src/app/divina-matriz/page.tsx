@@ -264,7 +264,9 @@ export default function DivinaMatrizPage() {
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
             <a
-              href="#unirme"
+              href="https://wa.me/5492234480139?text=Hola%20Romi!%20Quiero%20sumarme%20al%20curso%20Divina%20Matriz"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-[#cba72f] hover:bg-[#b59325] text-[#241a00] font-bold text-base sm:text-lg rounded-full px-10 py-5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider"
             >
               <Sparkles className="w-5 h-5" />
@@ -301,7 +303,7 @@ export default function DivinaMatrizPage() {
             </div>
 
             <a
-              href="https://wa.me/?text=Hola%20Romi!%20Quiero%20sumarme%20al%20curso%20Divina%20Matriz"
+              href="https://wa.me/5492234480139?text=Hola%20Romi!%20Quiero%20sumarme%20al%20curso%20Divina%20Matriz"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#cba72f] hover:bg-[#b59325] text-[#241a00] font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider"
@@ -512,7 +514,9 @@ export default function DivinaMatrizPage() {
 
               <div className="text-center">
                 <a
-                  href="#contacto"
+                  href="https://wa.me/5492234480139?text=Hola%20Romi!%20Quiero%20sanar%20mi%20%C3%BAtero%20ahora%20con%20Divina%20Matriz"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 bg-[#cba72f] hover:bg-[#b59325] text-[#241a00] font-bold text-lg rounded-full px-12 py-5 shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 uppercase tracking-wider"
                 >
                   <Flame className="w-6 h-6" />
