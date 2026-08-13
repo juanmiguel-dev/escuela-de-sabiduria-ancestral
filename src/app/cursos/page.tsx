@@ -8,7 +8,7 @@ import { VideoModal } from "@/components/VideoModal";
 import { GalleryModal } from "@/components/GalleryModal";
 import { getCursos } from "@/sanity/lib/queries";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
+import { HtmlCourseViewer } from "@/components/HtmlCourseViewer";
 
 export default function CursosPage() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
@@ -106,10 +106,7 @@ export default function CursosPage() {
                 </div>
 
                 {curso.htmlContent && (
-                  <div
-                    className="my-6 prose max-w-none w-full text-gray-800"
-                    dangerouslySetInnerHTML={{ __html: curso.htmlContent }}
-                  />
+                  <HtmlCourseViewer html={curso.htmlContent} title={curso.title} />
                 )}
 
                 {curso.projects && curso.projects.length > 0 ? (
