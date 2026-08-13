@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import mujerImg from "./mujer.jpg";
 import {
   Heart,
   Headphones,
@@ -324,10 +325,11 @@ export default function DivinaMatrizPage() {
           <div className="relative">
             <div className="rounded-t-[8rem] rounded-b-3xl overflow-hidden shadow-2xl relative z-10 aspect-[3/4] max-w-md mx-auto">
               <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBRTAnI1IrRe3sUnj-UMPNt2-MkcoScZxPEau7B3tl6gXMXOG_SzUSbYs6xXR44uNMQTl6xQMTa2fMRP2WeeM3RNQXhlJWCR0aztDPNJFWJEGm5LnH7p62G8I6MaWJ70J8u1JlkMYeV9mfQ85BkaZ615VE4x5oR4hEXIkvDo3zFuJlC8zTvhmh_AzvM5pofBURGAvJj0keA00B5fYJ85aNBL4IkMClm0CR4bXDS0lExYJOY7HGrUlB"
-                alt="Manos en el útero"
+                src={mujerImg}
+                alt="Manos en el útero / Sanación femenina"
                 fill
                 className="object-cover"
+                sizes="(max-width: 768px) 100vw, 450px"
               />
             </div>
             <div className="absolute top-6 -left-6 w-full h-full rounded-t-[8rem] rounded-b-3xl border-2 border-[#702e1d]/20 -z-10 hidden sm:block" />
