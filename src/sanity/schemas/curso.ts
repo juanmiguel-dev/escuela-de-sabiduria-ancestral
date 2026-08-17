@@ -27,6 +27,12 @@ export const curso = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'customLandingUrl',
+      title: 'Ruta o Landing Personalizada (Opcional)',
+      description: 'Si este curso tiene una página pública a medida (ej: /divina-matriz), colócala aquí para redirigir la presentación pública directamente a esa landing.',
+      type: 'string',
+    }),
+    defineField({
       name: 'shortDescription',
       title: 'Descripción Corta',
       type: 'text',

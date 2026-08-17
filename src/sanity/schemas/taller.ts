@@ -27,6 +27,12 @@ export const taller = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'customLandingUrl',
+      title: 'Ruta o Landing Personalizada (Opcional)',
+      description: 'Si este taller tiene una página pública a medida (ej: /divina-matriz), colócala aquí para redirigir la presentación pública directamente a esa landing.',
+      type: 'string',
+    }),
+    defineField({
       name: 'shortDescription',
       title: 'Descripción Corta',
       type: 'text',

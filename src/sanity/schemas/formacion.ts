@@ -29,6 +29,12 @@ export const formacion = defineType({
       initialValue: 'Formación Profesional e Iniciática de 9 meses',
     }),
     defineField({
+      name: 'customLandingUrl',
+      title: 'Ruta o Landing Personalizada (Opcional)',
+      description: 'Si esta formación tiene una página pública a medida (ej: /divina-matriz), colócala aquí para redirigir la presentación pública directamente a esa landing.',
+      type: 'string',
+    }),
+    defineField({
       name: 'shortDescription',
       title: 'Descripción Corta (Para la tarjeta en el Inicio)',
       type: 'text',

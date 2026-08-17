@@ -1,5 +1,5 @@
 import { getFormacionBySlug } from "@/sanity/lib/queries";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Image from "next/image";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -20,10 +20,19 @@ export const revalidate = 0;
 
 export default async function FormacionPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+
+  if (slug === 'divina-matriz') {
+    redirect('/divina-matriz');
+  }
+
   const formacion = await getFormacionBySlug(slug);
 
   if (!formacion) {
     notFound();
+  }
+
+  if (formacion.customLandingUrl) {
+    redirect(formacion.customLandingUrl);
   }
 
   const blockRenderers: { [key: string]: React.ComponentType<any> } = {

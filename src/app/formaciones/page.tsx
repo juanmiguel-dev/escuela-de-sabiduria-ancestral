@@ -37,13 +37,15 @@ export default async function FormacionesPage() {
       {/* Grid de Formaciones */}
       <section className="relative z-30 max-w-6xl mx-auto px-6 pb-24 -mt-8 sm:-mt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {formaciones.map((formacion: any, idx: number) => (
-            <NextLink
-              key={formacion._id}
-              href={`/formaciones/${formacion.slug}`}
-              className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-full animate-fade-in-up"
-              style={{ animationDelay: `${idx * 100}ms`, animationFillMode: 'both' }}
-            >
+          {formaciones.map((formacion: any, idx: number) => {
+            const targetHref = formacion.customLandingUrl || (formacion.slug === 'divina-matriz' ? '/divina-matriz' : `/formaciones/${formacion.slug}`);
+            return (
+              <NextLink
+                key={formacion._id}
+                href={targetHref}
+                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-full animate-fade-in-up"
+                style={{ animationDelay: `${idx * 100}ms`, animationFillMode: 'both' }}
+              >
               <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
                 {formacion.imageUrl && (
                   <Image
@@ -83,7 +85,8 @@ export default async function FormacionesPage() {
                 </div>
               </div>
             </NextLink>
-          ))}
+          );
+        })}
         </div>
         
         {formaciones.length === 0 && (

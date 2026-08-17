@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import NextLink from "next/link";
 import { ImageCarousel } from "@/components/ImageCarousel";
 import { VideoModal } from "@/components/VideoModal";
 import { GalleryModal } from "@/components/GalleryModal";
@@ -99,11 +100,21 @@ export default function CursosPage() {
                 viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUpVariant}
               >
-                <div className="mb-6 text-left">
-                  <h2 className="text-3xl sm:text-4xl font-medium text-[#5b2c1d] tracking-tight leading-none">
-                    {curso.title} <span className="text-[#d4af37]">{curso.highlightText}</span>
-                  </h2>
-                  <div className="w-20 h-1 bg-[#d4af37] mt-3 rounded-full" />
+                <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <h2 className="text-3xl sm:text-4xl font-medium text-[#5b2c1d] tracking-tight leading-none">
+                      {curso.title} <span className="text-[#d4af37]">{curso.highlightText}</span>
+                    </h2>
+                    <div className="w-20 h-1 bg-[#d4af37] mt-3 rounded-full" />
+                  </div>
+                  {(curso.customLandingUrl || curso.slug === 'divina-matriz') && (
+                    <NextLink
+                      href={curso.customLandingUrl || '/divina-matriz'}
+                      className="inline-flex items-center gap-2 text-sm font-bold text-[#5b2c1d] hover:text-[#d4af37] transition-colors bg-white px-5 py-2.5 rounded-full shadow-sm border border-gray-100 hover:shadow-md self-start sm:self-auto"
+                    >
+                      Ver Presentación Completa &rarr;
+                    </NextLink>
+                  )}
                 </div>
 
                 {curso.htmlContent && (
