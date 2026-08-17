@@ -121,7 +121,7 @@ export default function CursosPage() {
                   <HtmlCourseViewer html={curso.htmlContent} title={curso.title} />
                 )}
 
-                {curso.projects && curso.projects.length > 0 ? (
+                {curso.projects && curso.projects.length > 0 && (
                   <ImageCarousel
                     onGalleryClick={() => {}}
                     images={curso.projects
@@ -133,10 +133,6 @@ export default function CursosPage() {
                         description: p.description,
                       }))}
                   />
-                ) : (
-                  !curso.htmlContent && (
-                    <p className="text-gray-500 italic py-4">Próximamente contenido para este curso.</p>
-                  )
                 )}
               </motion.div>
             </section>
