@@ -49,7 +49,7 @@ export async function getFormaciones() {
 }
 
 export async function getFormacionBySlug(slug: string) {
-  return await client.fetch(`*[_type == "formacion" && slug.current == $slug][0] {
+  return await client.fetch(`*[_type in ["formacion", "curso", "taller"] && slug.current == $slug][0] {
     _id,
     title,
     subtitle,
