@@ -30,12 +30,12 @@ export const alumno = {
     },
     {
       name: 'formaciones',
-      title: 'Formaciones Inscritas',
+      title: 'Formaciones / Cursos / Talleres Inscritos',
       type: 'array',
       of: [
         {
           type: 'reference',
-          to: [{ type: 'formacion' }],
+          to: [{ type: 'formacion' }, { type: 'curso' }, { type: 'taller' }],
         },
       ],
     },

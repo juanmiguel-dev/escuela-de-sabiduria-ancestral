@@ -25,6 +25,26 @@ export default defineConfig({
                   .title('Formaciones')
                   .filter('_type == "formacion"')
               ),
+            S.listItem()
+              .title('Cursos')
+              .id('cursos')
+              .schemaType('curso')
+              .child(
+                S.documentList()
+                  .schemaType('curso')
+                  .title('Cursos')
+                  .filter('_type == "curso"')
+              ),
+            S.listItem()
+              .title('Talleres')
+              .id('talleres')
+              .schemaType('taller')
+              .child(
+                S.documentList()
+                  .schemaType('taller')
+                  .title('Talleres')
+                  .filter('_type == "taller"')
+              ),
             S.divider(),
             S.listItem()
               .title('Configuración de Inicio')
@@ -48,7 +68,7 @@ export default defineConfig({
               ),
             S.divider(),
             ...S.documentTypeListItems().filter(
-              (listItem) => !['landing', 'video', 'formacion', 'testimonio'].includes(listItem.getId() as string)
+              (listItem) => !['landing', 'video', 'formacion', 'curso', 'taller', 'testimonio'].includes(listItem.getId() as string)
             ),
           ]),
     }),
