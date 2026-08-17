@@ -341,7 +341,7 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
             });
           }
         } else if (data?.videoUrl) {
-          setSelectedVideo({ videoUrl: data.videoUrl, title: 'Contenido Liberado' });
+          setSelectedVideo({ videoUrl: data.videoUrl, title: data.title });
         }
       } catch (error) {
         console.error("Error loading formation data:", error);
@@ -490,8 +490,7 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                   )}
 
                   <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl sm:text-3xl font-bold leading-tight">{selectedVideo?.title || 'Contenido Liberado'}</h1>
-                    <span className="self-start bg-[#d4af37]/10 text-[#d4af37] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Liberado</span>
+                    <h1 className="text-2xl sm:text-3xl font-bold leading-tight">{selectedVideo?.title || formacion?.title}</h1>
                   </div>
                   
                   <div className="w-12 h-[2px] bg-[#d4af37]/50 rounded-full" />
