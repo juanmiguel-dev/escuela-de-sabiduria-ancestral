@@ -108,7 +108,7 @@ export default function DivinaMatrizPage() {
     },
     {
       module: "Módulo 7",
-      title: "Rito del ütero Munay ki",
+      title: "Rito del Útero Munay ki",
       description: "Activación de la creatividad. El útero como imán de manifestación. Trazando tu nuevo camino.",
       activation: "Rito del Útero (Bendición de Creación)."
     }
