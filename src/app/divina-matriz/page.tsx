@@ -108,7 +108,7 @@ export default function DivinaMatrizPage() {
     },
     {
       module: "Módulo 7",
-      title: "Dar a Luz a tu Nueva Versión",
+      title: "Rito del ütero Munay ki",
       description: "Activación de la creatividad. El útero como imán de manifestación. Trazando tu nuevo camino.",
       activation: "Rito del Útero (Bendición de Creación)."
     }
@@ -509,7 +509,7 @@ export default function DivinaMatrizPage() {
                   "Workbook (Cuaderno de Trabajo) para cada semana",
                   "Bonus: Pack 'Rituales de Amor Propio'",
                   "Acceso a la Comunidad 'Círculo Matriz' (Espacio privado de contención)",
-                  "1 Sesión de Preguntas y Respuestas Grupal (Grabada)"
+                  "1 Sesión de Preguntas y Respuestas Grupal"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-base font-normal text-white/90">
                     <CheckCircle className="w-5 h-5 text-[#ffe088] shrink-0 mt-0.5" />
