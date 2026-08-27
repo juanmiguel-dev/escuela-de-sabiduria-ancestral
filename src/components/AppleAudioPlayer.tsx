@@ -218,7 +218,7 @@ export function AppleAudioPlayer({
                   }`}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
-                  Apple Podcast Style
+                  Audio Clase
                 </span>
                 {durationText && (
                   <span className={`text-[10px] ${dark ? "text-white/40" : "text-gray-400"}`}>
@@ -363,25 +363,6 @@ export function AppleAudioPlayer({
         />
 
         <div className="relative z-10 p-6 sm:p-10 lg:p-12 flex flex-col items-center text-center">
-          {/* Top Apple Podcasts Badge */}
-          <div className="flex items-center gap-2 mb-6 sm:mb-8">
-            <span
-              className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase border backdrop-blur-md ${
-                dark
-                  ? "bg-white/[0.06] text-[#f5d77f] border-[#d4af37]/30"
-                  : "bg-black/[0.04] text-[#5b2c1d] border-[#5b2c1d]/20"
-              }`}
-            >
-              {/* Apple Podcast Wave Icon */}
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="12" r="3" />
-                <path d="M12 2C6.48 2 2 6.48 2 12c0 2.85 1.2 5.42 3.12 7.24l1.42-1.42A7.95 7.95 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 2.29-.97 4.36-2.54 5.82l1.42 1.42C20.8 17.42 22 14.85 22 12c0-5.52-4.48-10-10-10z" />
-                <path d="M12 6c-3.31 0-6 2.69-6 6 0 1.71.72 3.25 1.88 4.34l1.42-1.42A3.98 3.98 0 018 12c0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.15-.49 2.18-1.28 2.92l1.42 1.42A5.96 5.96 0 0018 12c0-3.31-2.69-6-6-6z" />
-              </svg>
-              <span>Apple Podcast Experience</span>
-            </span>
-          </div>
-
           {/* Album / Class Squircle Artwork */}
           <div className="relative group mb-6 sm:mb-8">
             <div
