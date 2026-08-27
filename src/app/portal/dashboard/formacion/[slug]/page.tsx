@@ -6,6 +6,7 @@ import NextLink from "next/link";
 import { m, LazyMotion, domAnimation } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { getFormacionBySlug } from "@/sanity/lib/queries";
+import { AppleAudioPlayer } from "@/components/AppleAudioPlayer";
 
 import { IntroBlockRenderer } from "@/components/FormacionBlocks/IntroBlockRenderer";
 import { CuerpoPorQueBlockRenderer } from "@/components/FormacionBlocks/CuerpoPorQueBlockRenderer";
@@ -294,12 +295,21 @@ function CustomVideoPlayer({ videoUrl, poster }: { videoUrl: string; poster?: st
   );
 }
 
+interface LessonItem {
+  title: string;
+  videoUrl?: string;
+  audioUrl?: string;
+  duration?: string;
+  description?: string;
+}
+
 export default function FormacionPlayer({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const router = useRouter();
   const [formacion, setFormacion] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedVideo, setSelectedVideo] = useState<any>(null);
+  const [selectedLesson, setSelectedLesson] = useState<LessonItem | null>(null);
+  const [mediaMode, setMediaMode] = useState<"video" | "audio">("video");
   const [dark, setDark] = useState(false);
   const [activeTab, setActiveTab] = useState<number>(0);
   const [activeVideo, setActiveVideo] = useState<number>(0);
@@ -338,13 +348,32 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
         if (data?.modulos && data.modulos.length > 0) {
           const firstModule = data.modulos[0];
           if (firstModule.videos && firstModule.videos.length > 0) {
-            setSelectedVideo({ 
-              videoUrl: firstModule.videos[0].videoUrl, 
-              title: firstModule.videos[0].titulo 
+            const first = firstModule.videos[0];
+            setSelectedLesson({ 
+              title: first.titulo,
+              videoUrl: first.videoUrl,
+              audioUrl: first.audioUrl,
+              duration: first.duration,
+              description: first.description
             });
+            if (!first.videoUrl && first.audioUrl) {
+              setMediaMode("audio");
+            } else {
+              setMediaMode("video");
+            }
           }
-        } else if (data?.videoUrl) {
-          setSelectedVideo({ videoUrl: data.videoUrl, title: data.title });
+        } else if (data?.videoUrl || data?.audioUrl) {
+          setSelectedLesson({ 
+            title: data.title, 
+            videoUrl: data.videoUrl, 
+            audioUrl: data.audioUrl,
+            duration: data.duration
+          });
+          if (!data.videoUrl && data.audioUrl) {
+            setMediaMode("audio");
+          } else {
+            setMediaMode("video");
+          }
         }
       } catch (error) {
         console.error("Error loading formation data:", error);
@@ -383,10 +412,19 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
     if (formacion?.modulos && formacion.modulos.length > 0) {
       const activeModule = formacion.modulos[activeTab];
       if (activeModule?.videos && activeModule.videos.length > activeVideo) {
-        setSelectedVideo({
-          videoUrl: activeModule.videos[activeVideo].videoUrl,
-          title: activeModule.videos[activeVideo].titulo
+        const lesson = activeModule.videos[activeVideo];
+        setSelectedLesson({
+          title: lesson.titulo,
+          videoUrl: lesson.videoUrl,
+          audioUrl: lesson.audioUrl,
+          duration: lesson.duration,
+          description: lesson.description
         });
+        if (!lesson.videoUrl && lesson.audioUrl) {
+          setMediaMode("audio");
+        } else if (lesson.videoUrl && !lesson.audioUrl) {
+          setMediaMode("video");
+        }
       }
     }
   }, [activeTab, activeVideo, formacion]);
@@ -428,6 +466,10 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
 
   const hasMultipleModules = formacion?.modulos && formacion.modulos.length > 1;
   const currentModuleVideos = formacion?.modulos && formacion.modulos[activeTab]?.videos;
+
+  const hasBothMedia = !!selectedLesson?.videoUrl && !!selectedLesson?.audioUrl;
+  const hasAudioOnly = !selectedLesson?.videoUrl && !!selectedLesson?.audioUrl;
+  const hasVideoOnly = !!selectedLesson?.videoUrl && !selectedLesson?.audioUrl;
 
   return (
     <LazyMotion features={domAnimation}>
@@ -481,26 +523,101 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
 
         {/* Main Workspace Layout */}
         <main className="flex-grow flex flex-col lg:flex-row overflow-hidden">
-          {selectedVideo ? (
+          {selectedLesson ? (
             <>
-              {/* Left Column: Cinematic Video Stage */}
+              {/* Left Column: Media Stage (Video or Apple Podcasts Flagship Audio) */}
               <div className="flex-1 flex flex-col justify-start bg-black lg:min-h-[calc(100vh-61px)] relative">
-                {selectedVideo.videoUrl ? (
-                  <CustomVideoPlayer videoUrl={selectedVideo.videoUrl} poster={formacion?.imageUrl} />
-                ) : (
-                  <div className="w-full aspect-video flex flex-col items-center justify-center p-12 text-center my-auto">
-                    <div className="w-16 h-16 bg-white/[0.05] rounded-2xl border border-white/10 flex items-center justify-center mb-4">
-                      <svg className="w-8 h-8 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                      </svg>
+                
+                {/* Media Switcher Bar (when both Video and Audio exist) */}
+                {hasBothMedia && (
+                  <div className={`w-full py-3 px-6 flex items-center justify-between border-b ${dark ? 'bg-[#121217] border-white/[0.08]' : 'bg-[#f4f2ea] border-black/[0.06]'}`}>
+                    <div className="flex items-center gap-2">
+                      <span className={`text-[11px] font-semibold uppercase tracking-wider ${dark ? 'text-white/40' : 'text-gray-500'}`}>
+                        Formato:
+                      </span>
                     </div>
-                    <h3 className="text-base font-semibold text-white/70 mb-1">Video en preparación</h3>
-                    <p className="text-xs text-white/40 max-w-xs">El contenido de esta clase estará disponible próximamente.</p>
+                    <div className="flex items-center bg-black/20 p-1 rounded-full border border-white/10 backdrop-blur-md">
+                      <button
+                        onClick={() => setMediaMode("video")}
+                        className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-all cursor-pointer ${
+                          mediaMode === "video"
+                            ? dark
+                              ? "bg-[#d4af37] text-black shadow-md"
+                              : "bg-[#5b2c1d] text-white shadow-md"
+                            : dark
+                              ? "text-white/60 hover:text-white"
+                              : "text-gray-600 hover:text-gray-900"
+                        }`}
+                      >
+                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                        <span>Video Clase</span>
+                      </button>
+                      <button
+                        onClick={() => setMediaMode("audio")}
+                        className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-all cursor-pointer ${
+                          mediaMode === "audio"
+                            ? dark
+                              ? "bg-[#d4af37] text-black shadow-md"
+                              : "bg-[#5b2c1d] text-white shadow-md"
+                            : dark
+                              ? "text-white/60 hover:text-white"
+                              : "text-gray-600 hover:text-gray-900"
+                        }`}
+                      >
+                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                          <circle cx="12" cy="12" r="3" />
+                          <path d="M12 2C6.48 2 2 6.48 2 12c0 2.85 1.2 5.42 3.12 7.24l1.42-1.42A7.95 7.95 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 2.29-.97 4.36-2.54 5.82l1.42 1.42C20.8 17.42 22 14.85 22 12c0-5.52-4.48-10-10-10z" />
+                        </svg>
+                        <span>Audio Podcast</span>
+                      </button>
+                    </div>
                   </div>
                 )}
 
-                {/* Video Info Strip beneath player on desktop */}
+                {/* Primary Media Component Display */}
+                {mediaMode === "audio" || hasAudioOnly ? (
+                  selectedLesson.audioUrl ? (
+                    <AppleAudioPlayer
+                      audioUrl={selectedLesson.audioUrl}
+                      title={selectedLesson.title}
+                      subtitle={formacion.title}
+                      durationText={selectedLesson.duration}
+                      coverImage={formacion.imageUrl}
+                      dark={true}
+                      variant="hero"
+                      className="my-auto"
+                    />
+                  ) : (
+                    <div className="w-full aspect-video flex flex-col items-center justify-center p-12 text-center my-auto">
+                      <div className="w-16 h-16 bg-white/[0.05] rounded-2xl border border-white/10 flex items-center justify-center mb-4 text-[#d4af37]">
+                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-base font-semibold text-white/70 mb-1">Audio en preparación</h3>
+                      <p className="text-xs text-white/40 max-w-xs">El podcast o audio de esta clase se habilitará en breve.</p>
+                    </div>
+                  )
+                ) : (
+                  selectedLesson.videoUrl ? (
+                    <CustomVideoPlayer videoUrl={selectedLesson.videoUrl} poster={formacion?.imageUrl} />
+                  ) : (
+                    <div className="w-full aspect-video flex flex-col items-center justify-center p-12 text-center my-auto">
+                      <div className="w-16 h-16 bg-white/[0.05] rounded-2xl border border-white/10 flex items-center justify-center mb-4">
+                        <svg className="w-8 h-8 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                      </div>
+                      <h3 className="text-base font-semibold text-white/70 mb-1">Video en preparación</h3>
+                      <p className="text-xs text-white/40 max-w-xs">El contenido en video de esta clase estará disponible próximamente.</p>
+                    </div>
+                  )
+                )}
+
+                {/* Video / Class Info Strip beneath player on desktop */}
                 <div className={`hidden lg:block px-8 py-6 border-t ${dark ? 'bg-[#0d0d10] border-white/[0.06]' : 'bg-[#f0eee6] border-black/[0.06]'}`}>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#d4af37]">
@@ -510,10 +627,23 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                     <span className={`text-xs ${dark ? 'text-white/50' : 'text-gray-500'}`}>
                       {formacion.title}
                     </span>
+                    {selectedLesson.duration && (
+                      <>
+                        <span className="text-white/20">•</span>
+                        <span className="text-xs font-mono text-[#d4af37]/80">
+                          ⏱ {selectedLesson.duration}
+                        </span>
+                      </>
+                    )}
                   </div>
                   <h2 className={`text-xl sm:text-2xl font-semibold tracking-tight ${dark ? 'text-white' : 'text-gray-900'}`}>
-                    {selectedVideo?.title || formacion?.title}
+                    {selectedLesson?.title || formacion?.title}
                   </h2>
+                  {selectedLesson?.description && (
+                    <p className={`text-xs mt-2 leading-relaxed max-w-2xl ${dark ? 'text-white/60' : 'text-gray-600'}`}>
+                      {selectedLesson.description}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -537,12 +667,12 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                               onClick={() => setActiveTab(index)}
                               className={`w-full text-left px-4 py-3 rounded-2xl transition-all duration-200 flex items-center justify-between gap-3 cursor-pointer border ${
                                 isActive 
-                                  ? dark 
-                                    ? 'bg-[#d4af37]/15 text-[#f5d77f] border-[#d4af37]/40 shadow-sm' 
-                                    : 'bg-[#5b2c1d] text-white border-[#5b2c1d] shadow-sm'
-                                  : dark 
-                                    ? 'bg-white/[0.03] text-white/70 border-white/[0.05] hover:bg-white/[0.06] hover:text-white' 
-                                    : 'bg-white text-gray-700 border-black/[0.06] hover:bg-gray-50'
+                                   ? dark 
+                                     ? 'bg-[#d4af37]/15 text-[#f5d77f] border-[#d4af37]/40 shadow-sm' 
+                                     : 'bg-[#5b2c1d] text-white border-[#5b2c1d] shadow-sm'
+                                   : dark 
+                                     ? 'bg-white/[0.03] text-white/70 border-white/[0.05] hover:bg-white/[0.06] hover:text-white' 
+                                     : 'bg-white text-gray-700 border-black/[0.06] hover:bg-gray-50'
                               }`}
                             >
                               <div className="flex items-center gap-3 min-w-0">
@@ -573,20 +703,27 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                     </div>
                   )}
 
-                  {/* Video Playlist within Module */}
-                  {currentModuleVideos && currentModuleVideos.length > 1 && (
+                  {/* Video / Audio Playlist within Module */}
+                  {currentModuleVideos && currentModuleVideos.length > 0 && (
                     <div className="space-y-2.5">
-                      <span className={`text-[11px] font-semibold tracking-wider uppercase ${dark ? 'text-white/40' : 'text-gray-400'}`}>
-                        Clases del Módulo
-                      </span>
+                      <div className="flex items-center justify-between">
+                        <span className={`text-[11px] font-semibold tracking-wider uppercase ${dark ? 'text-white/40' : 'text-gray-400'}`}>
+                          Clases del Módulo
+                        </span>
+                        <span className={`text-[10px] ${dark ? 'text-white/30' : 'text-gray-400'}`}>
+                          {currentModuleVideos.length} lecciones
+                        </span>
+                      </div>
                       <div className="space-y-1.5">
                         {currentModuleVideos.map((video: any, index: number) => {
                           const isCurrent = activeVideo === index;
+                          const hasVideo = !!video.videoUrl;
+                          const hasAudio = !!video.audioUrl;
                           return (
                             <button
                               key={index}
                               onClick={() => setActiveVideo(index)}
-                              className={`w-full text-left p-3 rounded-2xl transition-all duration-200 flex items-center gap-3 cursor-pointer border ${
+                              className={`w-full text-left p-3.5 rounded-2xl transition-all duration-200 flex items-center justify-between gap-3 cursor-pointer border ${
                                 isCurrent
                                   ? dark 
                                     ? 'bg-white/[0.08] text-white border-white/20 shadow-sm' 
@@ -596,18 +733,59 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
                                     : 'bg-transparent text-gray-600 border-transparent hover:bg-black/[0.03]'
                               }`}
                             >
-                              <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-transform ${
-                                isCurrent
-                                  ? 'bg-[#d4af37] text-black scale-105'
-                                  : dark ? 'bg-white/[0.06] text-white/40' : 'bg-gray-200 text-gray-500'
-                              }`}>
-                                <svg className="w-3.5 h-3.5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                  <path d="M8 5v14l11-7z" />
-                                </svg>
+                              <div className="flex items-center gap-3 min-w-0">
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform ${
+                                  isCurrent
+                                    ? 'bg-[#d4af37] text-black scale-105 shadow-md'
+                                    : dark ? 'bg-white/[0.06] text-white/40' : 'bg-gray-200 text-gray-500'
+                                }`}>
+                                  {hasAudio && !hasVideo ? (
+                                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                      <circle cx="12" cy="12" r="2.5" />
+                                      <path d="M12 2C6.48 2 2 6.48 2 12c0 2.85 1.2 5.42 3.12 7.24l1.42-1.42A7.95 7.95 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 2.29-.97 4.36-2.54 5.82l1.42 1.42C20.8 17.42 22 14.85 22 12c0-5.52-4.48-10-10-10z" />
+                                    </svg>
+                                  ) : (
+                                    <svg className="w-3.5 h-3.5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                      <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                  )}
+                                </div>
+
+                                <div className="min-w-0 flex flex-col">
+                                  <span className="text-xs sm:text-sm font-medium tracking-tight leading-snug line-clamp-1">
+                                    {video.titulo}
+                                  </span>
+                                  {video.duration && (
+                                    <span className={`text-[10px] font-mono mt-0.5 ${dark ? 'text-white/40' : 'text-gray-400'}`}>
+                                      {video.duration}
+                                    </span>
+                                  )}
+                                </div>
                               </div>
-                              <span className="text-xs sm:text-sm font-medium tracking-tight leading-snug line-clamp-2">
-                                {video.titulo}
-                              </span>
+
+                              {/* Media Badges */}
+                              <div className="flex items-center gap-1 flex-shrink-0">
+                                {hasVideo && (
+                                  <span
+                                    title="Clase en Video"
+                                    className={`px-1.5 py-0.5 rounded text-[9px] font-bold uppercase border ${
+                                      dark ? 'bg-white/5 border-white/10 text-white/50' : 'bg-gray-100 border-black/5 text-gray-500'
+                                    }`}
+                                  >
+                                    🎬
+                                  </span>
+                                )}
+                                {hasAudio && (
+                                  <span
+                                    title="Audio Podcast"
+                                    className={`px-1.5 py-0.5 rounded text-[9px] font-bold uppercase border ${
+                                      dark ? 'bg-[#d4af37]/15 border-[#d4af37]/30 text-[#f5d77f]' : 'bg-[#5b2c1d]/10 border-[#5b2c1d]/20 text-[#5b2c1d]'
+                                    }`}
+                                  >
+                                    🎙️
+                                  </span>
+                                )}
+                              </div>
                             </button>
                           );
                         })}
@@ -617,13 +795,43 @@ export default function FormacionPlayer({ params }: { params: Promise<{ slug: st
 
                   {/* Title & Description on Mobile */}
                   <div className="block lg:hidden space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#d4af37]">
-                      {formacion.modulos && formacion.modulos.length > 0 ? `Módulo ${activeTab + 1}` : 'Contenido'}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#d4af37]">
+                        {formacion.modulos && formacion.modulos.length > 0 ? `Módulo ${activeTab + 1}` : 'Contenido'}
+                      </span>
+                      {selectedLesson.duration && (
+                        <span className="text-[10px] font-mono text-white/40">
+                          • {selectedLesson.duration}
+                        </span>
+                      )}
+                    </div>
                     <h2 className={`text-lg sm:text-xl font-semibold tracking-tight ${dark ? 'text-white' : 'text-gray-900'}`}>
-                      {selectedVideo?.title || formacion?.title}
+                      {selectedLesson?.title || formacion?.title}
                     </h2>
+                    {selectedLesson?.description && (
+                      <p className={`text-xs pt-1 leading-relaxed ${dark ? 'text-white/60' : 'text-gray-600'}`}>
+                        {selectedLesson.description}
+                      </p>
+                    )}
                   </div>
+
+                  {/* Apple Podcast Mini Player Card in Sidebar (when in video mode and audio is available) */}
+                  {mediaMode === "video" && selectedLesson?.audioUrl && (
+                    <div className="space-y-2">
+                      <span className={`text-[11px] font-semibold tracking-wider uppercase ${dark ? 'text-white/40' : 'text-gray-400'}`}>
+                        Versión Audio de esta Clase
+                      </span>
+                      <AppleAudioPlayer
+                        audioUrl={selectedLesson.audioUrl}
+                        title={selectedLesson.title}
+                        subtitle="Escuchar versión podcast"
+                        durationText={selectedLesson.duration}
+                        coverImage={formacion.imageUrl}
+                        dark={dark}
+                        variant="card"
+                      />
+                    </div>
+                  )}
 
                   {/* Extra Resources Card - Apple Material Design */}
                   <div className={`p-5 rounded-3xl border transition-all ${dark ? 'bg-white/[0.03] border-white/[0.08]' : 'bg-white border-black/[0.06] shadow-sm'}`}>

@@ -112,9 +112,24 @@ export const taller = defineType({
       description: 'URL del video de YouTube (usar URL de embed para videos ocultos)',
     }),
     defineField({
+      name: 'audioFile',
+      title: 'Archivo de Audio Principal (Opcional)',
+      description: 'Sube un archivo de audio (.mp3, .m4a, .wav) para reproducirlo en estilo Apple Podcast.',
+      type: 'file',
+      options: {
+        accept: 'audio/*',
+      },
+    }),
+    defineField({
+      name: 'audioUrl',
+      title: 'URL de Audio Principal Externa (Opcional)',
+      description: 'Enlace directo a un archivo de audio externo si no se sube archivo.',
+      type: 'url',
+    }),
+    defineField({
       name: 'modulos',
       title: 'Módulos / Pestañas',
-      description: 'Si agregas módulos, el alumno verá pestañas para navegar entre ellos. Cada pestaña tiene su propio video y recursos.',
+      description: 'Si agregas módulos, el alumno verá pestañas para navegar entre ellos. Cada pestaña tiene sus propias clases (video, audio o ambos) y recursos.',
       type: 'array',
       of: [
         {
@@ -122,31 +137,82 @@ export const taller = defineType({
           fields: [
             defineField({
               name: 'titulo',
-              title: 'Nombre de la Pestaña',
+              title: 'Nombre de la Pestaña / Módulo',
               type: 'string',
               validation: (Rule) => Rule.required(),
             }),
             defineField({
               name: 'videos',
-              title: 'Videos de la Pestaña',
+              title: 'Clases / Lecciones del Módulo',
+              description: 'Agrega las clases de este módulo. Cada clase puede tener video (URL de YouTube), archivo de audio (MP3/M4A/WAV estilo Apple Podcast), o ambos.',
               type: 'array',
               of: [
                 {
                   type: 'object',
+                  name: 'claseItem',
+                  title: 'Clase / Lección',
                   fields: [
                     defineField({
                       name: 'titulo',
-                      title: 'Título del Video',
+                      title: 'Título de la Clase',
                       type: 'string',
                       validation: (Rule) => Rule.required(),
                     }),
                     defineField({
                       name: 'videoUrl',
-                      title: 'URL del Video',
+                      title: 'URL del Video (YouTube)',
                       type: 'url',
-                      validation: (Rule) => Rule.required(),
+                      description: 'URL del video de YouTube (ej: https://www.youtube.com/watch?v=... o embed)',
+                    }),
+                    defineField({
+                      name: 'audioFile',
+                      title: 'Archivo de Audio (Subir MP3, M4A, WAV)',
+                      type: 'file',
+                      options: {
+                        accept: 'audio/*',
+                      },
+                      description: 'Sube el archivo de audio para reproducirlo en el mini reproductor estilo Apple Podcast.',
+                    }),
+                    defineField({
+                      name: 'audioUrl',
+                      title: 'URL de Audio Externa (Opcional si no se sube archivo)',
+                      type: 'url',
+                      description: 'Enlace directo a archivo de audio externo si no se sube directamente a Sanity.',
+                    }),
+                    defineField({
+                      name: 'duration',
+                      title: 'Duración Estimada (Opcional, ej: 15 min, 45 min)',
+                      type: 'string',
+                    }),
+                    defineField({
+                      name: 'description',
+                      title: 'Descripción o Notas de la Clase (Opcional)',
+                      type: 'text',
+                      rows: 2,
                     }),
                   ],
+                  preview: {
+                    select: {
+                      title: 'titulo',
+                      videoUrl: 'videoUrl',
+                      audioFile: 'audioFile',
+                      audioUrl: 'audioUrl',
+                      duration: 'duration',
+                    },
+                    prepare(selection) {
+                      const { title, videoUrl, audioFile, audioUrl, duration } = selection;
+                      const hasVideo = !!videoUrl;
+                      const hasAudio = !!(audioFile || audioUrl);
+                      let mediaType = 'Sin multimedia';
+                      if (hasVideo && hasAudio) mediaType = '🎬 Video + 🎙️ Audio';
+                      else if (hasVideo) mediaType = '🎬 Solo Video';
+                      else if (hasAudio) mediaType = '🎙️ Audio Podcast';
+                      return {
+                        title: title || 'Clase sin título',
+                        subtitle: `${mediaType}${duration ? ` • ${duration}` : ''}`,
+                      };
+                    },
+                  },
                 },
               ],
             }),

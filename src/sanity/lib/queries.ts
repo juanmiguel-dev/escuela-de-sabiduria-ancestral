@@ -61,9 +61,10 @@ export async function getFormacionBySlug(slug: string) {
     priceArs,
     paymentLink,
     paymentLinkArs,
-"imageUrl": mainImage.asset->url,
+    "imageUrl": mainImage.asset->url,
     "heroImageUrl": heroImage.asset->url,
     videoUrl,
+    "audioUrl": coalesce(audioFile.asset->url, audioUrl),
     "recursos": recursos[] {
       titulo,
       "archivoUrl": archivo.asset->url
@@ -72,7 +73,10 @@ export async function getFormacionBySlug(slug: string) {
       titulo,
       "videos": videos[] {
         titulo,
-        videoUrl
+        videoUrl,
+        "audioUrl": coalesce(audioFile.asset->url, audioUrl),
+        duration,
+        description
       },
       "recursos": recursos[] {
         titulo,
